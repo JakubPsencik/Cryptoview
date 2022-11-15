@@ -119,3 +119,14 @@ nastaveni prav pro pohledy
 dulezite v binance - pair for trade
 
 cryptologos.cc
+
+# TODO
+- FastAPI 
+- AioMysql
+
+
+na utery nachystat:
+- vykresleni nejakeho toho grafu
+- vykresleni kupcu a dolin
+- dat tam nejake ikonky pro ty pary uz (cryptologos.cc)
+- a mrknout na nejakou tu infografiku/-

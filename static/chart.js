@@ -1,22 +1,15 @@
 var binanceSocket
 
 var url = createurl()
-display_data2(url)
-
-//var dd = new Date(1549312452 * 1000).toISOString().slice(0, 10);
-//console.log(dd)
-
-pair = document.getElementById("pair_symbol_option_id").value.toLowerCase()
-int = document.getElementById("interval_option_id").value.toLowerCase()
-var url = `wss://stream.binance.com:9443/ws/${pair}@kline_${int}`
-//binanceSocket = new WebSocket(url)
+display_data(url)
+display_cryptoview_data("http://127.0.0.1:5000/as")
 
 function createurl() {
-	opt = document.getElementById("kline_trade_option_id").value
+	//opt = document.getElementById("kline_trade_option_id").value
 	pair = document.getElementById("pair_symbol_option_id").value
 	int = document.getElementById("interval_option_id").value
 	amount = document.getElementById("data_amount_option_id").value
-	var url = "http://127.0.0.1:5000/update?kline_trade_option_name=" + opt
+	var url = "http://127.0.0.1:5000/update?kline_trade_option_name=" + "kline"
 		+ "&pair_symbol_option_name=" + pair
 		+ "&interval_option_name=" + int
 		+ "&data_amount_option_name=" + encodeURIComponent(amount);
@@ -35,7 +28,7 @@ async function getData(url) {
 	}
 }
 
-async function display_data2(url) {
+async function display_data(url) {
 	try {
 		let response = await fetch(url);
 		response.json().then((r) => {
@@ -58,7 +51,7 @@ async function display_data2(url) {
 			})); 
 
 			//chart2
-			LineSeries.setData(lineData);			
+			LineSeries.setData(lineData);
 	
 		});
 	} catch (error) {
@@ -67,43 +60,103 @@ async function display_data2(url) {
 
 }
 
-async function high_low_peakutils(url) {
+async function display_cryptoview_data(url) {
 	try {
 		let response = await fetch(url);
 		response.json().then((r) => {
-			
-			
+			let infotable = document.getElementById("infotable");
+			let infodiv2 = document.getElementById("infodiv2");
+			var pairNames = [];
+			var tradeCounts = [];
+			var barColors = ["red", "green","blue","orange","brown"];
+
 			console.log(r)
-			var markers = []
 			
-			for(let i = r.length-1; i > -1; i--){
-				var _id = "candlesticksSeriesMarker_" + i
-				if(r[i][0] == "peak"){
-					const marker = {
-						time: 	r[i][1],
-						position: 'aboveBar',
-						color: 'green',
-						shape: 'circle',
-						id: _id,
-						text: r[i][2],
-						size: 1,
-					}
-					markers.push(marker)
-				} else if(r[i][0] == "valley") {
-					const marker = {
-							time: 	r[i][1],
-							position: 'belowBar',
-							color: 'yellow',
-							shape: 'circle',
-							id: _id,
-							text: [i][2],
-							size: 1,
-						}
-					markers.push(marker)
-				}								
+			let tmp_str = `Did you know that if you were to trade ${r[0][1]} against ${r[0][2]} this month
+							and your initial deposit was €100,
+							your deposit would increase by up to ${r[0][6]}% to €${100 * r[0][6]}.`
+
+			infodiv2.innerHTML += tmp_str
+
+			var body = document.createElement("tbody")
+
+			body.setAttribute("id", "body1");
+			for(let i = 0; i < r.length; i++) {
+				//infotable.innerHTML += (r[i][0]).toUpperCase() + "<br>"
+				var row = document.createElement("tr")
+
+				row.setAttribute("id", "row"+(i+1));
+				var th = document.createElement("th");
+				//row.scope = "row"
+				
+				th.setAttribute("scope", "row");
+				th.innerHTML = i+1
+				th.id = "row"+(i+1);
+
+				let pair = document.createElement("td");
+				pair.id = "pair"+(i+1)                    
+				pair.innerHTML = r[i][0];
+
+
+				let base = document.createElement("td");
+				base.id = "base"+(i+1)
+				//base.innerHTML = r[i][1];
+				let baseicon = document.createElement("img");
+				baseicon.setAttribute("width", "24px");
+				baseicon.setAttribute("height", "24px");
+				baseicon.setAttribute("src", `static/img/${(r[i][1]).toLowerCase()}.png`)
+				//baseicon.setAttribute("src", `{{url_for('static', filename='img/${(r[i][1]).toLowerCase()}.png')}}`)
+				base.appendChild(baseicon);
+
+				let quote = document.createElement("td");
+				quote.id = "quote"+(i+1)                    
+				//quote.innerHTML = r[i][2];
+				let quoteicon = document.createElement("img");
+				quoteicon.setAttribute("width", "24px");
+				quoteicon.setAttribute("height", "24px");
+				quoteicon.setAttribute("src", `static/img/${(r[i][2]).toLowerCase()}.png`)
+				//${(r[i][2]).toLowerCase()}
+				quote.appendChild(quoteicon);
+
+				let interest = document.createElement("td");
+				interest.id = "interest"+(i+1)+"%"                    
+				interest.innerHTML = r[i][6];
+				
+
+				row.appendChild(th)
+				row.appendChild(pair);
+				row.appendChild(base);
+				row.appendChild(quote);
+				row.appendChild(interest);
+
+				body.appendChild(row)
+				
+				infotable.appendChild(body);
+
+				pairNames.push(r[i][0])
+				tradeCounts.push(r[i][7])
 			}
 
-			candlesticksSeries.setMarkers(markers);
+			const chrt = new Chart(document.getElementById("myChart"), {
+				type: "bar",
+				data: {
+				  labels: pairNames,
+				  datasets: [{
+					backgroundColor: barColors,
+					data: tradeCounts
+				  }]
+				},
+				options: {
+				  legend: {display: false},
+				  title: {
+					display: true,
+					text: "amount of trades for each pair from last month"
+				  }
+				}
+			});
+			
+			//document.body.appendChild(chrt)
+			
 		});
 	} catch (error) {
 		console.log(error);
@@ -131,43 +184,9 @@ async function refreshSocket(socket, url) {
 //Display data clicked
 document.getElementById("display_data_bn").addEventListener("click", function () {
 	const url = createurl()
-	display_data2(url)
-	/* 
-	pair = document.getElementById("pair_symbol_option_id").value.toLowerCase()
-	int = document.getElementById("interval_option_id").value.toLowerCase()
-	var url = `wss://stream.binance.com:9443/ws/${pair}@kline_${int}`
-	console.log(url)
-	//refresh socket
-	//refreshSocket(binanceSocket,url)
+	display_data(url)
 	
-	binanceSocket = new WebSocket(url);
-
-	binanceSocket.onmessage = function(event) {
-		var message = JSON.parse(event.data)
-		var candlestick = message.k;
-		
-		candleSeries.update({
-			time: candlestick.t / 1000,
-			open: candlestick.o,
-			high: candlestick.h,
-			low: candlestick.l,
-			close: candlestick.c
-		})
-	}*/
 });
-
-document.getElementById('peak_valley_bn').addEventListener("click", function() {
-	opt = document.getElementById("kline_trade_option_id").value
-	pair = document.getElementById("pair_symbol_option_id").value
-	int = document.getElementById("interval_option_id").value
-	amount = document.getElementById("data_amount_option_id").value
-	const url = "http://127.0.0.1:5000/peakvalley?kline_trade_option_name=" + opt
-		+ "&pair_symbol_option_name=" + pair
-		+ "&interval_option_name=" + int
-		+ "&data_amount_option_name=" + encodeURIComponent(amount);
-	high_low_peakutils(url);
-
-})
 
 //HTML------------------------------------------------------------------------------------------------------------
 
@@ -343,5 +362,5 @@ chart2.subscribeClick(param => {
 // Note: for more advanced examples (when the chart doesn't fill the entire window)
 // you may need to use ResizeObserver -> https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver
 window.addEventListener("resize", () => {
-	chart2.resize(window.innerWidth, window.innerHeight);
+	//chart2.resize(window.innerWidth, window.innerHeight);
 });
