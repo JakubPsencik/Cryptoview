@@ -1,11 +1,11 @@
-body {
+body, #maindiv {
 	background-color: rgb(19,23,34);
 	color: #ffffff;
 	padding: 0;
 	margin: 0;
 	font-family: Arial, Helvetica, sans-serif;
 }
-
+/**/
 .divstyle {
 	width: fit-content;
 	height: 200x;
@@ -17,7 +17,7 @@ body {
 	user-select: none;
 	-webkit-tap-highlight-color: transparent;
 	left: 15%;
-	width: 59%;
+	width: 100%;
 	height: 400px;
 	position: relative;
 	left: 0px;
@@ -27,7 +27,7 @@ body {
 }
 
 .subchart {
-	user-select: none;
+	/*user-select: none;
 	-webkit-tap-highlight-color: transparent;
 	top: 57%;
 	left: 60%;
@@ -37,25 +37,51 @@ body {
 	max-height: 500px;
 	position: absolute;
 	margin-bottom: 3%;
-	margin-left: 5%;
+	margin-left: 5%;*/
+	position: relative;
+	margin: auto;
+	margin-top: 2%;
+	width: fit-content;
+	max-width: 80%;
+	height: fit-content;
+
+	
+	border: 3px solid var(--tw-grey);
 }
 
+.r_subchart{
+
+	/*height: auto;
+	margin: auto;
+	margin-top: 5%;
+	margin-right: 10%;
+	width:  80%;*/
+}
+
+/*TABLE*/
 #infodiv1 {
-	/*#d1d4dc*/
+	/*#d1d4dc
 	position: absolute;
 	top: 15%;
 	left: 70%;
 	border-radius: 25px;
-	border: 3px solid red;
-	padding: 20px;
+	border: 3px solid var(--tw-grey);
+	padding: 10px;*/
+
+	position: relative;
 	width: fit-content;
 	height: fit-content;
+	border: 3px solid var(--tw-grey);
+	margin: auto;
+	margin-top: 20%;
+	width: 80%;
+	
 }
 
 #infodiv2 {
 	/*#d1d4dc*/
 	left: 15%;
-	width: 59%;
+	width: 100%;
 	height: 100px;
 	position: relative;
 	left: 0px;
@@ -63,22 +89,14 @@ body {
 	margin-bottom: 3%;
 	margin-left: 5%;
 	border-radius: 25px;
-	border: 3px solid red;
-	color: white;
+	border: 3px solid var(--tw-grey);
+	background: var(--tw-black);
+	color: var(--tw-lightgrey);
 	/*padding: 20px;*/
-	
 }
 
-
-.widgetbar-handle {
-	background: #0000;
-	cursor: ew-resize;
-	height: 100%;
-	/*left: -3px;*/
-	position: relative;
-	top: 0;
-	touch-action: none;
-	width: 5px;
+form{
+	width: 100%;
 }
 
 .settings {
@@ -91,4 +109,11 @@ select option {
 	background-color: rgb(19,23,34);
 	color: #ffffff;
 	text-shadow: 0 1px 0 rgba(19,23,34);
-  }
+}
+
+.bn_next, .bn_prev{
+	position: relative;
+	 color: white;
+	width: 10vw;
+	font-weight: bold;
+}

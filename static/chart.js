@@ -3,6 +3,7 @@ var binanceSocket
 var url = createurl()
 display_data(url)
 display_cryptoview_data("http://127.0.0.1:5000/as")
+//downloadImage('https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=023')
 
 function createurl() {
 	//opt = document.getElementById("kline_trade_option_id").value
@@ -21,12 +22,35 @@ async function getData(url) {
 	try {
 		let response = await fetch(url);
 		response.json().then((r) => {
+			console.log(r)
 			return r
 		});
 	} catch (error) {
 		console.log(error);
 	}
 }
+
+async function downloadImage(url) {
+	fetch(url, {
+	  mode : 'no-cors',
+	})
+	  .then(response => response.blob())
+	  .then(blob => {
+	  let blobUrl = window.URL.createObjectURL(blob);
+	  blobUrl = blobUrl.substring(blobUrl.lastIndexOf("/"));
+
+	  const res = url.replace(/^.*[\\\/]/, '') + blobUrl
+	  console.log(res);
+	  let a = document.createElement('a');
+	  a.download = 'bitcoin-btc-logo.svg?v=002';
+	  a.href = 'https://cryptologos.cc/logos/bitcoin-btc-logo.svg?v=002';
+	  a.attribute = 'bitcoin-btc-logo.svg?v=002'
+	  console.log(a);
+	  document.body.appendChild(a);
+	  a.click();
+	  a.remove();
+	})
+  }
 
 async function display_data(url) {
 	try {
@@ -70,7 +94,7 @@ async function display_cryptoview_data(url) {
 			var tradeCounts = [];
 			var barColors = ["red", "green","blue","orange","brown"];
 
-			console.log(r)
+			//console.log(r)
 			
 			let tmp_str = `Did you know that if you were to trade ${r[0][1]} against ${r[0][2]} this month
 							and your initial deposit was €100,
@@ -105,6 +129,7 @@ async function display_cryptoview_data(url) {
 				baseicon.setAttribute("width", "24px");
 				baseicon.setAttribute("height", "24px");
 				baseicon.setAttribute("src", `static/img/${(r[i][1]).toLowerCase()}.png`)
+				baseicon.setAttribute("loading", 'lazy')
 				//baseicon.setAttribute("src", `{{url_for('static', filename='img/${(r[i][1]).toLowerCase()}.png')}}`)
 				base.appendChild(baseicon);
 
@@ -115,6 +140,7 @@ async function display_cryptoview_data(url) {
 				quoteicon.setAttribute("width", "24px");
 				quoteicon.setAttribute("height", "24px");
 				quoteicon.setAttribute("src", `static/img/${(r[i][2]).toLowerCase()}.png`)
+				quoteicon.setAttribute('loading', 'lazy')
 				//${(r[i][2]).toLowerCase()}
 				quote.appendChild(quoteicon);
 

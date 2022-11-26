@@ -18,7 +18,7 @@ client = Client(config.API_KEY, config.API_SECRET)
 
 @app.route("/", methods=['GET'])
 def index():
-	title = "Cryptoview"
+	title = "CRYPTOVIEW"
 
 	exchange_info = client.get_exchange_info()
 	currency_symbols = exchange_info['symbols']

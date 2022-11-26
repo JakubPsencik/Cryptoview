@@ -5,7 +5,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import peakutils
+import requests
+import bs4
 
+'''
 #15 minutes candles from binance api
 my_data = genfromtxt("./1_week_old.csv", delimiter=",")
 
@@ -31,7 +34,7 @@ df = pd.DataFrame(closing_price, columns=['unixtime', 'close'])
 #overbought - usually over 70; oversold usually below 30
 #relative_strenght_index = talib.RSI(closing_price)
 #print(relative_strenght_index)
-'''
+
 
 # Input signal
 t = np.arange(len(closing_price))
@@ -65,7 +68,7 @@ plt.plot(t[valley_idx], series[valley_idx], 'b.')
 mng = plt.get_current_fig_manager()
 mng.resize(*mng.window.maxsize())
 #plt.show()
-'''
+
 
 # load values from strategy_values
 threshold_high = 100
@@ -94,3 +97,6 @@ sell_points = [(closing_price[x][0], closing_price[x][1]) for x in lows]
 print('buy_points\n', buy_points)
 #print('---------------------------------------------------')
 print('sell_points\n', sell_points)
+'''
+
+#-------------------------------------------------------

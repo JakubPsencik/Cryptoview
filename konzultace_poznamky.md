@@ -24,7 +24,7 @@ mrknout na pine.js - bylo by super mit ekvival. knih. pro python, mysql,...
 
 - zkouset to prvni na 1-mesicnich datech treba (pine.js)
 
-  
+
 - zobrazovani nejakych bodu primo na te svicce - mel by byt schopny se zvyraznit - datum, value
 - nekterou z os udelat logaritmickou
 - zobrazeni krivek
@@ -87,9 +87,9 @@ kdyztak by mi to dal slider revolution
 
 ### questions
 - peaks&valleys - jak to poznám, že to počítá dobře
-                - jak poznám, kde mám dávat zelené a kde červené pásy, resp. jak určím ten border mezi profitem a loosem
+				- jak poznám, kde mám dávat zelené a kde červené pásy, resp. jak určím ten border mezi profitem a loosem
 - objemy a pocty tradu - existuje nejaky endpoint na binance api, ktery mi to vrati nebo to musim nejak spocitat sam
-                       - jak to vykreslovat do toho grafu
+					- jak to vykreslovat do toho grafu
 
 - knihovny pro dashboardy, infografiku - jeste nebyl udelan research
 
@@ -130,3 +130,40 @@ na utery nachystat:
 - vykresleni kupcu a dolin
 - dat tam nejake ikonky pro ty pary uz (cryptologos.cc)
 - a mrknout na nejakou tu infografiku/-
+
+
+
+- coinmarketcup na ikonky
+- jeden slide, jak se vyviji trhy - na tom coinmarketcupu to prej vsecko je
+
+
+vzit last day podle ziskovosti
+
+peak valley stats all where pairname not like %000%
+
+last_day 1 
+
+previous day 1 2 3 5
+
+
+z te tabulky vyselektovat ty nejprofitovejsi pary
+
+
+3 grafy - day, week, month - v kazdem top x paru
+	|------\
+	|		\
+	|------	 \
+	|		  \__                           .... a tak dale proste, chapeme se
+	|------		 \     /-----/\            / 
+	|			  \   /        \          /
+	|			   \_/          \        /
+	|------						 \______/
+	|
+	|------
+	|
+	|------
+
+- jakoby startovaci cara pro ty jdnotlive pary - a dal bude nasledovat graf jak se to vyvijelo za posledni dny (4 mam dojem rikal)
+
+
+pozn. podivat se, co znamena loading('lazy')
