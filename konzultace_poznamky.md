@@ -233,17 +233,35 @@ kdybyste nejakoupim tu opici koupili
 	- udelat screen toho TW grafu ze ktereho sem to porovnaval a zapsat
 
 # Simulace Binance - Simple Earn
-	- z tabulky saving_staking vybrat top 5 - 10 paru, ktere maji nejvyssi profit
-	- ty pary potom zobrazit do webove aplikace, spolecne s poctem dni kolik to bezi
+	- z tabulky saving_staking vybrat top 5 - 10 paru, ktere maji nejvyssi profit - [DONE] 
+	- ty pary potom zobrazit do webove aplikace, spolecne s poctem dni kolik to bezi - [DONE]
 	- k tomu nejaky lakavy a hezky popisek (kdybyste do toho pred xxx dny investovali, tak..)
 
-# Top 20 paru
+# Top 20 paru - [DONE]
 	- vytahnout z databaze jeste tydenni a mesicni data pro tech top 20 paru (denni data uz jsou vytazene) - [DONE]
 	- ridit se podle tech dennich - [DONE]
 	- porovnat to s mesicnima a tydennima - [DONE]
 	- pokud nektery z tech paru v mesicnich a tydennich nebude, dostane krizek - [DONE]
-	- zvetsit velikost nazvu jedn. paru (prip. se mrknout po nejakem cssku)
+	- zvetsit velikost nazvu jedn. paru (prip. se mrknout po nejakem cssku) - [DONE]
 
 	- **update**
 	- vytahnout nove day, week, month data z tech pohledu a orientovat se podle toho
 	- pro vykresleni tech grafu vytahnout data z peak_valley_stats_all podle paru z pohledu
+
+
+## 21.3 ##
+- k OUR TOP pridat:
+	- compound intered
+	- fixed deposit
+	- na boky muzou jit nejake widgety s vysvetlivkama jak ty investicni metody funguji
+
+- ohledne deploye na obrazovky
+	- vsecko tam bezi ve forme videa
+	- zadny kod se nespousti, nic...
+
+## TODO:
+	- upravit query pro ziskavani view dat
+	- jde to udelat jednim dotazem
+
+	- popsat co znamena daily, weekly, monthly
+	- IDEA ALERT! - rozdelit DFA na 4 podgrafy a ukazat tam 4 ruzne investice | budto podle men a nebo jednu menu podle intervalu

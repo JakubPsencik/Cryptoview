@@ -218,6 +218,40 @@ async def getViewData():
 
 	return jsonify(processed_data)
 
+@app.route("/savings", methods=['GET'])
+async def getSavingsStakingData():
+	loop = asyncio.get_event_loop()
+
+	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+
+	cur = await conn.cursor()
+	await cur.execute("""select s.*, ssa.interval_day from (SELECT asset, MAX(profit_total_eur) AS highest_profit_price
+							FROM savings_staking_all
+							GROUP BY asset
+							ORDER BY highest_profit_price DESC
+							limit 20) as s
+							join savings_staking_all ssa on s.asset = ssa.asset and s.highest_profit_price = ssa.profit_total_eur
+							order by highest_profit_price desc;""")
+	
+	data = await cur.fetchall()
+	await cur.close()
+	conn.close()
+
+	processed_data = []
+
+	for d in data:
+		pair = {
+			"asset": d[0],
+			"profit": round(d[1], 2),
+			"interval": d[2]
+		}
+	
+		processed_data.append(pair)
+
+	return jsonify(processed_data)
+
 @app.route('/<path:filename>')
 def send_file(filename):
 	return send_from_directory('/static/img', filename)
+
+

@@ -1,0 +1,88 @@
+
+:root{
+	--tw-black: #131722;
+	--tw-grey: #434651;
+	--tw-lightgrey: #d1d4dc;
+	--tw-blue: #143a87;
+	--tw-lightblue: #2962ff;
+	--tw-red: #f23645;
+	--tw-green: #089981;
+}
+
+
+#button{
+	padding: 8px;
+	width: 100px;
+	border: 2px solid white;
+	background-color: transparent;
+	color: white;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: 0.1s;
+}
+
+button:hover{
+transform: scale(1.05);
+}
+
+.container{
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.pages {
+display: flex;
+	width: 600%;
+	height: 100vh;
+	box-sizing: border-box;
+}
+
+.page {
+width: 100%;
+height: 100%;
+/*
+display: flex;
+align-items: center;
+justify-content: flex-start;*/
+transition: all 0.7s;
+color: white;
+}
+
+.center {
+	margin: 0;
+	position: relative;
+	top: 50%;
+	left: 50%;
+}
+
+.one{
+background-image: url(img/stock1920.jpg);
+background-position: center; 
+background-repeat: no-repeat;
+background-size: cover;
+}
+
+.two{
+	/*background-image: url(img/stock1920.jpg);*/
+	background-position: center; 
+	background-repeat: no-repeat;
+	background-size: cover;
+	background: var(--tw-black);
+}
+
+.three{
+background: var(--tw-black);
+}
+
+.four{
+	background: var(--tw-black);
+}
+
+.five{
+	background: var(--tw-black);
+}
+
+.six {
+	background: var(--tw-black);
+}

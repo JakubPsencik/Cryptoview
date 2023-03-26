@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crypto Currency Prices</title>
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.18.0.min.js"></script>
+    <script type="text/javascript" src="https://pubnub.github.io/eon/v/eon/1.0.0/eon.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://pubnub.github.io/eon/v/eon/1.0.0/eon.css"/>
+</head>
+<body>
+
+    <div id="bitcoinChart"></div>
+    <div id="etherChart"></div>
+    <div id="liteCoinChart"></div>
+
+    <script>
+
+        var pubnub = new PubNub({
+            publishKey:   'demo', // replace with your own pub-key
+            subscribeKey: 'demo' // replace with your own sub-key
+        });
+        var xhr = new XMLHttpRequest();
+        
+        var pointLimit = 100;
+        var useLabels = false;
+
+        function processRequest(e) {
+             if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                console.log(response);
+
+                pubnub.publish({
+                    channel: 'bitcoin-eon',
+                    message: {
+                      eon: {
+                        'BitCoin': response.BTC.USD.toFixed(2)
+                      }
+                    }
+                  });
+
+                pubnub.publish({
+                    channel: 'ether-eon',
+                    message: {
+                      eon: {
+                        'Ether': response.ETH.USD.toFixed(2)
+                      }
+                    }
+                  });
+
+                pubnub.publish({
+                    channel: 'litecoin-eon',
+                    message: {
+                      eon: {
+                        'LiteCoin': response.LTC.USD.toFixed(2)
+                      }
+                    }
+                  });
+
+
+                 //var notification = new Notification("Hi there!");
+            }
+        }
+
+        eon.chart({
+          channels: ['bitcoin-eon'],
+          history: true,
+          flow: true,
+          limit: pointLimit,
+          pubnub: pubnub,
+          generate: {
+            bindto: '#bitcoinChart',
+            data: {
+              labels: useLabels,
+              type: 'spline'
+            },
+            axis: {
+                y: {
+                    padding: {top:200, bottom:100}
+                }
+            }
+          }
+        });
+
+        eon.chart({
+          channels: ['ether-eon'],
+          history: true,
+          flow: true,
+          limit: pointLimit,
+          pubnub: pubnub,
+          generate: {
+            bindto: '#etherChart',
+            data: {
+              labels: useLabels,
+              type: 'spline'
+            },
+            axis: {
+                y: {
+                    padding: {top:200, bottom:100}
+                }
+            }
+          }
+        });
+
+        eon.chart({
+          channels: ['litecoin-eon'],
+          history: true,
+          flow: true,
+          limit: pointLimit,
+          pubnub: pubnub,
+          generate: {
+            bindto: '#liteCoinChart',
+            data: {
+              labels: useLabels,
+              type: 'spline'
+            },
+            axis: {
+                y: {
+                    padding: {top:200, bottom:100}
+                }
+            }
+          }
+        });
+
+        function mainApp() {
+            if (Notification.permission !== "denied") {
+                Notification.requestPermission(function (permission) {});
+              }
+
+            setInterval(function(){
+                
+                xhr.open('GET', 'https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,LTC&tsyms=USD', true)
+                xhr.send();
+                xhr.onreadystatechange = processRequest;
+            }, 5000)
+        };
+        mainApp();
+
+    </script>
+</body>
+</html>

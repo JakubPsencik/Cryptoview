@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Cryptoview</title>
+	 <link rel="icon" type="image/x-icon" href="/static/img/btc.png">
+</head>
+
+<body>
+
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0" />
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<link rel="stylesheet" href="static/style_carousel.css">
+	<link rel="stylesheet" href="static/style.css">
+	<link rel="stylesheet" href="static/slider.css">
+
+	<div style="overflow: hidden;">
+		<div id="pages" class="pages">
+			<div class="page one"> 
+				<div class="col-md-12" style="margin-top: 40vh;">
+					<div class="text w-100 text-center" style="margin: auto;">
+						<h1 class="mb-3" style="font-size: 9vw;font-weight: 800;text-transform: uppercase;color: #fff;line-height: 1;">Cryptoview</h1>
+						<h2 style="font-size: 16px;text-transform: uppercase;letter-spacing: 2px;font-family: Poppins, Arial, sans-serif;font-weight: 700;color: white;color: #f5e4c3;display: block;position: relative;letter-spacing: 4px;">Trade with us</h2>
+						<!--<button class="btn btn-outline-secondary bn_next" onclick="slide('next')" style="margin-top: 1%;">next</button>-->
+					</div>
+				</div>
+			</div>
+			<div id="pg2" class="page two"> 
+				<!--<button type="button" class="btn btn-outline-secondary bn_prev" onclick="slide('prev')">prev</button>-->
+				<!--<button type="button" class="btn btn-outline-secondary bn_next" onclick="slide('next')">next</button>-->
+
+				<div class="modal-body row" style="height: 100vh;">
+					<div class="col-md-2" style="border: 2px solid var(--tw-grey);">
+					<!--left side-->
+					<div class="widget-container">
+						<div class="widget-header">
+						  <h2>Compound Interest</h2>
+						</div>
+						<div class="widget-body">
+						  <div class="widget-body__item">
+							<div class="widget-body__item__label">Start with: </div>
+							<div class="widget-body__item__value" id="bitcoin-price">100 euro</div>
+						  </div>
+						  <div class="widget-body__item">
+							<div class="widget-body__item__label">Every day, invest: </div>
+							<div class="widget-body__item__value" id="ethereum-price">100 euro</div>
+						  </div>
+						  <div class="widget-body__item">
+							<div class="widget-body__item__label">Keep investing for: </div>
+							<div class="widget-body__item__value" id="bitcoin-market-cap">90 days</div>
+						  </div>
+						  <div class="widget-body__item">
+							<div class="widget-body__item__label">Make profit:</div>
+							<div class="widget-body__item__value" id="ethereum-market-cap">xxx euro</div>
+						  </div>
+						  <div class="widget-bottom">
+							<h2>Invest with Cryptoview!</h2>
+						  </div>
+						</div>
+					  </div>
+					</div>
+					<div class="col-md-8" style="border: 2px solid var(--tw-grey); padding: 0;">
+			
+						<h1 class="pg2_headliner mb-1" >OUR TOP 10 TODAY!</h1>
+						
+						
+						<table id="pg2_table"></table>
+					</div>
+					<div class="col-md-2" style="border: 2px solid var(--tw-grey);">
+						<!--<h1 class="info-label">Bitcoin</h1>-->
+						<!--<img src="static/img/test.png" style="align-items: center; height: 80%;">-->
+					<!--right side-->
+					</div>
+				</div>
+				
+			</div> <!--END PAGE 2-->
+			<div id="pg5" class="page five"> 
+				<!--<button type="button" class="btn btn-outline-secondary bn_prev" onclick="slide('prev')">prev</button>-->
+				<!--<button type="button" class="btn btn-outline-secondary bn_next" onclick="slide('next')">next</button>-->
+
+				<div class="modal-body row" style="height: 100vh;">
+					<div class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0;">
+					<!--left side-->
+					<!--<span class="pg5_left" style="size: 50px; font-weight: 700;">Invest now and watch your profit grow!</span>-->
+					<div class="widget">
+						<p>Invest now and watch your profit grow!</p>
+					</div>
+					</div>
+					<div class="col-md-8" style="border: 2px solid var(--tw-grey); padding: 0;">
+						<h1 class="pg5_headliner mb-3" >CRYPTOVIEW SIMPLE EARN</h1>
+						<table id="pg5_table"></table>
+					</div>
+					<div class="col-md-2" style="border: 2px solid var(--tw-grey);">
+						<!--<h1 class="info-label">Bitcoin</h1>-->
+					<!--right side-->
+					</div>
+				</div>
+				
+			</div> <!--END PAGE 5-->
+			<div id="pg4" class="page four"> 
+				<!--<button type="button" class="btn btn-outline-secondary bn_prev" onclick="slide('prev')">prev</button>-->
+				<!--<button type="button" class="btn btn-outline-secondary bn_next" onclick="slide('next')">next</button>-->
+				<div class="modal-body row">
+					<div class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0;">
+						<table id="pg4_table" style=" width: inherit; height: 100%; text-align: center; vertical-align: middle; padding: 0;">
+						</table>
+
+					</div>
+					<div class="col-md-8" style="border: 2px solid var(--tw-grey);">
+						<div id="container4_1" class="price-info-chart" style="height: 90vh; width: inherit;"></div>
+					</div>
+					<div class="col-md-2" style="border: 2px solid var(--tw-grey);">
+						
+					</div>
+				</div>
+			</div> <!--END PAGE 4-->
+			<div id="pg6" class="page six"> 
+				<!--<button type="button" class="btn btn-outline-secondary bn_prev" onclick="slide('prev')">prev</button>-->
+				<!--<button type="button" class="btn btn-outline-secondary bn_next" onclick="slide('next')">next</button>-->
+
+				<div class="modal-body row" style="height: 100vh;">
+					<div class="col-md-2" style="border: 2px solid var(--tw-grey);">
+					<!--left side-->
+					<span class="pg6_left">DFA<br>------------<br>Dollar-First-Averaging</span>
+					</div>
+					<div class="col-md-8" style="border: 2px solid var(--tw-grey); padding: 0;">
+						<h1 class="pg6_headliner mb-3" >CRYPTOVIEW DFA INVEST</h1>
+						<div id="pg6_lightweightchart" style="width: 100%; height: 80vh;"></div>
+					</div>
+					<div class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0;">
+						<!--<h1 class="info-label">Bitcoin</h1>-->
+						<div style="border: 2px solid var(--tw-grey); width: inherit; height: 50%; position: sticky; top: 0; left: 0; display: flex; flex-wrap: wrap; align-content: flex-start; padding: 0;">test</div>
+					<!--right side-->
+					</div>
+				</div>
+				
+			</div> <!--END PAGE 6-->
+			<div class="page three"> <!--PAGE 3-->
+				<div class="modal-body row">
+					<div class="col-md-7">
+						<div id="titlediv">
+							<h1><img src="{{url_for('static', filename='img/btc.svg')}}" loading="lazy" style="width:64px;height:64px; margin-right: 10px; margin-top: 5px; margin-left: 5px;">{{title}}</h1>
+						</div>
+						<div id="properties" style="margin-left: 4%; left: 15%;" class="settings">
+							<form action="/" method="GET">
+				
+								<select id="pair_symbol_option_id" name = "pair_symbol_option_name" class="settings" style="width: 95px;">
+									{% for symbol in symbols %}
+										<option value="{{symbol['symbol']}}">{{symbol['symbol']}}</option>
+									{% endfor %}
+								</select>
+						
+								<select id="interval_option_id" name = "interval_option_name" class="settings">
+										<option value="1m">1m</option>
+										<option value="3m">3m</option>
+										<option value="5m">5m</option>
+										<option value="15m">15m</option>
+										<option value="30m">30m</option>
+										<option value="1h">1h</option>
+										<option value="2h">2h</option>
+										<option value="4h">4h</option>
+										<option value="6h">6h</option>
+										<option value="8h">8h</option>
+										<option value ="12h">12h</option>
+										<option value="1d">1d</option>
+										<option value="3d">3d</option>
+										<option value="1w">1w</option>
+										<option value="1M">1M</option>
+								</select>
+						
+								<select id="data_amount_option_id" name = "data_amount_option_name" class="settings">
+									<option value="1 day ago UTC" selected>1D</option>
+									<option value="7 days ago UTC">1W</option>
+									<option value="1 month ago UTC">1M</option>
+									<option value="2 months ago UTC">2M</option>
+									<option value="3 months ago UTC">3M</option>
+								</select>
+								<button type="button" id="display_data_bn" class="settings">Display data</button>
+								
+								<select id="priceScaleModeSelect" class="settings" style="width: 60px;">
+									<option value="normal" selected>Def</option>
+									<option value="logarithmic">Log</option>
+									<option value="percentage">%</option>
+								</select>
+								<button type="button" id="set_pricescalemode_bn" class="settings">Change scale</button>
+								<!--<button type="button" class="btn btn-outline-secondary bn_prev" onclick="slide('prev')">prev</button>-->
+								<!--<button type="button" class="btn btn-outline-secondary bn_next" onclick="slide('next')">next</button>-->
+							</form>
+						</div> <!--END properties -->
+
+						<div id="container" class="mainchart"></div>
+						<div id="infodiv2"></div>
+					</div> <!--END col-md-7-->
+					<div class="col-md-5">
+						<div class="container text-center">
+							<!-- Your second column here -->
+							<div class="row">
+								<div id="infodiv1">
+									<table id="infotable" class="table table-dark">
+										<thead>
+											<tr>
+												<th scope="col">#</th>
+												<th scope="col">pair</th>
+												<th scope="col">base</th>
+												<th scope="col">quote</th>
+												<th scope="col">interest</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+							</div>
+							<div class="row r_subchart">
+								<canvas id="myChart" class="subchart"></canvas>
+							</div>
+						</div>
+
+					</div> <!--END col-md-5-->
+				</div>
+			</div> <!--END PAGE 3-->
+		</div>
+	</div>
+
+	<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+	<script src="{{url_for('static', filename='controls.js')}}"></script>
+	<script src="{{url_for('static', filename='chart.js')}}"></script>
+	<script src="{{url_for('static', filename='slider.js')}}"></script>
+	
+</body>
+</html>
