@@ -1,0 +1,21 @@
+
+
+.sparkboxes_ .box_1 {
+  border-bottom: 3px solid #734CEA
+}
+
+.sparkboxes_ .box_2 {
+  border-bottom: 3px solid #34bfa3
+}
+
+.sparkboxes_ .box_3 {
+  border-bottom: 3px solid #f4516c;
+}
+
+.sparkboxes_ .box_4 {
+  border-bottom: 3px solid #00c5dc;
+}
+
+.spinner-border {
+  display: none;
+}

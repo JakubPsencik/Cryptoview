@@ -92,6 +92,8 @@ async def getLastPrices():
 	
 	data = await cur.fetchall()
 	data = ["\"{}\"".format(row[0]) for row in data]
+	# replace Pant with Ishan
+	
 	#print(data)
 	#print("##")
 	await cur.execute("""select pairname,type,date_begin,date_end, compound_interest_total_in_eur, fixed_deposit_total_in_eur
@@ -106,7 +108,7 @@ async def getLastPrices():
 	conn.close()
 	#print(data)
 	#print(data1)
-
+	data = list(map(lambda x: x.replace('"', ''), data))
 	processed_data = []
 	processed_data.append(data)
 	for d in data1:
@@ -138,7 +140,7 @@ async def getViewData():
 
 	##select from view_pair_for_trade_day##
 	await cur.execute("""select v.pairname, v.base_currency, v.quote_currency, v.date_begin, v.date_end, v.compound_interest_total_in_eur, v.fixed_deposit_total_in_eur
-							from view_pair_for_trade_day v
+							from view_pair_for_trade_busd_all v
 							order by fixed_deposit_total_in_eur desc
 							limit 20;""")
 	
@@ -149,7 +151,7 @@ async def getViewData():
 
 	##select from view_pair_for_trade_week##
 	await cur.execute("""select v.pairname, v.base_currency, v.quote_currency, v.date_begin, v.date_end, v.compound_interest_total_in_eur, v.fixed_deposit_total_in_eur
-							from view_pair_for_trade_week v
+							from view_pair_for_trade_busd_all v
 							order by fixed_deposit_total_in_eur desc
 							limit 20;""")
 	
@@ -160,7 +162,7 @@ async def getViewData():
 
 	##select from view_pair_for_trade_month
 	await cur.execute("""select v.pairname, v.base_currency, v.quote_currency, v.date_begin, v.date_end, v.compound_interest_total_in_eur, v.fixed_deposit_total_in_eur
-						from view_pair_for_trade_month v
+						from view_pair_for_trade_busd_all v
 						order by fixed_deposit_total_in_eur desc
 						limit 20;""")
 	

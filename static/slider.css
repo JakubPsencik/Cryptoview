@@ -33,7 +33,7 @@ transform: scale(1.05);
 
 .pages {
 display: flex;
-	width: 600%;
+	width: 700%;
 	height: 100vh;
 	box-sizing: border-box;
 }
@@ -84,5 +84,9 @@ background: var(--tw-black);
 }
 
 .six {
+	background: var(--tw-black);
+}
+
+.seven {
 	background: var(--tw-black);
 }

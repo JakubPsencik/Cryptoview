@@ -183,9 +183,10 @@ async function displayPriceChartsDataPage4(url) {
 		response.json().then(async (r) => {
 			//if not swapped, dates are backwards
 			r.reverse();
-			pair_names = r[r.length-1]
+			pair_names = r[r.length-1];
 			//console.log(pair_names)
 			//for through all top 20 pairs
+			
 			for (let i = 0; i < 20; i++) {
 
 				pair = r.filter(((line) => pair_names[i].includes(line.pairname)));
@@ -193,7 +194,17 @@ async function displayPriceChartsDataPage4(url) {
 				//console.log(pair)	
 				await setLine(colors[i]);
 
+				//pg2
+				// - tady potrebuju dostat output z .
+				//buildRealtimeWidgetPG4(wdArr[i], pair_names[i].toUpperCase(), '1m', 1000, 2)
+				buildRealtimeWidgetPG4(`wd${i+1}`, pair_names[i].toUpperCase());
+
 			}
+			buildRealtimeWidget('realtimeWidget1', 'BTCEUR', 'BTC', 'EUR', 1000);
+			buildRealtimeWidget('realtimeWidget2', 'ETHEUR', 'ETH', 'EUR', 1000);
+			buildRealtimeWidget('realtimeWidget3', 'BNBEUR', 'BNB', 'EUR', 1000);
+			buildRealtimeWidget('realtimeWidget4', 'XRPEUR', 'XRP', 'EUR', 1000);
+			buildRealtimeWidget('realtimeWidget5', 'ADAEUR', 'ADA', 'EUR', 1000);
 			BuildTable(pair_names, colors, ["jasmy.png", "pha.png", "btc.png"], "pg4_table")
 		});
 
@@ -215,7 +226,7 @@ async function checkViewData(response) {
 		const currentValue = daily[i];
 
 		const valDaily = "check.png";
-
+		
 		// Check if currentValue is present in array2 and array3
 		if (weekly.includes(currentValue)) { valWeekly = "check.png" }
 		else { valWeekly = "cross.svg"; }
@@ -283,6 +294,7 @@ async function AddTableRow(name, color, imgname, tableName) {
 	let img_td = document.createElement("td");
 
 	name_td.innerHTML += name
+	
 	color_td.innerHTML += `<span class="dot" style="background-color: ${color}; vertical-align: middle;"></span>`
 
 	let img = document.createElement("img");
@@ -305,7 +317,7 @@ async function BuildTable(names, colors, imgnames, tableName) {
 	let counter = 0;
 	for(let i = 0; i < 20; i++) {
 
-		AddTableRow(names[i], colors[i], imgnames[counter], tableName)
+		AddTableRow(names[i].toUpperCase(), colors[i], imgnames[counter], tableName)
 		counter+=1;
 		if(counter == 3) {
 			counter = 0
@@ -523,18 +535,10 @@ async function display_cryptoview_data(url) {
 		let response = await fetch(url);
 		response.json().then((r) => {
 			let infotable = document.getElementById("infotable");
-			let infodiv2 = document.getElementById("infodiv2");
+			
 			var pairNames = [];
 			var tradeCounts = [];
 			var barColors = ["red", "green","blue","orange","brown"];
-
-			//console.log(r)
-			
-			let tmp_str = `Did you know that if you were to trade ${r[0][1]} against ${r[0][2]} this month
-							and your initial deposit was €100,
-							your deposit would increase by up to ${r[0][6]}% to €${100 * r[0][6]}.`
-
-			infodiv2.innerHTML += tmp_str
 
 			var body = document.createElement("tbody")
 
@@ -799,27 +803,185 @@ fetchData(_url).then(prices => {
 	}
 
 	DFAlineSeries.setData(data);
-	
-	/*
-	const BTCEURlineSeries = chart.addLineSeries({
-		color: 'rgba(99, 255, 132, 0.8)',
-		lineWidth: 3,
-	});
-
-	data = [];
-	for (let i = 0; i < prices.length; i++) {
-		data.push({ time: new Date(prices[i][0]), value: prices[i][1] });
-	}
-
-	BTCEURlineSeries.setData(data);*/
-
-	// fit the chart to its content
-	//chart.fitContent();
 });
 
+/*
+const websocket = new WebSocket('wss://stream.binance.com:9443/ws/!ticker@arr');
+
+websocket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+	console.log(data)
+    // Update the HTML elements with the new prices and changes
+    // Use CSS animations to make the widget more engaging
+};
+
+websocket.onerror = (error) => {
+    console.error('WebSocket error:', error);
+};
+*/
+
+var options = {
+	series: [{
+	name: 'Inflation',
+	data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2]
+  }],
+	chart: {
+	height: 350,
+	type: 'bar',
+  },
+  plotOptions: {
+	bar: {
+	  borderRadius: 10,
+	  dataLabels: {
+		position: 'top', // top, center, bottom
+	  },
+	}
+  },
+  dataLabels: {
+	enabled: true,
+	formatter: function (val) {
+	  return val + "%";
+	},
+	offsetY: -20,
+	style: {
+	  fontSize: '12px',
+	  colors: ["#304758"]
+	}
+  },
+  
+  xaxis: {
+	categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+	position: 'top',
+	axisBorder: {
+	  show: false
+	},
+	axisTicks: {
+	  show: false
+	},
+	crosshairs: {
+	  fill: {
+		type: 'gradient',
+		gradient: {
+		  colorFrom: '#D8E3F0',
+		  colorTo: '#BED1E6',
+		  stops: [0, 100],
+		  opacityFrom: 0.4,
+		  opacityTo: 0.5,
+		}
+	  }
+	},
+	tooltip: {
+	  enabled: true,
+	}
+  },
+  yaxis: {
+	axisBorder: {
+	  show: false
+	},
+	axisTicks: {
+	  show: false,
+	},
+	labels: {
+	  show: true,
+	  formatter: function (val) {
+		return val + "%";
+	  }
+	}
+  
+  },
+  title: {
+	text: 'Monthly Inflation in Argentina, 2002',
+	floating: true,
+	offsetY: 330,
+	align: 'center',
+	style: {
+	  color: '#444'
+	}
+  }
+  };
+
+  var barchart = new ApexCharts(document.querySelector("#chartt"), options);
+  barchart.render();
 
 //HTML------------------------------------------------------------------------------------------------------------
 
+async function getBinanceHistoricalData1() {
+	const symboll = 'ADXBUSD';
+	const intervall = '1m';
+	const startTime = new Date('2023-04-01 15:21:00').getTime();
+	const endTime = new Date('2023-04-01 15:44:00').getTime();
+	const limitt = 1000;
+
+	const urll = `https://api.binance.com/api/v3/klines?symbol=${symboll}&interval=${intervall}&startTime=${startTime}&endTime=${endTime}&limit=${limitt}`;
+
+	const xhr = new XMLHttpRequest();
+	xhr.open('GET', urll, true);
+	xhr.onreadystatechange = function() {
+	if (this.readyState === 4 && this.status === 200) {
+		const parsedData = JSON.parse(this.responseText);
+		const data = parsedData.map((kline) => {
+		return {
+			openTime: kline[0],
+			open: kline[1],
+			high: kline[2],
+			low: kline[3],
+			close: kline[4],
+			volume: kline[5],
+			closeTime: kline[6],
+			quoteAssetVolume: kline[7],
+			numberOfTrades: kline[8],
+			takerBuyBaseAssetVolume: kline[9],
+			takerBuyQuoteAssetVolume: kline[10]
+		}
+		});
+		console.log(data);
+	}
+	};
+	xhr.send();
+}
+
+getBinanceHistoricalData1();
+
+async function getBinanceHistoricalData(symbol,interval, daysFromNow) {
+	const startTime = new Date(Date.now() - daysFromNow * 24 * 60 * 60 * 1000).getTime();
+	const endTime = Date.now();
+	var prices = []
+	// Construct the API request URL
+	const requrl = `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&startTime=${startTime}&endTime=${endTime}`;
+	
+	// Create a new XMLHttpRequest object
+	const xhr = new XMLHttpRequest();
+	
+	// Set up the request
+	xhr.open('GET', requrl);
+	
+	// Handle the response
+	xhr.onload = function() {
+	  if (xhr.status === 200) {
+		// Parse the response data
+		const data = JSON.parse(xhr.responseText);
+	
+		prices = data.map((item) => {
+		  return {
+			date: new Date(item[0]).toISOString().slice(0, 10),
+			close: parseFloat(item[4]),
+		  };
+		});
+	
+		// Display the prices in the console
+		console.log(prices);
+	  } else {
+		console.error('Request failed. Status code: ' + xhr.status);
+	  }
+	};
+	
+	// Send the request
+	await xhr.send();
+}
+
+const sT = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).getTime();
+const eT = Date.now();
+//getBinanceHistoricalData('BTCUSD','1d', 30);
 
 // Create the Lightweight Chart within the container element
 var chart2 = LightweightCharts.createChart(
@@ -876,6 +1038,12 @@ price_chart_4_1.applyOptions({
 price_chart_4_1.timeScale().fitContent();
 price_chart_4_1.timeScale().applyOptions({
 	barSpacing: 50,
+});
+
+price_chart_4_1.applyOptions({
+	rightPriceScale: {
+		mode: LightweightCharts.PriceScaleMode.Normal
+	}
 });
 
 
@@ -1037,3 +1205,5 @@ chart2.subscribeClick(param => {
 window.addEventListener("resize", () => {
 	//chart2.resize(window.innerWidth, window.innerHeight);
 });
+
+//21705.44, 20362.22, 20150.69,20455.73,21997.11,24113.48,24670.41,24285.66,24998.78,27395.13,26907.49,27972.87,27717.01,28105.47,27250.97,28295.41,27454.47,2746295,27968.05,27124.91,26841.91

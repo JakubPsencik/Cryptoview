@@ -1,139 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Crypto Currency Prices</title>
-    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.18.0.min.js"></script>
-    <script type="text/javascript" src="https://pubnub.github.io/eon/v/eon/1.0.0/eon.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://pubnub.github.io/eon/v/eon/1.0.0/eon.css"/>
+    <meta charset="UTF-8">
+    <title>Bitcoin Price Widget</title>
+    <style>
+        body {
+            background-color: #222;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        .widget {
+            width: 100px;
+            height: 100px;
+            background-color: #333;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .widget h2 {
+            font-size: 16px;
+            margin: 0;
+        }
+        .widget span {
+            font-size: 12px;
+        }
+        .widget.positive {
+            color: #0f0;
+        }
+        .widget.negative {
+            color: #f00;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-
-    <div id="bitcoinChart"></div>
-    <div id="etherChart"></div>
-    <div id="liteCoinChart"></div>
-
+    <div class="widget">
+        <h2>Loading...</h2>
+        <span>Loading...</span>
+        <span>Loading...</span>
+        <span>Loading...</span>
+    </div>
     <script>
+        $(document).ready(function() {
+            // Set up Binance API request parameters
+            var symbol = 'BTCUSDT';
+            var interval = '1h';
+            var limit = 2;
 
-        var pubnub = new PubNub({
-            publishKey:   'demo', // replace with your own pub-key
-            subscribeKey: 'demo' // replace with your own sub-key
-        });
-        var xhr = new XMLHttpRequest();
-        
-        var pointLimit = 100;
-        var useLabels = false;
+            // Set up Binance API request URL
+            var url = 'https://api.binance.com/api/v3/klines?symbol=' + symbol + '&interval=' + interval + '&limit=' + limit;
 
-        function processRequest(e) {
-             if (xhr.readyState == 4 && xhr.status == 200) {
-                var response = JSON.parse(xhr.responseText);
-                console.log(response);
+            // Function to update widget elements with Bitcoin price data
+            function updateWidget() {
+                // Fetch data from Binance API
+                $.get(url, function(response) {
+                    // Extract current and previous Bitcoin prices
+                    var currentPrice = parseFloat(response[1][4]);
+                    var previousPrice = parseFloat(response[0][4]);
 
-                pubnub.publish({
-                    channel: 'bitcoin-eon',
-                    message: {
-                      eon: {
-                        'BitCoin': response.BTC.USD.toFixed(2)
-                      }
+                    // Calculate price change percentage and amount
+                    var priceChangePercentage = ((currentPrice - previousPrice) / previousPrice) * 100;
+                    var priceChangeAmount = currentPrice - previousPrice;
+
+                    // Set up widget elements
+                    var widget = $('.widget');
+                    var title = widget.find('h2');
+                    var price = widget.find('span').eq(0);
+                    var percentage = widget.find('span').eq(1);
+                    var amount = widget.find('span').eq(2);
+
+                    // Set widget text and styling
+                    title.text('BTC');
+                    price.text(currentPrice.toFixed(2) + ' EUR');
+                    percentage.text(priceChangePercentage.toFixed(2) + '%');
+                    amount.text(priceChangeAmount.toFixed(2) + ' EUR');
+
+                    if (priceChangeAmount > 0) {
+                        widget.addClass('positive');
+                        widget.removeClass('negative');
+                    } else if (priceChangeAmount < 0) {
+                        widget.addClass('negative');
+                        widget.removeClass('positive');
+                    } else {
+                        widget.removeClass('positive');
+                        widget.removeClass('negative');
                     }
-                  });
-
-                pubnub.publish({
-                    channel: 'ether-eon',
-                    message: {
-                      eon: {
-                        'Ether': response.ETH.USD.toFixed(2)
-                      }
-                    }
-                  });
-
-                pubnub.publish({
-                    channel: 'litecoin-eon',
-                    message: {
-                      eon: {
-                        'LiteCoin': response.LTC.USD.toFixed(2)
-                      }
-                    }
-                  });
-
-
-                 //var notification = new Notification("Hi there!");
+                });
             }
-        }
 
-        eon.chart({
-          channels: ['bitcoin-eon'],
-          history: true,
-          flow: true,
-          limit: pointLimit,
-          pubnub: pubnub,
-          generate: {
-            bindto: '#bitcoinChart',
-            data: {
-              labels: useLabels,
-              type: 'spline'
-            },
-            axis: {
-                y: {
-                    padding: {top:200, bottom:100}
-                }
-            }
-          }
+            // Call updateWidget function every 5 seconds
+            setInterval(updateWidget, 5000);
+
+            // Call updateWidget function once on page load
+            updateWidget();
         });
-
-        eon.chart({
-          channels: ['ether-eon'],
-          history: true,
-          flow: true,
-          limit: pointLimit,
-          pubnub: pubnub,
-          generate: {
-            bindto: '#etherChart',
-            data: {
-              labels: useLabels,
-              type: 'spline'
-            },
-            axis: {
-                y: {
-                    padding: {top:200, bottom:100}
-                }
-            }
-          }
-        });
-
-        eon.chart({
-          channels: ['litecoin-eon'],
-          history: true,
-          flow: true,
-          limit: pointLimit,
-          pubnub: pubnub,
-          generate: {
-            bindto: '#liteCoinChart',
-            data: {
-              labels: useLabels,
-              type: 'spline'
-            },
-            axis: {
-                y: {
-                    padding: {top:200, bottom:100}
-                }
-            }
-          }
-        });
-
-        function mainApp() {
-            if (Notification.permission !== "denied") {
-                Notification.requestPermission(function (permission) {});
-              }
-
-            setInterval(function(){
-                
-                xhr.open('GET', 'https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,LTC&tsyms=USD', true)
-                xhr.send();
-                xhr.onreadystatechange = processRequest;
-            }, 5000)
-        };
-        mainApp();
-
     </script>
 </body>
 </html>

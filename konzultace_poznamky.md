@@ -265,3 +265,5 @@ kdybyste nejakoupim tu opici koupili
 
 	- popsat co znamena daily, weekly, monthly
 	- IDEA ALERT! - rozdelit DFA na 4 podgrafy a ukazat tam 4 ruzne investice | budto podle men a nebo jednu menu podle intervalu
+
+# vyresit insufficient resources error u wss
