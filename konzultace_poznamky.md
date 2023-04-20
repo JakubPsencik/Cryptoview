@@ -267,3 +267,17 @@ kdybyste nejakoupim tu opici koupili
 	- IDEA ALERT! - rozdelit DFA na 4 podgrafy a ukazat tam 4 ruzne investice | budto podle men a nebo jednu menu podle intervalu
 
 # vyresit insufficient resources error u wss
+
+# Do textu pridat:
+- vic zkratek
+- vic literatury - pouzit knizky - scopus.com, ieee explore, wed of science
+- trosku rozbit ty kapitoly aby bylo videt co tam presne delam
+- k tem vizualizacnim knihovnam pridat nejake obrazky s ukazkama
+	- stahnout data BTCUSDT - 1d
+	- pro vykresleni pouzit ty knihovny
+	- vlozit do dokumentu
+- k tem strategiim pridat nejake grafy a na nich ukazat jak ty to funguju
+	- pro peaks and valleys vzit ty tydenni data
+	- nejak do toho grafu dostat ty body, kde sou kopce a kde doliny
+	- popsat ze to nakupuji/prodavaji pri 1% zmene
+- dodelat popis widgetu

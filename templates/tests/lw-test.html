@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bitcoin Price Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="chart"></div>
+    <script>
+      const binanceBaseUrl = 'https://api.binance.com';
+      const symbol = 'BTCUSDT';
+      const interval = '1d';
+      const startDate = new Date();
+      startDate.setMonth(startDate.getMonth() - 3); // 3 months ago
+
+      axios
+        .get(`${binanceBaseUrl}/api/v3/klines`, {
+          params: {
+            symbol: symbol,
+            interval: interval,
+            startTime: startDate.getTime(),
+            endTime: new Date().getTime(),
+          },
+        })
+        .then(function (response) {
+          const data = response.data.map(function (kline) {
+            return {
+              x: kline[0],
+              y: kline[4], // close price
+            };
+          });
+
+          const options = {
+            chart: {
+              type: 'line',
+              height: 500,
+			  background: '#131722', // set background color to light gray
+            },
+            series: [
+              {
+                name: 'BTCUSDT',
+                data: data,
+                lineWidth: 1, // decrease lineWidth to lower the line thickness
+              },
+            ],
+			stroke: {
+				color: '#00ff00', // set line color to green
+				curve: 'straight',
+				width: 2
+			},
+            xaxis: {
+              type: 'datetime',
+            },
+			colors: ['#2962ff'],
+          };
+
+          const chart = new ApexCharts(document.querySelector('#chart'), options);
+          chart.render();
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    </script>
+  </body>
+</html>

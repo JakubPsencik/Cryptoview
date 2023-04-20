@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bitcoin Price Chart</title>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body style="background-color: #131722;">
+	<canvas id="myChart" style="width: 500px; height: 50vh;"></canvas>
+	<script>
+		// Set the API endpoint URL and query parameters
+		const url = 'https://api.binance.com/api/v3/klines';
+		const symbol = 'BTCUSDT';
+		const interval = '1d';
+		const startTime = Date.now() - (90 * 24 * 60 * 60 * 1000); // 3 months ago
+		const endTime = Date.now();
+
+		// Build the API request URL
+		const requestUrl = `${url}?symbol=${symbol}&interval=${interval}&startTime=${startTime}&endTime=${endTime}`;
+
+		// Make the API request
+		fetch(requestUrl)
+			.then(response => response.json())
+			.then(data => {
+				// Extract the relevant data from the API response
+				const prices = data.map(item => item[4]);
+				const dates = data.map(item => new Date(item[0]).toLocaleDateString());
+
+				// Create the chart using chart.js
+				const ctx = document.getElementById('myChart').getContext('2d');
+				const myChart = new Chart(ctx, {
+					type: 'line',
+					data: {
+						labels: dates,
+						datasets: [{
+							label: 'Bitcoin Price',
+							data: prices,
+							backgroundColor: '#2962ff',
+							fill: false,
+							borderColor: '#2962ff',
+							tension: 0.1,
+							borderWidth: 0.5
+						}]
+					},
+					options: {
+						maintainAspectRatio: false,
+						legend: {
+							display: false
+						},
+						scales: {
+							xAxes: [{
+								gridLines: {
+									color: "#fff",
+									zeroLineColor: "#fff"
+								},
+								ticks: {
+									fontColor: '#123456'
+								}
+							}],
+							yAxes: [{
+								gridLines: {
+									color: "#131722",
+									zeroLineColor: "#131722"
+								},
+								ticks: {
+									fontColor: 'rgba(255, 255, 255, 0.8)'
+								}
+							}]
+						},
+						// Add width and height attributes
+						//responsive: false,
+						//width: 500,
+						//height: 500
+					}
+				});
+			});
+	</script>	
+</body>
+</html>

@@ -47,7 +47,7 @@ async function display_data(url) {
 				close: Number(datapoint.close)
 			}));
 
-			candlesticksSeries.setData(candleSticksData);
+			//candlesticksSeries.setData(candleSticksData);
 			
 			//PROLOZENI KRIVKOU
 			// Convert the candlestick data for use with a line series
@@ -57,6 +57,19 @@ async function display_data(url) {
 			})); 
 			//chart2
 			LineSeries.setData(lineData);
+
+			var histogramSeries = chart2.addHistogramSeries({
+				//color: 'rgba(255, 0, 0, 0.5)',
+				//lineWidth: 2
+			});
+
+			var histogramData = r.map((datapoint) => ({
+				time: datapoint.time,
+				value: Number(datapoint.close),
+			}));
+
+			//histogramSeries.setData(histogramData);
+			
 
 		});
 	} catch (error) {
@@ -149,8 +162,9 @@ async function displayPriceChartsData(url) {
 	}
 }
 
-async function setLine(color) {
+async function setLine(color, counter) {
 
+	console.log(counter);
 	const clr = `${color}`
 	pairData = pair.map((datapoint) => ({
 		time: datapoint.date_begin,
@@ -161,12 +175,47 @@ async function setLine(color) {
 		return new Date(a.time) - new Date(b.time);
 	});
 
-	price_chart_4_1.addLineSeries({
-	lastValueVisible: false, // hide the last value marker for this series
-	crosshairMarkerVisible: true, // hide the crosshair marker for this series
-	color: clr,
-	}).setData(pairData);
 
+		if (counter < 5) {
+			console.log('counter < 5');
+			price_chart_4_1.addLineSeries({
+				lastValueVisible: false, // hide the last value marker for this series
+				crosshairMarkerVisible: true, // hide the crosshair marker for this series
+				color: clr,
+				}).setData(pairData);
+		} else if(counter >= 5 && counter < 10) {
+			console.log('counter >= 5 && counter < 10');
+			price_chart_4_2.addLineSeries({
+				lastValueVisible: false, // hide the last value marker for this series
+				crosshairMarkerVisible: true, // hide the crosshair marker for this series
+				color: clr,
+				}).setData(pairData);
+		} else if(counter >= 10 && counter < 15) {
+			console.log('counter >= 10 && counter < 15');
+			price_chart_4_3.addLineSeries({
+				lastValueVisible: false, // hide the last value marker for this series
+				crosshairMarkerVisible: true, // hide the crosshair marker for this series
+				color: clr,
+				}).setData(pairData);
+		} else if(counter >= 15 && counter < 20) {
+			console.log(' counter >= 15 && counter < 20');
+			price_chart_4_4.addLineSeries({
+				lastValueVisible: false, // hide the last value marker for this series
+				crosshairMarkerVisible: true, // hide the crosshair marker for this series
+				color: clr,
+				}).setData(pairData);
+		} else {
+			console.log('def')
+			price_chart_4_1.addLineSeries({
+				lastValueVisible: false, // hide the last value marker for this series
+				crosshairMarkerVisible: true, // hide the crosshair marker for this series
+				color: clr,
+				}).setData(pairData);
+		}
+
+
+			
+	
 }
 
 async function displayPriceChartsDataPage4(url) {
@@ -192,7 +241,7 @@ async function displayPriceChartsDataPage4(url) {
 				pair = r.filter(((line) => pair_names[i].includes(line.pairname)));
 				if(pair.length > 4) { pair = pair.slice(0,4) }
 				//console.log(pair)	
-				await setLine(colors[i]);
+				await setLine(colors[i], i);
 
 				//pg2
 				// - tady potrebuju dostat output z .
@@ -988,7 +1037,7 @@ var chart2 = LightweightCharts.createChart(
 	document.getElementById('container'),
 	{
 		layout: {
-			background: { color: "#222" },
+			background: { color: "#131722" },
 			textColor: "#C3BCDB",
 		},
 		grid: {
@@ -1037,13 +1086,76 @@ price_chart_4_1.applyOptions({
 });
 price_chart_4_1.timeScale().fitContent();
 price_chart_4_1.timeScale().applyOptions({
-	barSpacing: 50,
+	barSpacing: 100,
 });
 
 price_chart_4_1.applyOptions({
 	rightPriceScale: {
 		mode: LightweightCharts.PriceScaleMode.Normal
 	}
+});
+
+var price_chart_4_2 = LightweightCharts.createChart(
+	document.getElementById('container4_2'),
+	{
+		layout: {
+			background: { color: "#131722" },
+			textColor: "#C3BCDB",
+		},
+		grid: {
+			vertLines: { color: "#444" },
+			horzLines: { color: "#444" },
+		},
+		autoSize: true,
+	}
+);
+
+price_chart_4_2.timeScale().fitContent();
+price_chart_4_2.timeScale().applyOptions({
+	barSpacing: 100,
+	
+});
+
+
+var price_chart_4_3 = LightweightCharts.createChart(
+	document.getElementById('container4_3'),
+	{
+		layout: {
+			background: { color: "#131722" },
+			textColor: "#C3BCDB",
+		},
+		grid: {
+			vertLines: { color: "#444" },
+			horzLines: { color: "#444" },
+		},
+		autoSize: true,
+	}
+);
+
+price_chart_4_3.timeScale().fitContent();
+price_chart_4_3.timeScale().applyOptions({
+	barSpacing: 100,
+});
+
+
+var price_chart_4_4 = LightweightCharts.createChart(
+	document.getElementById('container4_4'),
+	{
+		layout: {
+			background: { color: "#131722" },
+			textColor: "#C3BCDB",
+		},
+		grid: {
+			vertLines: { color: "#444" },
+			horzLines: { color: "#444" },
+		},
+		autoSize: true,
+	}
+);
+
+price_chart_4_4.timeScale().fitContent();
+price_chart_4_4.timeScale().applyOptions({
+	barSpacing: 100,
 });
 
 
@@ -1136,7 +1248,9 @@ var LineSeries;
 LineSeries = chart2.addLineSeries({
 	lastValueVisible: false, // hide the last value marker for this series
 	crosshairMarkerVisible: false, // hide the crosshair marker for this series
-	color: "white", // hide the line
+	color: "#2962ff", // hide the line
+	lineWidth: 1.5,
+
 	//topColor: "rgba(56, 33, 110,0.6)",
 	//bottomColor: "rgba(56, 33, 110, 0.1)",
 });

@@ -137,19 +137,29 @@
 						</table>
 
 					</div>
-					<div class="col-md-8" style="border: 2px solid var(--tw-grey); padding: 0;">
+					<div class="col-md-8" style="display: flex; flex-direction: column; border: 2px solid var(--tw-grey); padding: 0;">
 						<div style="width: 100%; height: 100px; border: 2px solid var(--tw-grey); display: grid; justify-content: center; align-items: center;">
 							<span class="widget-bottom" style="padding: 5px; font-weight: 600; font-size: 3em;">Cryptoview Peaks & Valleys</span>
 						</div>
-						<div id="container4_1" class="price-info-chart"></div>
+						<div style="display: flex; flex-direction: row;">
+							<div id="container4_1" class="price-info-chart"></div>
+							<div id="container4_2" class="price-info-chart"></div>
+						</div>
+						
+						<div style="display: flex; flex-direction: row; flex: 1;">
+							<div id="container4_3" class="price-info-chart"></div>
+							<div id="container4_4" class="price-info-chart"></div>
+						</div>
+						<!--
 						<div class="box box5">
 							<div id="spark5"></div>
 						</div>
+						-->
 					</div>
 					<div class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0;">
 					<!--right side-->
 					<div id="pg4_realtime_widget">
-						<div id="pg4_realtime_widget_header" style="display: flex; flex-direction: row; justify-content: space-evenly;">
+						<div id="pg4_realtime_widget_header" style="display: flex; flex-direction: row; justify-content: space-between;">
 							
 							<span class="span">Symbol</span>
 							<span class="span">Last</span>
@@ -381,7 +391,7 @@
 						<div id="titlediv">
 							<h1><img src="{{url_for('static', filename='img/btc.svg')}}" loading="lazy" style="width:64px;height:64px; margin-right: 10px; margin-top: 5px; margin-left: 5px;">{{title}}</h1>
 						</div>
-						<div id="properties" style="margin-left: 4%; left: 15%;" class="settings">
+						<div id="properties" style="margin-left: 4%; left: 15%; margin-bottom: 10px;" class="settings">
 							<form action="/" method="GET">
 				
 								<select id="pair_symbol_option_id" name = "pair_symbol_option_name" class="settings" style="width: 95px;">
