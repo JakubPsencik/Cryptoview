@@ -1277,41 +1277,6 @@ candlesticksSeries.priceScale().applyOptions({
 	},
 });
 
-candlesticksSeries.setMarkers([
-	{
-		time: 	Date.now(),
-		position: 'aboveBar',
-		color: 'blue',
-		shape: 'arrowDown',
-	},
-	{
-		time: 1666855800,
-		position: 'belowBar',
-		color: 'red',
-		shape: 'arrowUp',
-		id: 'id3',
-	},
-	{
-		time: 1666855800,
-		position: 'belowBar',
-		color: 'orange',
-		shape: 'circle',
-		id: 'id4',
-		text: 'example',
-		size: 2,
-	},
-]);
-
-chart2.subscribeCrosshairMove(param => {
-	if (param.hoveredMarkerId != undefined)
-		console.log(param);
-});
-
-chart2.subscribeClick(param => {
-	if (param.hoveredMarkerId != undefined)
-		console.log(param);
-});
-
 // Adding a window resize event handler to resize the chart when
 // the window size changes.
 // Note: for more advanced examples (when the chart doesn't fill the entire window)
@@ -1319,5 +1284,3 @@ chart2.subscribeClick(param => {
 window.addEventListener("resize", () => {
 	//chart2.resize(window.innerWidth, window.innerHeight);
 });
-
-//21705.44, 20362.22, 20150.69,20455.73,21997.11,24113.48,24670.41,24285.66,24998.78,27395.13,26907.49,27972.87,27717.01,28105.47,27250.97,28295.41,27454.47,2746295,27968.05,27124.91,26841.91

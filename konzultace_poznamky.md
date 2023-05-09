@@ -281,3 +281,43 @@ kdybyste nejakoupim tu opici koupili
 	- nejak do toho grafu dostat ty body, kde sou kopce a kde doliny
 	- popsat ze to nakupuji/prodavaji pri 1% zmene
 - dodelat popis widgetu
+
+27/4/23
+strana 17
+------------------------------------------
+predikce kakulovana v minutovych intervalech ktere muzou byt ovivnovane lokalnima extremama - reseni prejet na sekundove svicky nebo primo na trady
+
+60 krat sloyitejsi - 
+
+
+eiminace paru ktere prodelavaji - pro ty nema smysl to pocitat
+rozhodnovani jestli jit nejit, objem obchovani, mnoztsvi obchodu, neocekavane obhcody
+
+1% - jednou za minutu close na close - peak a valley
+stop loss - hranice
+
+binance ma nejradsi konkretni hodnoty
+trailingove obchody - binancu se to nelibi
+--------------------------------------------
+
+zajistene nezajistene obchodovani
+nezajistene - stahuji z burzy kurz - a vte chvili posilaji na burze rozsahy
+technicke problemy s burzou - tak sme v hajzlu
+
+zajistine - posuvne okenko - je tam nejaka hranice - pri stoupani davaji nove prikazy
+
+pridat
+----------------------------------
+highchart, fusion chart - zminit -[DONE]
+
+
+pred zaverem udelat summary co to vsecko umi - ty featury
+
+infografika generovana na infopanelu - ukazat jak se to viviji a priskakuje do grafu
+nejaky live charticek
+blokove schema - nejaky konfigurak - jake meny atd atd....
+
+23.5 - termin obhajoby projektu
+
+
+

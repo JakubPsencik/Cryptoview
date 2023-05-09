@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FusionCharts Line Chart Example</title>
+    <script src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <script src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.candy.js"></script>
+    <style>
+      body {
+        background-color: #252525;
+        color: #ffffff;
+      }
+      #chart-container {
+		width: 800px;
+		height: 400px;
+        margin: 0 auto;
+        background-color: #333333;
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chart-container"></div>
+    <script>
+      // Load Binance API
+      const binanceAPI = "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&startTime=1671686400000&endTime=1703232000000";
+
+      // Fetch data from Binance API
+      fetch(binanceAPI)
+        .then(response => response.json())
+        .then(data => {
+          // Format data for FusionCharts
+          const chartData = {
+            chart: {
+              caption: 'BTC/USDT Price Chart',
+              subCaption: '',
+              xAxisName: 'Date',
+              yAxisName: 'Price (USDT)',
+              theme: 'candy',
+              bgColor: '#333333',
+              bgAlpha: '100',
+              baseFontColor: '#ffffff',
+              lineThickness: '2',
+              showCanvasBorder: '0',
+              showAlternateHGridColor: '1',
+              showValues: '0',
+              canvasBgColor: '#333333',
+              canvasBgAlpha: '100',
+              divLineAlpha: '100'
+            },
+            data: data.map(item => ({
+              label: new Date(item[0]).toLocaleDateString(),
+              value: item[4]
+            }))
+          };
+
+          // Create FusionCharts chart
+          const chart = new FusionCharts({
+            type: 'line',
+            renderAt: 'chart-container',
+            width: '100%',
+            height: '400',
+            dataFormat: 'json',
+            dataSource: chartData
+          }).render();
+        })
+        .catch(error => console.error(error));
+    </script>
+  </body>
+</html>

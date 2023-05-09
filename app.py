@@ -151,7 +151,7 @@ async def getViewData():
 
 	##select from view_pair_for_trade_week##
 	await cur.execute("""select v.pairname, v.base_currency, v.quote_currency, v.date_begin, v.date_end, v.compound_interest_total_in_eur, v.fixed_deposit_total_in_eur
-							from view_pair_for_trade_busd_all v
+							from view_pair_for_trade_week v
 							order by fixed_deposit_total_in_eur desc
 							limit 20;""")
 	
@@ -162,7 +162,7 @@ async def getViewData():
 
 	##select from view_pair_for_trade_month
 	await cur.execute("""select v.pairname, v.base_currency, v.quote_currency, v.date_begin, v.date_end, v.compound_interest_total_in_eur, v.fixed_deposit_total_in_eur
-						from view_pair_for_trade_busd_all v
+						from view_pair_for_trade_month v
 						order by fixed_deposit_total_in_eur desc
 						limit 20;""")
 	
