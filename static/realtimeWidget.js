@@ -1,13 +1,3 @@
-$(document).ready(function() {
-	// widgetID, symbol, base, quote, interval, refreshInterval, limit
-	/*buildRealtimeWidget('realtimeWidget1', 'BTCEUR', 'BTC', 'EUR', 1000);
-	buildRealtimeWidget('realtimeWidget2', 'ETHEUR', 'ETH', 'EUR', 1000);
-	buildRealtimeWidget('realtimeWidget3', 'BNBEUR', 'BNB', 'EUR', 1000);
-	buildRealtimeWidget('realtimeWidget4', 'XRPEUR', 'XRP', 'EUR', 1000);
-	buildRealtimeWidget('realtimeWidget5', 'ADAEUR', 'ADA', 'EUR', 1000);*/
-	
-});
-
 function buildRealtimeWidget(widgetID, symbol, base, quote, refreshInterval) {
 	
 	try {

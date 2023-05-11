@@ -165,8 +165,8 @@ var spark4 = {
     },
   }
 }
-
+/*
 new ApexCharts(document.querySelector("#spark_1"), spark1).render();
 new ApexCharts(document.querySelector("#spark_2"), spark2).render();
 new ApexCharts(document.querySelector("#spark_3"), spark3).render();
-new ApexCharts(document.querySelector("#spark_4"), spark4).render();
+new ApexCharts(document.querySelector("#spark_4"), spark4).render();*/

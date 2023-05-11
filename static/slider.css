@@ -33,7 +33,7 @@ transform: scale(1.05);
 
 .pages {
 display: flex;
-	width: 700%;
+	width: 600%;
 	height: 100vh;
 	box-sizing: border-box;
 }

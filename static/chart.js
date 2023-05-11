@@ -1,12 +1,8 @@
 var binanceSocket
 
-var url = createurl()
-display_data(url)
-display_cryptoview_data("http://127.0.0.1:5000/as")
-//displayPriceChartsData("http://127.0.0.1:5000/lastPrices")
-displayPriceChartsDataPage4("http://127.0.0.1:5000/lastPrices")
-displayDataPG2("http://127.0.0.1:5000/view")
-display_savings_staking_data("http://127.0.0.1:5000/savings")
+//var url = createurl()
+//display_cryptoview_data("http://127.0.0.1:5000/as")
+
 
 
 function createurl() {
@@ -34,137 +30,10 @@ async function getData(url) {
 	}
 }
 
-async function display_data(url) {
-	try {
-		let response = await fetch(url);
-		response.json().then((r) => {
-
-			var candleSticksData = r.map((datapoint) => ({
-				time:  datapoint.time,
-				open:  Number(datapoint.open),
-				high:  Number(datapoint.high),
-				low:   Number(datapoint.low),
-				close: Number(datapoint.close)
-			}));
-
-			//candlesticksSeries.setData(candleSticksData);
-			
-			//PROLOZENI KRIVKOU
-			// Convert the candlestick data for use with a line series
-			var lineData = r.map((datapoint) => ({
-				time: datapoint.time,
-				value: Number(datapoint.close),
-			})); 
-			//chart2
-			LineSeries.setData(lineData);
-
-			var histogramSeries = chart2.addHistogramSeries({
-				//color: 'rgba(255, 0, 0, 0.5)',
-				//lineWidth: 2
-			});
-
-			var histogramData = r.map((datapoint) => ({
-				time: datapoint.time,
-				value: Number(datapoint.close),
-			}));
-
-			//histogramSeries.setData(histogramData);
-			
-
-		});
-	} catch (error) {
-		console.log(error);
-	}
-
-}
-
-async function displayPriceChartsData(url) {
-	try {
-		let response = await fetch(url);
-		response.json().then((r) => {
-			//if not swapped, dates are backwards
-			r.reverse();
-			//console.log(r)
-			pair = r.filter((line => line.pairname == 'jasmybtc'));
-			//console.log(pair)
-			var pairData = pair.map((datapoint) => ({
-				time: datapoint.date_begin,
-				value: Number(datapoint.fixed_deposit_total_in_eur),
-			}));
-
-			price_chart_1_LineSeries = price_chart_1.addLineSeries({
-				lastValueVisible: false, // hide the last value marker for this series
-				crosshairMarkerVisible: true, // hide the crosshair marker for this series
-				color: "white",
-			});
-			price_chart_1_LineSeries.setData(pairData);
-
-			pair = r.filter((line => line.pairname == 'ampbtc'));
-			//console.log(pair)
-			pairData = pair.map((datapoint) => ({
-				time: datapoint.date_begin,
-				value: Number(datapoint.fixed_deposit_total_in_eur),
-			}));
-			price_chart_1_LineSeries1 = price_chart_1.addLineSeries({
-				lastValueVisible: false, // hide the last value marker for this series
-				crosshairMarkerVisible: true, // hide the crosshair marker for this series
-				color: "yellow",
-			});
-			price_chart_1_LineSeries1.setData(pairData);
-
-			pair = r.filter((line => line.pairname == 'cosbtc'));
-			//console.log(pair)
-			pairData = pair.map((datapoint) => ({
-				time: datapoint.date_begin,
-				value: Number(datapoint.fixed_deposit_total_in_eur),
-			})); 
-			price_chart_1_LineSeries2 = price_chart_1.addLineSeries({
-				lastValueVisible: false, // hide the last value marker for this series
-				crosshairMarkerVisible: true, // hide the crosshair marker for this series
-				color: "red",
-			});
-			price_chart_1_LineSeries2.setData(pairData);
-
-			pair = r.filter((line => line.pairname == 'linabtc'));
-			//console.log(pair)
-			pairData = pair.map((datapoint) => ({
-				time: datapoint.date_begin,
-				value: Number(datapoint.fixed_deposit_total_in_eur),
-			})); 
-			price_chart_1_LineSeries3 = price_chart_1.addLineSeries({
-				lastValueVisible: false, // hide the last value marker for this series
-				crosshairMarkerVisible: true, // hide the crosshair marker for this series
-				color: "green",
-			});
-			price_chart_1_LineSeries3.setData(pairData);
-
-
-			pair = r.filter((line => line.pairname == 'snmbusd'));
-			if(pair.length > 4) {
-				pair = pair.slice(0,4)
-			}
-			
-			//console.log(pair)
-			pairData = pair.map((datapoint) => ({
-				time: datapoint.date_begin,
-				value: Number(datapoint.fixed_deposit_total_in_eur),
-			})); 
-			price_chart_1_LineSeries4 = price_chart_1.addLineSeries({
-				lastValueVisible: false, // hide the last value marker for this series
-				crosshairMarkerVisible: true, // hide the crosshair marker for this series
-				color: "orange",
-			});
-			price_chart_1_LineSeries4.setData(pairData);
-
-		});
-	} catch (error) {
-		console.log(error);
-	}
-}
 
 async function setLine(color, counter) {
 
-	console.log(counter);
+	
 	const clr = `${color}`
 	pairData = pair.map((datapoint) => ({
 		time: datapoint.date_begin,
@@ -177,35 +46,35 @@ async function setLine(color, counter) {
 
 
 		if (counter < 5) {
-			console.log('counter < 5');
+			
 			price_chart_4_1.addLineSeries({
 				lastValueVisible: false, // hide the last value marker for this series
 				crosshairMarkerVisible: true, // hide the crosshair marker for this series
 				color: clr,
 				}).setData(pairData);
 		} else if(counter >= 5 && counter < 10) {
-			console.log('counter >= 5 && counter < 10');
+			
 			price_chart_4_2.addLineSeries({
 				lastValueVisible: false, // hide the last value marker for this series
 				crosshairMarkerVisible: true, // hide the crosshair marker for this series
 				color: clr,
 				}).setData(pairData);
 		} else if(counter >= 10 && counter < 15) {
-			console.log('counter >= 10 && counter < 15');
+			
 			price_chart_4_3.addLineSeries({
 				lastValueVisible: false, // hide the last value marker for this series
 				crosshairMarkerVisible: true, // hide the crosshair marker for this series
 				color: clr,
 				}).setData(pairData);
 		} else if(counter >= 15 && counter < 20) {
-			console.log(' counter >= 15 && counter < 20');
+			
 			price_chart_4_4.addLineSeries({
 				lastValueVisible: false, // hide the last value marker for this series
 				crosshairMarkerVisible: true, // hide the crosshair marker for this series
 				color: clr,
 				}).setData(pairData);
 		} else {
-			console.log('def')
+			
 			price_chart_4_1.addLineSeries({
 				lastValueVisible: false, // hide the last value marker for this series
 				crosshairMarkerVisible: true, // hide the crosshair marker for this series
@@ -313,7 +182,7 @@ async function displayDataPG2(url) {
 			//r.reverse();
 			pair_names = r[r.length-2]
 			//console.log(pair_names)
-			console.log(r)
+			//console.log(r)
 			let markers = await checkViewData(r)
 			//console.log(markers)
 			arr = r.slice(2,22)
@@ -325,6 +194,14 @@ async function displayDataPG2(url) {
 			}
 			
 			BuildTablePG2(pair_names, compound, fixed, markers, ["jasmy.png", "pha.png", "btc.png"], "pg2_table")
+
+			const startingDate = new Date("2023-01-01");
+			const endingDate = new Date("2023-03-01");
+			
+			setDfaLineChart(lw_dfa_1_lineSeries,startingDate,endingDate,100,`https://api.binance.com/api/v3/klines`,`${markers[0].name.replace(/"/g,'').toUpperCase()}`,'1d',100);
+			setDfaLineChart(lw_dfa_2_lineSeries,startingDate,endingDate,100,`https://api.binance.com/api/v3/klines`,`${markers[1].name.replace(/"/g,'').toUpperCase()}`,'1d',100);
+			setDfaLineChart(lw_dfa_3_lineSeries,startingDate,endingDate,100,`https://api.binance.com/api/v3/klines`,`${markers[2].name.replace(/"/g,'').toUpperCase()}`,'1d',100);
+			setDfaLineChart(lw_dfa_4_lineSeries,startingDate,endingDate,100,`https://api.binance.com/api/v3/klines`,`${markers[3].name.replace(/"/g,'').toUpperCase()}`,'1d',100);
 		});
 
 	} catch (error) {
@@ -355,7 +232,7 @@ async function AddTableRow(name, color, imgname, tableName) {
 
 	tr.appendChild(name_td)
 	tr.appendChild(color_td)
-	tr.appendChild(img_td)
+	//tr.appendChild(img_td)
 
 	table.appendChild(tr)
 }
@@ -497,7 +374,7 @@ async function display_savings_staking_data(url) {
 		response.json().then((r) => {
 
 			//console.log(r)
-			BuildTablePG5(r, ["jasmy.png", "pha.png", "btc.png"])
+			BuildTablePG3(r, ["jasmy.png", "pha.png", "btc.png"])
 	
 		});
 	} catch (error) {
@@ -506,7 +383,7 @@ async function display_savings_staking_data(url) {
 }
 
 //page4 - table  builder
-async function BuildTablePG5(response, imgnames) {
+async function BuildTablePG3(response, imgnames) {
 
 	//console.log(markers)
 	let table = document.getElementById("pg5_table")
@@ -539,6 +416,125 @@ async function BuildTablePG5(response, imgnames) {
 			counter = 0
 		}
 	}
+	
+	//setLiveCharts(lw_live_1,lw_live_1_lineSeries,`${response[0].asset.toLowerCase()}usdt`)
+	//setLiveCharts(lw_live_2,lw_live_2_lineSeries,`${response[1].asset.toLowerCase()}usdt`)
+	//setLiveCharts(lw_live_3,lw_live_3_lineSeries,`${response[2].asset.toLowerCase()}usdt`)
+	//setLiveCharts(lw_live_4,lw_live_4_lineSeries,`${response[3].asset.toLowerCase()}usdt`)
+	const test = 'btc';
+	/*------------------------------------------------------------------------------------- */
+	const lw_live_1_pair  = `${response[0].asset.toLowerCase()}busd`;
+	console.log(lw_live_1_pair);
+	// Create a WebSocket connection to Binance API
+	var wsurl = `wss://stream.binance.com:9443/ws/${lw_live_1_pair}@trade`;
+	const lw_live_1_socket = new WebSocket(wsurl);
+	
+
+	// Handle incoming data from the WebSocket
+	lw_live_1_socket.onmessage = event => {
+		const trade = JSON.parse(event.data);
+		const price = parseFloat(trade.p);
+
+		// Update the chart with the new price
+		lw_live_1.timeScale().scrollToRealTime();
+		lw_live_1.applyOptions({ priceFormat: { type: 'custom', minMove: '0.01', formatter: () => price.toFixed(2) } });
+		lw_live_1.priceScale().applyOptions({PriceScaleMargins: {top: 0.1,bottom: 0.1,}});
+		// Update the line series with the new price
+		lw_live_1_lineSeries.update({ time: (new Date(trade.T) / 1000), value: price });
+
+	}
+	/*------------------------------------------------------------------------------------- */
+
+	/*------------------------------------------------------------------------------------- */
+	const lw_live_2_pair  = `${response[1].asset.toLowerCase()}busd`;
+	
+	// Create a WebSocket connection to Binance API
+	wsurl = `wss://stream.binance.com:9443/ws/${lw_live_2_pair}@trade`;
+	const lw_live_2_socket = new WebSocket(wsurl);
+	
+
+	// Handle incoming data from the WebSocket
+	lw_live_2_socket.onmessage = event => {
+		const trade = JSON.parse(event.data);
+		const price = parseFloat(trade.p);
+
+		// Update the chart with the new price
+		lw_live_2.timeScale().scrollToRealTime();
+		lw_live_2.applyOptions({ priceFormat: { type: 'custom', minMove: '0.01', formatter: () => price.toFixed(2) } });
+		lw_live_2.priceScale().applyOptions({PriceScaleMargins: {top: 0.1,bottom: 0.1,}});
+		// Update the line series with the new price
+		lw_live_2_lineSeries.update({ time: (new Date(trade.T) / 1000), value: price });
+
+	}
+	/*------------------------------------------------------------------------------------- */
+	/*------------------------------------------------------------------------------------- */
+	const lw_live_3_pair  = `${response[2].asset.toLowerCase()}busd`;
+	
+	// Create a WebSocket connection to Binance API
+	wsurl = `wss://stream.binance.com:9443/ws/${lw_live_3_pair}@trade`;
+	const lw_live_3_socket = new WebSocket(wsurl);
+	
+
+	// Handle incoming data from the WebSocket
+	lw_live_3_socket.onmessage = event => {
+		const trade = JSON.parse(event.data);
+		const price = parseFloat(trade.p);
+
+		// Update the chart with the new price
+		lw_live_3.timeScale().scrollToRealTime();
+		lw_live_3.applyOptions({ priceFormat: { type: 'custom', minMove: '0.01', formatter: () => price.toFixed(2) } });
+		lw_live_3.priceScale().applyOptions({PriceScaleMargins: {top: 0.1,bottom: 0.1,}});
+		// Update the line series with the new price
+		lw_live_3_lineSeries.update({ time: (new Date(trade.T) / 1000), value: price });
+
+	}
+	/*------------------------------------------------------------------------------------- */
+	/*------------------------------------------------------------------------------------- */
+	const lw_live_4_pair  = `${response[3].asset.toLowerCase()}busd`;
+	
+	// Create a WebSocket connection to Binance API
+	wsurl = `wss://stream.binance.com:9443/ws/${lw_live_4_pair}@trade`;
+	const lw_live_4_socket = new WebSocket(wsurl);
+	
+
+	// Handle incoming data from the WebSocket
+	lw_live_4_socket.onmessage = event => {
+		const trade = JSON.parse(event.data);
+		const price = parseFloat(trade.p);
+
+		// Update the chart with the new price
+		lw_live_4.timeScale().scrollToRealTime();
+		lw_live_4.applyOptions({ priceFormat: { type: 'custom', minMove: '0.01', formatter: () => price.toFixed(2) } });
+		lw_live_4.priceScale().applyOptions({PriceScaleMargins: {top: 0.1,bottom: 0.1,}});
+		// Update the line series with the new price
+		lw_live_4_lineSeries.update({ time: (new Date(trade.T) / 1000), value: price });
+
+	}
+	/*------------------------------------------------------------------------------------- */
+	
+}
+
+async function setDfaLineChart(series, startingDate,endingDate,investmentAmount,apiUrl,symbol,interval,limit) {
+
+		// Main code
+		let investments = calculateInvestment(startingDate, endingDate, investmentAmount);
+		let _url = `${apiUrl}?symbol=${symbol}&interval=${interval}&limit=${limit}`;
+	
+		fetchData(_url).then(prices => {
+			let portfolioData = calculatePortfolioValue(investments, prices);
+			let dates = portfolioData.map(item => item.date);
+			let values = portfolioData.map(item => item.value);
+	
+			let data = [];
+			for (let i = 0; i < dates.length; i++) {
+			data.push({ time: dates[i], value: values[i] });
+			}
+	
+				//DFAlineSeries.setData(data);
+			series.setData(data);
+	
+			
+		});
 
 }
 
@@ -576,128 +572,6 @@ async function AddTableRowPG5(asset, interval, profit, imgname) {
 
 	table.appendChild(tr)
 }
-
-
-
-async function display_cryptoview_data(url) {
-	try {
-		let response = await fetch(url);
-		response.json().then((r) => {
-			let infotable = document.getElementById("infotable");
-			
-			var pairNames = [];
-			var tradeCounts = [];
-			var barColors = ["red", "green","blue","orange","brown"];
-
-			var body = document.createElement("tbody")
-
-			body.setAttribute("id", "body1");
-			for(let i = 0; i < r.length; i++) {
-				var row = document.createElement("tr");
-
-				row.setAttribute("id", "row"+(i+1));
-				var th = document.createElement("th");
-				//row.scope = "row"
-				
-				th.setAttribute("scope", "row");
-				th.innerHTML = i+1;
-				th.id = "row"+(i+1);
-
-				let pair = document.createElement("td");
-				pair.id = "pair"+(i+1);
-				pair.innerHTML = r[i][0];
-
-
-				let base = document.createElement("td");
-				base.id = "base"+(i+1)
-				//base.innerHTML = r[i][1];
-				let baseicon = document.createElement("img");
-				baseicon.setAttribute("width", "24px");
-				baseicon.setAttribute("height", "24px");
-				baseicon.setAttribute("src", `static/img/${(r[i][1]).toLowerCase()}.png`);
-				//baseicon.setAttribute("src", `static/img/bitshares-bts-logo.svg`);
-				baseicon.setAttribute("loading", 'lazy');
-				//baseicon.setAttribute("src", `{{url_for('static', filename='img/${(r[i][1]).toLowerCase()}.png')}}`)
-				base.appendChild(baseicon);
-
-				let quote = document.createElement("td");
-				quote.id = "quote"+(i+1);
-				//quote.innerHTML = r[i][2];
-				let quoteicon = document.createElement("img");
-				quoteicon.setAttribute("width", "24px");
-				quoteicon.setAttribute("height", "24px");
-				quoteicon.setAttribute("src", `static/img/${(r[i][2]).toLowerCase()}.png`)
-				quoteicon.setAttribute('loading', 'lazy')
-				//${(r[i][2]).toLowerCase()}
-				quote.appendChild(quoteicon);
-
-				let interest = document.createElement("td");
-				interest.id = "interest"+(i+1)+"%"
-				interest.innerHTML = r[i][6];
-				
-
-				row.appendChild(th)
-				row.appendChild(pair);
-				row.appendChild(base);
-				row.appendChild(quote);
-				row.appendChild(interest);
-
-				body.appendChild(row)
-				
-				infotable.appendChild(body);
-
-				pairNames.push(r[i][0])
-				tradeCounts.push(r[i][7])
-			}
-
-			//info chart with trades amount
-			const trades_amount_info_chart = new Chart(document.getElementById("myChart"), {
-				type: "bar",
-				data: {
-				  labels: pairNames,
-				  datasets: [{
-					backgroundColor: barColors,
-					data: tradeCounts
-				  }]
-				},
-				options: {
-				  legend: {display: false},
-				  title: {
-					display: true,
-					text: "amount of trades for each pair from last month"
-				  }
-				}
-			});		
-		});
-	} catch (error) {
-		console.log(error);
-	}
-}
-
-async function refreshSocket(socket, url) {
-	//refresh socket
-	socket = new WebSocket(url);
-
-	socket.onmessage = await function(event) {
-		var message = JSON.parse(event.data)
-		var candlestick = message.k;
-		
-		candleSeries.update({
-			time: candlestick.t / 1000,
-			open: candlestick.o,
-			high: candlestick.h,
-			low: candlestick.l,
-			close: candlestick.c
-		})
-	}
-}
-
-//Display data clicked
-document.getElementById("display_data_bn").addEventListener("click", function () {
-	const url = createurl()
-	display_data(url)
-	
-});
 
 // Page 6 DFA chart functionality
 
@@ -769,283 +643,77 @@ fetchData(_url).then(prices => {
 	let dates = portfolioData.map(item => item.date);
 	let values = portfolioData.map(item => item.value);
 
-	//let ctx = document.getElementById('myChart').getContext('2d');
-
-
-	// Create the Lightweight Chart within the container element
-	const chart = LightweightCharts.createChart(
-		document.getElementById('pg6_lightweightchart'),
-		{
-		layout: {
-			background: { color: "#131722" },
-			textColor: "#C3BCDB",
-		},
-		grid: {
-			vertLines: { color: "#434651" },
-			horzLines: { color: "#434651" },
-		},
-		}
-	);
-
-	// Setting the border color for the vertical axis
-	chart.priceScale().applyOptions({
-		borderColor: "#71649C",
-		barSpacing: 20,
-	});
-
-	// Setting the border color for the horizontal axis
-	chart.timeScale().applyOptions({
-		borderColor: "#71649C",
-	});
-
-	// Adjust the starting bar width (essentially the horizontal zoom)
-	chart.timeScale().applyOptions({
-		barSpacing: 15,
-	});
-
-	// Get the current users primary locale
-	const currentLocale = window.navigator.languages[0];
-	// Create a number format using Intl.NumberFormat
-	const myPriceFormatter = Intl.NumberFormat(currentLocale, {
-		style: "currency",
-		currency: "EUR", // Currency for data points
-	}).format;
-
-	// Apply the custom priceFormatter to the chart
-	chart.applyOptions({
-		localization: {
-		priceFormatter: myPriceFormatter,
-		},
-	});
-
-	// Customizing the Crosshair
-	chart.applyOptions({
-		crosshair: {
-		// Change mode from default 'magnet' to 'normal'.
-		// Allows the crosshair to move freely without snapping to datapoints
-		mode: LightweightCharts.CrosshairMode.Normal,
-
-		// Vertical crosshair line (showing Date in Label)
-		vertLine: {
-			width: 8,
-			color: "#C3BCDB44",
-			style: LightweightCharts.LineStyle.Solid,
-			labelBackgroundColor: "#9B7DFF",
-		},
-
-		// Horizontal crosshair line (showing Price in Label)
-		horzLine: {
-			color: "#9B7DFF",
-			labelBackgroundColor: "#9B7DFF",
-		},
-		},
-	});
-
-	const DFAlineSeries = chart.addLineSeries({
-	color: 'rgba(99, 255, 132, 0.8)',
-	lineWidth: 3,
-	});
-
 	let data = [];
 	for (let i = 0; i < dates.length; i++) {
 	data.push({ time: dates[i], value: values[i] });
 	}
 
-	DFAlineSeries.setData(data);
 });
 
-/*
-const websocket = new WebSocket('wss://stream.binance.com:9443/ws/!ticker@arr');
+// Create the Lightweight Chart within the container element
+const lw_dfa_1 = LightweightCharts.createChart(document.getElementById('lw-dfa-1'));
+const lw_dfa_2 = LightweightCharts.createChart(document.getElementById('lw-dfa-2'));
+const lw_dfa_3 = LightweightCharts.createChart(document.getElementById('lw-dfa-3'));
+const lw_dfa_4 = LightweightCharts.createChart(document.getElementById('lw-dfa-4'));
 
-websocket.onmessage = (event) => {
-    const data = JSON.parse(event.data);
-	console.log(data)
-    // Update the HTML elements with the new prices and changes
-    // Use CSS animations to make the widget more engaging
-};
+const lw_live_1 = LightweightCharts.createChart(document.getElementById('lw-live-1'));
+const lw_live_2 = LightweightCharts.createChart(document.getElementById('lw-live-2'));
+const lw_live_3 = LightweightCharts.createChart(document.getElementById('lw-live-3'));
+const lw_live_4 = LightweightCharts.createChart(document.getElementById('lw-live-4'));
 
-websocket.onerror = (error) => {
-    console.error('WebSocket error:', error);
-};
-*/
+const lw_dfa_1_lineSeries = lw_dfa_1.addLineSeries();
+const lw_dfa_2_lineSeries = lw_dfa_2.addLineSeries();
+const lw_dfa_3_lineSeries = lw_dfa_3.addLineSeries();
+const lw_dfa_4_lineSeries = lw_dfa_4.addLineSeries();
 
-var options = {
-	series: [{
-	name: 'Inflation',
-	data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2]
-  }],
-	chart: {
-	height: 350,
-	type: 'bar',
-  },
-  plotOptions: {
-	bar: {
-	  borderRadius: 10,
-	  dataLabels: {
-		position: 'top', // top, center, bottom
-	  },
-	}
-  },
-  dataLabels: {
-	enabled: true,
-	formatter: function (val) {
-	  return val + "%";
-	},
-	offsetY: -20,
-	style: {
-	  fontSize: '12px',
-	  colors: ["#304758"]
-	}
-  },
-  
-  xaxis: {
-	categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-	position: 'top',
-	axisBorder: {
-	  show: false
-	},
-	axisTicks: {
-	  show: false
-	},
-	crosshairs: {
-	  fill: {
-		type: 'gradient',
-		gradient: {
-		  colorFrom: '#D8E3F0',
-		  colorTo: '#BED1E6',
-		  stops: [0, 100],
-		  opacityFrom: 0.4,
-		  opacityTo: 0.5,
+const lw_live_1_lineSeries = lw_live_1.addLineSeries();
+const lw_live_2_lineSeries = lw_live_2.addLineSeries();
+const lw_live_3_lineSeries = lw_live_3.addLineSeries();
+const lw_live_4_lineSeries = lw_live_4.addLineSeries();
+
+
+async function setLiveCharts(chart, series, pair) {
+	const livechart = document.getElementById(`${chart}`);
+	console.log(`${chart}, ${series}, ${pair}\n`)
+	// Create a WebSocket connection to Binance API
+	const lsocket = new WebSocket(`wss://stream.binance.com:9443/ws/${pair}@trade`);
+	console.log(lsocket);
+
+	// Handle incoming data from the WebSocket
+	lsocket.onmessage = event => {
+	const trade = JSON.parse(event.data);
+	const price = parseFloat(trade.p);
+
+	// Update the chart with the new price
+	livechart.timeScale().scrollToRealTime();
+	livechart.applyOptions({ priceFormat: { type: 'custom', minMove: '0.01', formatter: () => price.toFixed(2) } });
+	livechart.priceScale().applyOptions({
+		PriceScaleMargins: {
+			top: 0.1,
+			bottom: 0.1,
 		}
-	  }
-	},
-	tooltip: {
-	  enabled: true,
-	}
-  },
-  yaxis: {
-	axisBorder: {
-	  show: false
-	},
-	axisTicks: {
-	  show: false,
-	},
-	labels: {
-	  show: true,
-	  formatter: function (val) {
-		return val + "%";
-	  }
-	}
-  
-  },
-  title: {
-	text: 'Monthly Inflation in Argentina, 2002',
-	floating: true,
-	offsetY: 330,
-	align: 'center',
-	style: {
-	  color: '#444'
-	}
-  }
-  };
+	});
 
-  var barchart = new ApexCharts(document.querySelector("#chartt"), options);
-  barchart.render();
+	// Update the line series with the new price
+	const timestamp = new Date(trade.T) / 1000;
+	series.update({ time: timestamp, value: price });
+
+	// Log the trade details
+	console.log(`Trade ID: ${trade.t}, Price: ${price}, timestamp: ${timestamp}`);
+
+	// Handle WebSocket connection errors
+	lsocket.onerror = error => {
+		console.error('WebSocket error:', error);
+	};
+	}
+
+};
+
 
 //HTML------------------------------------------------------------------------------------------------------------
 
-async function getBinanceHistoricalData1() {
-	const symboll = 'ADXBUSD';
-	const intervall = '1m';
-	const startTime = new Date('2023-04-01 15:21:00').getTime();
-	const endTime = new Date('2023-04-01 15:44:00').getTime();
-	const limitt = 1000;
 
-	const urll = `https://api.binance.com/api/v3/klines?symbol=${symboll}&interval=${intervall}&startTime=${startTime}&endTime=${endTime}&limit=${limitt}`;
 
-	const xhr = new XMLHttpRequest();
-	xhr.open('GET', urll, true);
-	xhr.onreadystatechange = function() {
-	if (this.readyState === 4 && this.status === 200) {
-		const parsedData = JSON.parse(this.responseText);
-		const data = parsedData.map((kline) => {
-		return {
-			openTime: kline[0],
-			open: kline[1],
-			high: kline[2],
-			low: kline[3],
-			close: kline[4],
-			volume: kline[5],
-			closeTime: kline[6],
-			quoteAssetVolume: kline[7],
-			numberOfTrades: kline[8],
-			takerBuyBaseAssetVolume: kline[9],
-			takerBuyQuoteAssetVolume: kline[10]
-		}
-		});
-		console.log(data);
-	}
-	};
-	xhr.send();
-}
-
-getBinanceHistoricalData1();
-
-async function getBinanceHistoricalData(symbol,interval, daysFromNow) {
-	const startTime = new Date(Date.now() - daysFromNow * 24 * 60 * 60 * 1000).getTime();
-	const endTime = Date.now();
-	var prices = []
-	// Construct the API request URL
-	const requrl = `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&startTime=${startTime}&endTime=${endTime}`;
-	
-	// Create a new XMLHttpRequest object
-	const xhr = new XMLHttpRequest();
-	
-	// Set up the request
-	xhr.open('GET', requrl);
-	
-	// Handle the response
-	xhr.onload = function() {
-	  if (xhr.status === 200) {
-		// Parse the response data
-		const data = JSON.parse(xhr.responseText);
-	
-		prices = data.map((item) => {
-		  return {
-			date: new Date(item[0]).toISOString().slice(0, 10),
-			close: parseFloat(item[4]),
-		  };
-		});
-	
-		// Display the prices in the console
-		console.log(prices);
-	  } else {
-		console.error('Request failed. Status code: ' + xhr.status);
-	  }
-	};
-	
-	// Send the request
-	await xhr.send();
-}
-
-const sT = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).getTime();
-const eT = Date.now();
-//getBinanceHistoricalData('BTCUSD','1d', 30);
-
-// Create the Lightweight Chart within the container element
-var chart2 = LightweightCharts.createChart(
-	document.getElementById('container'),
-	{
-		layout: {
-			background: { color: "#131722" },
-			textColor: "#C3BCDB",
-		},
-		grid: {
-			vertLines: { color: "#444" },
-			horzLines: { color: "#444" },
-		},
-	}
-);
 
 var price_chart_4_1 = LightweightCharts.createChart(
 	document.getElementById('container4_1'),
@@ -1156,125 +824,6 @@ var price_chart_4_4 = LightweightCharts.createChart(
 price_chart_4_4.timeScale().fitContent();
 price_chart_4_4.timeScale().applyOptions({
 	barSpacing: 100,
-});
-
-
-//change scale
-document.getElementById("set_pricescalemode_bn").addEventListener("click", function() {
-	selected = document.getElementById("priceScaleModeSelect").value;
-	
-	if(selected == "normal")
-		chart2.applyOptions({
-			rightPriceScale: {
-				mode: LightweightCharts.PriceScaleMode.Normal
-			}
-		});
-	else if(selected == "logarithmic")
-	chart2.applyOptions({
-		rightPriceScale: {
-			mode: LightweightCharts.PriceScaleMode.Logarithmic
-		}
-	});
-	else if(selected == "percentage")
-	chart2.applyOptions({
-		rightPriceScale: {
-			mode: LightweightCharts.PriceScaleMode.Percentage
-		}
-	});
-});
-
-// Setting the border color for the vertical axis
-chart2.priceScale().applyOptions({
-	borderColor: "#71649C",
-});
-
-// Setting the border color for the horizontal axis
-chart2.timeScale().applyOptions({
-	borderColor: "#71649C",
-});
-
-// Adjust the starting bar width (essentially the horizontal zoom)
-chart2.timeScale().applyOptions({
-	barSpacing: 10,
-});
-
-// Get the current users primary locale - device language
-const currentLocale = window.navigator.languages[0];
-// Create a number format using Intl.NumberFormat
-const myPriceFormatter = Intl.NumberFormat(currentLocale, {
-	style: "currency",
-	currency: "EUR", // Currency for data points
-}).format;/** */
-
-// Apply the custom priceFormatter to the chart
-chart2.applyOptions({
-	localization: {
-		//priceFormatter: myPriceFormatter,
-	},
-});
-
-// Customizing the Crosshair
-chart2.applyOptions({
-	crosshair: {
-		// Change mode from default 'magnet' to 'normal'.
-		// Allows the crosshair to move freely without snapping to datapoints
-		mode: LightweightCharts.CrosshairMode.Magnet,
-
-		// Vertical crosshair line (showing Date in Label)
-		vertLine: {
-			width: 8,
-			color: "#C3BCDB44",
-			style: LightweightCharts.LineStyle.Solid,
-			labelBackgroundColor: "#9B7DFF",
-		},
-
-		// Horizontal crosshair line (showing Price in Label)
-		horzLine: {
-			color: "#9B7DFF",
-			labelBackgroundColor: "#9B7DFF",
-		},
-	},
-});
-
-
-// Create the Main Series (Candlesticks)
-var candlesticksSeries;
-candlesticksSeries = chart2.addCandlestickSeries();
-
-// Add an area series to the chart2,
-// Adding this before we add the candlestick chart2
-// so that it will appear beneath the candlesticks
-var LineSeries;
-LineSeries = chart2.addLineSeries({
-	lastValueVisible: false, // hide the last value marker for this series
-	crosshairMarkerVisible: false, // hide the crosshair marker for this series
-	color: "#2962ff", // hide the line
-	lineWidth: 1.5,
-
-	//topColor: "rgba(56, 33, 110,0.6)",
-	//bottomColor: "rgba(56, 33, 110, 0.1)",
-});
-
-
-// Set the data for the Main Series
-//candlesticksSeries.setData(candleStickData);
-
-// Changing the Candlestick colors
-candlesticksSeries.applyOptions({
-	wickUpColor: "rgb(54, 116, 217)",
-	upColor: "rgb(54, 116, 217)",
-	wickDownColor: "rgb(225, 50, 85)",
-	downColor: "rgb(225, 50, 85)",
-	borderVisible: false,
-});
-
-// Adjust the options for the priceScale of the candlesticksSeries
-candlesticksSeries.priceScale().applyOptions({
-	autoScale: true, // disables auto scaling based on visible content
-	scaleMargins: {
-		top: 0.1,
-		bottom: 0.2,
-	},
 });
 
 // Adding a window resize event handler to resize the chart when

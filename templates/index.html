@@ -36,17 +36,17 @@
 				<!--<button type="button" class="btn btn-outline-secondary bn_prev" onclick="slide('prev')">prev</button>-->
 				<!--<button type="button" class="btn btn-outline-secondary bn_next" onclick="slide('next')">next</button>-->
 
-				<div class="modal-body row" style="height: 100vh; padding-top: 0; padding-bottom: 0;">
-					<div class="col-md-4" style="border: 2px solid var(--tw-grey); position: relative;">
+				<div class="modal-body row" style="height: 100vh; padding-bottom: 0; padding-top: 0;">
+					<div class="col-md-4" style="border: 2px solid var(--tw-grey); position: relative; padding: 0;">
 						<!--left side-->
-						<div class="pg6_left" style=" display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 5px; border-radius: 10px; background: radial-gradient(ellipse at center, var(--tw-grey) 50%, var(--tw-black) 100%);">
+						<div class="pg6_left" style=" display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 1vh; background: radial-gradient(ellipse at center, var(--tw-black) 50%, var(--tw-black) 100%); border-bottom: 2px solid var(--tw-grey);">
 
 							<span class="widget-bottom">Saving Staking</span>
 							
 							<span class="widget-bottom">Compound Interest Investing</span>
 
 						</div>
-						<div class="pg6_left" style="bottom: 0;  margin-top: 5px; border-radius: 10px; background: radial-gradient(ellipse at center, var(--tw-grey) 50%, var(--tw-black) 100%);">
+						<div class="pg6_left" style="bottom: 0;  margin-top: 5vh; border-radius: 10px; background: radial-gradient(ellipse at center, var(--tw-black) 50%, var(--tw-black) 100%);">
 							<ol>
 								<span class="widget-bottom" style="margin-bottom: 15px;">1. Choose an investment amount.</span>
 								<span class="widget-bottom" style="margin-bottom: 15px;">2. Divide your investment amount into equal parts.</span>
@@ -129,8 +129,6 @@
 				
 			</div> <!--END PAGE 5-->
 			<div id="pg4" class="page four"> 
-				<!--<button type="button" class="btn btn-outline-secondary bn_prev" onclick="slide('prev')">prev</button>-->
-				<!--<button type="button" class="btn btn-outline-secondary bn_next" onclick="slide('next')">next</button>-->
 				<div class="modal-body row" style="height: 100vh; padding-top: 0; padding-bottom: 0;">
 					<div class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0;">
 						<table id="pg4_table" style=" width: inherit; height: 100%; text-align: center; vertical-align: middle; padding: 0;">
@@ -141,6 +139,7 @@
 						<div style="width: 100%; height: 100px; border: 2px solid var(--tw-grey); display: grid; justify-content: center; align-items: center;">
 							<span class="widget-bottom" style="padding: 5px; font-weight: 600; font-size: 3em;">Cryptoview Peaks & Valleys</span>
 						</div>
+						
 						<div style="display: flex; flex-direction: row;">
 							<div id="container4_1" class="price-info-chart"></div>
 							<div id="container4_2" class="price-info-chart"></div>
@@ -150,46 +149,44 @@
 							<div id="container4_3" class="price-info-chart"></div>
 							<div id="container4_4" class="price-info-chart"></div>
 						</div>
-						<!--
-						<div class="box box5">
-							<div id="spark5"></div>
-						</div>
-						-->
+						
+						
 					</div>
 					<div class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0;">
-					<!--right side-->
-					<div id="pg4_realtime_widget">
-						<div id="pg4_realtime_widget_header" style="display: flex; flex-direction: row; justify-content: space-between;">
+						<!--right side-->
+						<div id="pg4_realtime_widget">
+							<div id="pg4_realtime_widget_header" style="display: flex; flex-direction: row; justify-content: space-between;">
+								
+								<span class="span">Symbol</span>
+								<span class="span">Last</span>
+								<span class="span">Chg</span>
+								<span class="span">Chg %</span>
+
+							</div>
 							
-							<span class="span">Symbol</span>
-							<span class="span">Last</span>
-							<span class="span">Chg</span>
-							<span class="span">Chg %</span>
+							<div id="wd1" class="test"></div>
+							<div id="wd2" class="test"></div>
+							<div id="wd3" class="test"></div>
+							<div id="wd4" class="test"></div>
+							<div id="wd5" class="test"></div>
+							<div id="wd6" class="test"></div>
+							<div id="wd7" class="test"></div>
+							<div id="wd8" class="test"></div>
+							<div id="wd9" class="test"></div>
+							<div id="wd10" class="test"></div>
+							<div id="wd11" class="test"></div>
+							<div id="wd12" class="test"></div>
+							<div id="wd13" class="test"></div>
+							<div id="wd14" class="test"></div>
+							<div id="wd15" class="test"></div>
+							<div id="wd16" class="test"></div>
+							<div id="wd17" class="test"></div>
+							<div id="wd18" class="test"></div>
+							<div id="wd19" class="test"></div>
+							<div id="wd20" class="test"></div>
 
 						</div>
 						
-						<div id="wd1" class="test"></div>
-						<div id="wd2" class="test"></div>
-						<div id="wd3" class="test"></div>
-						<div id="wd4" class="test"></div>
-						<div id="wd5" class="test"></div>
-						<div id="wd6" class="test"></div>
-						<div id="wd7" class="test"></div>
-						<div id="wd8" class="test"></div>
-						<div id="wd9" class="test"></div>
-						<div id="wd10" class="test"></div>
-						<div id="wd11" class="test"></div>
-						<div id="wd12" class="test"></div>
-						<div id="wd13" class="test"></div>
-						<div id="wd14" class="test"></div>
-						<div id="wd15" class="test"></div>
-						<div id="wd16" class="test"></div>
-						<div id="wd17" class="test"></div>
-						<div id="wd18" class="test"></div>
-						<div id="wd19" class="test"></div>
-						<div id="wd20" class="test"></div>
-
-					</div>
 					</div>
 				</div>
 			</div> <!--END PAGE 4-->
@@ -198,16 +195,16 @@
 				<!--<button type="button" class="btn btn-outline-secondary bn_next" onclick="slide('next')">next</button>-->
 
 				<div class="modal-body row" style="height: 100vh; padding-top: 0; padding-bottom: 0;">
-					<div class="col-md-4" style="border: 2px solid var(--tw-grey); position: relative;">
+					<div class="col-md-4" style="border: 2px solid var(--tw-grey); position: relative; padding: 0;">
 						<!--left side-->
-						<div class="pg6_left" style=" display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 5px; border-radius: 10px; background: radial-gradient(ellipse at center, var(--tw-grey) 50%, var(--tw-black) 100%);">
+						<div class="pg6_left" style=" display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 5px; background: radial-gradient(ellipse at center, var(--tw-black) 50%, var(--tw-black) 100%); border-bottom: 1px solid var(--tw-grey);">
 
 							<span class="widget-bottom">DFA</span>
 							
 							<span class="widget-bottom">Dollar-First-Averaging</span>
 
 						</div>
-						<div class="pg6_left" style="bottom: 0;  margin-top: 5px; border-radius: 10px; background: radial-gradient(ellipse at center, var(--tw-grey) 50%, var(--tw-black) 100%);">
+						<div class="pg6_left" style="bottom: 0;  margin-top: 5vh; border-radius: 10px; background: radial-gradient(ellipse at center, var(--tw-black) 50%, var(--tw-black) 100%);">
 							<ol>
 								<span class="widget-bottom" style="margin-bottom: 15px;">1. Decide on an investment amount.</span>
 								<span class="widget-bottom" style="margin-bottom: 15px;">2. Invest that amount at regular intervals.</span>
@@ -219,13 +216,23 @@
 							
 						</div>
 					</div>
-					<div class="col-md-8" style="border: 2px solid var(--tw-grey); padding: 0;">
+					<div class="col-md-8" style="display: flex; flex-direction: column; border: 2px solid var(--tw-grey); padding: 0;">
 						<h1 class="pg6_headliner mb-3" >Here Is An Example Of Investing
 							<span style="color: var(--tw-green); font-weight: 600;">100 $</span>
 							Per Day For <span style="color: var(--tw-green); font-weight: 600;">60</span>
-							 Days</h1>
+							 Days
+						</h1>
 						
-						<div id="pg6_lightweightchart" style="position: relative; width: inherit; height: 80vh;"></div>
+						<div style="display: flex; flex-direction: row;">
+							<div id="lw-dfa-1" class="price-info-chart"></div>
+							<div id="lw-dfa-2" class="price-info-chart"></div>
+						</div>
+						
+						<div style="display: flex; flex-direction: row; flex: 1;">
+							<div id="lw-dfa-3" class="price-info-chart"></div>
+							<div id="lw-dfa-4" class="price-info-chart"></div>
+						</div>
+					
 					</div>
 					<!---->
 					<div class="col-md-0" style="border: 2px solid var(--tw-grey); padding: 0;">
@@ -237,239 +244,32 @@
 				
 			</div> <!--END PAGE 6-->
 			<div id="pg7" class="page seven"> 
-				<!--<button type="button" class="btn btn-outline-secondary bn_prev" onclick="slide('prev')">prev</button>-->
-				<!--<button type="button" class="btn btn-outline-secondary bn_next" onclick="slide('next')">next</button>-->
-
-				<div class="modal-body row" style="height: 100vh; padding-top: 0; padding-bottom: 0;">
-					<div class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0;">
-						<!--left side-->
-						<!--<span class="pg6_left">DFA<br>------------<br>Dollar-First-Averaging</span>-->
-						<div id="wrapper">
-							<div class="content-area">
-								<div class="container-fluid">
-									<div class="main">
-										<div class="row sparkboxes mt-4">
-											<div class="">
-												<div class="box box2">
-												<div class="details">
-													<h3>422</h3>
-													<h4>VIEWS</h4>
-												</div>
-												<div id="spark2"></div>
-												</div>
-											</div>
-											<div class="">
-												<div class="box box3" style="display: flex; flex-direction: row; justify-content: space-evenly;">
-													
-														
-														<div class="details" style="display: flex; flex-direction: row; text-align: center; justify-content: space-between; align-items: center; padding-top: 1vh; border-bottom: 2px solid var(--tw-red);">
-															<h3><img src="{{url_for('static', filename='img/btc.svg')}}" loading="lazy" style="width:44px;height:44px;"></h3>
-															<h4 style="margin-left: 1vw;">BTC</h4>
-														</div>
-														<div class="details" style="margin-top: 45px; display: flex; flex-direction: row; text-align: center; justify-content: space-between; align-items: center; padding-top: 1vh;">
-															<h4 style="width: 10vw; overflow: hidden; text-align: left;">23457.88 $</h4>
-														</div>
-
-													
-													
-													<div id="spark3"></div>
-												</div>
-											</div>
-											<div class="">
-												<div class="box box4">
-												<div class="details">
-													<h3><img src="{{url_for('static', filename='img/btc.svg')}}" loading="lazy" style="width:44px;height:44px;"></h3>
-													<h4>SALES</h4>
-												</div>
-												<div id="spark4"></div>
-												</div>
-											</div>
-											<div class="">
-												<div class="box box5">
-													<div id="spark5"></div>
-												</div>
-											</div>
-											<div class="">
-												<div class="box box5">
-												<div class="details">
-													<h3>100 $</h3>
-													<h4>PROFIT</h4>
-												</div>
-												<div id="spark6"></div>
-												</div>
-											</div>
-											
-											<div class="box" style="background-color: greenyellow; display: flex; flex-direction: row;">
-											
-												<div style="background-color: blue; width: 50%;">
-													<div class="" style="background-color: rgb(33, 194, 159); display: flex; flex-direction: row; text-align: center; justify-content: space-evenly; align-items: center; padding-top: 1vh; border-bottom: 2px solid var(--tw-red);">
-														<h3><img src="{{url_for('static', filename='img/btc.svg')}}" loading="lazy" style="width:34px;height:34px;"></h3>
-														<h4>BTC</h4>
-													</div>
-												</div>
-												<div style="background-color: red; width: 50%;"></div>
-											
-											</div>
-										</div>
-										<!---->
-										
-									</div>
-								</div>
-							</div>
-						</div>
-				
-					</div>
-					<div class="col-md-8" style="border: 2px solid var(--tw-grey); padding: 0; max-height: 100vh;">
-						<div id="wrapper">
-							<div class="content-area">
-								<div class="container-fluid">
-									<div class="main">
-										<!---->
-										<div class="row mt-4">
-											<div class="col-md-5">
-												<div class="box shadow mt-4">
-												<div id="radialBarBottom"></div>
-												</div>
-											</div>
-											<div class="col-md-7">
-												<div class="box shadow mt-4">
-												<div id="line-adwords" class=""></div>
-												</div>
-											</div>
-										</div>
+				<div class="modal-body row" style="height: 100vh; padding-top: 0; padding-bottom: 0; justify-content: center; width: 100%;">
 					
-										<div class="row mt-4">
-											<div class="col-md-5">
-												<div class="box shadow mt-4">
-												<div id="barchart"></div>
-												</div>
-											</div>
-											<div class="col-md-7">
-												<div class="box shadow mt-4">
-												<div id="areachart"></div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+					<div class="col-md-11" style="display: flex; flex-direction: column; border: 2px solid var(--tw-grey); padding: 0;">
+						<div style="width: 100%; height: 100px; border: 2px solid var(--tw-grey); display: grid; justify-content: center; align-items: center;">
+							<span class="widget-bottom" style="padding: 5px; font-weight: 600; font-size: 3em;">Cryptoview Realtime Trades</span>
 						</div>
-					</div>
-					<div class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0;">
-						<!--<h1 class="info-label">Bitcoin</h1>-->
-						<!--<div style="border: 2px solid var(--tw-grey); width: inherit; height: 50%; position: sticky; top: 0; left: 0; display: flex; flex-wrap: wrap; align-content: flex-start; padding: 0;">test</div>-->
-						<div class="" style="display: flex; flex-direction: column; padding: 20px;">
-							<div class="row sparkboxes_ mt-4">
-								
-									<div class="box_ box_1" style="margin-bottom: 20px;">
-										<div id="spark_1"></div>
-									</div>
-		
-									<div class="box_ box_2" style="margin-bottom: 20px;">
-										<div id="spark_2"></div>
-									</div>
-		
-									<div class="box_ box_3" style="margin-bottom: 20px;">
-										<div id="spark_3"></div>
-									</div>
-		
-									<div class="box_ box_4" style="margin-bottom: 20px;">
-										<div id="spark_4"></div>
-									</div>
-		
-								
-							</div>
+						
+						<div style="display: flex; flex-direction: row;">
+							<div id="lw-live-1" class="price-info-chart"></div>
+							<div id="lw-live-2" class="price-info-chart"></div>
 						</div>
-					<!--right side-->
+						
+						<div style="display: flex; flex-direction: row; flex: 1;">
+							<div id="lw-live-3" class="price-info-chart"></div>
+							<div id="lw-live-4" class="price-info-chart"></div>
+						</div>
+						
+						
 					</div>
+					
 				</div>
 				
 			</div> <!--END PAGE 7-->
-			<div class="page three"> <!--PAGE 3-->
-				<div class="modal-body row">
-					<div class="col-md-7">
-						<div id="titlediv">
-							<h1><img src="{{url_for('static', filename='img/btc.svg')}}" loading="lazy" style="width:64px;height:64px; margin-right: 10px; margin-top: 5px; margin-left: 5px;">{{title}}</h1>
-						</div>
-						<div id="properties" style="margin-left: 4%; left: 15%; margin-bottom: 10px;" class="settings">
-							<form action="/" method="GET">
-				
-								<select id="pair_symbol_option_id" name = "pair_symbol_option_name" class="settings" style="width: 95px;">
-									{% for symbol in symbols %}
-										<option value="{{symbol['symbol']}}">{{symbol['symbol']}}</option>
-									{% endfor %}
-								</select>
-						
-								<select id="interval_option_id" name = "interval_option_name" class="settings">
-										<option value="1m">1m</option>
-										<option value="3m">3m</option>
-										<option value="5m">5m</option>
-										<option value="15m">15m</option>
-										<option value="30m">30m</option>
-										<option value="1h">1h</option>
-										<option value="2h">2h</option>
-										<option value="4h">4h</option>
-										<option value="6h">6h</option>
-										<option value="8h">8h</option>
-										<option value ="12h">12h</option>
-										<option value="1d">1d</option>
-										<option value="3d">3d</option>
-										<option value="1w">1w</option>
-										<option value="1M">1M</option>
-								</select>
-						
-								<select id="data_amount_option_id" name = "data_amount_option_name" class="settings">
-									<option value="1 day ago UTC" selected>1D</option>
-									<option value="7 days ago UTC">1W</option>
-									<option value="1 month ago UTC">1M</option>
-									<option value="2 months ago UTC">2M</option>
-									<option value="3 months ago UTC">3M</option>
-								</select>
-								<button type="button" id="display_data_bn" class="settings">Display data</button>
-								
-								<select id="priceScaleModeSelect" class="settings" style="width: 60px;">
-									<option value="normal" selected>Def</option>
-									<option value="logarithmic">Log</option>
-									<option value="percentage">%</option>
-								</select>
-								<button type="button" id="set_pricescalemode_bn" class="settings">Change scale</button>
-								<!--<button type="button" class="btn btn-outline-secondary bn_prev" onclick="slide('prev')">prev</button>-->
-								<!--<button type="button" class="btn btn-outline-secondary bn_next" onclick="slide('next')">next</button>-->
-							</form>
-						</div> <!--END properties -->
-
-						<div id="container" class="mainchart"></div>
-						<div id="chartt"></div>
-					</div> <!--END col-md-7-->
-					<div class="col-md-5">
-						<div class="container text-center">
-							<!-- Your second column here -->
-							<div class="row">
-								<div id="infodiv1" style="padding: 0;">
-									<table id="infotable" class="table table-dark">
-										<thead>
-											<tr>
-												<th scope="col">#</th>
-												<th scope="col">pair</th>
-												<th scope="col">base</th>
-												<th scope="col">quote</th>
-												<th scope="col">interest</th>
-											</tr>
-										</thead>
-									</table>
-								</div>
-							</div>
-							<div class="row r_subchart">
-								<canvas id="myChart" class="subchart"></canvas>
-							</div>
-						</div>
-
-					</div> <!--END col-md-5-->
-				</div>
-			</div> <!--END PAGE 3-->
 		</div>
 	</div>
-
+	
 	<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
@@ -481,7 +281,9 @@
 	<script src="{{url_for('static', filename='scripts.js')}}"></script>
 	<script src="{{url_for('static', filename='scripts copy.js')}}"></script>
 	<script src="{{url_for('static', filename='realtimeWidget.js')}}"></script>
-	
+	<script src="{{url_for('static', filename='lw-live.js')}}"></script>
+	<script src="{{url_for('static', filename='lw-dfa.js')}}"></script>
+	<script src="{{url_for('static', filename='config.js')}}"></script>
 	
 </body>
 </html>

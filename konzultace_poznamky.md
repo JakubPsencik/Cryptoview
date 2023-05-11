@@ -285,15 +285,12 @@ kdybyste nejakoupim tu opici koupili
 27/4/23
 strana 17
 ------------------------------------------
-predikce kakulovana v minutovych intervalech ktere muzou byt ovivnovane lokalnima extremama - reseni prejet na sekundove svicky nebo primo na trady
-
-60 krat sloyitejsi - 
-
+predikce kakulovana v minutovych intervalech ktere muzou byt ovivnovane lokalnima extremama - reseni prejet na sekundove svicky nebo primo na trady, 60 krat sloyitejsi ... -[DONE]
 
 eiminace paru ktere prodelavaji - pro ty nema smysl to pocitat
-rozhodnovani jestli jit nejit, objem obchovani, mnoztsvi obchodu, neocekavane obhcody
+rozhodnovani jestli jit nejit, objem obchovani, mnoztsvi obchodu, neocekavane obhcody -[DONE]
 
-1% - jednou za minutu close na close - peak a valley
+1% - jednou za minutu close na close - peak a valley -[DONE]
 stop loss - hranice
 
 binance ma nejradsi konkretni hodnoty
@@ -313,8 +310,8 @@ highchart, fusion chart - zminit -[DONE]
 
 pred zaverem udelat summary co to vsecko umi - ty featury
 
-infografika generovana na infopanelu - ukazat jak se to viviji a priskakuje do grafu
-nejaky live charticek
+infografika generovana na infopanelu - ukazat jak se to viviji a priskakuje do grafu -[DONE]
+nejaky live charticek -[DONE]
 blokove schema - nejaky konfigurak - jake meny atd atd....
 
 23.5 - termin obhajoby projektu
