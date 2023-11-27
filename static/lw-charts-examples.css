@@ -1,0 +1,109 @@
+/*custom theme, range switcher*/
+.switcher {
+	display: flex;
+	align-items: center;
+	height: 30px;
+	margin-top: 8px;
+	color: #2196F3;
+}
+
+.switcher-item {
+	cursor: pointer;
+	text-decoration: none;
+	display: inline-block;
+	padding: 6px 8px;
+	font-size: 14px;
+	color: #262b3e;
+	background-color: transparent;
+	margin-right: 8px;
+	border: none;
+	border-radius: 4px;
+	outline: none;
+}
+
+.switcher-item:hover {
+	background-color: #f2f3f5;
+}
+
+.switcher-active-item {
+	text-decoration: none;
+	cursor: default;
+	color: #262b3e;
+}
+
+.switcher-active-item,
+.switcher-active-item:hover {
+	background-color: #e1eff9;
+}
+
+.test {
+	-webkit-text-size-adjust: 100%;
+	--v-rhythm-header-1-space-phone: 56px;
+	--v-rhythm-header-1-space-tablet: 80px;
+	--v-rhythm-header-1-space-laptop: 100px;
+	--v-rhythm-header-1-space-desktop: 120px;
+	--v-rhythm-header-2-space-phone: 16px;
+	--v-rhythm-header-2-space-tablet: 24px;
+	--v-rhythm-header-2-space-laptop: 32px;
+	--v-rhythm-header-2-space-desktop: 40px;
+	--v-rhythm-header-3-space-phone: 16px;
+	--v-rhythm-header-3-space-tablet: 16px;
+	--v-rhythm-header-3-space-laptop: 24px;
+	--v-rhythm-header-3-space-desktop: 24px;
+	--v-rhythm-footer-1-space-phone: 56px;
+	--v-rhythm-footer-1-space-tablet: 80px;
+	--v-rhythm-footer-1-space-laptop: 100px;
+	--v-rhythm-footer-1-space-desktop: 120px;
+	--v-rhythm-footer-2-space-phone: 16px;
+	--v-rhythm-footer-2-space-tablet: 24px;
+	--v-rhythm-footer-2-space-laptop: 32px;
+	--v-rhythm-footer-2-space-desktop: 40px;
+	--v-rhythm-footer-3-space-phone: 16px;
+	--v-rhythm-footer-3-space-tablet: 16px;
+	--v-rhythm-footer-3-space-laptop: 24px;
+	--v-rhythm-footer-3-space-desktop: 24px;
+	--v-rhythm-spacing-1-phone: 80px;
+	--v-rhythm-spacing-1-tablet: 120px;
+	--v-rhythm-spacing-1-laptop: 160px;
+	--v-rhythm-spacing-1-desktop: 200px;
+	--v-rhythm-spacing-2-phone: 64px;
+	--v-rhythm-spacing-2-tablet: 88px;
+	--v-rhythm-spacing-2-laptop: 120px;
+	--v-rhythm-spacing-2-desktop: 160px;
+	--v-rhythm-spacing-3-phone: 48px;
+	--v-rhythm-spacing-3-tablet: 64px;
+	--v-rhythm-spacing-3-laptop: 88px;
+	--v-rhythm-spacing-3-desktop: 120px;
+	--v-rhythm-spacing-4-phone: 48px;
+	--v-rhythm-spacing-4-tablet: 48px;
+	--v-rhythm-spacing-4-laptop: 64px;
+	--v-rhythm-spacing-4-desktop: 80px;
+	--v-rhythm-spacing-5-phone: 32px;
+	--v-rhythm-spacing-5-tablet: 32px;
+	--v-rhythm-spacing-5-laptop: 40px;
+	--v-rhythm-spacing-5-desktop: 48px;
+	--v-rhythm-header-1-space: var(--v-rhythm-header-1-space-desktop);
+	--v-rhythm-header-2-space: var(--v-rhythm-header-2-space-desktop);
+	--v-rhythm-header-3-space: var(--v-rhythm-header-3-space-desktop);
+	--v-rhythm-footer-1-space: var(--v-rhythm-footer-1-space-desktop);
+	--v-rhythm-footer-2-space: var(--v-rhythm-footer-2-space-desktop);
+	--v-rhythm-footer-3-space: var(--v-rhythm-footer-3-space-desktop);
+	--v-rhythm-spacing-1: var(--v-rhythm-spacing-1-desktop);
+	--v-rhythm-spacing-2: var(--v-rhythm-spacing-2-desktop);
+	--v-rhythm-spacing-3: var(--v-rhythm-spacing-3-desktop);
+	--v-rhythm-spacing-4: var(--v-rhythm-spacing-4-desktop);
+	--v-rhythm-spacing-5: var(--v-rhythm-spacing-5-desktop);
+	color-scheme: dark;
+	-webkit-font-smoothing: antialiased;
+	font-feature-settings: "tnum" on,"lnum" on;
+	font-family: -apple-system,BlinkMacSystemFont,Trebuchet MS,Roboto,Ubuntu,sans-serif;
+	font-size: 14px;
+	-webkit-tap-highlight-color: transparent;
+	color: #d1d4dc;
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+	padding: 32px 40px;
+	border: 1px solid #434651;
+	border-radius: 16px;
+}

@@ -26,7 +26,3 @@ function moveSlide(e) {
 	}
 
 }
-
-//how to compare if string values in array1 are also in array2 and array 3 in javascript?
-
-

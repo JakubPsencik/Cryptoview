@@ -1,99 +1,86 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Dollar-First-Averaging (DFA) on Bitcoin data from Binance</title>
-	</head>
-	<body>
-		<h1>Dollar-First-Averaging (DFA) on Bitcoin data from Binance</h1>
-		<p>This page demonstrates the Dollar-First-Averaging (DFA) strategy on historical Bitcoin price data from Binance. DFA is a passive investment strategy that involves investing a fixed dollar amount at regular intervals, regardless of the market price.</p>
-		<p>In this demonstration, we will invest $1000 in Bitcoin every week, starting from January 1, 2022, until March 1, 2023.</p>
-		
-		<h2>Results</h2>
-		<table id="tb">
-			<tr>
-				<th>Date</th>
-				<th>Investment</th>
-				<th>Bitcoin Price</th>
-				<th>Bitcoin Purchased</th>
-				<th>Total Bitcoin Purchased</th>
-				<th>Portfolio Value</th>
-			</tr>
-			<tbody id="results"></tbody>
-			
-		</table>
-		
-		<script>
-			// Define variables
-			const startingDate = new Date("2022-01-01");
-			const endingDate = new Date("2023-03-01");
-			const investmentAmount = 100;
-			const apiUrl = "https://api.binance.com/api/v3/klines";
-			const symbol = "BTCEUR";
-			const interval = "1d";
-			const limit = 100;
-			
-			// Define functions
-			function formatDate(date) {
-				let year = date.getFullYear();
-				let month = date.getMonth() + 1;
-				let day = date.getDate();
-				return year + "-" + (month < 10 ? "0" : "") + month + "-" + (day < 10 ? "0" : "") + day;
-			}
-			
-			function calculateInvestment(startDate, endDate, amount) {
-				let investmentArray = [];
-				let currentDate = new Date(startDate.getTime());
-				while (currentDate <= endDate) {
-				let formattedDate = formatDate(currentDate);
-				investmentArray.push({
-					date: formattedDate,
-					investment: amount,
-				});
-				currentDate.setDate(currentDate.getDate() + 1);
-				}
-				return investmentArray;
-			}
-			
-			function fetchData(url) {
-				return fetch(url)
-				.then(response => response.json())
-				.then(data => data.map(item => [item[0], item[4]]))
-				.catch(error => console.log(error));
-			}
-			
-			function calculatePortfolioValue(investments, prices) {
-				console.log(investments.length)
-				var portfolioValue = 0;
-				var totalBitcoinPurchased = 0;
-				for (var i = 0; i < investments.length; i++) {
-					var investmentDate = new Date(investments[i].date);
-					var priceDateIndex = prices.findIndex(item => new Date(item[0]) >= investmentDate);
-					if (priceDateIndex !== -1) {
-						var price = parseFloat(prices[priceDateIndex][1]);
-						var bitcoinPurchased = investments[i].investment / price;
-						totalBitcoinPurchased += bitcoinPurchased;
-						portfolioValue = totalBitcoinPurchased * price;
-					}
-					var row = document.createElement("tr");
-					row.innerHTML = `
-						<td>${investments[i].date}</td>
-						<td>${investments[i].investment.toFixed(2)}</td>
-						<td>${price}</td>
-						<td>${bitcoinPurchased.toFixed(8)}</td>
-						<td>${totalBitcoinPurchased.toFixed(8)}</td>
-						<td>${portfolioValue.toFixed(2)}</td>`;
-				
-					document.getElementById("results").appendChild(row);
-				}
-			}
-		
-			// Main code
-			let investments = calculateInvestment(startingDate, endingDate, investmentAmount);
-			let url = `${apiUrl}?symbol=${symbol}&interval=${interval}&limit=${limit}`;
-			fetchData(url)
-				.then(prices => calculatePortfolioValue(investments, prices));
+<head>
+  <title>Rebalancing Chart</title>
+  <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+<body>
+  <div id="chartContainer" style="width: 100vw; height: 100vh;"></div>
+  <script>
+    // Create a new Lightweight Charts instance.
 
-			console.log(document.getElementById("tb").childNodes)
-		</script>
-	</body>
+	var chart = LightweightCharts.createChart(
+		document.getElementById('chartContainer'),
+		{
+			layout: {
+				background: { color: "#131722" },
+				textColor: "#C3BCDB",
+			},
+			grid: {
+				vertLines: { color: "#444" },
+				horzLines: { color: "#444" },
+			},
+			autoSize: true,
+		}
+	);
+
+    // Create a new series for Bitcoin.
+    const bitcoinSeries = chart.addLineSeries({
+      title: "Bitcoin",
+      color: "red"
+    });
+
+    // Create a new series for Ethereum.
+    const ethereumSeries = chart.addLineSeries({
+      title: "Ethereum",
+      color: "blue"
+    });
+
+    // Add data to the Bitcoin series.
+    bitcoinSeries.setData([
+      { time: "2023-08-01", value: 10000 },
+      { time: "2023-08-08", value: 11000 },
+      { time: "2023-08-15", value: 12000 },
+      { time: "2023-08-22", value: 13000 },
+      { time: "2023-08-29", value: 14000 },
+      { time: "2023-09-05", value: 15000 },
+      { time: "2023-09-12", value: 14500 },
+      { time: "2023-09-19", value: 13500 },
+      { time: "2023-09-26", value: 14000 }
+    ]);
+
+    // Add data to the Ethereum series.
+    ethereumSeries.setData([
+      { time: "2023-08-01", value: 5000 },
+      { time: "2023-08-08", value: 6000 },
+      { time: "2023-08-15", value: 7000 },
+      { time: "2023-08-22", value: 8000 },
+      { time: "2023-08-29", value: 9000 },
+      { time: "2023-09-05", value: 10000 },
+      { time: "2023-09-12", value: 9500 },
+      { time: "2023-09-19", value: 8500 },
+      { time: "2023-09-26", value: 9000 }
+    ]);
+
+    // Add markers to the Bitcoin and Ethereum series to represent the rebalance points.
+    bitcoinSeries.setMarkers([{
+      time: "2023-09-05",
+      color: "red",
+      shape: "triangle",
+	  position: 'aboveBar',
+      size: 10
+    },]);
+
+    ethereumSeries.setMarkers([{
+      time: "2023-09-05",
+      color: "green",
+	  position: 'belowBar',
+      shape: "square",
+      size: 10
+    },]);
+
+    // Customize the chart to your liking.
+
+  </script>
+</body>
 </html>

@@ -24,7 +24,7 @@ function buildRealtimeWidget(widgetID, symbol, base, quote, refreshInterval) {
 			// Set widget text and styling
 			title.text(`${base}`);
 			price.text(currentPrice.toFixed(2) + ` ${quote}`);
-			percentage.text('+ ' + priceChangePercentage.toFixed(2) + '%');
+			percentage.text(priceChangePercentage.toFixed(2) + '%');
 			amount.text(priceChangeAmount.toFixed(2) + ` ${quote}`);
 
 			if (priceChangeAmount > 0) {
@@ -52,80 +52,23 @@ function buildRealtimeWidget(widgetID, symbol, base, quote, refreshInterval) {
 	
 }
 
-/*
-function buildRealtimeWidget(widgetID, symbol, base, quote, interval, refreshInterval, limit) {
-	// Set up Binance API request parameters
-	var symbol = symbol;
-	var interval = interval;
-	var limit = limit;
-
-	// Set up Binance API request URL
-	var url = 'https://api.binance.com/api/v3/klines?symbol=' + symbol + '&interval=' + interval + '&limit=' + limit;
-
-	// Function to update widget elements with Bitcoin price data
-	function updateWidget() {
-		// Fetch data from Binance API
-		$.get(url, function(response) {
-			// Extract current and previous Bitcoin prices
-			var currentPrice = parseFloat(response[1][4]);
-			var previousPrice = parseFloat(response[0][4]);
-
-			// Calculate price change percentage and amount
-			var priceChangePercentage = ((currentPrice - previousPrice) / previousPrice) * 100;
-			var priceChangeAmount = currentPrice - previousPrice;
-
-			// Set up widget elements
-			var widget = $(`#${widgetID}`);
-			var title = widget.find('h2');
-			var price = widget.find('span').eq(0);
-			var percentage = widget.find('span').eq(1);
-			var amount = widget.find('span').eq(2);
-
-			// Set widget text and styling
-			title.text( `${base}`);
-			price.text(currentPrice.toFixed(2) + ` ${quote}`);
-			percentage.text('+ ' + priceChangePercentage.toFixed(2) + '%');
-			amount.text(priceChangeAmount.toFixed(2) + ` ${quote}`);
-
-			if (priceChangeAmount > 0) {
-				widget.addClass('positive');
-				widget.removeClass('negative');
-				//percentage.text('+ ' + priceChangePercentage.toFixed(2) + '%');
-			} else if (priceChangeAmount < 0) {
-				widget.addClass('negative');
-				widget.removeClass('positive');
-				//percentage.text('- ' + priceChangePercentage.toFixed(2) + '%');
-			} else {
-				widget.removeClass('positive');
-				widget.removeClass('negative');
-			}
-		});
-	}
-
-	// Call updateWidget function every 5 seconds
-	setInterval(updateWidget, refreshInterval);
-
-	// Call updateWidget function once on page load
-	updateWidget();
-}
-*/
 function buildRealtimeWidgetPG4(widgetID, symbol) {
 	// Set up Binance API request parameters
 	var symbol = symbol;
 	
-	const wsurl = `wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@ticker`;
-	const socket = new WebSocket(wsurl);
+	//const wsurl = `wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@ticker`;
+	//const socket = new WebSocket(wsurl);
 
-	socket.addEventListener('open', (event) => {
-		InitializeWidget(widgetID, symbol);
-	});
+	//socket.addEventListener('open', (event) => {
+	InitializeWidget(widgetID, symbol);
+	//});
 
 	// When a new message is received from Binance, update the widget with the new data
-	socket.addEventListener('message', (event) => {
+	/*socket.addEventListener('message', (event) => {
 		
 		const data = JSON.parse(event.data);
 		fillWidget(widgetID, data);
-	});
+	});*/
 }
 
 function fillWidget(widgetID, data) {
@@ -210,55 +153,3 @@ function InitializeWidget(widgetID, symbol) {
 	widget.append(amount);
 	widget.append(percentage);
 }
-//---------------------------
-/*
-// Create a new WebSocket connection to Binance
-const wss = new WebSocket('wss://stream.binance.com:9443/ws/ampbtc@ticker');
-
-// When the WebSocket connection is open, start sending messages
-wss.addEventListener('open', (event) => {
-  console.log('WebSocket connection opened');
-});
-
-// When a new message is received from Binance, update the widget with the new data
-wss.addEventListener('message', (event) => {
-  const data = JSON.parse(event.data);
-
-  // Extract the relevant data from the message
-  const symbol = data.s;
-  const price = parseFloat(data.c);
-  const priceChange = parseFloat(data.p);
-  const percentChange = parseFloat(data.P);
-
-  console.log('-----------------------');
-  console.log(symbol);
-  console.log(price);
-  console.log(priceChange);
-  console.log(percentChange);
-  console.log('-----------------------');
-
-  // Update the widget with the new data
-  $('#symbol').text(symbol);
-  $('#price').text(price.toFixed(2));
-  $('#priceChange').text(priceChange.toFixed(2));
-  $('#percentChange').text(percentChange.toFixed(2) + '%');
-});
-
-// Build the widget using jQuery
-const $widget = $('<div>')
-  .addClass('binance-widget')
-  .append($('<span>').text('Symbol: '))
-  .append($('<span>').attr('id', 'symbol'))
-  .append($('<br>'))
-  .append($('<span>').text('Price: '))
-  .append($('<span>').attr('id', 'price'))
-  .append($('<br>'))
-  .append($('<span>').text('Price Change: '))
-  .append($('<span>').attr('id', 'priceChange'))
-  .append($('<br>'))
-  .append($('<span>').text('Percent Change: '))
-  .append($('<span>').attr('id', 'percentChange'));
-
-// Add the widget to the page
-$('body').append($widget);
-*/
