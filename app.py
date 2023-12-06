@@ -7,6 +7,8 @@ import asyncio
 import aiomysql
 import requests
 from datetime import datetime, timedelta
+import math
+import csv
 
 app = Flask(__name__)
 
@@ -273,7 +275,6 @@ def get_binance_kline_data(symbol, interval, start_date, end_date):
 	start_timestamp = int(datetime.timestamp(datetime.strptime(start_date, "%Y-%m-%d")) * 1000)
 	end_timestamp = int(datetime.timestamp(datetime.strptime(end_date, "%Y-%m-%d")) * 1000)
 
-	#print("get_binance_kline_data: " + symbol + '\n')
 	# Construct the URL
 	url = f"{base_url}?symbol={symbol}&interval={interval}&startTime={start_timestamp}&endTime={end_timestamp}"
 
@@ -951,12 +952,16 @@ def calc_day_average(data):
 
 def start_week_predict(historical_data, weekPredictResults):
 	
+	
+	rng =  math.floor(len(historical_data) / 24)
+	
+	print(f"data-len: {len(historical_data)}, range: {rng}")
 	markers = []
 
 	start = 0
 	end = 24
-	for i in range(0,7):
-		weekPredictResults.append([i, historical_data[start][0], calc_day_average(historical_data[start:end])])
+	for i in range(0,rng+1):
+		weekPredictResults.append([i, historical_data[start][0], historical_data[start][1], calc_day_average(historical_data[start:end])])
 		start = start + 24
 		end = start + 24
 
@@ -996,9 +1001,9 @@ def getweekPredictions():
 
 	# Retrieve Kline data
 	historical_data = get_binance_rebalanace_kline_data(symbol,
-														interval, 
-														convert_datetime_to_unix_timestamp("2023-11-06T00:00"), 
-														convert_datetime_to_unix_timestamp("2023-11-13T00:00"))
+											interval, 
+											convert_datetime_to_unix_timestamp("2023-10-28T00:00"), 
+											convert_datetime_to_unix_timestamp("2023-11-29T00:00"))
 	
 	complete_historical_data = []
 	for c in historical_data:
@@ -1025,6 +1030,8 @@ def getweekPredictions():
 
 		processed_data.append(item)
 
+	processed_data.append(weekPredictResults)
+
 	data = []
 	for i in candles:
 		try:
@@ -1044,3 +1051,50 @@ def getweekPredictions():
 	processed_data.append(data)
 
 	return jsonify(processed_data)
+
+@app.route("/getData", methods=['GET'])
+def getData():
+
+	# Set parameters
+	symbol ="BTCEUR"
+	interval = "1d"
+
+	# Retrieve Kline data
+	historical_data = get_binance_kline_data( symbol,interval,"2023-11-06","2023-12-06")
+	
+	historical_data1 = get_binance_kline_data(symbol,interval,"2023-10-06","2023-11-06")
+	
+	historical_data2 = get_binance_kline_data(symbol,interval, "2023-09-06", "2023-10-06")
+	
+	historical_data3 = get_binance_kline_data(symbol,interval, "2023-08-06", "2023-09-06")
+
+	data = []
+	for i in historical_data3:
+		item = {
+			"value": i[4],
+			"time": i[0] / 1000
+		}
+		data.append(item)
+
+	for i in historical_data2:
+		item = {
+			"value": i[4],
+			"time": i[0] / 1000
+		}
+		data.append(item)
+
+	for i in historical_data1:
+		item = {
+			"value": i[4],
+			"time": i[0] / 1000
+		}
+		data.append(item)
+
+	for i in historical_data:
+		item = {
+			"value": i[4],
+			"time": i[0] / 1000
+		}
+		data.append(item)
+
+	return jsonify(data)

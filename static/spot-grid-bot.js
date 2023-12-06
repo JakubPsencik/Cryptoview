@@ -86,7 +86,7 @@ async function setSpotGridPoints(SpotGrid_url) {
 		const price_lines = []
 		const markers = []
 
-		console.log("spot grid bot initialized...");
+		//console.log("spot grid bot initialized...");
 
 		//points
 		document.getElementById("SpotGrid-lower").value =  points[0].close;

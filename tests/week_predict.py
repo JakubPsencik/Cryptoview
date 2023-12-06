@@ -1,6 +1,7 @@
 from flask import jsonify, request
 import requests
 from datetime import datetime
+import math
 
 def get_binance_kline_data(symbol, interval, start_date, end_date):
 	base_url = "https://api.binance.com/api/v3/klines"
@@ -38,11 +39,15 @@ def calc_day_average(data):
 
 def start_week_predict(historical_data, weekPredictResults):
 	
+	
+	rng =  math.floor(len(historical_data) / 24)
+	
+	print(rng)
 	markers = []
 
 	start = 0
 	end = 24
-	for i in range(0,8):
+	for i in range(0,rng-1):
 		weekPredictResults.append([i, historical_data[start][0], calc_day_average(historical_data[start:end])])
 		start = start + 24
 		end = start + 24
@@ -67,7 +72,8 @@ def start_week_predict(historical_data, weekPredictResults):
 
 	print(f"{min_value}, time: {min_time} | {max_value}, time: {max_time}")
 
-	markers.append([min_time, min_value], [max_time, max_value])
+	markers.append([min_time, min_value])
+	markers.append([max_time, max_value])
 
 	return markers
 	#return jsonify(processed_data)
@@ -82,7 +88,7 @@ def getweekPredictions():
 	# Retrieve Kline data
 	historical_data = get_binance_kline_data(symbol,
 											interval, 
-											convert_datetime_to_unix_timestamp("2023-11-06T00:00"), 
+											convert_datetime_to_unix_timestamp("2023-10-14T00:00"), 
 											convert_datetime_to_unix_timestamp("2023-11-14T00:00"))
 	
 	complete_historical_data = []
@@ -93,7 +99,7 @@ def getweekPredictions():
 	for c in historical_data:
 		candles.append([c[0], c[1], c[2], c[3], c[4]])
 
-	print(f"{complete_historical_data} \n {len(complete_historical_data)}")
+	#print(f"{complete_historical_data} \n {len(complete_historical_data)}")
 
 	markers = start_week_predict(complete_historical_data, weekPredictResults)
 	
@@ -109,6 +115,8 @@ def getweekPredictions():
 		}
 
 		processed_data.append(item)
+
+	processed_data.append(weekPredictResults)
 
 	data = []
 	for i in candles:
@@ -128,7 +136,7 @@ def getweekPredictions():
 
 	processed_data.append(data)
 
-	return jsonify(processed_data)
+	#return jsonify(processed_data)
 
 #--------------------------------------------------------
 getweekPredictions()

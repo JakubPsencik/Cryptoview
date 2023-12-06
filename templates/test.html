@@ -1,86 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Rebalancing Chart</title>
-  <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top 10 Binance Assets</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-  <div id="chartContainer" style="width: 100vw; height: 100vh;"></div>
-  <script>
-    // Create a new Lightweight Charts instance.
+<div id="top-ten-assets"></div>
 
-	var chart = LightweightCharts.createChart(
-		document.getElementById('chartContainer'),
-		{
-			layout: {
-				background: { color: "#131722" },
-				textColor: "#C3BCDB",
-			},
-			grid: {
-				vertLines: { color: "#444" },
-				horzLines: { color: "#444" },
-			},
-			autoSize: true,
+<script>
+	$(document).ready(function() {
+	function getTopTenAssets() {
+		$.ajax({
+		url: 'https://api.binance.com/api/v3/exchangeInfo',
+		method: 'GET',
+		success: function(data) {
+			var topTenAssets = [];
+			data.symbols.sort(function(a, b) {
+			return b.marketCap - a.marketCap;
+			});
+			for (var i = 0; i < 10; i++) {
+			topTenAssets.push(data.symbols[i].symbol);
+			}
+			$('#top-ten-assets').html('Top 10 Assets: ' + topTenAssets.join(', '));
 		}
-	);
+		});
+	}
 
-    // Create a new series for Bitcoin.
-    const bitcoinSeries = chart.addLineSeries({
-      title: "Bitcoin",
-      color: "red"
-    });
+	getTopTenAssets();
 
-    // Create a new series for Ethereum.
-    const ethereumSeries = chart.addLineSeries({
-      title: "Ethereum",
-      color: "blue"
-    });
-
-    // Add data to the Bitcoin series.
-    bitcoinSeries.setData([
-      { time: "2023-08-01", value: 10000 },
-      { time: "2023-08-08", value: 11000 },
-      { time: "2023-08-15", value: 12000 },
-      { time: "2023-08-22", value: 13000 },
-      { time: "2023-08-29", value: 14000 },
-      { time: "2023-09-05", value: 15000 },
-      { time: "2023-09-12", value: 14500 },
-      { time: "2023-09-19", value: 13500 },
-      { time: "2023-09-26", value: 14000 }
-    ]);
-
-    // Add data to the Ethereum series.
-    ethereumSeries.setData([
-      { time: "2023-08-01", value: 5000 },
-      { time: "2023-08-08", value: 6000 },
-      { time: "2023-08-15", value: 7000 },
-      { time: "2023-08-22", value: 8000 },
-      { time: "2023-08-29", value: 9000 },
-      { time: "2023-09-05", value: 10000 },
-      { time: "2023-09-12", value: 9500 },
-      { time: "2023-09-19", value: 8500 },
-      { time: "2023-09-26", value: 9000 }
-    ]);
-
-    // Add markers to the Bitcoin and Ethereum series to represent the rebalance points.
-    bitcoinSeries.setMarkers([{
-      time: "2023-09-05",
-      color: "red",
-      shape: "triangle",
-	  position: 'aboveBar',
-      size: 10
-    },]);
-
-    ethereumSeries.setMarkers([{
-      time: "2023-09-05",
-      color: "green",
-	  position: 'belowBar',
-      shape: "square",
-      size: 10
-    },]);
-
-    // Customize the chart to your liking.
-
-  </script>
+	// Update top 10 assets every 5 minutes
+	setInterval(getTopTenAssets, 300000);
+	});
+</script>
 </body>
 </html>

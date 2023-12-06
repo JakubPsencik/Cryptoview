@@ -482,3 +482,6 @@ Jak přesně vizualizovat denní predikce? - Co když je nejvyšší průměř p
 
 Vizualizace týdenní predikce - Vizualizovat cenový průběh a opět místa kde nakoupit / prodat v ten daný týden?
 							 - Nebo tam dát něco jako "během tohoto týdne bylo nejvhodnější nakoupit v tento den a tuto hodinu a prodat..."
+
+
+ew-index -> evaluace probiha posledni patek v mesici

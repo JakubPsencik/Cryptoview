@@ -1,15 +1,54 @@
 async function setWeekPredictPoints(url) {
 
 	const markers = [];
+	const investment = 1000;
+	let total = 0;
+	let amtOfBase = 0;
+	const durationIncrease = 7;
+	let duration = 0;
  
 	try {
+
+		document.getElementById('WeekPredict-points-div').remove();
+
+		const dv = document.createElement("div");
+		dv.id = 'WeekPredict-points-div';
+
+		document.getElementById("WeekPredict-left-1").appendChild(dv);
 
 		let response = await fetch(url);
 		response.json().then(async (points) => {
 		
 		console.log(points);
 
-		price_chart_14_1_candlestickSeries1.setData(points[2]);
+		price_chart_14_1_candlestickSeries1.setData(points[3]);
+
+		for(let i = 0; i < points[2].length; i++) {
+			/*markers.push({
+				id: String("week-predict-" + String(i)),
+				time: points[2][i][1] / 1000,
+				position: 'aboveBar',
+				color: 'yellow',
+				shape: 'circle',
+				text: String(points[2][i][0]),
+				size: 1.0,
+			});*/
+
+			if((i % 7) == 0) {
+				date = new Date((points[2][i][1]));
+				dateString = date.toLocaleDateString();
+			
+				dt = `${dateString}`;
+	
+				amtOfBase += investment / parseFloat(points[2][i][3])
+				total += investment;
+	
+				InitializeWeekPredictPointRecord(("week-predict-point-" + i), dt, total, parseFloat(amtOfBase).toFixed(4), duration)
+	
+				duration += durationIncrease;
+			}
+			
+		}
 
 		//buy point
 		markers.push({
@@ -42,32 +81,8 @@ async function setWeekPredictPoints(url) {
 		'<span style="color: white;">' 
 		+ 'Buy at: ' 
 		+ begin
-		/*
-		+ ' for '
-		+ parseFloat(points[0].close).toFixed(2)
-		+ ' € | <br>'*/
 		+ '<br> Sell at: ' 
 		+ end
-		/*
-		+ ' for '
-		+ parseFloat(points[1].close).toFixed(2) 
-		+ ' € | '
-		/*+ 'total: ' 
-		+ 0
-		+ '.0 $ | '
-		+ 'profit: ' 
-		+ '<span style="color: red;">' 
-		+ 0 
-		+ '.0 $ ' 
-		+ '</span>'
-		+ '</span>'*/;
-		
-		// Zoom out the candlestick series to a specific time range.
-		/*price_chart_14_1.timeScale().setVisibleRange({
-			from: points[2][0].time / 1000,
-			to: points[2][points.length-1].time / 1000,
-		});*/
-	
 	});
 		
 	} catch (error) {
@@ -75,4 +90,49 @@ async function setWeekPredictPoints(url) {
 	}
 	
 
+}
+
+function InitializeWeekPredictPointRecord(id, _time, _total, amtOfBase, _duration) {
+
+	const dv = document.createElement("div");
+	dv.id = id;
+	dv.classList.add("test");
+
+	// Calculate the total width of the div.
+	const totalWidth = document.getElementById('WeekPredict-left-side').offsetWidth;
+	const elementWidth = (totalWidth / 4);
+
+	var time = document.createElement("span");
+	var duration = document.createElement("span");
+	var invested = document.createElement("span");
+	var balance = document.createElement("span");
+
+	// Set widget text and styling
+	time.innerHTML = (`${String(_time)}`);
+	duration.innerHTML = (`${_duration} d`);
+	invested.innerHTML = (`${_total} €`);
+	balance.innerHTML = (`${amtOfBase} BTC`);
+
+	time.classList.add("pg4span_symbol");
+	duration.classList.add("test1");
+	invested.classList.add("test1");
+	balance.classList.add("test1");
+
+	time.style.width = elementWidth + 'px';
+	duration.style.width = elementWidth + 'px';
+	duration.style.justifyContent = "center";
+
+	invested.style.width = elementWidth + 'px';
+	invested.style.justifyContent = "center";
+
+	balance.style.width = elementWidth + 'px';
+	balance.style.justifyContent = "center";
+
+	// Append the span element to an existing element
+	dv.append(time);
+	dv.append(duration);
+	dv.append(invested);
+	dv.append(balance);
+
+	document.getElementById("WeekPredict-points-div").appendChild(dv);
 }

@@ -23,7 +23,7 @@ Slide 2
 	},
 	...
 */
-display_savings_staking_data("http://127.0.0.1:5000/savings")
+//display_savings_staking_data("http://127.0.0.1:5000/savings")
 
 
 /* Slide 3 - Rebalancing bot
@@ -53,8 +53,8 @@ $(document).ready(async () => {
 		+ "&start=" + start_date
 		+ "&end=" + end_date;
 
-	console.log(rebalance_url)
-	setRebalancePoints(rebalance_url);
+	//console.log(rebalance_url)
+	//setRebalancePoints(rebalance_url);
 });
 
 /* Slide 4 - Spot DCA bot
@@ -86,7 +86,7 @@ $(document).ready(async () => {
 		+ "&start=" + start_date
 		+ "&end=" + end_date;
 
-	setSpotDCAPoints(DCA_url);
+	//setSpotDCAPoints(DCA_url);
 
 });
 
@@ -117,7 +117,7 @@ $(document).ready(async () => {
 		+ "&start=" + start_date
 		+ "&end=" + end_date;
 
-	setSpotGridPoints(SpotGrid_url);
+	//setSpotGridPoints(SpotGrid_url);
 });
 
 /* 
@@ -145,7 +145,7 @@ Slide 6
 	},
 	...
 */
-displayTop10("http://127.0.0.1:5000/view")
-
+//displayTop10("http://127.0.0.1:5000/view")
 
 setWeekPredictPoints("http://127.0.0.1:5000/weekPredict")
+getHistoricalData("http://127.0.0.1:5000/savings")

@@ -42,7 +42,7 @@ async function setRebalancePoints(url) {
 		
 		candlestickSeries1.setData(points[0])
 		candlestickSeries2.setData(points[1])
-		console.log("rebalancing bot initialized...");
+		//console.log("rebalancing bot initialized...");
 		//console.log(points)
 		var marker = {}
 		for(let i = 0; i < points[2].length; i+= 20) {

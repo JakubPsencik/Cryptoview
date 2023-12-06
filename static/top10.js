@@ -15,7 +15,7 @@ async function displayTop10(url) {
 		//OUR TOP...! page
 		let response = await fetch(url);
 		response.json().then(async (r) => {
-			console.log("top 10 table initialized...");
+			//console.log("top 10 table initialized...");
 			//if not swapped, dates are backwards
 			//r.reverse();
 			pair_names = r[r.length-2]

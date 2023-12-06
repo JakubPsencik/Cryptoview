@@ -1,6 +1,7 @@
 
 :root{
 	--tw-black: #131722;
+	--bn-black: #0B0E11;
 	--tw-grey: #434651;
 	--tw-lightgrey: #d1d4dc;
 	--tw-blue: #143a87;
@@ -33,14 +34,14 @@ transform: scale(1.05);
 
 .pages {
 display: flex;
-	width: 700%;
+	width: 800%;
 	height: 100vh;
 	box-sizing: border-box;
 }
 
 .page {
-width: 100%;
-height: 100%;
+width: 100vw;
+height: 100vh;
 /*
 display: flex;
 align-items: center;
@@ -72,7 +73,7 @@ background-size: cover;
 }
 
 .three{
-background: green;
+	background: var(--tw-black);
 }
 
 .four{

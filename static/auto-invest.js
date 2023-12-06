@@ -9,7 +9,7 @@ async function display_savings_staking_data(url) {
 		let response = await fetch(url);
 		response.json().then((r) => {
 
-			console.log('auto invest initialized...')
+			//console.log('auto invest initialized...')
 			BuildTablePG3(r, ["jasmy.png", "pha.png", "btc.png"])
 	
 		});

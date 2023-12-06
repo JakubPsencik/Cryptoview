@@ -35,6 +35,31 @@ document.getElementById("bn_DCA").addEventListener("click", function () {
 	setSpotDCAPoints(DCA_url);
 });
 
+var price_chart_12_1 = LightweightCharts.createChart(
+	document.getElementById('container12_1'),
+	{
+		layout: {
+			background: { color: "#131722" },
+			textColor: "#C3BCDB",
+		},
+		grid: {
+			vertLines: { color: "#444" },
+			horzLines: { color: "#444" },
+		},
+		autoSize: true,
+		timeScale: {
+			timeVisible: true,  // Display time on the time scale
+			secondsVisible: false,  // Do not display seconds
+		},
+	}
+);
+
+// Create a candlesticks series
+const price_chart_12_1_candlestickSeries1 = price_chart_12_1.addCandlestickSeries({
+	upColor: "green",
+	downColor: "red",
+});
+
 async function setSpotDCAPoints(DCA_url) {
 
 	const markers = [];
@@ -104,7 +129,6 @@ async function setSpotDCAPoints(DCA_url) {
 				const dt = `${dateString}-${timeString}`;
 				//console.log(dateString, timeString) 
 
-
 				InitializeSpotDCAPointRecord(`SpotDCA-record${i}`,(dt), parseFloat(points[i].close).toFixed(2), parseFloat(points[i].amtOfBase).toFixed(4), parseFloat(points[i].profit).toFixed(2));
 			} else if (points[i].DCA == 0) {
 				//console.log(points[i])
@@ -127,10 +151,8 @@ async function setSpotDCAPoints(DCA_url) {
 				const dt = `${dateString}-${timeString}`;
 				//console.log(dateString, timeString) 
 
-
 				InitializeSpotDCAPointRecord(`SpotDCA-record${i}`,(dt), parseFloat(points[i].close).toFixed(2), parseFloat(points[i].amtOfBase).toFixed(4), parseFloat(points[i].profit).toFixed(2));
 			}
-			
 		}
 
 		markers.push({
