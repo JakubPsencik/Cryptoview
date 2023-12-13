@@ -965,8 +965,6 @@ def start_week_predict(historical_data, weekPredictResults):
 		start = start + 24
 		end = start + 24
 
-	print(f"{weekPredictResults}, {len(weekPredictResults)}")
-
 	# Extract prices from the list of lists
 	prices = []
 	for row in weekPredictResults:
@@ -991,13 +989,20 @@ def start_week_predict(historical_data, weekPredictResults):
 	return markers
 	#return jsonify(processed_data)
 
+def calculate_start_end_dates(months_ago):
+	today = datetime.now()
+	end_date = today - timedelta(days=months_ago * 30)
+	start_date = end_date - timedelta(days=30)
+	return start_date.strftime("%Y-%m-%d"), end_date.strftime("%Y-%m-%d")
+
 @app.route("/weekPredict", methods=['GET'])
 def getweekPredictions():
 	weekPredictResults = []
 	markers = []
 	# Set parameters
-	symbol ="BTCEUR"
-	interval = "1h"
+		# Set parameters
+	symbol = request.args.get("symbol")
+	interval = request.args.get("interval")
 
 	# Retrieve Kline data
 	historical_data = get_binance_rebalanace_kline_data(symbol,
@@ -1030,7 +1035,7 @@ def getweekPredictions():
 
 		processed_data.append(item)
 
-	processed_data.append(weekPredictResults)
+	#processed_data.append(weekPredictResults)
 
 	data = []
 	for i in candles:
@@ -1054,47 +1059,29 @@ def getweekPredictions():
 
 @app.route("/getData", methods=['GET'])
 def getData():
-
+	weekPredictResults = []
 	# Set parameters
-	symbol ="BTCEUR"
+	symbol = request.args.get("symbol")
 	interval = "1d"
-
-	# Retrieve Kline data
-	historical_data = get_binance_kline_data( symbol,interval,"2023-11-06","2023-12-06")
-	
-	historical_data1 = get_binance_kline_data(symbol,interval,"2023-10-06","2023-11-06")
-	
-	historical_data2 = get_binance_kline_data(symbol,interval, "2023-09-06", "2023-10-06")
-	
-	historical_data3 = get_binance_kline_data(symbol,interval, "2023-08-06", "2023-09-06")
-
 	data = []
-	for i in historical_data3:
-		item = {
-			"value": i[4],
-			"time": i[0] / 1000
-		}
-		data.append(item)
 
-	for i in historical_data2:
-		item = {
-			"value": i[4],
-			"time": i[0] / 1000
-		}
-		data.append(item)
+	for i in range(3, -1, -1):
+		start_date, end_date = calculate_start_end_dates(i)
+		historical_data = get_binance_kline_data( symbol,interval, start_date, end_date)
+		for i in historical_data:
+			item = {
+				"time": i[0] / 1000,
+				"value": i[4]
+			}
+			data.append(item)
 
-	for i in historical_data1:
+	markers = start_week_predict(historical_data, weekPredictResults)
+	for res in markers:	
 		item = {
-			"value": i[4],
-			"time": i[0] / 1000
+			"time": res[0],
+			"close": res[1]
 		}
-		data.append(item)
 
-	for i in historical_data:
-		item = {
-			"value": i[4],
-			"time": i[0] / 1000
-		}
 		data.append(item)
 
 	return jsonify(data)

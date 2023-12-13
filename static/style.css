@@ -629,7 +629,7 @@ body {
 .test {
 	color-scheme: dark;
 	font-family: -apple-system,BlinkMacSystemFont,Trebuchet MS,Roboto,Ubuntu,sans-serif;
-	font-size: 14px;
+	font-size: 10px;
 	/*color: #d1d4dc;*/
 	user-select: none;
 	cursor: default;
@@ -639,7 +639,7 @@ body {
 	display: flex;
 	flex-direction: row;
 	/*flex: 1 1 auto;*/
-	height: 20px;
+	height: fit-content;
 	margin-top: -1px;
 	position: relative;
 	/*background-color: #131722;*/
@@ -831,9 +831,8 @@ border: 1px solid var(--tw-black);
 
 #binance-ew-index-table {
 	width: 100%;
-	height: 99.9%;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: center;
 	border: 2px solid var(--tw-grey);
 	background-color: var(--bn-black);

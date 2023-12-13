@@ -1,6 +1,6 @@
 const _options = {
 	layout: {
-		background: { color: "#131722" },
+		background: { color: "#0B0E11" },
 		textColor: "#C3BCDB",
 	},
 	grid: {
@@ -63,8 +63,202 @@ async function getHistoricalData(url) {
 	try {
 		let response = await fetch(url);
 		response.json().then(async (points) => {
-			//console.log(points)
 			
+			chartData = points.slice(0, (points.length-2)); // Output: [2, 3]
+
+			console.log(points)
+
+			if(url.includes("BTCEUR")) {
+				var chart = LightweightCharts.createChart(document.getElementById(`binance-container1`));
+				chart.applyOptions(_options);
+				const lineSeries = chart.addLineSeries({});
+				lineSeries.applyOptions({
+					type: "line",
+					color: "red", // Set the line color to red
+					lineWidth: 2, // Set the line width to 2 pixels
+				});
+				lineSeries.setData(chartData);
+
+				// Zoom out the candlestick series to a specific time range.
+				chart.timeScale().setVisibleRange({
+					from: points[0].time,
+					to: points[points.length-1].time,
+				});
+
+				setEwIndexTableContent('BTCEUR', points);
+			}
+
+			if(url.includes("ETHEUR")) {
+				var chart = LightweightCharts.createChart(document.getElementById(`binance-container2`));
+				chart.applyOptions(_options);
+				const lineSeries = chart.addLineSeries({});
+				lineSeries.setData(points);
+				lineSeries.applyOptions({
+					type: "line",
+					color: "red", // Set the line color to red
+					lineWidth: 2, // Set the line width to 2 pixels
+				});
+				// Zoom out the candlestick series to a specific time range.
+				chart.timeScale().setVisibleRange({
+					from: points[0].time,
+					to: points[points.length-1].time,
+				});
+
+				setEwIndexTableContent('ETHEUR', points);
+			}
+
+			if(url.includes("BNBEUR")) {
+				var chart = LightweightCharts.createChart(document.getElementById(`binance-container3`));
+				chart.applyOptions(_options);
+				const lineSeries = chart.addLineSeries({});
+				lineSeries.setData(points);
+				lineSeries.applyOptions({
+					type: "line",
+					color: "red", // Set the line color to red
+					lineWidth: 2, // Set the line width to 2 pixels
+				});
+				// Zoom out the candlestick series to a specific time range.
+				chart.timeScale().setVisibleRange({
+					from: points[0].time,
+					to: points[points.length-1].time,
+				});
+
+				setEwIndexTableContent('BNBEUR', points);
+			}
+				
+			if(url.includes("XRPEUR")) {
+				var chart = LightweightCharts.createChart(document.getElementById(`binance-container4`));
+				chart.applyOptions(_options);
+				const lineSeries = chart.addLineSeries({});
+				lineSeries.setData(points);
+				lineSeries.applyOptions({
+					type: "line",
+					color: "red", // Set the line color to red
+					lineWidth: 2, // Set the line width to 2 pixels
+				});
+				// Zoom out the candlestick series to a specific time range.
+				chart.timeScale().setVisibleRange({
+					from: points[0].time,
+					to: points[points.length-1].time,
+				});
+
+				setEwIndexTableContent('XRPEUR', points);
+			}
+
+			if(url.includes("SOLEUR")) {
+				var chart = LightweightCharts.createChart(document.getElementById(`binance-container5`));
+				chart.applyOptions(_options);
+				const lineSeries = chart.addLineSeries({});
+				lineSeries.setData(points);
+				lineSeries.applyOptions({
+					type: "line",
+					color: "red", // Set the line color to red
+					lineWidth: 2, // Set the line width to 2 pixels
+				});
+				// Zoom out the candlestick series to a specific time range.
+				chart.timeScale().setVisibleRange({
+					from: points[0].time,
+					to: points[points.length-1].time,
+				});
+
+				setEwIndexTableContent('SOLEUR', points);
+			}
+
+			if(url.includes("ADAEUR")) {
+				var chart = LightweightCharts.createChart(document.getElementById(`binance-container6`));
+				chart.applyOptions(_options);
+				const lineSeries = chart.addLineSeries({});
+				lineSeries.setData(points);
+				lineSeries.applyOptions({
+					type: "line",
+					color: "red", // Set the line color to red
+					lineWidth: 2, // Set the line width to 2 pixels
+				});
+				// Zoom out the candlestick series to a specific time range.
+				chart.timeScale().setVisibleRange({
+					from: points[0].time,
+					to: points[points.length-1].time,
+				});
+
+				setEwIndexTableContent('ADAEUR', points);
+			}
+
+			if(url.includes("TRXEUR")) {
+				var chart = LightweightCharts.createChart(document.getElementById(`binance-container7`));
+				chart.applyOptions(_options);
+				const lineSeries = chart.addLineSeries({});
+				lineSeries.setData(points);
+				lineSeries.applyOptions({
+					type: "line",
+					color: "red", // Set the line color to red
+					lineWidth: 2, // Set the line width to 2 pixels
+				});
+				// Zoom out the candlestick series to a specific time range.
+				chart.timeScale().setVisibleRange({
+					from: points[0].time,
+					to: points[points.length-1].time,
+				});
+
+				setEwIndexTableContent('TRXEUR', points);
+			}
+
+			if(url.includes("LINKEUR")) {
+				var chart = LightweightCharts.createChart(document.getElementById(`binance-container8`));
+				chart.applyOptions(_options);
+				const lineSeries = chart.addLineSeries({});
+				lineSeries.setData(points);
+				lineSeries.applyOptions({
+					type: "line",
+					color: "red", // Set the line color to red
+					lineWidth: 2, // Set the line width to 2 pixels
+				});
+				// Zoom out the candlestick series to a specific time range.
+				chart.timeScale().setVisibleRange({
+					from: points[0].time,
+					to: points[points.length-1].time,
+				});
+
+				setEwIndexTableContent('LINKEUR', points);
+			}
+
+			if(url.includes("DOTEUR")) {
+				var chart = LightweightCharts.createChart(document.getElementById(`binance-container9`));
+				chart.applyOptions(_options);
+				const lineSeries = chart.addLineSeries({});
+				lineSeries.setData(points);
+				lineSeries.applyOptions({
+					type: "line",
+					color: "red", // Set the line color to red
+					lineWidth: 2, // Set the line width to 2 pixels
+				});
+				// Zoom out the candlestick series to a specific time range.
+				chart.timeScale().setVisibleRange({
+					from: points[0].time,
+					to: points[points.length-1].time,
+				});
+
+				setEwIndexTableContent('DOTEUR', points);
+			}
+
+			if(url.includes("LTCEUR")) {
+				var chart = LightweightCharts.createChart(document.getElementById(`binance-container10`));
+				chart.applyOptions(_options);
+				const lineSeries = chart.addLineSeries({});
+				lineSeries.setData(points);
+				lineSeries.applyOptions({
+					type: "line",
+					color: "red", // Set the line color to red
+					lineWidth: 2, // Set the line width to 2 pixels
+				});
+				// Zoom out the candlestick series to a specific time range.
+				chart.timeScale().setVisibleRange({
+					from: points[0].time - 100000000000000,
+					to: points[points.length-1].time + 100000000000000,
+				});
+
+				setEwIndexTableContent('LTCEUR', points);
+			}
+			/*
 			for(let i = 1; i < 11; i++) {
 				var chart = LightweightCharts.createChart(document.getElementById(`binance-container${i}`));
 				chart.applyOptions(_options);
@@ -76,7 +270,7 @@ async function getHistoricalData(url) {
 					from: points[0].time,
 					to: points[points.length-1].time,
 				});
-			}
+			}*/
 		
 		//buildCharts(points);
 	});

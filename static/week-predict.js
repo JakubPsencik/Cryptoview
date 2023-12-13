@@ -4,7 +4,7 @@ async function setWeekPredictPoints(url) {
 	const investment = 1000;
 	let total = 0;
 	let amtOfBase = 0;
-	const durationIncrease = 7;
+	const durationIncrease = 1;
 	let duration = 0;
  
 	try {
@@ -19,12 +19,39 @@ async function setWeekPredictPoints(url) {
 		let response = await fetch(url);
 		response.json().then(async (points) => {
 		
-		console.log(points);
+		//console.log(points);
 
-		price_chart_14_1_candlestickSeries1.setData(points[3]);
+		price_chart_14_1_candlestickSeries1.setData(points[2]);
+		
+		const timestamp = points[0].time;
+		increment = 7;
+		for(let i = 0; i < points[2].length / 24; i++) {
+			
+			let date = new Date(timestamp);
+			date.setDate(date.getDate() + (i * increment));
 
+			const newTimestamp = date.getTime() / 1000;
+			
+			//find the record with the timestamp
+		
+			const result = points[2].find(x => x.time === newTimestamp);
+			if(result != undefined) {
+				console.log(timestamp, date, newTimestamp, result)
+				markers.push({
+					id: String("week-predict-" + String(i)),
+					time: result.time,
+					position: 'aboveBar',
+					color: 'yellow',
+					shape: 'circle',
+					text: "",
+					size: 1.0,
+				});
+			}
+			
+		}
+		/*
 		for(let i = 0; i < points[2].length; i++) {
-			/*markers.push({
+			markers.push({
 				id: String("week-predict-" + String(i)),
 				time: points[2][i][1] / 1000,
 				position: 'aboveBar',
@@ -32,24 +59,24 @@ async function setWeekPredictPoints(url) {
 				shape: 'circle',
 				text: String(points[2][i][0]),
 				size: 1.0,
-			});*/
+			});
 
-			if((i % 7) == 0) {
-				date = new Date((points[2][i][1]));
-				dateString = date.toLocaleDateString();
-			
-				dt = `${dateString}`;
-	
-				amtOfBase += investment / parseFloat(points[2][i][3])
-				total += investment;
-	
-				InitializeWeekPredictPointRecord(("week-predict-point-" + i), dt, total, parseFloat(amtOfBase).toFixed(4), duration)
-	
-				duration += durationIncrease;
-			}
+			//if((i % 7) == 0) {
+			date = new Date((points[2][i][1]));
+			dateString = date.toLocaleDateString();
+		
+			dt = `${dateString}`;
+
+			amtOfBase += investment / parseFloat(points[2][i][3])
+			total += investment;
+
+			InitializeWeekPredictPointRecord(("week-predict-point-" + i), dt, total, parseFloat(amtOfBase).toFixed(4), duration)
+
+			duration += durationIncrease;
+			//}
 			
 		}
-
+		*/
 		//buy point
 		markers.push({
 			id: String("week-predict-min"),
@@ -82,7 +109,7 @@ async function setWeekPredictPoints(url) {
 		+ 'Buy at: ' 
 		+ begin
 		+ '<br> Sell at: ' 
-		+ end
+		+ end;
 	});
 		
 	} catch (error) {

@@ -23,7 +23,7 @@ Slide 2
 	},
 	...
 */
-//display_savings_staking_data("http://127.0.0.1:5000/savings")
+display_savings_staking_data("http://127.0.0.1:5000/savings")
 
 
 /* Slide 3 - Rebalancing bot
@@ -145,7 +145,24 @@ Slide 6
 	},
 	...
 */
-//displayTop10("http://127.0.0.1:5000/view")
+displayTop10("http://127.0.0.1:5000/view")
 
-setWeekPredictPoints("http://127.0.0.1:5000/weekPredict")
-getHistoricalData("http://127.0.0.1:5000/savings")
+//setWeekPredictPoints("http://127.0.0.1:5000/weekPredict?&symbol=LTCEUR&interval=1h")
+
+getHistoricalData("http://127.0.0.1:5000/getData?&symbol=BTCEUR")
+getHistoricalData("http://127.0.0.1:5000/getData?&symbol=ETHEUR")
+getHistoricalData("http://127.0.0.1:5000/getData?&symbol=BNBEUR")
+getHistoricalData("http://127.0.0.1:5000/getData?&symbol=XRPEUR")
+getHistoricalData("http://127.0.0.1:5000/getData?&symbol=SOLEUR")
+getHistoricalData("http://127.0.0.1:5000/getData?&symbol=ADAEUR")
+getHistoricalData("http://127.0.0.1:5000/getData?&symbol=TRXEUR")
+getHistoricalData("http://127.0.0.1:5000/getData?&symbol=LINKEUR")
+getHistoricalData("http://127.0.0.1:5000/getData?&symbol=DOTEUR")
+getHistoricalData("http://127.0.0.1:5000/getData?&symbol=LTCEUR")
+/**/
+
+const coins = ['BTCEUR', 'ETHEUR', 'BNBEUR', 'XRPEUR', 'SOLEUR', 'ADAEUR', 'TRXEUR', 'LINKEUR', 'DOTEUR', 'LTCEUR'];
+
+for(let i = 0; i < coins.length; i++) {
+	//setEwIndexTableContent(coins[i], `http://127.0.0.1:5000/weekPredict?&symbol=${coins[i]}&interval=1h`)
+}
