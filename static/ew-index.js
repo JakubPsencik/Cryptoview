@@ -69,7 +69,7 @@ function InitializeEwIndexRowRecord(_coin, data) {
 	dv.append(coin);
 
 	const increment = 10;
-	let totalInvested = 10;
+	let totalInvested = increment;
 	let totalOwned = parseFloat(0);
 
 	for(let i = 0; i < data.length; i++) {
@@ -84,6 +84,9 @@ function InitializeEwIndexRowRecord(_coin, data) {
 		totalInvested += increment;
 		//record.classList.add("pg4span_symbol");
 		record.style.width = elementWidth + 'px';
+		if(i == (data.length-1)) {
+			record.style.background = "red";
+		}
 		dv.append(record);
 	}
 

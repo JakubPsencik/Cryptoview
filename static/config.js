@@ -54,7 +54,7 @@ $(document).ready(async () => {
 		+ "&end=" + end_date;
 
 	//console.log(rebalance_url)
-	//setRebalancePoints(rebalance_url);
+	setRebalancePoints(rebalance_url);
 });
 
 /* Slide 4 - Spot DCA bot
@@ -86,7 +86,7 @@ $(document).ready(async () => {
 		+ "&start=" + start_date
 		+ "&end=" + end_date;
 
-	//setSpotDCAPoints(DCA_url);
+	setSpotDCAPoints(DCA_url);
 
 });
 
@@ -117,7 +117,7 @@ $(document).ready(async () => {
 		+ "&start=" + start_date
 		+ "&end=" + end_date;
 
-	//setSpotGridPoints(SpotGrid_url);
+	setSpotGridPoints(SpotGrid_url);
 });
 
 /* 
@@ -147,7 +147,7 @@ Slide 6
 */
 displayTop10("http://127.0.0.1:5000/view")
 
-//setWeekPredictPoints("http://127.0.0.1:5000/weekPredict?&symbol=LTCEUR&interval=1h")
+setWeekPredictPoints("http://127.0.0.1:5000/weekPredict?&symbol=LTCEUR&interval=1h")
 
 getHistoricalData("http://127.0.0.1:5000/getData?&symbol=BTCEUR")
 getHistoricalData("http://127.0.0.1:5000/getData?&symbol=ETHEUR")

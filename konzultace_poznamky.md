@@ -485,3 +485,47 @@ Vizualizace týdenní predikce - Vizualizovat cenový průběh a opět místa kd
 
 
 ew-index -> evaluace probiha posledni patek v mesici
+
+KONZULTACE - 13/12/2023 
+do konce pristiho tydne poslat osnovu prace - 2 poloviny - teoreticka cast a prakticka cast - 
+24.12 - DEADLINE pro tu osnovu
+
+teoreticka - existujici reseni, algoritmy, knihovny, api atd, atd...
+prakticka
+
+melo by vypadnout nejake zhodnoceni - tabulka pros cons podle nejakych kriterii (to uz jsem chtel udelat davno hehe...)
+a proste rekneme si toto naprogramujem toto to bude umet atd atd..
+abych vedel ze vysledkem prace bude to a to
+
+definovat si minimum
+
+zadne zadani zamitnute nebylo
+dulezite je aby ten oponent to mohl projit a rict ten bod byl splnen tady a tady...
+
+vedouci resi spolupraci, oponent prakticky vysledek - zadani vs vystup
+oponenti se nijak nedrbou s konfiguraci - spis nejake live demo
+
+DEADLINE - pro psanou formu 30.4. !!! - textova podoba s datem odevzdanym v edisonu
+reknu ze mam kontinualni vyvoj kdybych nestihal kodik
+
+mesic pred odevzdanim mit hotovo a nechat to nejak pracovat pokud to bude nutne - ty algoritmy... (u te moji vizualizace)
+
+casovy harmonogram udelat: co chcu ktery tyden udelat (co bude ktery tyden hotove) - plan by mel koncit 15.4.
+
+lepsi je si dany text precist a vlastnima slovama to preformulovat.
+
+simulace pojedu na tech historickych datech
+musim zjistit co je hodl
+
+casovy interval uz mam, max 120 dni
+
+do toho 24.12.
+
+osnova
+casovy harmonogram
+shrnuti co jsem ze ten semestr udelal, resp. co mu v tom lednu ukazu - za to mi pak bude davat zapocet.
+
+prozkoumat ty jednotlive obdobi kdy to rostlo/padalo atd atd...
+aplikovat ty trading boty nad tema danyma obdobima
+
+bear / bull market
