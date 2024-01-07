@@ -1085,3 +1085,76 @@ def getData():
 		data.append(item)
 
 	return jsonify(data)
+
+@app.route("/binanceIndex", methods=['GET'])
+async def get_binance_index_data():
+	loop = asyncio.get_event_loop()
+
+	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+
+	cur = await conn.cursor()
+	await cur.execute("""select label, name from binance_index;""")
+
+	data = await cur.fetchall()
+	await cur.close()
+	conn.close()
+
+	result = []
+
+	for record in data:
+		item = {
+			"label": record[0],
+			"name": record[1]
+		}
+
+		result.append(item)
+
+	return jsonify(result)
+
+@app.route("/binanceIndexAsset", methods=['GET'])
+async def get_binance_index_asset_data():
+	loop = asyncio.get_event_loop()
+
+	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+
+	#retrieve data from binance_index table
+	binanceIndexCursor = await conn.cursor()
+	await binanceIndexCursor.execute("""select label, name from binance_index;""")
+	binanceIndexData = await binanceIndexCursor.fetchall()
+	await binanceIndexCursor.close()
+
+	#retrieve data from binance_index_asset table
+	binanceIndexAssetCursor = await conn.cursor()
+	await binanceIndexAssetCursor.execute("""select index_label, asset_label, allocation from binance_index_asset;""")
+	binanceIndexAssetData = await binanceIndexAssetCursor.fetchall()
+	await binanceIndexAssetCursor.close()
+
+	conn.close()
+
+	grouped_data = {}
+
+	for record in binanceIndexAssetData:
+		index_label = record[0]
+
+		if index_label not in grouped_data:
+			grouped_data[index_label] = {
+				"indexLabel": index_label,
+				"name": binanceIndexData[(findNameIdx(index_label, binanceIndexData, binanceIndexAssetData))][1],
+				"coins": []
+			}
+
+		grouped_data[index_label]["coins"].append({
+			"coin": record[1],
+			"allocation": record[2]
+		})
+
+	# Convert the dictionary to a list
+	result = list(grouped_data.values())
+
+	return jsonify(result)
+
+def findNameIdx(label, binanceIndexData, binanceIndexAssetData):
+		for i in range(0, len(binanceIndexAssetData)):
+			for idx, idx_data in enumerate(binanceIndexData):
+				if idx_data[0] == label:
+					return idx
