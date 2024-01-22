@@ -65,12 +65,7 @@ async function setSpotDCAPoints(DCA_url) {
 	const markers = [];
  
 	try {
-
-		/*
-		<div id="SpotDCA-points-div">
-		</div>
-		*/
-		console.log("spot dca bot initalized...");
+		//console.log("spot dca bot initalized...");
 		document.getElementById('SpotDCA-points-div').remove();
 
 		const dv = document.createElement("div");

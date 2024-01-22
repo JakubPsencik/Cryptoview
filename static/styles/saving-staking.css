@@ -1,0 +1,96 @@
+#saving_staking_label_large {
+	font-size: 5vw;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: #fff;
+	line-height: 1;
+}
+
+#saving_staking_label_small {
+	font-size: 16px;
+	font-weight: 700;	
+	letter-spacing: 4px;
+	font-family: Poppins, Arial, sans-serif;
+	text-transform: uppercase;
+	color: #fff;
+	display: block;
+	position: relative;
+
+}
+
+#saving_staking_description_wrapper {
+	width: 50vw;
+	height: 100vh;
+	margin: auto;
+	text-align: center;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+}
+
+
+#saving_staking_table .info-label {
+	/*display: inline-block;*/
+	text-align: center;
+	color: #fff;
+	font-size: 25px;
+	font-weight: 500;
+	text-transform: uppercase;
+}
+
+.saving_staking_headliner {
+
+	position: relative;
+	width: 100%;
+	color: #fff;
+	text-align: center;
+	background-color: var(--tw-black);
+	font-weight: 600;
+	font-size: 3em;
+	/*border-radius: 5em;
+
+	box-shadow: 5px 5px 8px var(--tw-grey);*/
+}
+
+#pg2_headline_div {
+	border-bottom: 1px solid var(--tw-grey);
+}
+
+#saving_staking_table {
+
+	width: 40vw;
+	height: 70vh;
+	min-height: fit-content;
+	text-align: center;
+	vertical-align: middle;
+	background-color: var(--bn-black);
+	border-radius: 2rem;
+	margin: 14.5vh auto auto auto;
+
+}
+
+#saving_staking_table td {
+
+	padding: 5px;
+}
+
+#saving_staking_table .profit {
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 28px;
+	color: #089981;
+	text-shadow: 0 0 10px rgb(8,153,129, 0.1);
+
+}
+
+.saving_staking_table_img {
+	position: relative;
+	width: 24px;
+	height: 24px;
+	background-color: var(--tw-black);
+	border-radius: 50%;
+	margin-left: 5px;
+}

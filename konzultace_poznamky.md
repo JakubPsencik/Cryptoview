@@ -529,3 +529,53 @@ prozkoumat ty jednotlive obdobi kdy to rostlo/padalo atd atd...
 aplikovat ty trading boty nad tema danyma obdobima
 
 bear / bull market
+
+## TODO:
+	- postahovat ikonky
+
+
+
+bar chart - ve kterem bude vizualizovane kolik ten index v danem roce mel profit ( tabulka binance_index_rate - sloupec profit)
+binance_index_asset_mapping - tabulka ktera ukazuje vuci ktere mene se ten dany coin obchoduje nejlip (EUR, USDT, BTC)
+
+minuty 59
+hodiny 59 x 24
+dny 59 x 24 x 7
+mesice - 59 x 24 x 7 x 28 dni v mesici
+
+
+
+binance_index_asset_buy_last - idcko coinu spolecne s poslednim kurzem o konverzi na 1 euro
+
+binance_index_asset_buy_minute - dim year - zesumarizovane data za dany rok; 9999 - 2022 -> present
+binance_index_asset_buy_hour   -
+binance_index_asset_buy_week   -
+binance_index_asset_buy_month  -
+
+binance_index_asset_recom - nejake doporuceni jak to kupovat
+
+
+nejaka vizualizace ktera ukaze jestli se to vyplacelo/zvedalo konstantne nebo tam jenom nejaka jedna hodnota vystrelila
+
+
+
+index name : 		idx_btc_eth 
+year: 				2022 
+invested: 			12 €
+profit: 			18.4871 € (1.54059 %)
+
+
+BTC 
+	2022 -> amount: 0.000526954  | trades: 12 | close: 40264.5 € | profit: 21.1751 € (1.76459 %)
+	2023 -> amount: 0.000491457  | trades: 12 | close: 40264.5 € | profit: 19.7487 € (1.64573 %)
+	2024 -> amount: 0.0000263089 | trades: 1  | close: 40264.5 € | profit: 1.05719 € (1.05719 %)
+	All  -> amount: 0.000993289  | trades: 24 | close: 40264.5 € | profit: 39.9143 € (1.6631  %)
+
+ETH
+	2022 -> amount: 0.0077757   | trades: 12 | close: 2036.52 € | profit: 15.8037 € (1.31698 %)
+	2023 -> amount: 0.00759044  | trades: 12 | close: 2036.52 € | profit: 15.4272 € (1.2856 %)
+	2024 -> amount: 0.000507375 | trades: 1  | close: 2036.52 € | profit: 1.03121 € (1.03121 %)
+	All  -> amount: 0.0150298   | trades: 24 | close: 2036.52 € | profit: 30.5472 € (1.2728 %)
+
+
+	

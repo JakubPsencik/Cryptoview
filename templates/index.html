@@ -3,7 +3,7 @@
 
 <head>
 	<title>Cryptoview</title>
-	<link rel="icon" type="image/x-icon" href="/static/img/btc.jpg">
+	<link rel="icon" type="image/x-icon" href="/static/img/VSB.png">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -19,43 +19,84 @@
 	<link rel="stylesheet" href="static/slider.css">
 	<link rel="stylesheet" href="static/styles.css">
 	<link rel="stylesheet" href="static/styles copy.css">
-
+	<link rel="stylesheet" href="static/styles/binance_index_asset.css">
+	<link rel="stylesheet" href="static/styles/auto-invest.css"> 
+	<link rel="stylesheet" href="static/styles/saving-staking.css">
+	<link rel="stylesheet" href="static/styles/binance_cmc_ew_index.css">
+	
 	<div style="overflow: hidden;">
 		<div id="pages" class="pages">
 			
 			<div class="page one"> 
 				<div class="col-md-12" style="margin-top: 40vh;">
 					<div class="text w-100 text-center" style="margin: auto;">
-						<h1 class="mb-3" style="font-size: 9vw;font-weight: 800;text-transform: uppercase;color: #fff;line-height: 1;">Cryptoview</h1>
-						<h2 style="font-size: 16px;text-transform: uppercase;letter-spacing: 2px;font-family: Poppins, Arial, sans-serif;font-weight: 700;color: white;color: #f5e4c3;display: block;position: relative;letter-spacing: 4px;">Trade with us</h2>
+						<h1 id="title_page_label_large">Cryptoview</h1>
+						<h2 id="title_page_label_small">Trade with us</h2>
 					</div>
 				</div>
-			</div>
-			<div id="pg5" class="page five"> 
+			</div> <!--END PAGE 1 -->
+
+			<div id="page_auto_invest" class="page auto-invest">
 				<div class="modal-body row" style="height: 100vh; padding-top: 0; padding-bottom: 0;">
-					<div class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0;">
-						<!--left side-->
-						<div class="widget">
-							<p style="transform: rotate(270deg); margin-top: 200px; margin-bottom: auto;">CRYPTOVIEW</p>
+					<div class="col-md-5" style="padding: 0;">
+						<div id="auto_invest_description_wrapper">
+							<h1 id="auto_invest_label_large">Auto-Invest</h1>
+							<h2 id="auto_invest_label_small">Accumulate Crypto on Autopilot.</h2>
 						</div>
 					</div>
-					<div class="col-md-8" style="border: 2px solid var(--tw-grey); padding: 0;">
-						<h1 class="pg5_headliner mb-3" >Auto-Invest</h1>
-						<table id="pg5_table"></table>
-					</div>
-					<!--<p>Invest now and watch your profit grow!</p>-->
-					<div class="col-md-2" style="border: 2px solid var(--tw-grey);">				
-					<!--right side-->
+					<div class="col-md-7" style="padding: 0;">
+						<table id="auto_invest_table"></table>
 					</div>
 				</div>
-				
-			</div> <!--END PAGE 5-->
+			</div> <!--END PAGE AUTO INVEST-->
+
+			<div id="page_saving_staking" class="page saving-staking"> 
+				<div class="modal-body row" style="height: 100vh; padding-bottom: 0; padding-top: 0;">
+					<!--left side-->
+					<div class="col-md-5" style="padding: 0;">
+						<div id="saving_staking_description_wrapper">
+							<h1 id="saving_staking_label_large">Simple Earn</h1>
+							<h2 id="saving_staking_label_small">The simple way to Deposit & Earn</h2>
+						</div>
+					</div>
+					<div class="col-md-7" style="padding: 0;">
+						<!--<div style="width: 100%; height: 100px; display: grid; justify-content: center; align-items: center;">
+							<span class="saving_staking_headliner" >Our Top 10 Today!</h1>
+						</div>-->
+						<table id="saving_staking_table"></table>
+					</div>
+				</div>
+			</div> <!--END PAGE SAVING STAKING-->
+
+			<div id="page_binance_cmc_ew_index" class="page b-cmc-idx"> 
+				<div class="modal-body row" style="height: 100vh; padding-bottom: 0; padding-top: 0;">
+					<!--left side-->
+					<div class="col-md-5" style="padding: 0;">
+						<div id="binance_cmc_ew_index_description_wrapper">
+							<h1 id="binance_cmc_ew_index_label_large">Binance CMC Cryptocurrency Top 10 Equal-Weighted Index</h1>
+							<h2 id="binance_cmc_ew_index_label_small">Tracking the performance of the top 10 digital assets by market capitalization, relative to the base currency of USD.</h2>
+						</div>
+					</div>
+					<div class="col-md-7" style="padding: 0;">
+						<div id="binance_cmc_ew_index_main_div" style="padding: 0;">
+							<div id="binance_cmc_ew_index_wrapper_div" style="padding: 0;">
+							
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> <!--END PAGE BINANCE CMC EQUAL WEIGHTED INDEX-->
+
+			<div id="page_binance_index_asset" class="page b-idx-asset"> 
+				<h1 class="binance_index_asset_page_label">Choose your portfolito and accumulate crypto now!</h1>
+				<div id="binance_index_asset_main_div"></div>
+			</div> <!--END PAGE BINANCE INDEX ASSET -->
 
 			<div id="pg10" class="page ten"> 
 				<div class="modal-body row" style="height: 100vh; padding-top: 0; padding-bottom: 0;">
 					<div class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0;">
 						<!--left side-->
-						<h1 id="" class="pg5_headliner mb-4" > 
+						<h1 id="" class="auto_invest_headliner mb-4" > 
 
 							Rebalancing <br>
 							
@@ -64,7 +105,7 @@
 					<div class="col-md-8" style="display: flex; flex-direction: column; border: 2px solid var(--tw-grey); padding: 0;">
 					
 						<div style="border: 2px solid var(--tw-grey); padding: 0;">
-							<h1 id="rebalancing-info-div" class="pg5_headliner mb-4" > </h1>
+							<h1 id="rebalancing-info-div" class="auto_invest_headliner mb-4" > </h1>
 						</div>
 
 						<div style="display: flex; flex-direction: row; flex: 1;">
@@ -140,7 +181,7 @@
 					<div class="col-md-7" style="display: flex; flex-direction: column; border: 2px solid var(--tw-grey); padding: 0; z-index: 1;">
 					
 						<div style="border: 2px solid var(--tw-grey); padding: 0;">
-							<h1 id="spotDCA-info-div" class="pg5_headliner mb-4" ></h1>
+							<h1 id="spotDCA-info-div" class="auto_invest_headliner mb-4" ></h1>
 						</div>
 
 						<div style="display: flex; flex-direction: row; flex: 1;">
@@ -205,7 +246,7 @@
 					<div class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0;">
 						<!--left side-->
 						<div style="border: 2px solid var(--tw-grey); padding: 0; width: 100%; height: 100%;">
-							<h1 id="" class="pg5_headliner mb-4" > 
+							<h1 id="" class="auto_invest_headliner mb-4" > 
 
 								Spot Grid  <br>
 							</h1>
@@ -214,7 +255,7 @@
 					<div class="col-md-8" style="display: flex; flex-direction: column; border: 2px solid var(--tw-grey); padding: 0;">
 					
 						<div style="border: 2px solid var(--tw-grey); padding: 0;">
-							<h1 id="spotGrid-info-div" class="pg5_headliner mb-4"></h1>
+							<h1 id="spotGrid-info-div" class="auto_invest_headliner mb-4"></h1>
 						</div>
 
 						<div id="spot-grid-div" style="display: flex; flex-direction: row; flex: 1;">
@@ -294,7 +335,7 @@
 					<div class="col-md-8" style="display: flex; flex-direction: column; border: 2px solid var(--tw-grey); padding: 0;">
 					
 						<div style="border: 2px solid var(--tw-grey); padding: 0;">
-							<h1 id="week-predict-info-div" class="pg5_headliner mb-4"></h1>
+							<h1 id="week-predict-info-div" class="auto_invest_headliner mb-4"></h1>
 						</div>
 
 						<div id="week-predict-div" style="display: flex; flex-direction: row; flex: 1;">
@@ -305,7 +346,7 @@
 						<!--<div id="WeekPredict-left" class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0; z-index: 1; width: 100%;">-->
 													<!--left side-->
 						<div style="border: 2px solid var(--tw-grey); padding: 0; width: 100%; height: 100%;">
-							<h1 id="" class="pg5_headliner mb-4" > 
+							<h1 id="" class="auto_invest_headliner mb-4" > 
 								Week Predictions  <br>
 							</h1>
 						</div>
@@ -313,32 +354,6 @@
 					</div>
 				</div> 
 			</div> <!--END PAGE 13-->
-			<div id="pg2" class="page two"> 
-				<div class="modal-body row" style="height: 100vh; padding-bottom: 0; padding-top: 0;">
-					<div class="col-md-4" style="border: 2px solid var(--tw-grey); position: relative; padding: 0;">
-						<!--left side-->
-						<div class="pg6_left" style=" display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 1vh; background: radial-gradient(ellipse at center, var(--tw-black) 50%, var(--tw-black) 100%); border-bottom: 2px solid var(--tw-grey);">
-							<span class="widget-bottom">Saving Staking</span>
-							<span class="widget-bottom">Compound Interest Investing</span>
-						</div>
-						<div class="pg6_left" style="bottom: 0;  margin-top: 5vh; border-radius: 10px; background: radial-gradient(ellipse at center, var(--tw-black) 50%, var(--tw-black) 100%);">
-							<ol>
-								<span class="widget-bottom" style="margin-bottom: 15px;">1. Choose an investment amount.</span>
-								<span class="widget-bottom" style="margin-bottom: 15px;">2. Divide your investment amount into equal parts.</span>
-								<span class="widget-bottom" style="margin-bottom: 15px;">3. Invest the equal parts at regular intervals.</span>
-								<span class="widget-bottom" style="margin-bottom: 15px;">4. Monitor market conditions for price fluctuations.</span>
-								<span class="widget-bottom" style="margin-bottom: 15px;">5. Adjust investments to buy more at low prices and less at high prices.</span>
-							</ol>
-						</div>
-					</div>
-					<div class="col-md-8" style="border: 2px solid var(--tw-grey); padding: 0;">
-						<div style="width: 100%; height: 100px; border: 2px solid var(--tw-grey); display: grid; justify-content: center; align-items: center;">
-							<span class="pg2_headliner" >Our Top 10 Today!</h1>
-						</div>
-						<table id="pg2_table"></table>
-					</div>
-				</div>
-			</div> <!--END PAGE 2-->
 			<div id="pg3" class="page three"> 
 				<div id="binance-div-test" style= "width: 100vw; height: 100vh; padding-bottom: 0; padding-top: 0; padding-right: 5px; padding-left: 5px;">
 					
@@ -453,6 +468,8 @@
 	<script src="{{url_for('static', filename='week-predict.js')}}"></script>
 	<script src="{{url_for('static', filename='get-data.js')}}"></script>
 	<script src="{{url_for('static', filename='ew-index.js')}}"></script>
+	<script src="{{url_for('static', filename='binance_index_asset.js')}}"></script>
+	<script src="{{url_for('static', filename='binance_cmc_ew_index.js')}}"></script>
 	<script src="{{url_for('static', filename='chart.js')}}"></script>
 	<script src="{{url_for('static', filename='config.js')}}"></script>
 </body>

@@ -1,0 +1,63 @@
+#binance_cmc_ew_index_label_large {
+	font-size: 48px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: #fff;
+	line-height: 1;
+	text-align: left;
+	padding-left: 100px;
+}
+
+#binance_cmc_ew_index_label_small {
+	font-size: 20px;
+	letter-spacing: 4px;
+	font-family: Poppins, Arial, sans-serif;
+	text-transform: uppercase;
+	color: #fff;
+	display: block;
+	position: relative;
+	text-align: left;
+	padding-left: 100px;
+	font-weight: initial;
+	display: flex;
+	flex-direction: row;
+
+}
+
+#binance_cmc_ew_index_description_wrapper {
+	width: 50vw;
+	height: 100vh;
+	margin: auto;
+	text-align: center;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+}
+
+#binance_cmc_ew_index_main_div {
+	width: 40vw;
+	height: 70vh;
+	background-color: var(--bn-black);
+	border-radius: 2rem;
+	margin: 14.5vh auto auto auto;
+	display: flex;
+	flex-direction: column;
+
+}
+
+.binance_cmc_ew_index_img {
+	position: relative;
+	width: 80px;
+	height: 80px;
+	background-color: var(--tw-black);
+	border-radius: 50%;
+	margin-left: 50px;
+	margin-top: 50px;
+}
+
+#binance_cmc_ew_index_wrapper_div { 
+	width: inherit;
+	height: 50%;
+	margin-top: 20%;
+	margin-left: 2vw;
+}

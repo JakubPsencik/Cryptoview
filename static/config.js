@@ -54,7 +54,7 @@ $(document).ready(async () => {
 		+ "&end=" + end_date;
 
 	//console.log(rebalance_url)
-	setRebalancePoints(rebalance_url);
+	//setRebalancePoints(rebalance_url);
 });
 
 /* Slide 4 - Spot DCA bot
@@ -86,7 +86,7 @@ $(document).ready(async () => {
 		+ "&start=" + start_date
 		+ "&end=" + end_date;
 
-	setSpotDCAPoints(DCA_url);
+	//setSpotDCAPoints(DCA_url);
 
 });
 
@@ -117,7 +117,7 @@ $(document).ready(async () => {
 		+ "&start=" + start_date
 		+ "&end=" + end_date;
 
-	setSpotGridPoints(SpotGrid_url);
+	//setSpotGridPoints(SpotGrid_url);
 });
 
 /* 
@@ -145,12 +145,12 @@ Slide 6
 	},
 	...
 */
-displayTop10("http://127.0.0.1:5000/view")
+displayTop10("http://127.0.0.1:5000/view");
 
-setWeekPredictPoints("http://127.0.0.1:5000/weekPredict?&symbol=LTCEUR&interval=1h")
+//setWeekPredictPoints("http://127.0.0.1:5000/weekPredict?&symbol=LTCEUR&interval=1h")
 
 getHistoricalData("http://127.0.0.1:5000/getData?&symbol=BTCEUR")
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=ETHEUR")
+/*getHistoricalData("http://127.0.0.1:5000/getData?&symbol=ETHEUR")
 getHistoricalData("http://127.0.0.1:5000/getData?&symbol=BNBEUR")
 getHistoricalData("http://127.0.0.1:5000/getData?&symbol=XRPEUR")
 getHistoricalData("http://127.0.0.1:5000/getData?&symbol=SOLEUR")
@@ -159,10 +159,15 @@ getHistoricalData("http://127.0.0.1:5000/getData?&symbol=TRXEUR")
 getHistoricalData("http://127.0.0.1:5000/getData?&symbol=LINKEUR")
 getHistoricalData("http://127.0.0.1:5000/getData?&symbol=DOTEUR")
 getHistoricalData("http://127.0.0.1:5000/getData?&symbol=LTCEUR")
-/**/
+*/
 
 const coins = ['BTCEUR', 'ETHEUR', 'BNBEUR', 'XRPEUR', 'SOLEUR', 'ADAEUR', 'TRXEUR', 'LINKEUR', 'DOTEUR', 'LTCEUR'];
 
-for(let i = 0; i < coins.length; i++) {
+//for(let i = 0; i < coins.length; i++) {
 	//setEwIndexTableContent(coins[i], `http://127.0.0.1:5000/weekPredict?&symbol=${coins[i]}&interval=1h`)
-}
+//}
+
+displayBinanceIndexAssetData("http://127.0.0.1:5000/binanceIndexAsset");
+
+displayBinanceCmcEwIndex("http://127.0.0.1:5000/CMC");
+

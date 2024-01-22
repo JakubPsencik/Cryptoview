@@ -111,7 +111,7 @@ async function displayPriceChartsDataPage4(url) {
 	}
 }
 
-async function displayDataPG5(url) {
+async function displayDataauto_invest(url) {
 	
 	try {
 		

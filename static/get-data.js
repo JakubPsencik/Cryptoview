@@ -66,7 +66,7 @@ async function getHistoricalData(url) {
 			
 			chartData = points.slice(0, (points.length-2)); // Output: [2, 3]
 
-			console.log(points)
+			//console.log(points)
 
 			if(url.includes("BTCEUR")) {
 				var chart = LightweightCharts.createChart(document.getElementById(`binance-container1`));

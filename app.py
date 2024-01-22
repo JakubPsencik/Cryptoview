@@ -955,7 +955,7 @@ def start_week_predict(historical_data, weekPredictResults):
 	
 	rng =  math.floor(len(historical_data) / 24)
 	
-	print(f"data-len: {len(historical_data)}, range: {rng}")
+	#print(f"data-len: {len(historical_data)}, range: {rng}")
 	markers = []
 
 	start = 0
@@ -981,7 +981,7 @@ def start_week_predict(historical_data, weekPredictResults):
 		if(max_value == row[2]):
 			max_time = row[1]
 
-	print(f"{min_value}, time: {min_time} | {max_value}, time: {max_time}")
+	#print(f"{min_value}, time: {min_time} | {max_value}, time: {max_time}")
 
 	markers.append([min_time, min_value])
 	markers.append([max_time, max_value])
@@ -1158,3 +1158,196 @@ def findNameIdx(label, binanceIndexData, binanceIndexAssetData):
 			for idx, idx_data in enumerate(binanceIndexData):
 				if idx_data[0] == label:
 					return idx
+
+@app.route("/binanceIndexRecommend", methods=['GET'])
+async def get_binance_index_recom_all_data():
+
+	#inputs from the form
+	params = [
+		request.args.get("indexName"),
+		request.args.get("minute"),
+	]
+
+	loop = asyncio.get_event_loop()
+
+	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+
+	#retrieve data from binance_index table
+	binance_index_recom_allCursor = await conn.cursor()
+	await binance_index_recom_allCursor.execute("""SELECT label, minute, dim_year, amount_invested, amount_profit, profit, asset_allocation
+													FROM binance.binance_index_recom_all
+													where label = {0} and minute = {1} ORDER BY profit DESC;""".format(params[0], params[1]))
+	
+	binance_index_recom_allData = await binance_index_recom_allCursor.fetchall()
+	await binance_index_recom_allCursor.close()
+
+	result = []
+
+	for record in binance_index_recom_allData:
+		item = {
+			"label": record[0],
+			"minute": record[1],
+			"year": record[2],
+			"invested": record[3],
+			"profitEur": record[4],
+			"profit": record[5],
+			"assets": record[6],
+		}
+
+		result.append(item)
+
+	return jsonify(result)
+
+
+@app.route("/binanceIndexAssetRecommendMinute", methods=['GET'])
+async def get_binance_index_asset_recom_minute_data():
+	#inputs from the form
+	param = request.args.get("queryParam")
+	loop = asyncio.get_event_loop()
+
+	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+
+	#retrieve data from binance_index table
+	binance_index_asset_recom_minuteCursor = await conn.cursor()
+	query = """SELECT asset_label, dim_year, amount, num_of_trades, close_eur, amount_eur, profit FROM
+															binance.binance_index_asset_recom_minute where asset_label = {0} ORDER BY profit DESC;""".format(param)
+	await binance_index_asset_recom_minuteCursor.execute(query)
+	
+	binance_index_asset_recom_minuteData = await binance_index_asset_recom_minuteCursor.fetchall()
+	await binance_index_asset_recom_minuteCursor.close()
+
+	result = []
+
+	for record in binance_index_asset_recom_minuteData:
+		item = {
+			"asset_label": record[0],
+			"year": record[1],
+			"amount": record[2],
+			"num_of_trades": record[3],
+			"close_eur": record[4],
+			"amount_eur": record[5],
+			"profit": record[6],
+		}
+
+		result.append(item)
+
+	return jsonify(result)
+
+@app.route("/binanceIndexAssetRecommendHour", methods=['GET'])
+async def get_binance_index_asset_recom_hour_data():
+	#inputs from the form
+	param = request.args.get("queryParam")
+	loop = asyncio.get_event_loop()
+
+	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+
+	#retrieve data from binance_index table
+	binance_index_asset_recom_minuteCursor = await conn.cursor()
+	query = """SELECT asset_label, dim_year, amount, num_of_trades, close_eur, amount_eur, profit FROM
+															binance.binance_index_asset_recom_hour where asset_label = {0} ORDER BY profit DESC;""".format(param)
+	await binance_index_asset_recom_minuteCursor.execute(query)
+	
+	binance_index_asset_recom_minuteData = await binance_index_asset_recom_minuteCursor.fetchall()
+	await binance_index_asset_recom_minuteCursor.close()
+
+	result = []
+
+	for record in binance_index_asset_recom_minuteData:
+		item = {
+			"asset_label": record[0],
+			"year": record[1],
+			"amount": record[2],
+			"num_of_trades": record[3],
+			"close_eur": record[4],
+			"amount_eur": record[5],
+			"profit": record[6],
+		}
+
+		result.append(item)
+
+	return jsonify(result)
+
+@app.route("/binanceIndexAssetRecommendWeek", methods=['GET'])
+async def get_binance_index_asset_recom_week_data():
+	#inputs from the form
+	param = request.args.get("queryParam")
+	loop = asyncio.get_event_loop()
+
+	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+
+	#retrieve data from binance_index table
+	binance_index_asset_recom_minuteCursor = await conn.cursor()
+	query = """SELECT asset_label, dim_year, amount, num_of_trades, close_eur, amount_eur, profit FROM
+															binance.binance_index_asset_recom_week where asset_label = {0} ORDER BY profit DESC;""".format(param)
+	await binance_index_asset_recom_minuteCursor.execute(query)
+	
+	binance_index_asset_recom_minuteData = await binance_index_asset_recom_minuteCursor.fetchall()
+	await binance_index_asset_recom_minuteCursor.close()
+
+	result = []
+
+	for record in binance_index_asset_recom_minuteData:
+		item = {
+			"asset_label": record[0],
+			"year": record[1],
+			"amount": record[2],
+			"num_of_trades": record[3],
+			"close_eur": record[4],
+			"amount_eur": record[5],
+			"profit": record[6],
+		}
+
+		result.append(item)
+
+	return jsonify(result)
+
+@app.route("/binanceIndexAssetRecommendMonth", methods=['GET'])
+async def get_binance_index_asset_recom_month_data():
+	#inputs from the form
+	param = request.args.get("queryParam")
+	loop = asyncio.get_event_loop()
+
+	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+
+	#retrieve data from binance_index table
+	binance_index_asset_recom_minuteCursor = await conn.cursor()
+	query = """SELECT asset_label, dim_year, amount, num_of_trades, close_eur, amount_eur, profit FROM
+															binance.binance_index_asset_recom_month where asset_label = {0} ORDER BY profit DESC;""".format(param)
+	await binance_index_asset_recom_minuteCursor.execute(query)
+	
+	binance_index_asset_recom_minuteData = await binance_index_asset_recom_minuteCursor.fetchall()
+	await binance_index_asset_recom_minuteCursor.close()
+
+	result = []
+
+	for record in binance_index_asset_recom_minuteData:
+		item = {
+			"asset_label": record[0],
+			"year": record[1],
+			"amount": record[2],
+			"num_of_trades": record[3],
+			"close_eur": record[4],
+			"amount_eur": record[5],
+			"profit": record[6],
+		}
+
+		result.append(item)
+
+	return jsonify(result)
+
+
+@app.route("/CMC", methods=['GET'])
+async def get_binance_cmc_ew_index_coins():
+
+	loop = asyncio.get_event_loop()
+	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+
+	#retrieve data from binance_index table
+	cursor = await conn.cursor()
+	query = """select asset_label from binance_index_asset where index_label = 'idx_binance_cmc_top_10';"""
+	await cursor.execute(query)
+	
+	data = await cursor.fetchall()
+	await cursor.close()
+
+	return jsonify(data)

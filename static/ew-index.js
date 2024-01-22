@@ -16,7 +16,7 @@ function extractDayAndHour(timestamp) {
 
 function InitializeEwIndexHeader(timestamps) {
 
-	console.log(timestamps)
+	//console.log(timestamps)
 
 	const dv = document.createElement("div");
 	dv.classList.add("test");
@@ -76,10 +76,10 @@ function InitializeEwIndexRowRecord(_coin, data) {
 		let record = document.createElement("span");
 		// Set widget text and styling
 		let tmp = parseFloat((increment / data[i].value)).toFixed(4);
-		console.log(tmp);
-		console.log(totalOwned);
+		//console.log(tmp);
+		//console.log(totalOwned);
 		totalOwned += parseFloat(tmp);
-		console.log(totalOwned);
+		//console.log(totalOwned);
 		record.innerHTML = (`${totalInvested} € / ${parseFloat(totalOwned).toFixed(4)}`);
 		totalInvested += increment;
 		//record.classList.add("pg4span_symbol");
@@ -97,13 +97,6 @@ async function setEwIndexTableContent(coin, points) {
 	
 	var timestamps = [];
 	var data = [];
-	/*
-	document.getElementById('binance-ew-index-table-content').remove();
-	const dv = document.createElement("div");
-	dv.id = 'binance-ew-index-table-content';
-	document.getElementById("binance-ew-index-table").appendChild(dv);*/
-	
-	//console.log(points);
 
 	const lowerPriceIdx = points.length - 2;
 	const UpperPriceIdx = points.length - 1;
@@ -111,31 +104,16 @@ async function setEwIndexTableContent(coin, points) {
 	let timestampOfLowestAvgPrice = points[lowerPriceIdx].time;
 	let timestampOfLowestAvgPriceDayAndHour = extractDayAndHour(timestampOfLowestAvgPrice);
 
-	//console.log("loop range: " + (points.length - 3) / 7);
 	for(let i = 0; i < (points.length - 3); i++) {
 		let tstmp = points[i].time * 1000;
 		const dayAndHour = extractDayAndHour(tstmp);
 
-		//console.log(`if((${timestampOfLowestAvgPriceDayAndHour[0]} ==${String(dayAndHour[0])}) && (${timestampOfLowestAvgPriceDayAndHour[1]} == ${String(dayAndHour[1])}))`);
-		//&& (timestampOfLowestAvgPriceDayAndHour[1] == String(dayAndHour[1]))
 		if((timestampOfLowestAvgPriceDayAndHour[0] == String(dayAndHour[0])) ) {
-			//console.log("OK")
 			data.push(points[i]);
 			timestamps.push(points[i].time);
 		}
-		/*
-		
-		const result = points.find(x => String(x.time * 1000) == String(newTimestamp));
-		if(result != undefined) {
-			data.push(result);
-			//console.log(result);
-			timestamps.push(newTimestamp);
-		}
-		counter += 1;*/
 	}
-	//console.log(counter);
-	console.log(`d:`);
-	console.log(data);
+
 
 	if(!headerSet) {
 		InitializeEwIndexHeader(timestamps);

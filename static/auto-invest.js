@@ -10,7 +10,7 @@ async function display_savings_staking_data(url) {
 		response.json().then((r) => {
 
 			//console.log('auto invest initialized...')
-			BuildTablePG3(r, ["jasmy.png", "pha.png", "btc.png"])
+			BuildTablePG3(r)
 	
 		});
 	} catch (error) {
@@ -18,10 +18,10 @@ async function display_savings_staking_data(url) {
 	}
 }
 
-async function BuildTablePG3(response, imgnames) {
+async function BuildTablePG3(response) {
 
 	//console.log(markers)
-	let table = document.getElementById("pg5_table")
+	let table = document.getElementById("auto_invest_table")
 
 	let tr = document.createElement("tr");
 	let name_td = document.createElement("td");
@@ -42,20 +42,14 @@ async function BuildTablePG3(response, imgnames) {
 
 	table.appendChild(tr)
 
-	let counter = 0;
 	for(let i = 0; i < 10; i++) {
-		
-		AddTableRowPG5(response[i].asset, response[i].interval, response[i].profit ,imgnames[counter])
-		counter+=1;
-		if(counter == 3) {
-			counter = 0
-		}
+		AddTableRowauto_invest(response[i].asset, response[i].interval, response[i].profit , `${response[i].asset}.png`);
 	}
 }
 
-async function AddTableRowPG5(asset, interval, profit, imgname) {
+async function AddTableRowauto_invest(asset, interval, profit, imgname) {
 	
-	let table = document.getElementById("pg5_table")
+	let table = document.getElementById("auto_invest_table")
 
 	let tr = document.createElement("tr");
 	let name_td = document.createElement("td");

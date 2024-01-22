@@ -34,7 +34,7 @@ transform: scale(1.05);
 
 .pages {
 display: flex;
-	width: 800%;
+	width: 1000%;
 	height: 100vh;
 	box-sizing: border-box;
 }
@@ -50,44 +50,33 @@ transition: all 0.7s;
 color: white;
 }
 
-.center {
-	margin: 0;
-	position: relative;
-	top: 50%;
-	left: 50%;
-}
-
-.one{
+.one {
 background-image: url(img/stock1920.jpg);
 background-position: center; 
 background-repeat: no-repeat;
 background-size: cover;
 }
 
-.two{
-	/*background-image: url(img/stock1920.jpg);*/
-	background-position: center; 
-	background-repeat: no-repeat;
-	background-size: cover;
+.auto-invest{
 	background: var(--tw-black);
+	background-image: url(img/stock1920.jpg);
+}
+
+.saving-staking {
+	background: var(--tw-black);
+	background-image: url(img/stock1920.jpg);
+}
+
+.b-idx-asset {
+	background: var(--tw-black);
+	background-image: url(img/stock1920.jpg);
+}
+
+.b-cmc-idx {
+	background: var(--tw-black);
+	background-image: url(img/stock1920.jpg);
 }
 
 .three{
 	background: var(--bn-black);
-}
-
-.four{
-	background: var(--tw-black);
-}
-
-.five{
-	background: var(--tw-black);
-}
-
-.six {
-	background: var(--tw-black);
-}
-
-.seven {
-	background: var(--tw-black);
 }

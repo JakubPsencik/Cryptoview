@@ -1,0 +1,434 @@
+#binance_index_asset_main_div {
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: 100vh;
+}
+
+.binance_index_asset_page_label  {
+	position: relative;
+	width: 100%;
+	height: 5vh;
+	color: #fff;
+	margin-top: 1vh;
+	margin-left: auto;
+	margin-right: auto;
+	font-weight: 600; 
+	font-size: 2em;
+	justify-content: center;
+	align-items: center; 
+	text-align: center;
+}
+
+.binance_index_asset_row_div {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	height: fit-content;
+	align-items: center;
+	justify-content: center;
+}
+
+.binance_index_asset_name_div {
+	text-size-adjust: 100%;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px 0px 16px;
+	min-width: 0px;
+	display: flex;
+	font-size: 16px;
+	line-height: 24px;
+	font-weight: 600;
+}
+
+.binance_index_asset_coins_div {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	line-height: 1.5;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	outline: 0;
+	padding: 0;
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	display: flex;
+	-webkit-box-pack: justify;
+	justify-content: flex-start;
+	flex-direction: row;
+}
+
+.binance_index_asset_coin_img {
+	position: relative;
+	width: 24px;
+	height: 24px;
+	background-color: var(--tw-black);
+	border-radius: 50%;
+	margin-left: 2px;
+}
+
+.moreDiv {
+	position: relative;
+	margin-left: 5px;
+	width: 36px;
+	height: 24px;
+	background-color: var(--tw-black);
+	border-radius: 50%;
+	text-align: center;
+}
+
+.binance_index_asset_view_allocation_div {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	line-height: 1.5;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: #EAECEF;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+	margin-top: 12px;
+	width: 100%;
+	display: grid;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.binance_index_asset_view_allocation_button {
+	text-size-adjust: 100%;
+	text-transform: none;
+	margin: 0px;
+	appearance: none;
+	user-select: none;
+	cursor: pointer;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	font-family: inherit;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	padding: 6px 12px;
+	min-width: 52px;
+	word-break: keep-all;
+	color: rgb(234, 236, 239);
+	border-radius: 4px;
+	min-height: 24px;
+	border: none;
+	width: 100%;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 20px;
+	box-shadow: none;
+	background-image: none;
+	background-color: rgb(43, 49, 57);
+}
+
+.binance_index_asset_view_detail_button {
+	text-size-adjust: 100%;
+	text-transform: none;
+	margin: 0px;
+	appearance: none;
+	user-select: none;
+	cursor: pointer;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	font-family: inherit;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	padding: 6px 12px;
+	min-width: 52px;
+	word-break: keep-all;
+	color: rgb(234, 236, 239);
+	background-color: var(--tw-lightblue);
+	border-radius: 4px;
+	min-height: 24px;
+	border: none;
+	width: 100%;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 20px;
+	box-shadow: none;
+	background-image: none;
+}
+
+.binance_index_asset_view_price_trend_button {
+	text-size-adjust: 100%;
+	text-transform: none;
+	margin: 0px;
+	appearance: none;
+	user-select: none;
+	cursor: pointer;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	font-family: inherit;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	padding: 6px 12px;
+	min-width: 52px;
+	word-break: keep-all;
+	color: rgb(234, 236, 239);
+	background-color: var(--tw-blue);
+	border-radius: 4px;
+	min-height: 24px;
+	border: none;
+	width: 100%;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 20px;
+	box-shadow: none;
+	background-image: none;
+}
+
+.binance_index_asset_view_allocation_cancel_button {
+	text-size-adjust: 100%;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	text-transform: none;
+	--scroll-bg: var(--color-popupBg);
+	appearance: none;
+	user-select: none;
+	cursor: pointer;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: inline-flex;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+	box-sizing: border-box;
+	font-family: inherit;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	padding: 6px 12px;
+	min-width: 52px;
+	word-break: keep-all;
+	color: rgb(234, 236, 239);
+	border-radius: 4px;
+	min-height: 24px;
+	border: none;
+	width: 10vw;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 20px;
+	box-shadow: none;
+	background-image: none;
+	background-color: rgb(43, 49, 57);
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	margin: 10px;
+}
+
+.binance_index_asset_allocation_details_div {
+	width: 25vw;
+	height: 75vh;
+	text-size-adjust: 100%;
+    font-weight: 400;
+    font-family: BinancePlex,Arial,sans-serif!important;
+    outline: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    box-sizing: border-box;
+    margin: 0px;
+    min-width: 0px;
+    padding: 24px;
+    font-size: 14px;
+    line-height: 20px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: var(--tw-black);
+	border: 1px solid #000000;
+	border-radius: 5px;
+	z-index: 999; /* Ensure it's above other elements */
+}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity here */
+	z-index: 998; /* Below the centered div */
+}
+
+.binance_index_asset_Allocation_detail_row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	margin: auto;
+	margin-bottom: 5px;
+}
+
+.binance_index_asset_portfolio_allocation_label {
+	text-size-adjust: 100%;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	display: flex;
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 28px;
+	flex-direction: row;
+	flex: 0 0 auto;
+}
+
+.binance_index_asset_portfolio_allocation_space_div {
+	width: 100%;
+	height: 5vh;
+	margin: 0;
+	padding: 0;
+}
+
+.binance_index_asset_div {
+	width: 350px;
+	height: 160px;
+	text-size-adjust: 100%;
+	font-weight: 400;
+	line-height: 1.5;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	box-sizing: border-box;
+	margin: 10px;
+	min-width: 0px;
+	display: flex;
+	border: 1px solid rgb(71, 77, 87);
+	flex-direction: column;
+	position: relative;
+	border-radius: 5px;
+	padding: 20px;
+	background-color: rgb(24, 26, 32);
+}
+
+.binance_index_asset_index_details_div {
+	width: 90vw;
+	height: 90vh;
+	text-size-adjust: 100%;
+    font-weight: 400;
+    font-family: BinancePlex,Arial,sans-serif!important;
+    outline: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    box-sizing: border-box;
+    margin: 0px;
+    min-width: 0px;
+    padding: 24px;
+    font-size: 14px;
+    line-height: 20px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: var(--tw-black);
+	border: 1px solid #000000;
+	border-radius: 5px;
+	z-index: 999; /* Ensure it's above other elements */
+}
+
+.binance_index_asset_index_detailsInfoDiv {
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	border: 1px solid red;
+	padding: 5px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+
+}
+
+.binance_index_asset_index_detailsInfoDivWrapper {
+	height: 45%;
+	display: flex;
+	flex-direction: row;
+	margin: auto;
+}
+
+.binance_index_asset_index_recom_all_recomendDataDiv {
+	border: 1px solid green;
+	width: inherit;
+	height: fit-content;
+	align-items: center;
+	text-align: center;
+}
+
+.binance_index_asset_index_recom_all_recomendCoinDataDiv {
+	border: 1px solid dark palevioletred;
+	width: inherit;
+	height: fit-content;
+	align-items: center;
+	text-align: center;
+}
+
+.binance_index_asset_getPriceTrendDataWrapper {
+	width: 85vw;
+	height: 70vh;
+	text-size-adjust: 100%;
+    font-weight: 400;
+    font-family: BinancePlex,Arial,sans-serif!important;
+    outline: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    box-sizing: border-box;
+    margin: 0px;
+    min-width: 0px;
+    padding: 24px;
+    font-size: 14px;
+    line-height: 20px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: var(--tw-black);
+	/*border: 1px solid green;*/
+	border-radius: 5px;
+	z-index: 999; /* Ensure it's above other elements */
+	overflow-y: scroll;
+	overflow-x: hidden;
+
+}
+
+.binance_index_asset_getPriceTrendData {
+	width: 100%;
+	height: 300px;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	margin: 10px;
+	padding: 5px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	/* border: 1px solid red; */
+}

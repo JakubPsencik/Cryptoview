@@ -5,24 +5,13 @@
 
 async function displayTop10(url) {
 	
-	var colors = 
-	["#493657","#4C9141","#F80000","#F39F18","#7BE0AD"
-	,"#C51D34","#89AC76","#354D73","#256D7B","#BEE5BF"
-	,"#DFF3E3","#FFD1BA","#44CFCB","#4EA5D9","#2A4494"
-	,"#224870","#122C34","#EA899A","#EAE6CA","#C1876B"]
-	
 	try {
-		//OUR TOP...! page
 		let response = await fetch(url);
 		response.json().then(async (r) => {
-			//console.log("top 10 table initialized...");
-			//if not swapped, dates are backwards
-			//r.reverse();
-			pair_names = r[r.length-2]
-			//console.log(pair_names)
-			//console.log(r)
+			console.log(r);
+
 			let markers = await checkViewData(r)
-			//console.log(markers)
+			console.log(markers);
 			arr = r.slice(2,22)
 			var compound = []
 			var fixed = []
@@ -30,9 +19,7 @@ async function displayTop10(url) {
 				compound.push(arr[i].compound_interest_total_in_eur);
 				fixed.push(arr[i].fixed_deposit_total_in_eur)
 			}
-			
-			BuildTablePG2(pair_names, compound, fixed, markers, ["jasmy.png", "pha.png", "btc.png"], "pg2_table")
-
+			BuildTablePG2(compound, fixed, markers, ["jasmy.png", "pha.png", "btc.png"], "saving_staking_table")
 		});
 
 	} catch (error) {
@@ -42,9 +29,8 @@ async function displayTop10(url) {
 }
 
 
-async function BuildTablePG2(names, compound, fixed, markers, imgnames, tableName) {
+async function BuildTablePG2(compound, fixed, markers, imgnames, tableName) {
 
-	//console.log(markers)
 	let table = document.getElementById(tableName)
 
 	let tr = document.createElement("tr");
@@ -56,14 +42,15 @@ async function BuildTablePG2(names, compound, fixed, markers, imgnames, tableNam
 	let weekly = document.createElement("td");
 	let monthly = document.createElement("td");
 
-	name_td.innerHTML = "Pair"
+	name_td.innerHTML     = "Pair"
 	compound_td.innerHTML = "Compound Interest"
-	fixed_td.innerHTML = "Fixed Deposit"
-	daily.innerHTML = "In daily"
-	weekly.innerHTML = "In weekly"
-	monthly.innerHTML = "In monthly"
+	fixed_td.innerHTML    = "Fixed Deposit"
+	daily.innerHTML       = "In daily"
+	weekly.innerHTML      = "In weekly"
+	monthly.innerHTML     = "In monthly"
 
 	tr.appendChild(img_td)
+	tr.appendChild(document.createElement("td"));
 	tr.appendChild(name_td)
 	tr.appendChild(compound_td)
 	tr.appendChild(fixed_td)
@@ -74,8 +61,7 @@ async function BuildTablePG2(names, compound, fixed, markers, imgnames, tableNam
 	table.appendChild(tr)
 	let counter = 0;
 	for(let i = 0; i < 10; i++) {
-		
-		AddTableRowPG2(markers[i].name, compound[i], fixed[i], [markers[i].daily,markers[i].weekly,markers[i].monthly], imgnames[counter], tableName)
+		AddTableRowPG2(markers[i].name, compound[i], fixed[i], [markers[i].daily,markers[i].weekly,markers[i].monthly], markers[i].base, markers[i].quote, tableName)
 		counter+=1;
 		if(counter == 3) {
 			counter = 0
@@ -87,6 +73,7 @@ async function BuildTablePG2(names, compound, fixed, markers, imgnames, tableNam
 async function checkViewData(response) {
 	
 	var daily = response[1];
+	console.log(daily);
 	var weekly = response[23];
 	var monthly = response[45];
 	var markers = [];
@@ -94,7 +81,7 @@ async function checkViewData(response) {
 	// Loop through each string value in array1
 	for (let i = 0; i < daily.length; i++) {
 		const currentValue = daily[i];
-
+		
 		const valDaily = "check.png";
 		
 		// Check if currentValue is present in array2 and array3
@@ -106,6 +93,8 @@ async function checkViewData(response) {
 
 		currentMarkerRow = {
 			"name": currentValue,
+			"base": response[i+2].base,
+			"quote": response[i+2].quote,
 			"daily": valDaily,
 			"weekly": valWeekly,
 			"monthly": valMonthly,
@@ -117,13 +106,14 @@ async function checkViewData(response) {
 	return markers;
 }
 
-async function AddTableRowPG2(name, compound, fixed, markers, imgname, tableName) {
+async function AddTableRowPG2(name, compound, fixed, markers, base, quote, tableName) {
 	
 	let table = document.getElementById(tableName)
 
 	let tr = document.createElement("tr");
 	let name_td = document.createElement("td");
-	let img_td = document.createElement("td");
+	let base_img_td = document.createElement("td");
+	let quote_img_td = document.createElement("td");
 	let compound_td = document.createElement("td");
 	let fixed_td = document.createElement("td");
 	let daily = document.createElement("td");
@@ -151,41 +141,49 @@ async function AddTableRowPG2(name, compound, fixed, markers, imgname, tableName
 	}
 
 	let img = document.createElement("img");
-	img.setAttribute("src", `static/img/${imgname}`);
+	img.setAttribute("src", `static/img/${base}.png`);
 	img.setAttribute("loading", 'lazy');
-	img.setAttribute("class", 'pg4_table_img');
+	img.setAttribute("class", 'saving_staking_table_img');
 
-	img_td.appendChild(img)
+	base_img_td.appendChild(img)
+
+	img = document.createElement("img");
+	img.setAttribute("src", `static/img/${quote}.png`);
+	img.setAttribute("loading", 'lazy');
+	img.setAttribute("class", 'saving_staking_table_img');
+
+	base_img_td.appendChild(img)
 
 	var daily_mark = document.createElement("img");
 	daily_mark.setAttribute("src", `static/img/${markers[0]}`);
 	daily_mark.setAttribute("loading", 'lazy');
-	if(markers[0].includes("check")) { daily_mark.setAttribute("class", 'pg2_table_img_mark_green'); }
-	else { daily_mark.setAttribute("class", 'pg2_table_img_mark_red'); }
+	if(markers[0].includes("check")) { daily_mark.setAttribute("class", 'saving_staking_table_img_mark_green'); }
+	else { daily_mark.setAttribute("class", 'saving_staking_table_img_mark_red'); }
 	
 	var weekly_mark = document.createElement("img");
 	weekly_mark.setAttribute("src", `static/img/${markers[1]}`);
 	weekly_mark.setAttribute("loading", 'lazy');
-	if(markers[1].includes("check")) { weekly_mark.setAttribute("class", 'pg2_table_img_mark_green'); }
-	else { weekly_mark.setAttribute("class", 'pg2_table_img_mark_red'); }
+	if(markers[1].includes("check")) { weekly_mark.setAttribute("class", 'saving_staking_table_img_mark_green'); }
+	else { weekly_mark.setAttribute("class", 'saving_staking_table_img_mark_red'); }
 
 	var monthly_mark = document.createElement("img");
 	monthly_mark.setAttribute("src", `static/img/${markers[2]}`);
 	monthly_mark.setAttribute("loading", 'lazy');
-	if(markers[2].includes("check")) { monthly_mark.setAttribute("class", 'pg2_table_img_mark_green'); }
-	else { monthly_mark.setAttribute("class", 'pg2_table_img_mark_red'); }
+	if(markers[2].includes("check")) { monthly_mark.setAttribute("class", 'saving_staking_table_img_mark_green'); }
+	else { monthly_mark.setAttribute("class", 'saving_staking_table_img_mark_red'); }
 
-	daily.appendChild(daily_mark)
-	weekly.appendChild(weekly_mark)
-	monthly.appendChild(monthly_mark)
+	daily.appendChild(daily_mark);
+	weekly.appendChild(weekly_mark);
+	monthly.appendChild(monthly_mark);
 
-	tr.appendChild(img_td)
-	tr.appendChild(name_td)
-	tr.appendChild(compound_td)
-	tr.appendChild(fixed_td)
-	tr.appendChild(daily)
-	tr.appendChild(weekly)
-	tr.appendChild(monthly)
+	tr.appendChild(base_img_td);
+	tr.appendChild(quote_img_td);
+	tr.appendChild(name_td);
+	tr.appendChild(compound_td);
+	tr.appendChild(fixed_td);
+	tr.appendChild(daily);
+	tr.appendChild(weekly);
+	tr.appendChild(monthly);
 
-	table.appendChild(tr)
+	table.appendChild(tr);
 }

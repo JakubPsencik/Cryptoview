@@ -7,7 +7,27 @@ body, #maindiv {
 	height: 100vh;
 	overflow-y: hidden;
 }
-/**/
+
+#title_page_label_large {
+	font-size: 9vw;
+	font-weight: 800;
+	text-transform: uppercase;
+	color: #fff;
+	line-height: 1;
+}
+
+#title_page_label_small {
+	font-size: 16px;
+	font-weight: 700;	
+	letter-spacing: 4px;
+	font-family: Poppins, Arial, sans-serif;
+	text-transform: uppercase;
+	color: #f5e4c3;
+	display: block;
+	position: relative;
+
+}
+
 .divstyle {
 	width: fit-content;
 	height: 200x;
@@ -19,8 +39,6 @@ body, #maindiv {
 	color: var(--tw-black);
 }
 
-
-/**/
 .mainchart {
 	user-select: none;
 	-webkit-tap-highlight-color: transparent;
@@ -152,7 +170,7 @@ select option {
 	border-radius: 50%;
 }
 
-.pg2_table_img_mark_red {
+.saving_staking_table_img_mark_red {
 	position: relative;
 	width: 24px;
 	height: 24px;
@@ -174,7 +192,7 @@ select option {
 }
 
 /* green marks*/
-.pg2_table_img_mark_green {
+.saving_staking_table_img_mark_green {
 	position: relative;
 	width: 24px;
 	height: 24px;
@@ -195,12 +213,7 @@ select option {
 	}
 }
 
-.rectangle {
-height: 5px;
-width: 50px;
-background-color: green;
-margin-left: 10px;
-}
+
 
 .dot {
 	position: relative;
@@ -273,171 +286,6 @@ margin-left: 10px;
 	text-align: center;
 }
 
-#pg2_table .info-label {
-	/*display: inline-block;*/
-	text-align: center;
-	color: #fff;
-	font-size: 25px;
-	font-weight: 500;
-	text-transform: uppercase;
-}
-
-.pg2_headliner {
-
-	position: relative;
-	width: 100%;
-	color: #fff;
-	text-align: center;
-	background-color: var(--tw-black);
-	font-weight: 600;
-	font-size: 3em;
-	/*border-radius: 5em;
-
-	box-shadow: 5px 5px 8px var(--tw-grey);*/
-}
-
-#pg2_headline_div {
-	border-bottom: 1px solid var(--tw-grey);
-}
-
-#pg2_table {
-	width: inherit; 
-	height: 88%; 
-	min-height: fit-content;
-	text-align: center; 
-	vertical-align: middle; 
-	background-color: var(--tw-black); 
-	/*border-radius: 5em;*/
-}
-
-#pg2_table td {
-	/*border: 2px solid var(--tw-grey);*/
-	border-bottom: 1px solid black;
-}
-
-#pg5_table {
-	width: inherit; 
-	height: 85%; 
-	min-height: fit-content;
-	text-align: center; 
-	vertical-align: middle; 
-	background-color: var(--tw-black); 
-	/*border-radius: 5em;*/
-}
-
-.pg5_headliner {
-
-	position: relative;
-	width: 100%;
-	height: inherit;
-	color: #fff;
-	text-align: center;
-	background-color: var(--tw-black);
-	margin-top: 1vh;
-	margin-left: auto;
-	margin-right: auto;
-	font-weight: 600; font-size: 2em;
-	/*border-bottom: 3px solid var(--tw-grey);*/
-	justify-content: center;
-	align-items: center; /* Vertical alignment */
-}
-
-#pg5_table td {
-	/*border: 2px solid var(--tw-grey);*/
-	border-bottom: 1px solid black;
-	box-shadow: 0px 0px 5px 0px var(--tw-grey);
-}
-
-#pg2_table .profit {
-	box-sizing: border-box;
-	margin: 0px;
-	min-width: 0px;
-	font-weight: 700;
-	font-size: 20px;
-	line-height: 28px;
-	color: #089981;
-	
-	text-shadow: 0 0 10px rgb(8,153,129, 0.1);
-	/*animation: profit_glow 2s ease-in-out infinite alternate;
-	animation: blinker 5s ease-in-out infinite alternate;*/
-}
-
-#pg5_table .profit {
-	box-sizing: border-box;
-	margin: 0px;
-	min-width: 0px;
-	font-weight: 700;
-	font-size: 20px;
-	line-height: 28px;
-	color: #089981;
-	
-	text-shadow: 0 0 10px rgb(8,153,129, 0.1);
-	animation: profit_glow 2s ease-in-out infinite alternate;
-	/*animation: blinker 5s ease-in-out infinite alternate;*/
-}
-
-@keyframes profit_glow {
-	from {
-		text-shadow: 0 0 10px rgb(8,153,129, 0.1);
-	}
-	to {
-		text-shadow: 0 0 20px rgb(8,153,129, 1.0);
-	}
-}
-/*@keyframes blinker {
-	50% {
-	opacity: 0;
-	}
-}*/
-
-#pg5_table .info-label {
-	
-	text-align: center;
-	color: #fff;
-	font-size: 25px;
-	font-weight: 500;
-	text-transform: uppercase;
-}
-
-#pg5_table .interval {
-
-	box-sizing: border-box;
-	margin: 0px;
-	min-width: 0px;
-	font-weight: 700;
-	font-size: 20px;
-	line-height: 28px;
-	color: #fff;
-}
-
-.pg5_left {
-	box-sizing: border-box;
-	margin: 0px;
-	min-width: 0px;
-	font-weight: 700;
-	font-size: 20px;
-	line-height: 28px;
-	color: #fff;
-}
-
-.pg5_widget_dv {
-	position: relative;
-	width: inherit;
-	height: 50px;
-	background-color: var(--tw-lightgrey);
-	color: red;
-	border-color: 3px solid black;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	display: flex;
-}
-.horizontal-line {
-	display: flex;
-}
-
-.horizontal-line div {
-	margin-right: 10px;
-}
 #pg6_table {
 	width: inherit; 
 	height: 85%; 
