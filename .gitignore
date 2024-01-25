@@ -104,7 +104,7 @@ dist
 .tern-port
 
 #config.py file
-config.py
+/config.py
 
 #notes
-konzultace_poznamky.md
+/konzultace_poznamky.md

@@ -1,6 +1,7 @@
 
 :root{
 	--tw-black: #131722;
+	--bn-black: #0B0E11;
 	--tw-grey: #434651;
 	--tw-lightgrey: #d1d4dc;
 	--tw-blue: #143a87;
@@ -33,14 +34,14 @@ transform: scale(1.05);
 
 .pages {
 display: flex;
-	width: 600%;
+	width: 1000%;
 	height: 100vh;
 	box-sizing: border-box;
 }
 
 .page {
-width: 100%;
-height: 100%;
+width: 100vw;
+height: 100vh;
 /*
 display: flex;
 align-items: center;
@@ -49,44 +50,48 @@ transition: all 0.7s;
 color: white;
 }
 
-.center {
-	margin: 0;
-	position: relative;
-	top: 50%;
-	left: 50%;
-}
-
-.one{
+.one {
 background-image: url(img/stock1920.jpg);
 background-position: center; 
 background-repeat: no-repeat;
 background-size: cover;
 }
 
-.two{
-	/*background-image: url(img/stock1920.jpg);*/
-	background-position: center; 
-	background-repeat: no-repeat;
-	background-size: cover;
-	background: var(--tw-black);
+.auto-invest{
+	background: var(--bn-black);
+	background-image: url(img/stock1920.jpg);
+}
+
+.saving-staking {
+	background: var(--bn-black);
+	background-image: url(img/stock1920.jpg);
+}
+
+.b-idx-asset {
+	background: var(--bn-black);
+	background-image: url(img/stock1920.jpg);
+}
+
+.b-cmc-idx {
+	background: var(--bn-black);
+	background-image: url(img/stock1920.jpg);
+}
+
+.rebalancing-bot {
+	background: var(--bn-black);
+	background-image: url(img/stock1920.jpg);
+}
+
+.spot-dca {
+	background: var(--bn-black);
+	background-image: url(img/stock1920.jpg);
+}
+
+.spot-grid {
+	background: var(--bn-black);
+	background-image: url(img/stock1920.jpg);
 }
 
 .three{
-background: green;
-}
-
-.four{
-	background: var(--tw-black);
-}
-
-.five{
-	background: var(--tw-black);
-}
-
-.six {
-	background: var(--tw-black);
-}
-
-.seven {
-	background: var(--tw-black);
+	background: var(--bn-black);
 }

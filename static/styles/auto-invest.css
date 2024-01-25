@@ -1,0 +1,121 @@
+
+#auto_invest_label_large {
+	font-size: 5vw;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: #fff;
+	line-height: 1;
+}
+
+#auto_invest_label_small {
+	font-size: 16px;
+	font-weight: 700;	
+	letter-spacing: 4px;
+	font-family: Poppins, Arial, sans-serif;
+	text-transform: uppercase;
+	color: #fff;
+	display: block;
+	position: relative;
+
+}
+
+#auto_invest_description_wrapper {
+	width: 50vw;
+	height: 100vh;
+	margin: auto;
+	text-align: center;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+}
+
+#auto_invest_table {
+	width: 40vw;
+	height: 70vh;
+	min-height: fit-content;
+	text-align: center;
+	vertical-align: middle;
+	background-color: var(--bn-black);
+	border-radius: 2rem;
+	margin: 14.5vh auto auto auto;
+}
+
+.auto_invest_headliner {
+
+	position: relative;
+	width: 100%;
+	height: inherit;
+	color: #fff;
+	text-align: center;
+	background-color: var(--tw-black);
+	margin-top: 1vh;
+	margin-left: auto;
+	margin-right: auto;
+	font-weight: 600; font-size: 2em;
+	/*border-bottom: 3px solid var(--tw-grey);*/
+	justify-content: center;
+	align-items: center; /* Vertical alignment */
+}
+
+#auto_invest_table .profit {
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 28px;
+	color: #089981;
+	
+	text-shadow: 0 0 10px rgb(8,153,129, 0.1);
+	animation: profit_glow 2s ease-in-out infinite alternate;
+	/*animation: blinker 5s ease-in-out infinite alternate;*/
+}
+
+@keyframes profit_glow {
+	from {
+		text-shadow: 0 0 10px rgb(8,153,129, 0.1);
+	}
+	to {
+		text-shadow: 0 0 20px rgb(8,153,129, 1.0);
+	}
+}
+
+#auto_invest_table .info-label {
+	
+	text-align: center;
+	color: #fff;
+	font-size: 25px;
+	font-weight: 500;
+	text-transform: uppercase;
+}
+
+#auto_invest_table .interval {
+
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 28px;
+	color: #fff;
+}
+
+#auto_invest_table td {
+
+	padding: 5px;
+}
+
+/*----------------------------------------*/
+
+@media (max-height: 700px) {
+	#auto_invest_table {
+		width: 40vw;
+		height: 40vh;
+		min-height: fit-content;
+		text-align: center;
+		vertical-align: middle;
+		background-color: var(--bn-black);
+		border-radius: 2rem;
+		margin: 7.25vh auto auto auto;
+	}
+}
