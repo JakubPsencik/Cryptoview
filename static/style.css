@@ -55,12 +55,11 @@ body, #maindiv {
 .price-info-chart {
 
 	position: relative;
-	height: 400px; 
-	max-height: 400px;
+	height: 70vh; 
+	max-height: 70vh;
 	flex: 1;
 	overflow: hidden;
 	width: 100%; 
-	border: 2px solid var(--tw-grey); 
 	padding: 0;
 }
 
@@ -69,12 +68,11 @@ body, #maindiv {
 	.price-info-chart {
 
 		position: relative;
-		height: 305px; 
-		min-height: 305px;
+		height: 70vh; 
+		min-height: 70vh;
 		flex: 1;
 		overflow: hidden;
 		width: 100%; 
-		border: 2px solid var(--tw-grey); 
 		padding: 0;
 	}
 }
@@ -478,19 +476,13 @@ body {
 	color-scheme: dark;
 	font-family: -apple-system,BlinkMacSystemFont,Trebuchet MS,Roboto,Ubuntu,sans-serif;
 	font-size: 10px;
-	/*color: #d1d4dc;*/
 	user-select: none;
 	cursor: default;
 	direction: ltr;
-	align-items: center;
 	background-clip: content-box;
-	display: flex;
-	flex-direction: row;
-	/*flex: 1 1 auto;*/
 	height: fit-content;
 	margin-top: -1px;
 	position: relative;
-	/*background-color: #131722;*/
 	background-color: var(--tw-black);
 	border-bottom: 1px solid #2a2e39;
 	border-top: 1px solid #2a2e39;
@@ -506,14 +498,13 @@ body {
 	font-family: -apple-system,BlinkMacSystemFont,Trebuchet MS,Roboto,Ubuntu,sans-serif;
 	font-size: 10px;
 	-webkit-tap-highlight-color: transparent;
-	/*color: #d1d4dc;*/
 	user-select: none;
 	cursor: default;
 	direction: ltr;
 	flex: var(--tv-symbol-list-column-last_price-flex,1 1 75px);
 	align-items: center;
 	box-sizing: border-box;
-	display: flex;
+	display: inline-flex;
 	height: 27px;
 	justify-content: flex-end;
 	min-width: 0;
@@ -523,53 +514,6 @@ body {
 	padding-top: 3px;
 	white-space: nowrap;
 }
-
-.rebalance-widget {
-	background-color: var(--tw-black);
-	width: inherit;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.rebalance-settings-form-input {
-	width: 90%; 
-	color: white; 
-	padding: 5px; 
-	border: 1px solid #ccc;
-	background-color: var(--tw-grey); 
-	border-radius: 5%;
-	margin: 5px;
-}
-
-.DCA-widget {
-	background-color: var(--tw-black);
-	width: inherit;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.DCA-settings-form-input {
-	width: 90%; 
-	height: 30px;
-	color: white; 
-	padding: 5px; 
-	border: 1px solid #ccc;
-	background-color: var(--tw-grey); 
-	border-radius: 5%;
-	margin: 5px;
-}
-
-.DCA-settings-form-label {
-height: 20px;
-display: block; 
-margin-left: 5px;
-margin-right: 5px;
-margin-bottom: 5px;
-border: 1px solid var(--tw-black);
-}
-
 
 .SpotGrid-widget {
 	background-color: var(--tw-black);
@@ -613,20 +557,6 @@ border: 1px solid var(--tw-black);
 	
 }
 
-#SpotDCA-header {
-	display: flex; 
-	flex-direction: row; 
-	justify-content: space-evenly;
-	align-items: center;
-}
-
-#SpotDCA-points-div {
-	z-index: 2;
-	overflow-y: scroll;
-	position: absolute;
-	height: 100vh;
-	width: fit-content;
-}	
 ::-webkit-scrollbar {
 	background-color: red;
 	width: 0px;

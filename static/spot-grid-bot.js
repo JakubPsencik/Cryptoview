@@ -53,7 +53,7 @@ async function setSpotGridPoints(SpotGrid_url) {
 		document.getElementById('container13_1'),
 		{
 			layout: {
-				background: { color: "#131722" },
+				background: { color: "#0B0E11" },
 				textColor: "#C3BCDB",
 			},
 			grid: {
@@ -159,7 +159,7 @@ async function setSpotGridPoints(SpotGrid_url) {
 			} else if (points[counter].order == 2){
 				//tady handle toho profitu
 				//console.log(points[counter])
-				document.getElementById("spotGrid-info-div").innerHTML = 
+				document.getElementById("spot-grid-sumarry-div").innerHTML = 
 				'<span style="color: white;">'
 				+ 'investment: '
 				+ points[counter].close + ' $ | '

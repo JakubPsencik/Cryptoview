@@ -8,18 +8,20 @@
 }
 
 .binance_index_asset_page_label  {
+	border-radius: 2em;
+	padding-top: 5vh;
 	position: relative;
-	width: 100%;
+	width: 60%;
 	height: 5vh;
 	color: #fff;
 	margin-top: 1vh;
 	margin-left: auto;
 	margin-right: auto;
-	font-weight: 600; 
+	font-weight: 600;
 	font-size: 2em;
-	justify-content: center;
-	align-items: center; 
 	text-align: center;
+	padding-bottom: 10vh;
+	background-color: var(--bn-black);
 }
 
 .binance_index_asset_row_div {

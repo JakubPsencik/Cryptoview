@@ -376,7 +376,7 @@ var price_chart_11_3 = LightweightCharts.createChart(
 	document.getElementById('container11_3'),
 	{
 		layout: {
-			background: { color: "#131722" },
+			background: { color: "#0B0E11" },
 			textColor: "#C3BCDB",
 		},
 		grid: {
@@ -395,7 +395,7 @@ var price_chart_11_4 = LightweightCharts.createChart(
 	document.getElementById('container11_4'),
 	{
 		layout: {
-			background: { color: "#131722" },
+			background: { color: "#0B0E11" },
 			textColor: "#C3BCDB",
 		},
 		grid: {

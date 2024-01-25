@@ -94,3 +94,19 @@
 	border-radius: 50%;
 	margin-left: 5px;
 }
+
+/*----------------------------------------*/
+
+@media (max-height: 700px) {
+
+	#saving_staking_table {
+
+		width: 50vw;
+		height: 40vh;
+		text-align: center;
+		background-color: var(--bn-black);
+		border-radius: 2rem;
+		margin: 7.25vh auto auto auto;
+	
+	}
+}

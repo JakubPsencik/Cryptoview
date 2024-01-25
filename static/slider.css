@@ -58,22 +58,37 @@ background-size: cover;
 }
 
 .auto-invest{
-	background: var(--tw-black);
+	background: var(--bn-black);
 	background-image: url(img/stock1920.jpg);
 }
 
 .saving-staking {
-	background: var(--tw-black);
+	background: var(--bn-black);
 	background-image: url(img/stock1920.jpg);
 }
 
 .b-idx-asset {
-	background: var(--tw-black);
+	background: var(--bn-black);
 	background-image: url(img/stock1920.jpg);
 }
 
 .b-cmc-idx {
-	background: var(--tw-black);
+	background: var(--bn-black);
+	background-image: url(img/stock1920.jpg);
+}
+
+.rebalancing-bot {
+	background: var(--bn-black);
+	background-image: url(img/stock1920.jpg);
+}
+
+.spot-dca {
+	background: var(--bn-black);
+	background-image: url(img/stock1920.jpg);
+}
+
+.spot-grid {
+	background: var(--bn-black);
 	background-image: url(img/stock1920.jpg);
 }
 

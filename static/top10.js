@@ -8,10 +8,8 @@ async function displayTop10(url) {
 	try {
 		let response = await fetch(url);
 		response.json().then(async (r) => {
-			console.log(r);
-
 			let markers = await checkViewData(r)
-			console.log(markers);
+			
 			arr = r.slice(2,22)
 			var compound = []
 			var fixed = []
@@ -73,7 +71,6 @@ async function BuildTablePG2(compound, fixed, markers, imgnames, tableName) {
 async function checkViewData(response) {
 	
 	var daily = response[1];
-	console.log(daily);
 	var weekly = response[23];
 	var monthly = response[45];
 	var markers = [];

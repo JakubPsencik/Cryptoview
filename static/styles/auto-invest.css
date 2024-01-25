@@ -104,3 +104,18 @@
 
 	padding: 5px;
 }
+
+/*----------------------------------------*/
+
+@media (max-height: 700px) {
+	#auto_invest_table {
+		width: 40vw;
+		height: 40vh;
+		min-height: fit-content;
+		text-align: center;
+		vertical-align: middle;
+		background-color: var(--bn-black);
+		border-radius: 2rem;
+		margin: 7.25vh auto auto auto;
+	}
+}

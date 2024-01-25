@@ -75,11 +75,11 @@ async function setRebalancePoints(url) {
 		//console.log(markers)
 		candlestickSeries1.setMarkers(markers);
 		candlestickSeries2.setMarkers(markers);
-		
+		/*
 		document.getElementById("rebalancing-info-div").innerHTML = 
 		'<span style="color: red;">' 
 		+ String(Math.round(points[2][points.length-1].QuoteTotal) + '.0 $') 
-		+ '</span>';
+		+ '</span>';*/
 
 		price_chart_11_3.timeScale().setVisibleRange({
 			from: points[0][0].time,

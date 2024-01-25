@@ -1,0 +1,165 @@
+#spot_dca_label_large {
+	font-size: 48px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: #fff;
+	line-height: 1;
+	padding: 2vh 2vh 1vh 2vh;
+	text-align: center;
+}
+
+#spot_dca_label_small {
+	font-size: 20px;
+	letter-spacing: 4px;
+	font-family: Poppins, Arial, sans-serif;
+	text-transform: uppercase;
+	color: #fff;
+	text-align: center;
+	padding-left: 5px;
+	font-weight: initial;
+
+}
+
+.spot-dca-sumarry-div {
+	width: 95vw;
+	position: relative;
+	display: inline-flex;
+	color: #fff;
+	text-align: center;
+	background-color: var(--bn-black);
+	font-weight: 600; 
+	font-size: 2em;
+	justify-content: center;
+	align-items: center; /* Vertical alignment */
+	margin: 0 0 0 5vh;
+	padding: 0;
+	border-radius: 2em 2em 0 0;
+}
+
+#spot_dca_description_wrapper {
+	width: 100vw;
+	text-align: center;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+	padding: 1vh;
+	justify-content: center;
+}
+
+#spot_dca_main_content_wrapper {
+	background-color: var(--bn-black);
+	width: 95vw;
+	height: 70vh;
+	border-radius: 0 0 2em 2em;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: 0 0 0 5vh;
+}
+
+#SpotDCA-left-1 {
+	width: 20vw;
+	height: 70vh;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+.spot-dca-points-div {
+	display: flex;
+	width: inherit;
+	background-color: var(--bn-black);
+	padding: 0;
+
+}
+
+.spot-dca-points-row {
+	color-scheme: dark;
+	font-family: -apple-system,BlinkMacSystemFont,Trebuchet MS,Roboto,Ubuntu,sans-serif;
+	font-size: 10px;
+}
+
+.spot-dca-point {
+	color-scheme: dark;
+	font-family: -apple-system,BlinkMacSystemFont,Trebuchet MS,Roboto,Ubuntu,sans-serif;
+	font-size: 10px;
+	padding-left: 0.5vw;
+	padding-right: 0.7vw;
+}
+
+.DCA-settings-form-input {
+	width: 90%; 
+	height: 30px;
+	color: white; 
+	padding: 5px; 
+	border: 1px solid #ccc;
+	background-color: var(--tw-grey); 
+	border-radius: 5%;
+	margin: 5px;
+}
+
+.DCA-settings-form-label {
+height: 20px;
+display: block; 
+margin-left: 5px;
+margin-right: 5px;
+margin-bottom: 5px;
+border: 1px solid var(--tw-black);
+}
+
+#spot_dca_chart_wrapper {
+	width: 60vw;
+	height: 70vh;
+	min-height: fit-content;
+	text-align: center;
+	vertical-align: middle;
+	background-color: var(--bn-black);
+	border-radius: 2rem;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+.spot_dca_table_header_element {
+	padding-bottom: 3px;
+	padding-right: 8px;
+	padding-top: 3px;
+}
+
+#SpotDCA-header {
+	display: flex; 
+	flex-direction: row; 
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+#SpotDCA-points-div {
+	z-index: 2;
+	overflow-y: scroll;
+	position: absolute;
+	height: 100vh;
+	width: fit-content;
+}	
+
+.DCA-widget {
+	height: 70vh;
+	min-height: fit-content;
+	text-align: center;
+	vertical-align: middle;
+	background-color: var(--bn-black);
+	border-radius: 0 2rem 2rem 0;
+	
+	overflow-x: hidden;
+	overflow-y: scroll;
+	padding: 1vh 2vh 2vh 2vh;
+}
+
+#SpotDCA-left {
+	height: 70vh;
+	min-height: fit-content;
+	text-align: center;
+	vertical-align: middle;
+	background-color: var(--bn-black);
+	border-radius: 2rem 0 0 2rem;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	padding: 1vh 2vh 2vh 2vh;
+}

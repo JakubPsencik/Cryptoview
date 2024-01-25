@@ -39,7 +39,7 @@ var price_chart_12_1 = LightweightCharts.createChart(
 	document.getElementById('container12_1'),
 	{
 		layout: {
-			background: { color: "#131722" },
+			background: { color: "#0B0E11" },
 			textColor: "#C3BCDB",
 		},
 		grid: {
@@ -65,7 +65,7 @@ async function setSpotDCAPoints(DCA_url) {
 	const markers = [];
  
 	try {
-		//console.log("spot dca bot initalized...");
+		
 		document.getElementById('SpotDCA-points-div').remove();
 
 		const dv = document.createElement("div");
@@ -210,11 +210,11 @@ function InitializeSpotDCAPointRecord(id, _time, _close, _base, _profit) {
 	//console.log(id, _time, _close, _base, _profit);
 	const dv = document.createElement("div");
 	dv.id = id;
-	dv.classList.add("test");
+	dv.classList.add("spot-dca-points-row");
 
 
 	// Calculate the total width of the div.
-	const totalWidth = document.getElementById('SpotDCA-left').offsetWidth;
+	const totalWidth = 200;
 	const elementWidth = (totalWidth / 4);
 	//console.log(elementWidth);
 	// Divide the total width of the div by the number of spans.
@@ -231,10 +231,10 @@ function InitializeSpotDCAPointRecord(id, _time, _close, _base, _profit) {
 	profit.innerHTML = (`${_profit} $`);
 	base.innerHTML = (`${_base} $`);
 
-	time.classList.add("pg4span_symbol");
-	close.classList.add("test1");
-	base.classList.add("test1");
-	profit.classList.add("test1");
+	time.classList.add("spot-dca-point");
+	close.classList.add("spot-dca-point");
+	base.classList.add("spot-dca-point");
+	profit.classList.add("spot-dca-point");
 
 	time.style.width = elementWidth + 'px';
 	close.style.width = elementWidth + 'px';
@@ -248,6 +248,39 @@ function InitializeSpotDCAPointRecord(id, _time, _close, _base, _profit) {
 	dv.append(base);
 	dv.append(profit);
 
-	document.getElementById("SpotDCA-points-div").appendChild(dv);
+	document.getElementById("SpotDCA-left-1").appendChild(dv);
+	
+}
+
+function InitializeSpotDCAHeader() {
+
+	const parentDiv = document.getElementById("SpotDCA-header");
+
+	const totalWidth = 200;
+	const elementWidth = (totalWidth / 4);
+
+	var date = document.createElement("span");
+	date.style.width = elementWidth + 'px';
+	date.classList.add("rebalancing_bot_table_header_element");
+	var close = document.createElement("span");
+	close.style.width = elementWidth + 'px';
+	close.classList.add("rebalancing_bot_table_header_element");
+	var base = document.createElement("span");
+	base.style.width = elementWidth + 'px';
+	base.classList.add("rebalancing_bot_table_header_element");
+	var quote = document.createElement("span");
+	quote.style.width = elementWidth + 'px';
+	quote.classList.add("rebalancing_bot_table_header_element");
+
+	// Set widget text and styling
+	date.innerHTML = "Date";
+	close.innerHTML = "Close";
+	base.innerHTML = "Base";
+	quote.innerHTML = "Quote";
+
+	parentDiv.append(date);
+	parentDiv.append(close);
+	parentDiv.append(base);
+	parentDiv.append(quote);
 	
 }

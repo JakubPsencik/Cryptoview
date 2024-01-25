@@ -69,7 +69,7 @@ async function createAssetDiv(data, parentDiv) {
 		let img = document.createElement("img");
 		img.setAttribute("src", `static/img/${imgName}`);
 		img.setAttribute("loading", 'lazy');
-		img.setAttribute("class", 'binance_index_asset_coin_img');
+		img.setAttribute("class", 'pg4_table_img');
 		//img.classList.add("binance_index_asset_coin_img");
 
 		coinDiv.append(img)
@@ -163,8 +163,8 @@ async function createAssetDiv(data, parentDiv) {
 		allocationDetailsDiv.appendChild(cancelButton);
 
 		// Append the div to the document or a specific element
-		document.getElementById("pg4").appendChild(overlay);
-		document.getElementById("pg4").appendChild(allocationDetailsDiv);
+		document.getElementById("page_binance_index_asset").appendChild(overlay);
+		document.getElementById("page_binance_index_asset").appendChild(allocationDetailsDiv);
 	};
 
 	viewAllocationsDiv.appendChild(allocationButton);
@@ -206,8 +206,8 @@ async function createAssetDiv(data, parentDiv) {
 		indexDetailsDiv.appendChild(cancelButton);
 
 		// Append the div to the document or a specific element
-		document.getElementById("pg4").appendChild(overlay);
-		document.getElementById("pg4").appendChild(indexDetailsDiv);
+		document.getElementById("page_binance_index_asset").appendChild(overlay);
+		document.getElementById("page_binance_index_asset").appendChild(indexDetailsDiv);
 	};
 
 	viewAllocationsDiv.appendChild(detailButton);
@@ -264,8 +264,8 @@ async function createAssetDiv(data, parentDiv) {
 		indexDetailsDiv.appendChild(cancelButton);
 
 		// Append the div to the document or a specific element
-		document.getElementById("pg4").appendChild(overlay);
-		document.getElementById("pg4").appendChild(indexDetailsDiv);
+		document.getElementById("page_binance_index_asset").appendChild(overlay);
+		document.getElementById("page_binance_index_asset").appendChild(indexDetailsDiv);
 	};
 
 	viewAllocationsDiv.appendChild(priceTrendChartButton);

@@ -54,7 +54,7 @@ $(document).ready(async () => {
 		+ "&end=" + end_date;
 
 	//console.log(rebalance_url)
-	//setRebalancePoints(rebalance_url);
+	setRebalancePoints(rebalance_url);
 });
 
 /* Slide 4 - Spot DCA bot
@@ -85,8 +85,9 @@ $(document).ready(async () => {
 		+ "&interval=" + _interval
 		+ "&start=" + start_date
 		+ "&end=" + end_date;
-
-	//setSpotDCAPoints(DCA_url);
+	
+	InitializeSpotDCAHeader();
+	setSpotDCAPoints(DCA_url);
 
 });
 
@@ -117,7 +118,7 @@ $(document).ready(async () => {
 		+ "&start=" + start_date
 		+ "&end=" + end_date;
 
-	//setSpotGridPoints(SpotGrid_url);
+	setSpotGridPoints(SpotGrid_url);
 });
 
 /* 

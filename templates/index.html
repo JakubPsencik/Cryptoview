@@ -23,6 +23,9 @@
 	<link rel="stylesheet" href="static/styles/auto-invest.css"> 
 	<link rel="stylesheet" href="static/styles/saving-staking.css">
 	<link rel="stylesheet" href="static/styles/binance_cmc_ew_index.css">
+	<link rel="stylesheet" href="static/styles/rebalancing-bot.css">
+	<link rel="stylesheet" href="static/styles/spot-dca.css">
+	<link rel="stylesheet" href="static/styles/spot-grid.css">
 	
 	<div style="overflow: hidden;">
 		<div id="pages" class="pages">
@@ -79,238 +82,221 @@
 					</div>
 					<div class="col-md-7" style="padding: 0;">
 						<div id="binance_cmc_ew_index_main_div" style="padding: 0;">
-							<div id="binance_cmc_ew_index_wrapper_div" style="padding: 0;">
+							<!--<div id="binance_cmc_ew_index_wrapper_div" style="padding: 0;"></div>-->
+								<div id="binance_cmc_ew_index_coin_div_1" class="binance_cmc_ew_index_coin_div"></div>
+								<div id="binance_cmc_ew_index_coin_div_2" class="binance_cmc_ew_index_coin_div"></div>
 							
-							</div>
 						</div>
 					</div>
 				</div>
 			</div> <!--END PAGE BINANCE CMC EQUAL WEIGHTED INDEX-->
 
 			<div id="page_binance_index_asset" class="page b-idx-asset"> 
-				<h1 class="binance_index_asset_page_label">Choose your portfolito and accumulate crypto now!</h1>
-				<div id="binance_index_asset_main_div"></div>
+			
+				<div id="binance_index_asset_main_div">
+					<h1 class="binance_index_asset_page_label">Choose your portfolito and accumulate crypto now!</h1>
+				</div>
 			</div> <!--END PAGE BINANCE INDEX ASSET -->
 
-			<div id="pg10" class="page ten"> 
+			<div id="page_rebalancing_bot" class="page rebalancing-bot"> 
 				<div class="modal-body row" style="height: 100vh; padding-top: 0; padding-bottom: 0;">
-					<div class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0;">
-						<!--left side-->
-						<h1 id="" class="auto_invest_headliner mb-4" > 
-
-							Rebalancing <br>
-							
-						</h1>
-					</div>
-					<div class="col-md-8" style="display: flex; flex-direction: column; border: 2px solid var(--tw-grey); padding: 0;">
-					
-						<div style="border: 2px solid var(--tw-grey); padding: 0;">
-							<h1 id="rebalancing-info-div" class="auto_invest_headliner mb-4" > </h1>
+					<div class="col-md-12" style="display: flex; flex-direction: column; padding: 0;">
+						<div id="rebalancing_bot_description_wrapper">
+							<h1 id="rebalancing_bot_label_large">Rebalancing bot</h1>
+							<h2 id="rebalancing_bot_label_small">Adjust your portfolio position in the token combination of your choice</h2>
 						</div>
 
-						<div style="display: flex; flex-direction: row; flex: 1;">
-							<div id="container11_3" class="price-info-chart"></div>
-						</div>
-						
-						<div style="display: flex; flex-direction: row; flex: 1;">
-							<div id="container11_4" class="price-info-chart"></div>
-						</div>
-					</div>
-					<div class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0;">
-						<!--right side-->
-						<div class="rebalance-widget">
-							
-							<div>
-								<div style="display: flex; flex-direction: row;">
-									<label style=" display: block; margin: 5px; border: 1px solid var(--tw-black);">1</label>
-									<input id="rebalance-coin1" type="text" value="BTC" class="rebalance-settings-form-input">
-
-									<input id="rebalance-coin1-allocation" type="number" value=50 class="rebalance-settings-form-input">
-								</div>
-								
-								<div style="display: flex; flex-direction: row;">
-									<label style=" display: block; margin: 5px; border: 1px solid var(--tw-black);">2</label>
-									<input id="rebalance-coin2" type="text" value="BNB" class="rebalance-settings-form-input">
-									<input id="rebalance-coin2-allocation" type="number" value=50 class="rebalance-settings-form-input">
-								</div>
-
-								<label style=" display: block; margin-bottom: 5px;">Invest Coin</label>
-								<input id="rebalance-investment" type="number" value="1000" class="rebalance-settings-form-input">
-								
-								<label style=" display: block; margin-bottom: 5px;">Coin ratio (%)</label>
-								<input id="rebalance-ratio" type="number" value="1" class="rebalance-settings-form-input">
-								
-								<label style=" display: block; margin-bottom: 5px;">Candle Type</label>
-								<select id="rebalance-interval" class="rebalance-settings-form-input">
-									<option selected="selected">1h</option>
-									<option value="1m">1m</option>
-									<option value="1h">1h</option>
-									<option value="1d">1d</option>
-									<option value="1w">1w</option>
-								</select>
-
-								<label style=" display: block; margin-bottom: 5px;">Start date</label>
-								<input id="rebalance-start-date" type="datetime-local" value="2023-09-12T08:00" class="rebalance-settings-form-input" >
-
-								<label style=" display: block; margin-bottom: 5px;">End date</label>
-								<input id="rebalance-end-date" type="datetime-local" value="2023-11-13T08:00" class="rebalance-settings-form-input">
-								
-								<button id="bn_rebalance" style="margin: 5px; background-color: var(--tw-lightblue); color: #fff; padding: 5px 10px; border: none; cursor: pointer;">Submit</button>
+						<div id="rebalancing_bot_main_content_wrapper">
+							<div id="rebalancing_bot_chart_wrapper">
+								<div id="container11_3" class="price-info-chart"></div>
+								<div id="container11_4" class="price-info-chart"></div>
 							</div>
-						</div>
-					</div>
-				</div>
-			</div> <!--END PAGE 10-->
-			<div id="pg11" class="page ten"> 
-				<div class="modal-body row" style="height: 100vh; padding-top: 0; padding-bottom: 0;">
-					<div id="SpotDCA-left" class="col-md-3" style="border: 2px solid var(--tw-grey); padding: 0; z-index: 1;">
-						<!--left side-->
-						<div id="SpotDCA-left-1" idstyle="border: 2px solid var(--tw-grey); padding: 0; width: 100%; height: 100%;">
-							<div id="SpotDCA-header">
-									
-								<span class="span">Date</span>
-								<span class="span">Close</span>
-								<span class="span">Base</span>
-								<span class="span">Quote</span>
-								
-							</div>
-							<div id="SpotDCA-points-div">
-							</div>
-						</div>
-					</div>
-					<div class="col-md-7" style="display: flex; flex-direction: column; border: 2px solid var(--tw-grey); padding: 0; z-index: 1;">
-					
-						<div style="border: 2px solid var(--tw-grey); padding: 0;">
-							<h1 id="spotDCA-info-div" class="auto_invest_headliner mb-4" ></h1>
-						</div>
-
-						<div style="display: flex; flex-direction: row; flex: 1;">
-							<div id="container12_1"  style="height: 99.9%; position: relative; flex: 1;overflow: hidden;width: 100%; border: 2px solid var(--tw-grey); padding: 0;"></div>
-						</div>
-						
-					</div>
-					<div class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0;">
-						<!--right side-->
-						<div class="DCA-widget">
-							<div>
-								<div style="display: flex; flex-direction: column;">
-									<label class="DCA-settings-form-label">1. Enter trading pair</label>
-									<input id="DCA-pair" type="text" value="BTCUSDT" class="DCA-settings-form-input">
-								</div>
-
-								<div style="display: flex; flex-direction: column;">
-									<label class="DCA-settings-form-label">2. Price Deviation (%)</label>
-									<input id="DCA-price-deviation" type="number" value="1" class="DCA-settings-form-input">
-								</div>
-
-								<div style="display: flex; flex-direction: column;">
-									<label class="DCA-settings-form-label">3. Take Profit (%)</label>
-									<input id="DCA-take-profit" type="number" value="5" class="DCA-settings-form-input">
-								</div>
-
-								<div style="display: flex; flex-direction: column;">
-									<label class="DCA-settings-form-label">4. Base Order</label>
-									<input id="DCA-base-order" type="number" value="1000" class="DCA-settings-form-input">
-
-									<label class="DCA-settings-form-label">5. DCA Order Size</label>
-									<input id="DCA-order-size" type="number" value="1000" class="DCA-settings-form-input">
-
-									<label class="DCA-settings-form-label">6. Max DCA Orders</label>
-									<input id="DCA-order-count" type="number" value="35" class="DCA-settings-form-input">
-								</div>
-								
-								<div style="border: 1px solid #ccc;">
-									<label class="DCA-settings-form-label">Candle Type</label>
-									<select id="DCA-interval" class="DCA-settings-form-input">
-										<option selected="selected">1d</option>
-										<option value="1m">1m</option>
-										<option value="1h">1h</option>
-										<option value="1d">1d</option>
-										<option value="1w">1w</option>
-									</select>
-	
-									<label class="DCA-settings-form-label">Start date</label>
-									<input id="DCA-start-date" type="datetime-local" value="2023-07-13T08:00" class="DCA-settings-form-input" >
-	
-									<label class="DCA-settings-form-label">End date</label>
-									<input id="DCA-end-date" type="datetime-local" value="2023-11-13T08:00" class="DCA-settings-form-input">
-								</div>
-								<button id="bn_DCA" style="margin: 5px; background-color: var(--tw-lightblue); color: #fff; padding: 5px 10px; border: none; cursor: pointer;">Submit</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> <!--END PAGE 11-->
-			<div id="pg12" class="page ten">
-				<div class="modal-body row" style="height: 100vh; padding-top: 0; padding-bottom: 0;">
-					<div class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0;">
-						<!--left side-->
-						<div style="border: 2px solid var(--tw-grey); padding: 0; width: 100%; height: 100%;">
-							<h1 id="" class="auto_invest_headliner mb-4" > 
-
-								Spot Grid  <br>
-							</h1>
-						</div>
-					</div>
-					<div class="col-md-8" style="display: flex; flex-direction: column; border: 2px solid var(--tw-grey); padding: 0;">
-					
-						<div style="border: 2px solid var(--tw-grey); padding: 0;">
-							<h1 id="spotGrid-info-div" class="auto_invest_headliner mb-4"></h1>
-						</div>
-
-						<div id="spot-grid-div" style="display: flex; flex-direction: row; flex: 1;">
-							<div id="container13_1"></div>
-						</div>
-					</div>
-					<div class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0;">
-						<!--right side-->
-						<div class="SpotGrid-widget">
-							<div>
-								<div style="display: flex; flex-direction: column;">
-									<label class="SpotGrid-settings-form-label">1. Enter trading pair</label>
-									<input id="SpotGrid-pair" type="text" value="LTCUSDT" class="SpotGrid-settings-form-input">
-								</div>
-
-								<div style="display: flex; flex-direction: column;">
-									<label style=" display: block; margin: 5px; border: 1px solid var(--tw-black);">2. Price Range</label>
+							<div class="rebalance-widget">
+								<div>
 									<div style="display: flex; flex-direction: row;">
-										<input id="SpotGrid-lower" type="number" placeholder="Lower Price Range" readonly class="SpotGrid-settings-form-input">
-										<label style="margin: 5px;">-</label>
-										<input id="SpotGrid-upper" type="number" placeholder="Upper Price Range" readonly class="SpotGrid-settings-form-input">
+										<label style=" display: block; margin: 5px;">1</label>
+										<input id="rebalance-coin1" type="text" value="BTC" class="rebalance-settings-form-input">
+										<input id="rebalance-coin1-allocation" type="number" value=50 class="rebalance-settings-form-input">
 									</div>
-								</div>
-								
-								<div style="display: flex; flex-direction: column;">
-									<label class="SpotGrid-settings-form-label">3. Grids</label>
-									<input id="SpotGrid-grids" type="number" value="7" class="SpotGrid-settings-form-input">
-								</div>
 
-								<div style="display: flex; flex-direction: column;">
-									<label class="SpotGrid-settings-form-label">4. Investment</label>
-									<input id="SpotGrid-investment" type="number" value="1000" class="SpotGrid-settings-form-input">
-								</div>
-								
-								<div style="border: 1px solid #ccc;">
-									<label class="SpotGrid-settings-form-label">Candle Type</label>
-									<select id="SpotGrid-interval" class="SpotGrid-settings-form-input">
+									<div style="display: flex; flex-direction: row;">
+										<label style=" display: block; margin: 5px;">2</label>
+										<input id="rebalance-coin2" type="text" value="BNB" class="rebalance-settings-form-input">
+										<input id="rebalance-coin2-allocation" type="number" value=50 class="rebalance-settings-form-input">
+									</div>
+
+									<label style=" display: block; margin-bottom: 5px;">Invest Coin</label>
+									<input id="rebalance-investment" type="number" value="1000" class="rebalance-settings-form-input">
+									
+									<label style=" display: block; margin-bottom: 5px;">Coin ratio (%)</label>
+									<input id="rebalance-ratio" type="number" value="1" class="rebalance-settings-form-input">
+									
+									<label style=" display: block; margin-bottom: 5px;">Candle Type</label>
+									<select id="rebalance-interval" class="rebalance-settings-form-input">
 										<option selected="selected">1h</option>
 										<option value="1m">1m</option>
 										<option value="1h">1h</option>
 										<option value="1d">1d</option>
 										<option value="1w">1w</option>
 									</select>
-	
-									<label class="SpotGrid-settings-form-label">Start date</label>
-									<input id="SpotGrid-start-date" type="datetime-local" value="2023-10-13T08:00" class="SpotGrid-settings-form-input" >
-	
-									<label class="SpotGrid-settings-form-label">End date</label>
-									<input id="SpotGrid-end-date" type="datetime-local"  value="2023-11-13T20:00" class="SpotGrid-settings-form-input">
+
+									<label style=" display: block; margin-bottom: 5px;">Start date</label>
+									<input id="rebalance-start-date" type="datetime-local" value="2023-09-12T08:00" class="rebalance-settings-form-input" >
+
+									<label style=" display: block; margin-bottom: 5px;">End date</label>
+									<input id="rebalance-end-date" type="datetime-local" value="2023-11-13T08:00" class="rebalance-settings-form-input">
+									
+									<button id="bn_rebalance" style="margin: 5px; background-color: var(--tw-lightblue); color: #fff; padding: 5px 10px; border: none; cursor: pointer;">Submit</button>
 								</div>
+							</div>
+						</div>
 						
-								<button id="bn_SpotGrid" style="margin: 5px; background-color: var(--tw-lightblue); color: #fff; padding: 5px 10px; border: none; cursor: pointer;">Submit</button>
+					</div>
+				</div>
+			</div> <!--END PAGE BINANCE REBALANCING BOT -->
+
+			<div id="page_spot_dca_bot" class="page spot-dca"> 
+				<div class="modal-body row" style="height: 100vh; padding-top: 0; padding-bottom: 0;">
+
+					<div class="col-md-12" style="display: flex; flex-direction: column; padding: 0; z-index: 1;">
+						<div id="spot_dca_description_wrapper">
+							<h1 id="spot_dca_label_large">Spot DCA bot</h1>
+							<h2 id="spot_dca_label_small">Achieve a better average price for the selected trading pair</h2>
+						</div>
+						
+						<h1 id="spotDCA-info-div" class="spot-dca-sumarry-div" ></h1>
+					
+						<div id="spot_dca_main_content_wrapper">
+							
+							<div id="SpotDCA-left-1" style="padding: 0;">
+								<div id="SpotDCA-header"></div>
+								<div id="SpotDCA-points-div"></div>
+							</div>
+
+							<div id="spot_dca_chart_wrapper">
+								<div id="container12_1"  class="price-info-chart"></div>
+							</div>
+
+							<div class="DCA-widget">
+								<div>
+									<div style="display: flex; flex-direction: column;">
+										<label class="DCA-settings-form-label">1. Enter trading pair</label>
+										<input id="DCA-pair" type="text" value="BTCUSDT" class="DCA-settings-form-input">
+									</div>
+	
+									<div style="display: flex; flex-direction: column;">
+										<label class="DCA-settings-form-label">2. Price Deviation (%)</label>
+										<input id="DCA-price-deviation" type="number" value="1" class="DCA-settings-form-input">
+									</div>
+	
+									<div style="display: flex; flex-direction: column;">
+										<label class="DCA-settings-form-label">3. Take Profit (%)</label>
+										<input id="DCA-take-profit" type="number" value="5" class="DCA-settings-form-input">
+									</div>
+	
+									<div style="display: flex; flex-direction: column;">
+										<label class="DCA-settings-form-label">4. Base Order</label>
+										<input id="DCA-base-order" type="number" value="1000" class="DCA-settings-form-input">
+	
+										<label class="DCA-settings-form-label">5. DCA Order Size</label>
+										<input id="DCA-order-size" type="number" value="1000" class="DCA-settings-form-input">
+	
+										<label class="DCA-settings-form-label">6. Max DCA Orders</label>
+										<input id="DCA-order-count" type="number" value="35" class="DCA-settings-form-input">
+									</div>
+									
+									<div style="border: 1px solid #ccc;">
+										<label class="DCA-settings-form-label">Candle Type</label>
+										<select id="DCA-interval" class="DCA-settings-form-input">
+											<option selected="selected">1d</option>
+											<option value="1m">1m</option>
+											<option value="1h">1h</option>
+											<option value="1d">1d</option>
+											<option value="1w">1w</option>
+										</select>
+		
+										<label class="DCA-settings-form-label">Start date</label>
+										<input id="DCA-start-date" type="datetime-local" value="2023-07-13T08:00" class="DCA-settings-form-input" >
+		
+										<label class="DCA-settings-form-label">End date</label>
+										<input id="DCA-end-date" type="datetime-local" value="2023-11-13T08:00" class="DCA-settings-form-input">
+									</div>
+									<button id="bn_DCA" style="margin: 5px; background-color: var(--tw-lightblue); color: #fff; padding: 5px 10px; border: none; cursor: pointer;">Submit</button>
+								</div>
+							</div>
+						</div>
+						
+					</div> 
+
+				</div>
+			</div> <!--END PAGE BINANCE SPOT DCA BOT -->
+			<div id="page_spot_grid_bot" class="page spot-grid">
+
+				<div class="modal-body row" style="height: 100vh; padding-top: 0; padding-bottom: 0;">
+
+					<div class="col-md-12" style="display: flex; flex-direction: column; padding: 0;">
+					
+						<div id="spot_grid_description_wrapper">
+							<h1 id="spot_grid_label_large">Spot Grid bot</h1>
+							<h2 id="spot_grid_label_small">Automate buying and selling on spot trading</h2>
+						</div>
+
+						<h1 id="spot-grid-sumarry-div"></h1>
+						
+						<div id="spot_grid_main_content_wrapper">
+							<div id="spot_grid_chart_wrapper">
+								<div id="container13_1" class="price-info-chart"></div>
+							</div>
+
+							<div id="SpotGrid-widget">
+								<div>
+									<div style="display: flex; flex-direction: column;">
+										<label class="SpotGrid-settings-form-label">1. Enter trading pair</label>
+										<input id="SpotGrid-pair" type="text" value="LTCUSDT" class="SpotGrid-settings-form-input">
+									</div>
+
+									<div style="display: flex; flex-direction: column;">
+										<label style=" display: block; margin: 5px;">2. Price Range</label>
+										<div style="display: flex; flex-direction: row;">
+											<input id="SpotGrid-lower" type="number" placeholder="Lower Price Range" readonly class="SpotGrid-settings-form-input">
+											<label style="margin: 5px;">-</label>
+											<input id="SpotGrid-upper" type="number" placeholder="Upper Price Range" readonly class="SpotGrid-settings-form-input">
+										</div>
+									</div>
+									
+									<div style="display: flex; flex-direction: column;">
+										<label class="SpotGrid-settings-form-label">3. Grids</label>
+										<input id="SpotGrid-grids" type="number" value="7" class="SpotGrid-settings-form-input">
+									</div>
+
+									<div style="display: flex; flex-direction: column;">
+										<label class="SpotGrid-settings-form-label">4. Investment</label>
+										<input id="SpotGrid-investment" type="number" value="1000" class="SpotGrid-settings-form-input">
+									</div>
+									
+									<div style="border: 1px solid #ccc;">
+										<label class="SpotGrid-settings-form-label">Candle Type</label>
+										<select id="SpotGrid-interval" class="SpotGrid-settings-form-input">
+											<option selected="selected">1h</option>
+											<option value="1m">1m</option>
+											<option value="1h">1h</option>
+											<option value="1d">1d</option>
+											<option value="1w">1w</option>
+										</select>
+		
+										<label class="SpotGrid-settings-form-label">Start date</label>
+										<input id="SpotGrid-start-date" type="datetime-local" value="2023-10-13T08:00" class="SpotGrid-settings-form-input" >
+		
+										<label class="SpotGrid-settings-form-label">End date</label>
+										<input id="SpotGrid-end-date" type="datetime-local"  value="2023-11-13T20:00" class="SpotGrid-settings-form-input">
+									</div>
+							
+									<button id="bn_SpotGrid" style="margin: 5px; background-color: var(--tw-lightblue); color: #fff; padding: 5px 10px; border: none; cursor: pointer;">Submit</button>
+								</div>
 							</div>
 						</div>
 					</div>
+					
 				</div> 
 			</div> <!--END PAGE 12-->
 			<div id="pg13" class="page ten">

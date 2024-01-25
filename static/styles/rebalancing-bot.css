@@ -1,0 +1,83 @@
+#rebalancing_bot_label_large {
+	font-size: 48px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: #fff;
+	line-height: 1;
+	padding: 2vh 2vh 1vh 2vh;
+	text-align: center;
+}
+
+#rebalancing_bot_label_small {
+	font-size: 20px;
+	letter-spacing: 4px;
+	font-family: Poppins, Arial, sans-serif;
+	text-transform: uppercase;
+	color: #fff;
+	text-align: center;
+	padding-left: 5px;
+	font-weight: initial;
+
+}
+
+#rebalancing_bot_description_wrapper {
+	width: 100vw;
+	text-align: center;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+	padding: 1vh;
+	justify-content: center;
+}
+
+#rebalancing_bot_main_content_wrapper {
+	background-color: var(--bn-black);
+	width: 95vw;
+	height: 70vh;
+	border-radius: 2rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: 5vh auto auto auto;
+}
+
+#rebalancing_bot_chart_wrapper {
+	width: 100%;
+	height: 70vh;
+	min-height: fit-content;
+	text-align: center;
+	vertical-align: middle;
+	background-color: var(--bn-black);
+	border-radius: 2rem;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+.rebalancing_bot_table_header_element {
+	padding-bottom: 3px;
+	padding-right: 8px;
+	padding-top: 3px;
+}
+
+.rebalance-widget {
+	height: 70vh;
+	min-height: fit-content;
+	text-align: center;
+	vertical-align: middle;
+	background-color: var(--bn-black);
+	border-radius: 0 2rem 2rem 0;
+	
+	overflow-x: hidden;
+	overflow-y: scroll;
+	padding: 1vh 2vh 2vh 2vh;
+}
+
+.rebalance-settings-form-input {
+	width: 90%; 
+	color: white; 
+	padding: 5px; 
+	border: 1px solid #ccc;
+	background-color: var(--tw-grey); 
+	border-radius: 5%;
+	margin: 5px;
+}

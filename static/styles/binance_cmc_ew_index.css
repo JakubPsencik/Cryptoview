@@ -51,13 +51,39 @@
 	height: 80px;
 	background-color: var(--tw-black);
 	border-radius: 50%;
-	margin-left: 50px;
-	margin-top: 50px;
 }
 
 #binance_cmc_ew_index_wrapper_div { 
 	width: inherit;
-	height: 50%;
+	height: 50%; 
 	margin-top: 20%;
 	margin-left: 2vw;
+}
+
+/*----------------------------------------*/
+
+@media (max-height: 700px) {
+	.binance_cmc_ew_index_img {
+		position: relative;
+		width: 60px;
+		height: 60px;
+		background-color: var(--tw-black);
+		border-radius: 50%;
+		margin-right: 2vw;
+	}
+
+	#binance_cmc_ew_index_wrapper_div { 
+		width: 100%;
+		height: 100%;
+		margin: auto;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+	}
+
+	.binance_cmc_ew_index_coin_div {
+		width: 30vw;
+		margin-left: 5vw;
+		margin-top: 17vh;
+	}
 }
