@@ -231,15 +231,15 @@ async function createAssetDiv(data, parentDiv) {
 		const chartdivWrapper = document.createElement('div');
 		chartdivWrapper.classList.add("binance_index_asset_getPriceTrendDataWrapper");
 
-		data.coins.forEach(coin => {
+		data.coins.forEach(async coin => {
 			try {
-				getPriceTrendData(chartdivWrapper, coin, `http://127.0.0.1:5000/getData?&symbol=${coin.coin}EUR`, true)
+				let result = await getPriceTrendData(chartdivWrapper, coin, `http://127.0.0.1:5000/getData?&symbol=${coin.coin}EUR`, true);
+				if(result == -1) {
+					await getPriceTrendData(chartdivWrapper, coin, `http://127.0.0.1:5000/getData?&symbol=${coin.coin}USDT`, false);
+				}
 			} catch (error) {
 				console.log(error);
-			} finally {
-				getPriceTrendData(chartdivWrapper, coin, `http://127.0.0.1:5000/getData?&symbol=${coin.coin}USDT`, false)
 			}
-			
 		});
 
 		indexDetailsDiv.appendChild(chartdivWrapper);
@@ -281,6 +281,9 @@ async function getPriceTrendData(div, coin, url, coinIsTradedAgainstEuro) {
  
 	try {
 		let response = await fetch(url);
+		if(response.status == 500) {
+			return -1;
+		}
 		response.json().then(async (points) => {
 
 			const chartDiv = document.createElement('div');
@@ -299,21 +302,26 @@ async function getPriceTrendData(div, coin, url, coinIsTradedAgainstEuro) {
 			div.appendChild(labelDiv);
 
 			chartData = points.slice(0, (points.length-2));
-			/**/
+			
 			var chart = LightweightCharts.createChart(chartDiv);
 			chart.applyOptions(_options);
 			const lineSeries = chart.addLineSeries({});
 			lineSeries.applyOptions({
 				type: "line",
 				color: "red", // Set the line color to red
-				lineWidth: 2, // Set the line width to 2 pixels
+				lineWidth: 2,
+				autoSize: true,
+				timeScale: {
+					timeVisible: true,  // Display time on the time scale
+					secondsVisible: false,  // Do not display seconds
+				}, // Set the line width to 2 pixels
 			});
 			lineSeries.setData(chartData);
-
+			
 			// Zoom out the candlestick series to a specific time range.
 			chart.timeScale().setVisibleRange({
-				from: points[0].time,
-				to: points[points.length-1].time,
+				from: chartData[0].time,
+				to: chartData[chartData.length-1].time,
 			});
 			
 			//setEwIndexTableContent(`${coin}EUR`, points);
@@ -323,6 +331,7 @@ async function getPriceTrendData(div, coin, url, coinIsTradedAgainstEuro) {
 		
 	} catch (error) {
 		console.log(error);
+		return null;
 	}
 }
 

@@ -239,7 +239,9 @@ function InitializeSpotDCAPointRecord(id, _time, _close, _base, _profit) {
 	time.style.width = elementWidth + 'px';
 	close.style.width = elementWidth + 'px';
 	base.style.width = elementWidth + 'px';
+	base.style.marginLeft = '20px';
 	profit.style.width = elementWidth + 'px';
+	profit.style.marginLeft = '20px';
 
 
 	// Append the span element to an existing element

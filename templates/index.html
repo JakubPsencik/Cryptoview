@@ -23,6 +23,7 @@
 	<link rel="stylesheet" href="static/styles/auto-invest.css"> 
 	<link rel="stylesheet" href="static/styles/saving-staking.css">
 	<link rel="stylesheet" href="static/styles/binance_cmc_ew_index.css">
+	<link rel="stylesheet" href="static/styles/auto-invest-calc.css">
 	<link rel="stylesheet" href="static/styles/rebalancing-bot.css">
 	<link rel="stylesheet" href="static/styles/spot-dca.css">
 	<link rel="stylesheet" href="static/styles/spot-grid.css">
@@ -82,21 +83,36 @@
 					</div>
 					<div class="col-md-7" style="padding: 0;">
 						<div id="binance_cmc_ew_index_main_div" style="padding: 0;">
-							<!--<div id="binance_cmc_ew_index_wrapper_div" style="padding: 0;"></div>-->
+							<div id="binance_cmc_ew_index_wrapper_div" style="padding: 0;">
 								<div id="binance_cmc_ew_index_coin_div_1" class="binance_cmc_ew_index_coin_div"></div>
 								<div id="binance_cmc_ew_index_coin_div_2" class="binance_cmc_ew_index_coin_div"></div>
-							
+							</div>
 						</div>
 					</div>
 				</div>
 			</div> <!--END PAGE BINANCE CMC EQUAL WEIGHTED INDEX-->
 
 			<div id="page_binance_index_asset" class="page b-idx-asset"> 
-			
 				<div id="binance_index_asset_main_div">
 					<h1 class="binance_index_asset_page_label">Choose your portfolito and accumulate crypto now!</h1>
 				</div>
 			</div> <!--END PAGE BINANCE INDEX ASSET -->
+
+			<div id="page_auto_invest_calc" class="page auto-invest-calc"> 
+				<div class="modal-body row" style="height: 100vh; padding-bottom: 0; padding-top: 0;">
+					<!--left side-->
+					<div class="col-md-5" style="padding: 0;">
+						<div id="auto_invest_calc_description_wrapper">
+							<h1 id="auto_invest_calc_label_large">Create your own Auto-Invest Plan</h1>
+							<h2 id="auto_invest_calc_label_small">Regularly invest in cryptocurrency with a pre-determined amount and accumulate your crypto holdings</h2>
+						</div>
+					</div>
+					<div class="col-md-7" style="padding: 0;">
+						
+						<table id="auto_invest_calc_table"></table>
+					</div>
+				</div>
+			</div> <!-- END PAGE AUTO INVEST CALCULATOR -->
 
 			<div id="page_rebalancing_bot" class="page rebalancing-bot"> 
 				<div class="modal-body row" style="height: 100vh; padding-top: 0; padding-bottom: 0;">

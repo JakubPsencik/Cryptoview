@@ -283,6 +283,8 @@ def get_binance_kline_data(symbol, interval, start_date, end_date):
 	
 	if response.status_code == 200:
 		return response.json()
+	elif response.status_code == 400 or response.status_code == 500:
+		return -1
 	else:
 		print(f"Failed to retrieve data. Status code: {response.status_code}")
 		return None
@@ -1068,6 +1070,10 @@ def getData():
 	for i in range(3, -1, -1):
 		start_date, end_date = calculate_start_end_dates(i)
 		historical_data = get_binance_kline_data( symbol,interval, start_date, end_date)
+		
+		if(historical_data == -1):
+			return -1
+		
 		for i in historical_data:
 			item = {
 				"time": i[0] / 1000,

@@ -40,7 +40,7 @@ document.getElementById("bn_SpotGrid").addEventListener("click", function () {
 	newContainer13_1.id = 'container13_1';
 
 	//add back to page
-	document.getElementById("spot-grid-div").appendChild(newContainer13_1);
+	document.getElementById("spot_grid_chart_wrapper").appendChild(newContainer13_1);
 
 	setSpotGridPoints(SpotGrid_url);
 
@@ -131,11 +131,8 @@ async function setSpotGridPoints(SpotGrid_url) {
 		
 		//---------------------------------------------------------------------------------
 		
-
 		let counter = 1;
 		while (points[counter].hasOwnProperty('base')) {
-
-			//console.log(points[counter].order)
 			if(points[counter].order == 0) {
 				markers.push({
 					id: String("spotGridPoint" + counter),

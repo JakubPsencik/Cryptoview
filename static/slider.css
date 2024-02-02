@@ -10,18 +10,6 @@
 	--tw-green: #089981;
 }
 
-
-#button{
-	padding: 8px;
-	width: 100px;
-	border: 2px solid white;
-	background-color: transparent;
-	color: white;
-	cursor: pointer;
-	border-radius: 5px;
-	transition: 0.1s;
-}
-
 button:hover{
 transform: scale(1.05);
 }
@@ -34,7 +22,7 @@ transform: scale(1.05);
 
 .pages {
 display: flex;
-	width: 1000%;
+	width: 1100%;
 	height: 100vh;
 	box-sizing: border-box;
 }
@@ -42,19 +30,15 @@ display: flex;
 .page {
 width: 100vw;
 height: 100vh;
-/*
-display: flex;
-align-items: center;
-justify-content: flex-start;*/
 transition: all 0.7s;
 color: white;
 }
 
 .one {
-background-image: url(img/stock1920.jpg);
-background-position: center; 
-background-repeat: no-repeat;
-background-size: cover;
+	background-image: url(img/stock1920.jpg);
+	background-position: center; 
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .auto-invest{
@@ -73,6 +57,11 @@ background-size: cover;
 }
 
 .b-cmc-idx {
+	background: var(--bn-black);
+	background-image: url(img/stock1920.jpg);
+}
+
+.auto-invest-calc {
 	background: var(--bn-black);
 	background-image: url(img/stock1920.jpg);
 }
