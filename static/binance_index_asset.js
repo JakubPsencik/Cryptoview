@@ -54,7 +54,7 @@ async function createAssetDiv(data, parentDiv) {
 	coinsDiv.classList.add("binance_index_asset_coins_div");
 
 	var counter = data.coins.length;
-	var moreDiv = undefined;
+	var moreDiv;
 	if(data.coins.length > 5) {
 		counter = 5;
 		moreDiv = document.createElement('div');
@@ -297,7 +297,7 @@ async function getPriceTrendData(div, coin, url, coinIsTradedAgainstEuro) {
 
 			const labelDiv = document.createElement('div');
 			labelDiv.append(img);
-			const quoteCurrency = coinIsTradedAgainstEuro == true ? "EUR" : "USDT";
+			const quoteCurrency = coinIsTradedAgainstEuro ? "EUR" : "USDT";
 			labelDiv.innerHTML += `<span style="margin-left: 10px"></span><strong>${coin.coin} (${quoteCurrency})</strong>`;
 			div.appendChild(labelDiv);
 

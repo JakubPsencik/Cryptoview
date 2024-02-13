@@ -112,8 +112,60 @@
 						<div id="auto_invest_calc_div">
 							<div id="auto_invest_calc_space_div"></div>
 							<div id="auto_invest_calc_search_div_wrapper">
-								<img src="/static/img/search-icon.png" class="auto_invest_calc_search_icon">
-								<input type="text" placeholder="Search" class="auto_invest_calc_search_div">
+								<div id="auto_invest_calc_buttons_wrapper">
+									<button data-bn-type="button" id="auto_invest_calc_add_coins_bn">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" id="auto_invest_calc_add_coins_bn_plus_icon">
+											<path d="M13.5 3h-3v7.5H3v3h7.5V21h3v-7.5H21v-3h-7.5V3z" fill="currentColor"></path>
+										</svg>
+										Add Coins
+									</button>
+
+									<button data-bn-type="button" id="auto_invest_calc_recom_coins_bn">Recommended For You</button>
+								</div>
+								
+
+								<div id="auto_invest_calc_search_div">
+									<div id="auto_invest_calc_search_bar_wrapper">
+										<img src="/static/img/search-icon.png" class="auto_invest_calc_search_icon">
+										<input id="auto_invest_calc_search_input" type="text" placeholder="Search" class="auto_invest_calc_search_div">
+									</div>
+									
+									<div id="auto_invest_calc_search_input_list"></div>
+								</div>
+
+								
+								
+								<div id="auto_invest_calc_index_wrapper">
+									<div class="auto_invest_calc_label">Coin Allocation</div>
+									<div id="auto_invest_calc_no_coins_selected">
+										<svg style="width: 6vw; height: auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none" class="css-13hycz7"><path fill-rule="evenodd" clip-rule="evenodd" d="M26 8h38l20 20v60H26V8zm48 29H36v4h38v-4zm0 9H36v4h38v-4zm-38 9h38v4H36v-4zm34 16l-4-4-4 4 4 4 4-4z" fill="url(#not-found-data_svg__paint0)"></path><path opacity="0.15" d="M86 50l3-3 3 3-3 3-3-3zM47 21l3-3 3 3-3 3-3-3zM84 28H64V8l20 20z" fill="#929AA5"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M4.172 73.171l14.5-14.5 5.656 5.658-14.5 14.5-5.656-5.657z" fill="url(#not-found-data_svg__paint1)"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M51 48c0-8.837-7.163-16-16-16s-16 7.163-16 16 7.163 16 16 16 16-7.163 16-16zm4 0c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20z" fill="url(#not-found-data_svg__paint2)"></path><defs><linearGradient id="not-found-data_svg__paint0" x1="55" y1="8" x2="55" y2="88" gradientUnits="userSpaceOnUse"><stop stop-color="#929AA5" stop-opacity="0.1"></stop><stop offset="1" stop-color="#929AA5" stop-opacity="0.25"></stop></linearGradient><linearGradient id="not-found-data_svg__paint1" x1="4.172" y1="68.75" x2="24.328" y2="68.75" gradientUnits="userSpaceOnUse"><stop stop-color="#929AA5"></stop><stop offset="1" stop-color="#76808F"></stop></linearGradient><linearGradient id="not-found-data_svg__paint2" x1="15" y1="48" x2="55" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#929AA5"></stop><stop offset="1" stop-color="#76808F"></stop></linearGradient></defs></svg>
+										<div class="auto_invest_calc_label1">No coin has been selected</div>
+									</div>
+								</div>
+								<div class="auto_invest_calc_props_wrapper">
+									<div data-bn-type="text" class="auto_invest_calc_label">Amount Per Period</div>
+									<div id="auto_invest_calc_amount_input_wrapper">
+										<input data-bn-type="input" class="auto_invest_calc_props_input" value="1">
+										<div id="auto_invest_calc_amount_search_bar_wrapper">
+											<div id="auto_invest_calc_amount_search_input_result" class="auto_invest_calc_search_div">
+												<img id="auto_invest_calc_amount_search_img" src="static/img/USDT.png" loading="lazy" alt="" class="auto_invest_calc_suggestion_image"/>
+												<span id="auto_invest_calc_amount_search_span" class="auto_invest_calc_suggestion_text">USDT</span>
+												<svg id="auto_invest_calc_amount_dropdown" style="width: 1vw; height: auto; margin-left: 1vw" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" class="css-rrv9q1"><path d="M16.5 8.49v2.25L12 15.51l-4.5-4.77V8.49h9z" fill="currentColor"></path></svg>
+											</div>	
+										</div>
+									</div>
+									<div id="auto_invest_calc_amount_search_input_list_wrapper">
+										<div style=" width: 12vw; background-color: var(--bn-black); margin-left: auto; margin-right: auto; margin-top: 1vh;">
+											<img src="/static/img/search-icon.png" class="auto_invest_calc_search_icon">
+											<input id="auto_invest_calc_amount_search_input" type="text" placeholder="Search" class="auto_invest_calc_search_div">
+										</div>
+
+										<div id="auto_invest_calc_amount_search_input_list"></div>
+									</div>
+									
+								</div>
+								
+								<div id="auto_invest_calc_confirm_button1" cursor="pointer" class="auto_invest_calc_confirm_button1">Confirm</div>
 							</div>
 						</div>
 					</div>
@@ -469,6 +521,8 @@
 	<script src="{{url_for('static', filename='slider.js')}}"></script>
 	<script src="{{url_for('static', filename='realtimeWidget.js')}}"></script>
 	<script src="{{url_for('static', filename='auto-invest.js')}}"></script>
+	<script src="{{url_for('static', filename='auto_invest_calc.js')}}"></script>
+	<script src="{{url_for('static', filename='auto_invest_calc_amount.js')}}"></script>
 	<script src="{{url_for('static', filename='rebalancing-bot.js')}}"></script>
 	<script src="{{url_for('static', filename='spot-dca-bot.js')}}"></script>
 	<script src="{{url_for('static', filename='spot-grid-bot.js')}}"></script>
@@ -480,5 +534,7 @@
 	<script src="{{url_for('static', filename='binance_cmc_ew_index.js')}}"></script>
 	<script src="{{url_for('static', filename='chart.js')}}"></script>
 	<script src="{{url_for('static', filename='config.js')}}"></script>
+
+	
 </body>
 </html>

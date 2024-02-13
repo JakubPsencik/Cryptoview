@@ -53,6 +53,8 @@
 
 #auto_invest_calc_div {
 
+	overflow-x: hidden;
+	overflow-y: scroll;
 	width: 40vw;
 	height: 70vh;
 	min-height: fit-content;
@@ -72,13 +74,120 @@
 	border-radius: 2rem;
 }
 
-#auto_invest_calc_search_div_wrapper {
+#auto_invest_calc_add_coins_bn {
+	text-size-adjust: 100%;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	text-transform: none;
+	margin: 0px;
+	appearance: none;
+	user-select: none;
+	cursor: pointer;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 	display: inline-flex;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+	box-sizing: border-box;
+	font-family: inherit;
+	font-weight: 600;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	padding: 8px 16px;
+	min-width: 60px;
+	word-break: keep-all;
+	border-radius: 4px;
+	min-height: 24px;
+	border: none;
+	background-image: none;
+	color: var(--bn-yellow);
+	background-color: var(--tw-black);
+	font-size: 12px;
+	line-height: 18px;
+	margin-right: 0.5vw;
+
+}
+
+#auto_invest_calc_add_coins_bn_plus_icon {
+	text-size-adjust: 100%;
+    text-transform: none;
+    user-select: none;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: inherit;
+    font-weight: 600;
+    text-align: center;
+    word-break: keep-all;
+    line-height: 18px;
+    outline: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    box-sizing: border-box;
+    margin: 0px 8px 0px 0px;
+    min-width: 0px;
+    color: var(--bn-yellow);
+    font-size: 16px;
+    fill: var(--bn-yellow);
+    width: 1em;
+    height: 1em;
+    display: block;
+}
+
+#auto_invest_calc_recom_coins_bn {
+	text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    text-transform: none;
+    margin: 0px;
+    appearance: none;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    padding: 8px 16px;
+    min-width: 60px;
+    word-break: keep-all;
+    border-radius: 4px;
+    border: none;
+    background-image: none;
+    min-height: 28px;
+    color: var(--bn-yellow);
+    background-color: var(--tw-black);
+    font-size: 12px;
+    line-height: 18px;
+}
+
+#auto_invest_calc_buttons_wrapper {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	display: inline-flex;
+	justify-content: flex-start;
+	padding: 5px;
+}
+
+
+#auto_invest_calc_search_div_wrapper {
+	display: flex;
+	flex-direction: column;
 	align-items: flex-start;
 	width: 80%;
 	height: fit-content;
 	background-color: var(--bn-black);
-	border: 1px solid #fff;
 	color: white;
 	border-radius: 2rem;
 	font-weight: bold;
@@ -86,9 +195,42 @@
 	margin-right: auto;
 }
 
-.auto_invest_calc_search_div {
-	width: 75%;
+#auto_invest_calc_search_bar_wrapper {
+	display: none;
+	align-items: flex-start;
+	width: 80%;
+	height: fit-content;
 	background-color: var(--bn-black);
+	color: white;
+	border-radius: 2rem;
+	font-weight: bold;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#auto_invest_calc_search_div {
+	display: none;
+	color: white;
+	font-weight: 500;
+	box-sizing: border-box;
+	margin-top: 0.26rem;
+	min-width: 0px;
+	outline: none;
+	border: none;
+	opacity: 1;
+	padding: 5px !important;
+	margin-left: 3.2vw;
+	background-color: var(--tw-black);
+	width: 50%;
+	max-height: 30vh;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+.auto_invest_calc_search_div {
+	display: none;
+	width: 75%;
+	background-color: var(--tw-black);
 	color: white;
 	font-weight: 500;
 	box-sizing: border-box;
@@ -98,6 +240,316 @@
 	border: none;
 	opacity: 1;
 	padding: 0px !important;
+}
+
+#auto_invest_calc_search_input {
+	display: flex;
+	border-radius: 2rem;
+	background-color: var(--bn-black);
+}
+
+#auto_invest_calc_search_input_list {
+	display: none;
+	height: fit-content;
+	overflow-y: scroll;
+	align-items: center;
+	width: 80%;
+	color: white;
+	font-weight: bold;
+	margin-left: auto;
+	margin-right: auto;
+	max-height: 30vh;
+	overflow-x: hidden;
+	padding-bottom: 4vh;
+	margin-top: 0.5vh;
+}
+
+#auto_invest_calc_amount_input_wrapper {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	line-height: 20px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+}
+
+#auto_invest_calc_amount_input_coin_div {
+	text-size-adjust: 100%;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	font-family: inherit;
+	line-height: 1.15;
+	overflow: visible;
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	outline: none;
+	border: none;
+	opacity: 1;
+	visibility: hidden;
+	cursor: pointer;
+	background-color: transparent;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	border-radius: 4px;
+	padding-left: 12px;
+	padding-right: 12px;
+}
+
+#auto_invest_calc_amount_input_wrapper1 { 
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	display: inline-flex;
+	position: relative;
+	-webkit-box-align: center;
+	align-items: center;
+	line-height: 1.6;
+	background-color: rgb(43, 49, 57);
+	border-radius: 4px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: transparent;
+	height: 40px;
+	width: 100%;
+	cursor: pointer;
+}
+
+.suggestion_wrapper {
+
+	width: fit-content;
+	height: fit-content;
+	background-color: var(--tw-grey);
+	display: inline-flex;
+	align-items: center;
+	border-radius: 2px;
+	padding: 5px;
+	margin: 0.5vw;
+	cursor: pointer;	
+}
+
+.selected_coin_wrapper {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	font-size: 12px;
+	color: rgb(132, 142, 156);
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	min-width: 0px;
+	position: relative;
+	line-height: 1.6;
+	background-color: rgb(43, 49, 57);
+	border-radius: 4px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: transparent;
+	height: 40px;
+	width: 96%;
+	-webkit-box-align: center;
+	align-items: center;
+	margin: 10px;
+}
+
+.coin_name_div {
+	text-size-adjust: 100%;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px 0px 0px 8px;
+	min-width: 0px;
+	display: flex;
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 500;
+}
+
+.auto_invest_calc_allocation_input {
+	text-size-adjust: 100%;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	font-family: inherit;
+	line-height: 1.15;
+	overflow: visible;
+	box-sizing: border-box;
+	margin-left: 15px;
+	min-width: 0;
+	width: 100%;
+	height: 100%;
+	outline: none;
+	border: none;
+	background-color: inherit;
+	opacity: 1;
+	text-align: center;
+	padding: 0px !important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	border-radius: 4px;
+}
+
+.auto_invest_calc_percent {
+	text-size-adjust: 100%;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(132, 142, 156);
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px 12px 0px 0px;
+	min-width: 0px;
+	display: flex;
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 500;
+}
+
+.auto_invest_calc_confirm_button1 {
+	width: 20%;
+	margin-left: auto;
+	margin-right: auto;
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	font-size: 14px;
+	line-height: 20px;
+	outline: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	min-width: 0px;
+	display: flex;
+	color: var(--bn-yellow);
+	cursor: pointer;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	align-items: center;
+	padding: 8px 12px;
+}
+
+#auto_invest_calc_index_wrapper {
+	overflow-x: hidden;
+	overflow-y: scroll;
+	align-items: center;
+	width: 80%;
+	background-color: var(--tw-black);
+	color: white;
+	font-weight: bold;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2vh;
+	padding: 1rem;
+}
+
+.auto_invest_calc_props_wrapper {
+	overflow-x: hidden;
+	overflow-y: scroll;
+	align-items: center;
+	width: 80%;
+	background-color: var(--bn-black);
+	color: white;
+	font-weight: bold;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2vh;
+	padding: 1rem;
+}
+
+.auto_invest_calc_props_input {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	font-size: 16px;
+	color: rgb(132, 142, 156);
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	min-width: 0px;
+	position: relative;
+	line-height: 1.6;
+	background-color: rgb(43, 49, 57);
+	border-radius: 4px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: transparent;
+	height: 40px;
+	width: 96%;
+	-webkit-box-align: center;
+	align-items: center;
+	margin: 10px;
+}
+
+.auto_invest_calc_label {
+	text-size-adjust: 100%;
+	font-weight: 500;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	font-size: 14px;
+	line-height: 22px;
+	color: rgb(234, 236, 239);
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	/*margin: 1vh 0px 1vh 0px;*/
+	min-width: 0px;
+	display: flex;
+
+}
+
+.auto_invest_calc_label1 {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	font-size: 14px;
+	line-height: 20px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	min-width: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	color: rgb(132, 142, 156);
+}
+
+.auto_invest_calc_suggestion_image {
+	position: relative;
+	width: 24px;
+	height: 24px;
+	background-color: var(--tw-black);
+	border-radius: 50%;
+	margin-right: 5px;
+	
+}
+
+.auto_invest_calc_remove_button {
+	border-radius: 50%;
+	background-color: var(--bn-black);
+	color: #FFF;
+	text-align: center;
 }
 
 .auto_invest_calc_search_icon {
@@ -113,6 +565,78 @@
 	background-color: var(--tw-black);
 	border-radius: 50%;
 	margin-left: 5px;
+}
+
+/*AMOUNT SEARCH BAR*/
+#auto_invest_calc_amount_search_input {
+	height: 40px;
+	max-height: 60vh;
+	overflow-y: scroll;
+	align-items: center;
+	width: 80%;
+	background-color: var(--bn-black);
+	color: white;
+	display: inline-flex;
+	font-weight: bold;
+}
+
+#auto_invest_calc_amount_search_input_result {
+	height: 40px;
+	max-height: 60vh;
+	overflow-y: scroll;
+	align-items: center;
+	width: 80%;
+	background-color: var(--bn-black);
+	color: white;
+	border-radius: 2rem;
+	display: inline-flex;
+	width: fit-content;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#auto_invest_calc_amount_search_bar_wrapper {
+	
+}
+
+#auto_invest_calc_amount_search_input_list_wrapper {
+	display: none;
+	height: fit-content;
+	max-height: 60vh;
+	overflow-y: scroll;
+	align-items: center;
+	background-color: var(--tw-black);
+	color: white;
+	border-radius: 4px;
+	font-weight: 500;
+	margin-left: auto;
+	width: 15vw;
+}
+
+#auto_invest_calc_amount_search_input_list {
+	height: fit-content;
+	max-height: 60vh;
+	overflow-y: scroll;
+	align-items: center;
+	width: 80%;
+	background-color: var(--bn-black);
+	color: white;
+	font-weight: bold;
+	margin-left: auto;
+	margin-right: auto;
+	display: grid;
+	margin-bottom: 1vh;
+}
+
+.amount_suggestion_wrapper {
+
+	height: fit-content;
+	display: inline-flex;
+	align-items: center;
+	border-radius: 2px;
+	padding: 5px;
+	margin: 0.5vw;
+	cursor: pointer;	
 }
 
 /*----------------------------------------*/

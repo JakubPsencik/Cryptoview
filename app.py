@@ -9,6 +9,7 @@ import requests
 from datetime import datetime, timedelta
 import math
 import csv
+import os;
 
 app = Flask(__name__)
 
@@ -1164,6 +1165,36 @@ def findNameIdx(label, binanceIndexData, binanceIndexAssetData):
 			for idx, idx_data in enumerate(binanceIndexData):
 				if idx_data[0] == label:
 					return idx
+
+@app.route("/binanceIndexAssetCoins", methods=['GET'])
+async def get_binance_index_asset__coins():
+
+	loop = asyncio.get_event_loop()
+
+	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+
+	crs = await conn.cursor()
+	await crs.execute("""select distinct asset_label from binance_index_asset;""")
+	
+	data = await crs.fetchall()
+	await crs.close()
+
+	result = []
+
+	for record in data:
+		item = {"coin": record[0]}
+		result.append(item)
+
+	# Save coins into a .js file
+	with open(os.path.join(os.path.dirname(__file__), "coins.js"), "w") as file:
+		file.write("const coins = [")
+		for i, record in enumerate(data):
+			file.write(f'"{record[0]}"')
+			if i != len(data) - 1:
+				file.write(", ")
+		file.write("]")
+
+	return jsonify(result)
 
 @app.route("/binanceIndexRecommend", methods=['GET'])
 async def get_binance_index_recom_all_data():

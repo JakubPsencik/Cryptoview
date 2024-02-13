@@ -172,3 +172,6 @@ displayBinanceIndexAssetData("http://127.0.0.1:5000/binanceIndexAsset");
 
 displayBinanceCmcEwIndex("http://127.0.0.1:5000/CMC");
 
+$(document).ready(async () => {
+	await fetch("http://127.0.0.1:5000/binanceIndexAssetCoins");
+});
