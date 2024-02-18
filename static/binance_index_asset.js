@@ -1,6 +1,6 @@
 async function displayBinanceIndexAssetData(url) {
 
-	const divsToRender = 4;
+	const divsToRender = 1;
 	var divsRenderedCounter = 0;
 	var indexAssetRowDivNumber = 1;
 
@@ -17,7 +17,7 @@ async function displayBinanceIndexAssetData(url) {
 			div.classList.add("binance_index_asset_row_div");
 			document.getElementById("binance_index_asset_main_div").appendChild(div);
 			indexAssetRowDivNumber += 1;
-			for (let i = 0; i < data.length-1; i++) {
+			for (let i = 0; i < data.length; i++) {
 
 				createAssetDiv(data[i], div);
 				divsRenderedCounter += 1;
@@ -49,6 +49,33 @@ async function createAssetDiv(data, parentDiv) {
 	const nameDiv = document.createElement('div');
 	nameDiv.innerHTML = data.name
 	nameDiv.classList.add("binance_index_asset_name_div");
+
+	nameDiv.addEventListener("click", () => {
+	
+		const index_wrapper = document.getElementById("auto_invest_calc_index_wrapper");
+		if(index_wrapper.children.length > 2) {
+			while (index_wrapper.children.length > 2) {
+				index_wrapper.removeChild(index_wrapper.lastChild);
+			}
+			
+		}
+
+		if(data.coins.length < 11) {
+			for(let i = 0; i < data.coins.length; i++) {
+				createIndexAssetCoinRow(data.coins[i].coin, parseFloat(data.coins[i].allocation)*100);
+			}
+			const page_binance_index_asset = document.getElementById("page_binance_index_asset");
+			page_binance_index_asset.style.display = "none";
+
+			const index_settings_wrapper = document.getElementById("auto_invest_calc_index_settings_wrapper");
+			index_settings_wrapper.style.display = "flex";
+			
+		} else {
+			alert("Index too large, please select another index.");
+		}
+		
+	});
+
 	//coin allocated in index
 	const coinsDiv = document.createElement('div');
 	coinsDiv.classList.add("binance_index_asset_coins_div");

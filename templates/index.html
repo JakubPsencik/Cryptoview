@@ -92,12 +92,6 @@
 				</div>
 			</div> <!--END PAGE BINANCE CMC EQUAL WEIGHTED INDEX-->
 
-			<div id="page_binance_index_asset" class="page b-idx-asset"> 
-				<div id="binance_index_asset_main_div">
-					<h1 class="binance_index_asset_page_label">Choose your portfolito and accumulate crypto now!</h1>
-				</div>
-			</div> <!--END PAGE BINANCE INDEX ASSET -->
-
 			<div id="page_auto_invest_calc" class="page auto-invest-calc"> 
 				<div class="modal-body row" style="height: 100vh; padding-bottom: 0; padding-top: 0;">
 					<!--left side-->
@@ -108,8 +102,23 @@
 						</div>
 					</div>
 					<div class="col-md-7" style="padding: 0;">
+
+						<div id="page_binance_index_asset" class="b-idx-asset"> 
+							<div id="binance_index_asset_main_div">
+								<div style="width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; margin-left: 95%;">
+									<button id="binance_index_asset_cancel_button" class="auto_invest_calc_remove_button">X</button>
+								</div>
+								
+							</div>
+						</div> <!--END PAGE BINANCE INDEX ASSET -->
 						
 						<div id="auto_invest_calc_div">
+							
+							<div id="auto_invest_calc_form_header">
+								<div>
+									Create your plan
+								</div>
+							</div>
 							<div id="auto_invest_calc_space_div"></div>
 							<div id="auto_invest_calc_search_div_wrapper">
 								<div id="auto_invest_calc_buttons_wrapper">
@@ -122,7 +131,6 @@
 
 									<button data-bn-type="button" id="auto_invest_calc_recom_coins_bn">Recommended For You</button>
 								</div>
-								
 
 								<div id="auto_invest_calc_search_div">
 									<div id="auto_invest_calc_search_bar_wrapper">
@@ -132,8 +140,6 @@
 									
 									<div id="auto_invest_calc_search_input_list"></div>
 								</div>
-
-								
 								
 								<div id="auto_invest_calc_index_wrapper">
 									<div class="auto_invest_calc_label">Coin Allocation</div>
@@ -142,30 +148,110 @@
 										<div class="auto_invest_calc_label1">No coin has been selected</div>
 									</div>
 								</div>
-								<div class="auto_invest_calc_props_wrapper">
-									<div data-bn-type="text" class="auto_invest_calc_label">Amount Per Period</div>
-									<div id="auto_invest_calc_amount_input_wrapper">
-										<input data-bn-type="input" class="auto_invest_calc_props_input" value="1">
-										<div id="auto_invest_calc_amount_search_bar_wrapper">
-											<div id="auto_invest_calc_amount_search_input_result" class="auto_invest_calc_search_div">
-												<img id="auto_invest_calc_amount_search_img" src="static/img/USDT.png" loading="lazy" alt="" class="auto_invest_calc_suggestion_image"/>
-												<span id="auto_invest_calc_amount_search_span" class="auto_invest_calc_suggestion_text">USDT</span>
-												<svg id="auto_invest_calc_amount_dropdown" style="width: 1vw; height: auto; margin-left: 1vw" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" class="css-rrv9q1"><path d="M16.5 8.49v2.25L12 15.51l-4.5-4.77V8.49h9z" fill="currentColor"></path></svg>
-											</div>	
-										</div>
-									</div>
-									<div id="auto_invest_calc_amount_search_input_list_wrapper">
-										<div style=" width: 12vw; background-color: var(--bn-black); margin-left: auto; margin-right: auto; margin-top: 1vh;">
-											<img src="/static/img/search-icon.png" class="auto_invest_calc_search_icon">
-											<input id="auto_invest_calc_amount_search_input" type="text" placeholder="Search" class="auto_invest_calc_search_div">
-										</div>
 
-										<div id="auto_invest_calc_amount_search_input_list"></div>
+								<div id="auto_invest_calc_index_settings_wrapper">
+
+									<div class="auto_invest_calc_props_wrapper">
+										<div data-bn-type="text" class="auto_invest_calc_label">Amount Per Period</div>
+										<div id="auto_invest_calc_amount_input_wrapper">
+											<input data-bn-type="input" class="auto_invest_calc_props_input" value="1">
+											<div id="auto_invest_calc_amount_search_bar_wrapper">
+												<div id="auto_invest_calc_amount_search_input_result" class="auto_invest_calc_search_div">
+													<img id="auto_invest_calc_amount_search_img" src="static/img/USDT.png" loading="lazy" alt="" class="auto_invest_calc_suggestion_image"/>
+													<span id="auto_invest_calc_amount_search_span" class="auto_invest_calc_suggestion_text">USDT</span>
+													<svg id="auto_invest_calc_amount_dropdown" style="width: 1vw; height: auto; margin-left: 1vw" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" class="css-rrv9q1"><path d="M16.5 8.49v2.25L12 15.51l-4.5-4.77V8.49h9z" fill="currentColor"></path></svg>
+												</div>	
+											</div>
+										</div>
+										<div id="auto_invest_calc_amount_search_input_list_wrapper">
+											<div style=" width: 12vw; background-color: var(--bn-black); margin-left: auto; margin-right: auto; margin-top: 1vh;">
+												<img src="/static/img/search-icon.png" class="auto_invest_calc_search_icon">
+												<input id="auto_invest_calc_amount_search_input" type="text" placeholder="Search" class="auto_invest_calc_search_div">
+											</div>
+	
+											<div id="auto_invest_calc_amount_search_input_list"></div>
+										</div>	
+									</div>
+	
+									<div id="recurring_cycle_label_wrapper" style="width: 80%; margin-left: auto; margin-right: auto; padding-left: 0.83vw;">
+										<div data-bn-type="text" class="auto_invest_calc_label">Recurring Cycle</div>
 									</div>
 									
+									<div id="auto_invest_calc_interval_wrapper">
+										
+										<div id="auto_invest_calc_interval_selector_button_wrapper" class="auto_invest_calc_interval_selector_button_wrapper">
+											<div class="auto_invest_calc_interval_selector_button active" style="border: 1px solid var(--bn-yellow);">Daily</div>
+	
+											<div class="auto_invest_calc_interval_selector_button">
+												<div>Weekly</div>
+											</div>
+											
+											<div class="auto_invest_calc_interval_selector_button">
+												<div >Monthly</div>
+											</div>
+											
+											<!--<div class="css-1r5nwuq"><div class="css-179zq33">1 Hour</div></div><div class="css-14xtt6"><div class="css-e1rbpa">4 Hours</div></div><div class="css-14xtt6"><div class="css-e1rbpa">8 Hours</div></div><div class="css-14xtt6"><div class="css-e1rbpa">12 Hours</div></div></div>-->
+										</div>
+									</div>
+	
+									<div id="repeats_on_label_wrapper" style="width: 80%; margin-left: auto; margin-right: auto; padding-left: 0.83vw;">
+										<div data-bn-type="text" class="auto_invest_calc_label">Repeats on</div>
+									</div>
+	
+									<div id="auto_invest_calc_interval_selector_days_button_wrapper" class="auto_invest_calc_interval_selector_days_button_wrapper">
+										<div class="auto_invest_calc_interval_selector_days_button">
+											<div>MON</div>
+										</div>
+	
+										<div class="auto_invest_calc_interval_selector_days_button">
+											<div>TUE</div>
+										</div>
+										
+										<div class="auto_invest_calc_interval_selector_days_button">
+											<div >WED</div>
+										</div>
+	
+										<div class="auto_invest_calc_interval_selector_days_button">
+											<div >THU</div>
+										</div>
+										
+										<div class="auto_invest_calc_interval_selector_days_button">
+											<div >FRI</div>
+										</div>
+	
+										<div class="auto_invest_calc_interval_selector_days_button">
+											<div >SAT</div>
+										</div>
+	
+										<div class="auto_invest_calc_interval_selector_days_button">
+											<div >SUN</div>
+										</div>
+									</div>
+	
+									<div id="auto_invest_calc_interval_detail_selector_daysInMonth_wrapper" class="auto_invest_calc_interval_detail_selector_wrapper">
+										<div data-bn-type="text" id="auto_invest_calc_interval_detail_selector_label">Date of the month</div>
+										<div id="auto_invest_calc_interval_detail_selector_dayInMonth_wrapper">
+											<input data-bn-type="input" placeholder="1-28" type="number" id="auto_invest_calc_interval_detail_selector_dayInMonth_input">
+										</div>
+									</div>
+	
+									<div id="auto_invest_calc_interval_detail_selector_localTime_wrapper" class="auto_invest_calc_interval_detail_selector_wrapper">
+										<div data-bn-type="text" id="auto_invest_calc_interval_detail_selector_label">Local Time</div>
+										<div id="auto_invest_calc_interval_detail_selector_hours_wrapper">
+											<input data-bn-type="input" placeholder="0-23" type="number" value="18" id="auto_invest_calc_interval_detail_selector_hours_input">
+											<div id="auto_invest_calc_interval_detail_selector_hours_input_suffix_wrapper1">
+												<div id="auto_invest_calc_interval_detail_selector_hours_input_suffix_wrapper2">
+													<div data-bn-type="text" id="auto_invest_calc_interval_detail_selector_hours_input_suffix">: 00</div>
+												</div>
+											</div>
+										</div>
+									</div>
+	
+									<div id="auto_invest_calc_confirm_button1" cursor="pointer" class="auto_invest_calc_confirm_button1">Confirm</div>
 								</div>
 								
-								<div id="auto_invest_calc_confirm_button1" cursor="pointer" class="auto_invest_calc_confirm_button1">Confirm</div>
+								
+								<div id="auto_invest_calc_space_div"></div>
 							</div>
 						</div>
 					</div>

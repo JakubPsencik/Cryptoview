@@ -1,10 +1,17 @@
 #binance_index_asset_main_div {
 	display: flex;
 	flex-direction: column;
-	padding: 0;
 	overflow-y: scroll;
 	overflow-x: hidden;
 	height: 100vh;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5vh;
+	margin-bottom: 5vh;
+	background-color: var(--tw-black);
+	border-radius: 2rem;
+	padding: 1vw;
 }
 
 .binance_index_asset_page_label  {
@@ -47,6 +54,7 @@
 	font-size: 16px;
 	line-height: 24px;
 	font-weight: 600;
+	cursor: pointer;
 }
 
 .binance_index_asset_coins_div {
@@ -245,7 +253,7 @@
 	box-shadow: none;
 	background-image: none;
 	background-color: rgb(43, 49, 57);
-	position: absolute;
+	display: block;
 	bottom: 0;
 	left: 0;
 	margin: 10px;
@@ -273,6 +281,8 @@
 	border: 1px solid #000000;
 	border-radius: 5px;
 	z-index: 999; /* Ensure it's above other elements */
+	overflow-x: hidden;
+	overflow-y: scroll;
 }
 
 .overlay {
@@ -433,4 +443,12 @@
 	overflow-y: scroll;
 	overflow-x: hidden;
 	/* border: 1px solid red; */
+}
+
+
+@media screen and (max-width: 1024px) {
+
+	.binance_index_asset_div {
+		height: 200px;
+	}
 }
