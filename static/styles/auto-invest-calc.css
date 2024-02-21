@@ -1188,9 +1188,9 @@
 @media (max-height: 700px) {
 
 	#auto_invest_calc_div {
-
-		width: 50vw;
-		height: 40vh;
+		
+		width: 40vw;
+		height: 85vh;
 		text-align: center;
 		background-color: var(--bn-black);
 		border-radius: 2rem;
