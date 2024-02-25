@@ -67,6 +67,9 @@ async function createAssetDiv(data, parentDiv) {
 			const page_binance_index_asset = document.getElementById("page_binance_index_asset");
 			page_binance_index_asset.style.display = "none";
 
+			const auto_invest_calc_div = document.getElementById("auto_invest_calc_div");
+			auto_invest_calc_div.style.display = "block";
+
 			const index_settings_wrapper = document.getElementById("auto_invest_calc_index_settings_wrapper");
 			index_settings_wrapper.style.display = "flex";
 			

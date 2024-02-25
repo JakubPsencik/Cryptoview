@@ -33,8 +33,12 @@ document.addEventListener("click", (event) => {
 
 recomCoinsButton.addEventListener("click", () => {
 	const page_binance_index_asset = document.getElementById("page_binance_index_asset");
+	const auto_invest_calc_div = document.getElementById("auto_invest_calc_div");
+
 	page_binance_index_asset.style.display = "block";
 	page_binance_index_asset.style.zIndex = "998";
+
+	auto_invest_calc_div.style.display = "none";
 	
 	console.log("clicked");
 });
@@ -42,6 +46,9 @@ recomCoinsButton.addEventListener("click", () => {
 document.getElementById("binance_index_asset_cancel_button").addEventListener("click", () => {
 	const page_binance_index_asset = document.getElementById("page_binance_index_asset");
 	page_binance_index_asset.style.display = "none";
+
+	const auto_invest_calc_div = document.getElementById("auto_invest_calc_div");
+	auto_invest_calc_div.style.display = "block";
 });
 
 intervalButtons = document.getElementsByClassName("auto_invest_calc_interval_selector_button");

@@ -15,21 +15,14 @@ app = Flask(__name__)
 
 client = Client(config.API_KEY, config.API_SECRET)
 
-# load page
 
-
-@app.route("/", methods=['GET'])
+@app.route("/", methods=['GET']) #rika flasku, kdy se ma zavolat index() funkce (po zadani ktere url)
 def index():
 	title = "CRYPTOVIEW"
 
-	exchange_info = client.get_exchange_info()
-	currency_symbols = exchange_info['symbols']
-
-	return render_template("index.html", title=title, symbols=currency_symbols)
+	return render_template("index.html", title=title)
 
 # display data button clicked
-
-
 @app.route("/update", methods=['GET'])
 def update():
 	# extract params from url
@@ -1388,3 +1381,33 @@ async def get_binance_cmc_ew_index_coins():
 	await cursor.close()
 
 	return jsonify(data)
+
+
+@app.route("/test", methods=['GET']) 
+def test():
+	return render_template("wgt_test.html")
+
+@app.route("/hello", methods=['GET']) 
+def hello():
+
+	name = request.args.get("name")
+
+	return render_template("widget_test.html", name=name)
+
+@app.route("/form", methods=['GET']) 
+def form():
+
+	return render_template("form.html")
+
+
+@app.route("/submit", methods=["POST"])
+def submit():
+	name = request.form["name"]
+
+	# Ověření dat
+	if not name:
+		return render_template("error.html", message="Error, please enter name.")
+
+	return render_template("success.html", name=name)
+
+

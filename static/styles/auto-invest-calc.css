@@ -75,14 +75,13 @@
 }
 
 #auto_invest_calc_div {
-
+	display: block;
 	overflow-x: hidden;
 	overflow-y: scroll;
 	width: 40vw;
 	height: 70vh;
 	min-height: fit-content;
 	text-align: center;
-	vertical-align: middle;
 	background-color: var(--bn-black);
 	border-radius: 2rem;
 	margin: 14.5vh auto auto auto;
