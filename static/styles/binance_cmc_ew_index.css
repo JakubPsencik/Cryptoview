@@ -87,13 +87,13 @@
 		font-family: BinancePlex,Arial,sans-serif!important;
 		outline: 0;
 		box-sizing: border-box;
-		margin: 0px 0px 8px;
 		min-width: 0px;
 		color: rgb(234, 236, 239);
 		font-weight: 600;
 		font-size: 20px;
 		line-height: 28px;
 		margin-top: 2vh;
+		margin-left: -1vw;
 	}
 
 	#binance_cmc_ew_index_wrapper_div { 
@@ -134,8 +134,6 @@
 	}
 
 	.binance_cmc_ew_index_coin_div {
-		width: 30vw;
-		margin-left: 5vw;
-		margin-top: 17vh;
+		margin: 16vh auto 0vh 7.5vh;
 	}
 }

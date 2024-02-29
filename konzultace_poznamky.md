@@ -574,8 +574,6 @@ ETH
 	2024 -> amount: 0.000507375 | trades: 1  | close: 2036.52 € | profit: 1.03121 € (1.03121 %)
 	All  -> amount: 0.0150298   | trades: 24 | close: 2036.52 € | profit: 30.5472 € (1.2728 %)
 
-
-
 doporucene vysledky promitnout do toho roku 2024
 naucim se v lednu a doporucim to v unoru/breznu
 
@@ -585,3 +583,5 @@ uvod - zadne bylo nebylo atd...
 
 abstrakt cca 10 radku
 zaver - co sme splnili, co by slo zlepsit, atd..
+
+vektorova grafika

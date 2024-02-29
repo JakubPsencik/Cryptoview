@@ -1381,33 +1381,3 @@ async def get_binance_cmc_ew_index_coins():
 	await cursor.close()
 
 	return jsonify(data)
-
-
-@app.route("/test", methods=['GET']) 
-def test():
-	return render_template("wgt_test.html")
-
-@app.route("/hello", methods=['GET']) 
-def hello():
-
-	name = request.args.get("name")
-
-	return render_template("widget_test.html", name=name)
-
-@app.route("/form", methods=['GET']) 
-def form():
-
-	return render_template("form.html")
-
-
-@app.route("/submit", methods=["POST"])
-def submit():
-	name = request.form["name"]
-
-	# Ověření dat
-	if not name:
-		return render_template("error.html", message="Error, please enter name.")
-
-	return render_template("success.html", name=name)
-
-
