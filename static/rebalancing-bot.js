@@ -3,6 +3,55 @@
  *
  */
 
+var price_chart_11_3 = LightweightCharts.createChart(
+	document.getElementById('container11_3'),
+	{
+		layout: {
+			background: { color: "#0B0E11" },
+			textColor: "#C3BCDB",
+		},
+		grid: {
+			vertLines: { color: "#444" },
+			horzLines: { color: "#444" },
+		},
+		autoSize: true,
+		timeScale: {
+			timeVisible: true,  // Display time on the time scale
+			secondsVisible: false,  // Do not display seconds
+		},
+	}
+);
+
+var price_chart_11_4 = LightweightCharts.createChart(
+	document.getElementById('container11_4'),
+	{
+		layout: {
+			background: { color: "#0B0E11" },
+			textColor: "#C3BCDB",
+		},
+		grid: {
+			vertLines: { color: "#444" },
+			horzLines: { color: "#444" },
+		},
+		autoSize: true,
+		timeScale: {
+			timeVisible: true,  // Display time on the time scale
+			secondsVisible: false,  // Do not display seconds
+		},
+	}
+);
+// Create a candlesticks series
+const candlestickSeries1 = price_chart_11_3.addCandlestickSeries({
+upColor: "green",
+downColor: "red",
+});
+
+// Create a candlesticks series
+const candlestickSeries2 = price_chart_11_4.addCandlestickSeries({
+	upColor: "yellow",
+	downColor: "purple",
+});
+
 //Rebalance
 document.getElementById("bn_rebalance").addEventListener("click", function () {
 	
@@ -75,11 +124,11 @@ async function setRebalancePoints(url) {
 		//console.log(markers)
 		candlestickSeries1.setMarkers(markers);
 		candlestickSeries2.setMarkers(markers);
-		/*
+		/**/
 		document.getElementById("rebalancing-info-div").innerHTML = 
 		'<span style="color: red;">' 
 		+ String(Math.round(points[2][points.length-1].QuoteTotal) + '.0 $') 
-		+ '</span>';*/
+		+ '</span>';
 
 		price_chart_11_3.timeScale().setVisibleRange({
 			from: points[0][0].time,

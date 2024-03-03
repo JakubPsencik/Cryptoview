@@ -585,3 +585,10 @@ abstrakt cca 10 radku
 zaver - co sme splnili, co by slo zlepsit, atd..
 
 vektorova grafika
+
+
+poznamky k rebalancing botovi:
+- funguje dobre, ale je nastaveny jenom na procentualni zmenu
+- musim pridat funkcionalitu, kdy to ten bot bude kontrolovat v danem datetimu
+	- tim padem bude potreba aj upravit ten vstupni formular
+- potreba pridat moznost zvoleni 1-10 coinu (to uz je hotove u ew-indexu jen to zkopirovat do rebalancing bota)

@@ -1,0 +1,139 @@
+#binance_cmc_ew_index_recommend_label_large {
+	font-size: 48px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: #fff;
+	line-height: 1;
+	text-align: left;
+	padding-left: 100px;
+}
+
+#binance_cmc_ew_index_recommend_label_small {
+	font-size: 20px;
+	letter-spacing: 4px;
+	font-family: Poppins, Arial, sans-serif;
+	text-transform: uppercase;
+	color: #fff;
+	display: block;
+	position: relative;
+	text-align: left;
+	padding-left: 100px;
+	font-weight: initial;
+	flex-direction: row;
+
+}
+
+#binance_cmc_ew_index_recommend_description_wrapper {
+	width: 50vw;
+	height: 100vh;
+	margin: auto;
+	text-align: center;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+}
+
+#binance_cmc_ew_index_recommend_main_div {
+	width: 40vw;
+	height: 70vh;
+	background-color: var(--bn-black);
+	border-radius: 2rem;
+	margin: 14.5vh auto auto auto;
+	display: flex;
+	flex-direction: column;
+
+}
+
+.binance_cmc_ew_index_recommend_img {
+	position: relative;
+	width: 80px;
+	height: 80px;
+	background-color: var(--tw-black);
+	border-radius: 50%;
+}
+
+#binance_cmc_ew_index_recommend_wrapper_div { 
+	width: inherit;
+	height: 50%; 
+	margin-top: 20%;
+	margin-left: 2vw;
+}
+
+/*----------------------------------------*/
+
+@media (max-height: 911px) {
+	
+	.binance_cmc_ew_index_recommend_img_wrapper {
+		width: 80px;
+		height: fit-content;
+		padding: 0;
+		display: flex;
+		flex-direction: column; 
+		margin-right: 2vw;
+	}
+	
+	.binance_cmc_ew_index_recommend_img {
+		position: relative;
+		width: 80px;
+		height: 80px;
+		background-color: var(--tw-black);
+		border-radius: 50%;
+		margin-right: 2vw;
+	}
+
+	.binance_cmc_ew_index_recommend_img_name {
+		padding: 0;
+		text-size-adjust: 100%;
+		font-family: BinancePlex,Arial,sans-serif!important;
+		outline: 0;
+		box-sizing: border-box;
+		min-width: 0px;
+		color: rgb(234, 236, 239);
+		font-weight: 600;
+		font-size: 20px;
+		line-height: 28px;
+		margin-top: 2vh;
+		margin-left: -1vw;
+	}
+
+	#binance_cmc_ew_index_recommend_wrapper_div { 
+		width: 100%;
+		height: 70vh;
+		margin: auto;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+	}
+
+	.binance_cmc_ew_index_recommend_coin_div {
+		width: 100%;
+		margin: 16vh auto 0vh 11.5vh;
+		display: inline-flex;
+		align-items: center;
+	}
+}
+
+
+@media (max-height: 700px) {
+	.binance_cmc_ew_index_recommend_img {
+		position: relative;
+		width: 60px;
+		height: 60px;
+		background-color: var(--tw-black);
+		border-radius: 50%;
+		margin-right: 2vw;
+	}
+
+	#binance_cmc_ew_index_recommend_wrapper_div { 
+		width: 100%;
+		height: 100%;
+		margin: auto;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+	}
+
+	.binance_cmc_ew_index_recommend_coin_div {
+		margin: 16vh auto 0vh 7.5vh;
+	}
+}

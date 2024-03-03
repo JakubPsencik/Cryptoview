@@ -39,8 +39,6 @@ recomCoinsButton.addEventListener("click", () => {
 	page_binance_index_asset.style.zIndex = "998";
 
 	auto_invest_calc_div.style.display = "none";
-	
-	console.log("clicked");
 });
 
 document.getElementById("binance_index_asset_cancel_button").addEventListener("click", () => {

@@ -289,7 +289,7 @@ def get_binance_rebalanace_kline_data(symbol, interval, start_date, end_date):
 	#print("get_binance_kline_data: " + symbol + '\n')
 	# Construct the URL
 	url = f"{base_url}?symbol={symbol}&interval={interval}&startTime={start_date}&endTime={end_date}&limit={1000}"
-
+	print(url)
 	# Make the API request
 	response = requests.get(url)
 	
@@ -300,26 +300,21 @@ def get_binance_rebalanace_kline_data(symbol, interval, start_date, end_date):
 		return None
 
 def Rebalance(AmountOfBaseCurrency1, AmountOfBaseCurrency2, newPair1Price, newPair2Price, time1, time2, alloc1,alloc2, rebalanceRatio, rebalancingResults):
-	
+
 	newPair1QuoteAmount = AmountOfBaseCurrency1 * newPair1Price
 	newPair2QuoteAmount = AmountOfBaseCurrency2 * newPair2Price
 
 	QuoteTotal = newPair1QuoteAmount + newPair2QuoteAmount
-	#print(alloc1)
-	#print(alloc2)
+
 	pair1Ratio = abs(alloc1 - (newPair1QuoteAmount / QuoteTotal))
 	pair2Ratio = abs(alloc2 - (newPair2QuoteAmount / QuoteTotal))
 	
-	# if (50% - calculated-ration) je kladne tak dokupuju -> tzn +
-	# if (50% - calculated-ration) je zaporne tak prodavam -> tzn -
+	# if (50% - calculated-ratio) je kladne tak dokupuju -> tzn +
+	# if (50% - calculated-ratio) je zaporne tak prodavam -> tzn -
 	
 	if((pair1Ratio > rebalanceRatio) or (pair2Ratio > rebalanceRatio)):
-		#print("rebalance triggered")
-		#print(f"newPair1QuoteAmount / QuoteTotal: {newPair1QuoteAmount / QuoteTotal}, newPair2QuoteAmount / QuoteTotal: {newPair2QuoteAmount / QuoteTotal}\n")
-		#print(f"ratio1: {0.5 - (newPair1QuoteAmount / QuoteTotal)}, ratio2: {0.5 - (newPair2QuoteAmount / QuoteTotal)}\n")
-		ratio1 = 0.5 - (newPair1QuoteAmount / QuoteTotal)
-		ratio2 = 0.5 - (newPair2QuoteAmount / QuoteTotal)
-
+		ratio1 = alloc1 - (newPair1QuoteAmount / QuoteTotal)
+		ratio2 = alloc2 - (newPair2QuoteAmount / QuoteTotal)
 
 		TriggerRebalance(ratio1, ratio2, newPair1QuoteAmount, newPair2QuoteAmount, QuoteTotal, time1, time2, rebalancingResults)
 	else:
@@ -352,19 +347,12 @@ def TriggerRebalance(pair1Ratio, pair2Ratio, newPair1QuoteAmount, newPair2QuoteA
 	#append record when rebalance triggered
 	rebalancingResults.append([time1, time2, pair1amt,pair2amt,QuoteTotal, 1])
 
-	return
-
 def SimulateRebalancing(pair1Data,   pair2Data, pair1QuoteAssest, pair2QuoteAssest, ratio1, ratio2, rebalanceRatio):
 	
 	#global values
 	rebalancingResults = []
 
 	for i in range(1, len(pair1Data)):
-
-		#print(f"Cycle Number: {i}\n")
-
-		#print(f"newMultiplier1: ' {pair1Data[i][4]}\n")
-		#print(f"newMultiplier2: ' {pair2Data[i][4]}\n")
 
 		#toto je ke 2. a vyssi iteraci
 		amtOfBase1 = (pair1QuoteAssest) / float(pair1Data[0][4])
@@ -404,19 +392,19 @@ def getRebalancing():
 	#print(f"{s}, || {e}")
 
 	# Retrieve Kline data
-	BTCUSDT_kline_data = get_binance_rebalanace_kline_data(symbols[0], interval, s, e)
-	BNBUSDT_kline_data = get_binance_rebalanace_kline_data(symbols[1], interval, s, e)
+	PAIR1_kline_data = get_binance_rebalanace_kline_data(symbols[0], interval, s, e)
+	PAIR2_kline_data = get_binance_rebalanace_kline_data(symbols[1], interval, s, e)
 
-	#print(BTCUSDT_kline_data)
-	#print(len(BNBUSDT_kline_data))
+	#print(PAIR1_kline_data)
+	#print(len(PAIR2_kline_data))
 
 	ratio1 = int(settings[1]) / 100
 	ratio2 = int(settings[3]) / 100
 
 	#print(f"{ratio1}, {ratio2}")
 
-	amtOfBase1 = (ratio1 * int(settings[4])) / float(BTCUSDT_kline_data[0][4])
-	amtOfBase2 = (ratio2 * int(settings[4])) / float(BNBUSDT_kline_data[0][4])
+	amtOfBase1 = (ratio1 * int(settings[4])) / float(PAIR1_kline_data[0][4])
+	amtOfBase2 = (ratio2 * int(settings[4])) / float(PAIR2_kline_data[0][4])
 
 	pair1QuoteAssest = ratio1 * int(settings[4])
 	pair2QuoteAssest =  ratio2 * int(settings[4])
@@ -425,9 +413,9 @@ def getRebalancing():
 	#(rebalanceRatio)
 	#1. iterace
 	
-	Rebalance(amtOfBase1,amtOfBase2, float(BTCUSDT_kline_data[0][4]), float(BNBUSDT_kline_data[0][4]),  BTCUSDT_kline_data[0][0], BNBUSDT_kline_data[0][0], ratio1, ratio2, rebalanceRatio, rebalancingResults)
+	Rebalance(amtOfBase1,amtOfBase2, float(PAIR1_kline_data[0][4]), float(PAIR2_kline_data[0][4]), PAIR1_kline_data[0][0], PAIR2_kline_data[0][0], ratio1, ratio2, rebalanceRatio, rebalancingResults)
 
-	rebalancingResults = SimulateRebalancing(BTCUSDT_kline_data,   BNBUSDT_kline_data, pair1QuoteAssest, pair2QuoteAssest,  ratio1, ratio2, rebalanceRatio)
+	rebalancingResults = SimulateRebalancing(PAIR1_kline_data, PAIR2_kline_data, pair1QuoteAssest, pair2QuoteAssest,  ratio1, ratio2, rebalanceRatio)
 
 	processed_data = []
 	data0 = []
@@ -445,7 +433,7 @@ def getRebalancing():
 
 	
 	data1 = []
-	for i in BTCUSDT_kline_data:
+	for i in PAIR1_kline_data:
 		try:
 			item = {
 				"time": i[0] / 1000,
@@ -462,7 +450,7 @@ def getRebalancing():
 
 	
 	data2 = []
-	for i in BNBUSDT_kline_data:
+	for i in PAIR2_kline_data:
 		try:
 			item = {
 				"time": i[0] / 1000,
@@ -477,8 +465,6 @@ def getRebalancing():
 
 		data2.append(item)
 
-	
-
 	processed_data.append(data1)
 	processed_data.append(data2)
 	processed_data.append(data0)
@@ -488,21 +474,6 @@ def getRebalancing():
 	
 def start_spotDCA(historical_data, settings, SpotDCAResults):
 	#start Spot DCA by buying 1,000 USDT worth of BTC.
-
-	'''
-	#inputs from the form
-	settings = [
-		request.args.get("pair"),
-		request.args.get("price_deviation"),
-		request.args.get("take_profit"),
-		request.args.get("base_order"),
-		request.args.get("order_size"),
-		request.args.get("number_of_orders"),
-		request.args.get("interval"),
-		request.args.get("start"),
-		request.args.get("end")
-	]
-	'''
 
 	price_deviation = float(settings[1]) / 100 #%
 	take_profit =float(settings[2]) / 100 #% 
