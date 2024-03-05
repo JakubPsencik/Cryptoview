@@ -586,7 +586,6 @@ zaver - co sme splnili, co by slo zlepsit, atd..
 
 vektorova grafika
 
-
 poznamky k rebalancing botovi:
 - funguje dobre, ale je nastaveny jenom na procentualni zmenu
 - musim pridat funkcionalitu, kdy to ten bot bude kontrolovat v danem datetimu

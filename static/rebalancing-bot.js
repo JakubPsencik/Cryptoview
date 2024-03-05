@@ -147,3 +147,223 @@ async function setRebalancePoints(url) {
 	}
 
 }
+
+// input form handler
+
+const rb_input = document.getElementById("rebalancing_bot_search_input");
+const rb_dropdown = document.getElementById("rebalancing_bot_search_input_list");
+
+const rb_addCoinsButton = document.getElementById("rebalancing_bot_add_coins_bn");
+const rb_recomCoinsButton = document.getElementById("rebalancing_bot_recom_coins_bn");
+
+//const selectedInterval = document.getElementById("rebalancing_bot_interval_selector_button_wrapper");
+
+rb_addCoinsButton.addEventListener("click", () => {
+
+	document.getElementById("rebalancing_bot_search_div").style.display = "block";
+	document.getElementById("rebalancing_bot_search_bar_wrapper").style.display = "inline-flex";
+	document.getElementById("rebalancing_bot_search_input_list").style.display = "block";
+
+});
+
+document.addEventListener("click", (event) => {
+  const target = event.target;
+  const searchBarWrapper = document.getElementById("rebalancing_bot_search_bar_wrapper");
+  const searchInputList = document.getElementById("rebalancing_bot_search_input_list");
+  const wrapper = document.getElementById("rebalancing_bot_search_div");
+
+  if (target !== rb_addCoinsButton && !searchBarWrapper.contains(target) && !searchInputList.contains(target) && !wrapper.contains(target)) {
+	searchBarWrapper.style.display = "none";
+	searchInputList.style.display = "none";
+	wrapper.style.display = "none";
+  }
+
+});
+
+rb_recomCoinsButton.addEventListener("click", () => {
+	const page_binance_index_asset = document.getElementById("rebalance_page_binance_index_asset");
+	const rebalancing_bot_div = document.getElementById("rebalance_settings_div");
+
+	page_binance_index_asset.style.display = "block";
+	page_binance_index_asset.style.zIndex = "998";
+
+	rebalancing_bot_div.style.display = "none";
+});
+
+document.getElementById("binance_index_asset_cancel_button").addEventListener("click", () => {
+	const page_binance_index_asset = document.getElementById("page_binance_index_asset");
+	page_binance_index_asset.style.display = "none";
+
+	const rebalancing_bot_div = document.getElementById("rebalance_settings_div");
+	rebalancing_bot_div.style.display = "block";
+});
+
+const rb_selected_coins_in_index_wrapper = document.getElementById("rebalancing_bot_index_wrapper");
+
+if (rb_selected_coins_in_index_wrapper.children.length > 2) {
+	const index_settings_wrapper = document.getElementById("rebalancing_bot_index_settings_wrapper");
+	index_settings_wrapper.style.display = "flex";
+}
+
+input.addEventListener("input", () => {
+	rbFilterSuggestions(input.value);
+});
+
+async function rbFilterSuggestions(inputValue) {
+	const filteredSuggestions =  binanceIndexAssetCoins.filter((suggestion) => {
+	  return suggestion.toLowerCase().startsWith(inputValue.toLowerCase());
+	});
+
+	rbDisplaySuggestions(filteredSuggestions);
+}
+
+function rbDisplaySuggestions(suggestionsList) {
+	rb_dropdown.innerHTML = "";
+
+	if(suggestionsList.length == binanceIndexAssetCoins.length) { 
+		return null;
+	}
+
+	if (suggestionsList.length > 0) {
+	suggestionsList.forEach((suggestion) => {
+
+		const coinDiv = document.createElement("div");
+		coinDiv.classList.add("suggestion_wrapper");
+
+		let img = document.createElement("img");
+		img.setAttribute("src", `static/img/${suggestion}.png`);
+		img.setAttribute("loading", 'lazy');
+		img.setAttribute("class", 'rebalancing_bot_suggestion_image');
+
+
+		const coinNameDiv = document.createElement("div");
+		coinNameDiv.classList.add("coin_name_div");
+		coinNameDiv.textContent = suggestion;
+		/*
+		coinNameDiv.addEventListener("click", () => {
+		input.value = suggestion;
+		rb_dropdown.innerHTML = "";
+
+		});*/
+
+		coinDiv.addEventListener("click", () => {
+			const index_wrapper = document.getElementById("rebalancing_bot_index_wrapper");
+	
+			const newWrapper = coinDiv.cloneNode(true);
+			newWrapper.classList.add("selected_coin_wrapper");
+
+			if(index_wrapper.children.length < 12) {
+
+				const allocationInput = document.createElement("input");
+				allocationInput.setAttribute("data-bn-type", "input");
+				allocationInput.setAttribute("placeholder", "Enter at least 10%");
+				allocationInput.setAttribute("class", "rebalancing_bot_allocation_input");
+				allocationInput.setAttribute("value", "10");
+
+				allocationInput.addEventListener("input", (event) => {
+					let inputValue = event.target.value;
+					inputValue = inputValue.replace(/[^0-9]/g, ""); // Remove non-numeric characters
+					inputValue = Math.min(Math.max(parseInt(inputValue), 0), 100); // Restrict the value between 0 and 100
+					event.target.value = inputValue;
+				});
+				newWrapper.appendChild(allocationInput);
+		
+				const percentDiv = document.createElement("div");
+				percentDiv.classList.add("rebalancing_bot_percent");
+				percentDiv.textContent = "%";
+				newWrapper.appendChild(percentDiv);
+
+				
+				const removeButton = document.createElement("button");
+				removeButton.classList.add("rebalancing_bot_remove_button");
+				removeButton.textContent = "X";
+				newWrapper.appendChild(removeButton);
+
+				removeButton.addEventListener("click", () => {
+					newWrapper.remove();
+					if(index_wrapper.children.length == 2) {
+						document.getElementById("rebalancing_bot_no_coins_selected").style.display = "block";
+						document.getElementById("rebalancing_bot_index_settings_wrapper").style.display = "none";
+					}
+					
+				});
+
+				//add coin to and index
+				index_wrapper.appendChild(newWrapper);
+				document.getElementById("rebalancing_bot_no_coins_selected").style.display = "none";
+			}
+			const index_settings_wrapper = document.getElementById("rebalancing_bot_index_settings_wrapper");
+			if(index_wrapper.children.length > 2) {
+				index_settings_wrapper.style.display = "flex";
+			}
+			
+		});
+
+		coinDiv.append(img);
+		coinDiv.append(coinNameDiv);
+		rb_dropdown.appendChild(coinDiv);
+	});
+	} else {
+		document.getElementById("rebalancing_bot_no_coins_selected").style.display = "block";
+	}
+}
+
+async function rb_createIndexAssetCoinRow(coinName, allocation) {
+
+	const coinDiv = document.createElement("div");
+	coinDiv.classList.add("suggestion_wrapper");
+
+	let img = document.createElement("img");
+	img.setAttribute("src", `static/img/${coinName}.png`);
+	img.setAttribute("loading", 'lazy');
+	img.setAttribute("class", 'rebalancing_bot_suggestion_image');
+
+	const coinNameDiv = document.createElement("div");
+	coinNameDiv.classList.add("coin_name_div");
+	coinNameDiv.textContent = coinName;
+	
+	coinDiv.append(img);
+	coinDiv.append(coinNameDiv);
+
+	const index_wrapper = document.getElementById("rebalancing_bot_index_wrapper");
+
+	coinDiv.classList.add("selected_coin_wrapper");
+
+	const allocationInput = document.createElement("input");
+	allocationInput.setAttribute("data-bn-type", "input");
+	allocationInput.setAttribute("placeholder", "Enter at least 10%");
+	allocationInput.setAttribute("class", "rebalancing_bot_allocation_input");
+	allocationInput.setAttribute("value", `${allocation}`);
+
+	allocationInput.addEventListener("input", (event) => {
+		let inputValue = event.target.value;
+		inputValue = inputValue.replace(/[^0-9]/g, ""); // Remove non-numeric characters
+		inputValue = Math.min(Math.max(parseInt(inputValue), 0), 100); // Restrict the value between 0 and 100
+		event.target.value = inputValue;
+	});
+	coinDiv.appendChild(allocationInput);
+
+	const percentDiv = document.createElement("div");
+	percentDiv.classList.add("rebalancing_bot_percent");
+	percentDiv.textContent = "%";
+	coinDiv.appendChild(percentDiv);
+
+	
+	const removeButton = document.createElement("button");
+	removeButton.classList.add("rebalancing_bot_remove_button");
+	removeButton.textContent = "X";
+	coinDiv.appendChild(removeButton);
+
+	removeButton.addEventListener("click", () => {
+		coinDiv.remove();
+		if(index_wrapper.children.length == 2) {
+			document.getElementById("rebalancing_bot_no_coins_selected").style.display = "block";
+			document.getElementById("rebalancing_bot_index_settings_wrapper").style.display = "none";
+		}
+		
+	});
+
+	//add coin to and index
+	index_wrapper.appendChild(coinDiv);
+	document.getElementById("rebalancing_bot_no_coins_selected").style.display = "none";
+}

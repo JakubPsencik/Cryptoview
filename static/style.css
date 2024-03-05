@@ -64,6 +64,18 @@ body, #maindiv {
 
 }
 
+.price-info-chart_dca {
+
+	position: relative;
+	height: 70vh;
+	max-height: 70vh;
+	flex: 1;
+	overflow: hidden;
+	width: 98%;
+	padding: 0;
+
+}
+
 @media screen and (max-height: 768px) {
 
 	.price-info-chart {

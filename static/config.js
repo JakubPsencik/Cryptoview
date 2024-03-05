@@ -30,10 +30,10 @@ display_savings_staking_data("http://127.0.0.1:5000/savings")
 */
 $(document).ready(async () => {
 
-	coin1 = document.getElementById("rebalance-coin1").value;
-	alloc1 = document.getElementById("rebalance-coin1-allocation").value;
-	coin2 = document.getElementById("rebalance-coin2").value;
-	alloc2 = document.getElementById("rebalance-coin2-allocation").value;
+	coin1 = "BTC";
+	alloc1 = 50;
+	coin2 = "ETH";
+	alloc2 = 50;
 	investment = document.getElementById("rebalance-investment").value;
 	ratio = document.getElementById("rebalance-ratio").value;
 	selectElement = document.getElementById("rebalance-interval");
@@ -169,6 +169,9 @@ const coins = ['BTCEUR', 'ETHEUR', 'BNBEUR', 'XRPEUR', 'SOLEUR', 'ADAEUR', 'TRXE
 //}
 
 displayBinanceIndexAssetData("http://127.0.0.1:5000/binanceIndexAsset");
+
+/*const auto_invest_bia = new BinanceIndexAsset("auto_invest", [], "auto_invest_calc_index_wrapper");
+auto_invest_bia.displayBinanceIndexAssetData("http://127.0.0.1:5000/binanceIndexAsset");*/
 
 displayBinanceCmcEwIndex("http://127.0.0.1:5000/CMC");
 

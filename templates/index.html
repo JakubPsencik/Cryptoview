@@ -114,7 +114,6 @@
 						</div> <!--END PAGE BINANCE INDEX ASSET -->
 						
 						<div id="auto_invest_calc_div">
-							
 							<div id="auto_invest_calc_form_header">
 								<div>
 									Create your plan
@@ -294,19 +293,48 @@
 								<div id="container11_4" class="price-info-chart"></div>
 							</div>
 							<div class="rebalance-widget">
-								<div>
-									<div style="display: flex; flex-direction: row;">
-										<label style=" display: block; margin: 5px;">1</label>
-										<input id="rebalance-coin1" type="text" value="BTC" class="rebalance-settings-form-input">
-										<input id="rebalance-coin1-allocation" type="number" value=50 class="rebalance-settings-form-input">
-									</div>
 
-									<div style="display: flex; flex-direction: row;">
-										<label style=" display: block; margin: 5px;">2</label>
-										<input id="rebalance-coin2" type="text" value="BNB" class="rebalance-settings-form-input">
-										<input id="rebalance-coin2-allocation" type="number" value=50 class="rebalance-settings-form-input">
+								<div id="rebalance_page_binance_index_asset" class="b-idx-asset"> 
+									<div id="binance_index_asset_main_div">
+										<div style="width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; margin-left: 95%;">
+											<button id="binance_index_asset_cancel_button" class="auto_invest_calc_remove_button">X</button>
+										</div>
+										
 									</div>
+								</div> <!--END PAGE BINANCE INDEX ASSET -->
+								
+								<div id="rebalancing_bot_buttons_wrapper">
+									<button data-bn-type="button" id="rebalancing_bot_add_coins_bn">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" id="rebalancing_bot_add_coins_bn_plus_icon">
+											<path d="M13.5 3h-3v7.5H3v3h7.5V21h3v-7.5H21v-3h-7.5V3z" fill="currentColor"></path>
+										</svg>
+										Add Coins
+									</button>
 
+									<button data-bn-type="button" id="rebalancing_bot_recom_coins_bn">Recommended For You</button>
+								</div>
+
+								<!--z cmc-->
+
+								<div id="rebalancing_bot_search_div">
+									<div id="rebalancing_bot_search_bar_wrapper">
+										<img src="/static/img/search-icon.png" class="rebalancing_bot_search_icon">
+										<input id="rebalancing_bot_search_input" type="text" placeholder="Search" class="rebalancing_bot_search_div">
+									</div>
+									
+									<div id="rebalancing_bot_search_input_list"></div>
+								</div>
+								
+								<div id="rebalancing_bot_index_wrapper">
+									<div class="rebalancing_bot_label">Coin Allocation</div>
+									<div id="rebalancing_bot_no_coins_selected">
+										<svg style="width: 6vw; height: auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none" class="css-13hycz7"><path fill-rule="evenodd" clip-rule="evenodd" d="M26 8h38l20 20v60H26V8zm48 29H36v4h38v-4zm0 9H36v4h38v-4zm-38 9h38v4H36v-4zm34 16l-4-4-4 4 4 4 4-4z" fill="url(#not-found-data_svg__paint0)"></path><path opacity="0.15" d="M86 50l3-3 3 3-3 3-3-3zM47 21l3-3 3 3-3 3-3-3zM84 28H64V8l20 20z" fill="#929AA5"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M4.172 73.171l14.5-14.5 5.656 5.658-14.5 14.5-5.656-5.657z" fill="url(#not-found-data_svg__paint1)"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M51 48c0-8.837-7.163-16-16-16s-16 7.163-16 16 7.163 16 16 16 16-7.163 16-16zm4 0c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20z" fill="url(#not-found-data_svg__paint2)"></path><defs><linearGradient id="not-found-data_svg__paint0" x1="55" y1="8" x2="55" y2="88" gradientUnits="userSpaceOnUse"><stop stop-color="#929AA5" stop-opacity="0.1"></stop><stop offset="1" stop-color="#929AA5" stop-opacity="0.25"></stop></linearGradient><linearGradient id="not-found-data_svg__paint1" x1="4.172" y1="68.75" x2="24.328" y2="68.75" gradientUnits="userSpaceOnUse"><stop stop-color="#929AA5"></stop><stop offset="1" stop-color="#76808F"></stop></linearGradient><linearGradient id="not-found-data_svg__paint2" x1="15" y1="48" x2="55" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#929AA5"></stop><stop offset="1" stop-color="#76808F"></stop></linearGradient></defs></svg>
+										<div class="rebalancing_bot_label1">No coin has been selected</div>
+									</div>
+								</div>
+
+								<!--z cmc-->
+								<div id="rebalance_settings_div">
 									<label style=" display: block; margin-bottom: 5px;">Invest Coin</label>
 									<input id="rebalance-investment" type="number" value="1000" class="rebalance-settings-form-input">
 									
@@ -330,6 +358,8 @@
 									
 									<button id="bn_rebalance" style="margin: 5px; background-color: var(--tw-lightblue); color: #fff; padding: 5px 10px; border: none; cursor: pointer;">Submit</button>
 								</div>
+								
+								
 							</div>
 						</div>
 						
@@ -356,7 +386,7 @@
 							</div>
 
 							<div id="spot_dca_chart_wrapper">
-								<div id="container12_1"  class="price-info-chart"></div>
+								<div id="container12_1"  class="price-info-chart_dca"></div>
 							</div>
 
 							<div class="DCA-widget">
@@ -639,6 +669,7 @@
 	<script src="{{url_for('static', filename='get-data.js')}}"></script>
 	<script src="{{url_for('static', filename='ew-index.js')}}"></script>
 	<script src="{{url_for('static', filename='binance_index_asset.js')}}"></script>
+	<script src="{{url_for('static', filename='binance_index_asset copy.js')}}"></script>
 	<script src="{{url_for('static', filename='binance_cmc_ew_index.js')}}"></script>
 	<script src="{{url_for('static', filename='chart.js')}}"></script>
 	<script src="{{url_for('static', filename='config.js')}}"></script>
