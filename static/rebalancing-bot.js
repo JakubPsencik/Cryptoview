@@ -181,21 +181,28 @@ document.addEventListener("click", (event) => {
 });
 
 rb_recomCoinsButton.addEventListener("click", () => {
-	const page_binance_index_asset = document.getElementById("rebalance_page_binance_index_asset");
+	const rebalance_page_binance_index_asset = document.getElementById("rebalance_page_binance_index_asset");
 	const rebalancing_bot_div = document.getElementById("rebalance_settings_div");
+	const rebalance_binance_index_asset_main_div = document.getElementById("rebalance_binance_index_asset_main_div");
 
-	page_binance_index_asset.style.display = "block";
-	page_binance_index_asset.style.zIndex = "998";
+	rebalance_binance_index_asset_main_div.style.display = "block";
+
+	rebalance_page_binance_index_asset.style.display = "block";
+	rebalance_page_binance_index_asset.style.zIndex = "998";
 
 	rebalancing_bot_div.style.display = "none";
 });
 
-document.getElementById("binance_index_asset_cancel_button").addEventListener("click", () => {
-	const page_binance_index_asset = document.getElementById("page_binance_index_asset");
+document.getElementById("rebalance_binance_index_asset_cancel_button").addEventListener("click", () => {
+	const page_binance_index_asset = document.getElementById("rebalance_page_binance_index_asset");
 	page_binance_index_asset.style.display = "none";
 
 	const rebalancing_bot_div = document.getElementById("rebalance_settings_div");
 	rebalancing_bot_div.style.display = "block";
+
+	const rebalance_binance_index_asset_main_div = document.getElementById("rebalance_binance_index_asset_main_div");
+
+	rebalance_binance_index_asset_main_div.style.display = "none";
 });
 
 const rb_selected_coins_in_index_wrapper = document.getElementById("rebalancing_bot_index_wrapper");
@@ -205,8 +212,8 @@ if (rb_selected_coins_in_index_wrapper.children.length > 2) {
 	index_settings_wrapper.style.display = "flex";
 }
 
-input.addEventListener("input", () => {
-	rbFilterSuggestions(input.value);
+rb_input.addEventListener("input", () => {
+	rbFilterSuggestions(rb_input.value);
 });
 
 async function rbFilterSuggestions(inputValue) {
@@ -291,10 +298,6 @@ function rbDisplaySuggestions(suggestionsList) {
 				//add coin to and index
 				index_wrapper.appendChild(newWrapper);
 				document.getElementById("rebalancing_bot_no_coins_selected").style.display = "none";
-			}
-			const index_settings_wrapper = document.getElementById("rebalancing_bot_index_settings_wrapper");
-			if(index_wrapper.children.length > 2) {
-				index_settings_wrapper.style.display = "flex";
 			}
 			
 		});

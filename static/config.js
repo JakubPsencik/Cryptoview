@@ -169,6 +169,7 @@ const coins = ['BTCEUR', 'ETHEUR', 'BNBEUR', 'XRPEUR', 'SOLEUR', 'ADAEUR', 'TRXE
 //}
 
 displayBinanceIndexAssetData("http://127.0.0.1:5000/binanceIndexAsset");
+rb_displayBinanceIndexAssetData("http://127.0.0.1:5000/binanceIndexAsset");
 
 /*const auto_invest_bia = new BinanceIndexAsset("auto_invest", [], "auto_invest_calc_index_wrapper");
 auto_invest_bia.displayBinanceIndexAssetData("http://127.0.0.1:5000/binanceIndexAsset");*/

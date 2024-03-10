@@ -1,6 +1,3 @@
-
-let IndexAssetPageDisplayed = false;
-
 const input = document.getElementById("auto_invest_calc_search_input");
 const dropdown = document.getElementById("auto_invest_calc_search_input_list");
 

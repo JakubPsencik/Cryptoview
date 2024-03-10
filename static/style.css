@@ -115,16 +115,8 @@ body, #maindiv {
 
 /*TABLE*/
 #infodiv1 {
-	/*#d1d4dc
-	position: absolute;
-	top: 15%;
-	left: 70%;
-	border-radius: 25px;
-	border: 3px solid var(--tw-grey);
-	padding: 10px;*/
-
 	position: relative;
-	width: fit-content;
+	min-width: fit-content;
 	height: fit-content;
 	border: 3px solid var(--tw-grey);
 	margin: auto;
@@ -134,12 +126,10 @@ body, #maindiv {
 }
 
 #infodiv2 {
-	/*#d1d4dc*/
 	left: 15%;
 	width: 100%;
 	height: 100px;
 	position: relative;
-	left: 0px;
 	top: 0px;
 	margin-bottom: 3%;
 	margin-left: 5%;
@@ -147,7 +137,6 @@ body, #maindiv {
 	border: 3px solid var(--tw-grey);
 	background: var(--tw-black);
 	color: var(--tw-lightgrey);
-	/*padding: 20px;*/
 }
 
 form{
