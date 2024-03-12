@@ -340,7 +340,6 @@ blokove schema - nejaky konfigurak - jake meny atd atd....
 
 do gitu pridat nastroj pro vizualizaci
 
-
 UDELAT GIT REPO
 
 - data budu brat ze stejne databaze
@@ -589,5 +588,6 @@ vektorova grafika
 poznamky k rebalancing botovi:
 - funguje dobre, ale je nastaveny jenom na procentualni zmenu
 - musim pridat funkcionalitu, kdy to ten bot bude kontrolovat v danem datetimu
-	- tim padem bude potreba aj upravit ten vstupni formular
-- potreba pridat moznost zvoleni 1-10 coinu (to uz je hotove u ew-indexu jen to zkopirovat do rebalancing bota)
+
+
+TABULKA PRODUCT!!!

@@ -227,7 +227,7 @@ async function rb_createAssetDiv(data, parentDiv) {
 		// Create a cancel button
 		let cancelButton = document.createElement("span");
 		cancelButton.innerHTML = "Cancel";
-		cancelButton.classList.add("binance_index_asset_view_allocation_cancel_button");
+		cancelButton.classList.add("rebalancing_index_asset_view_allocation_cancel_button");
 
 		// Add an onclick event to the cancel button
 		cancelButton.onclick = function() {
@@ -285,7 +285,7 @@ async function rb_createAssetDiv(data, parentDiv) {
 		// Create a cancel button
 		let cancelButton = document.createElement("span");
 		cancelButton.innerHTML = "Cancel";
-		cancelButton.classList.add("binance_index_asset_view_allocation_cancel_button");
+		cancelButton.classList.add("rebalancing_index_asset_view_allocation_cancel_button");
 
 		// Add an onclick event to the cancel button
 		cancelButton.onclick = function() {

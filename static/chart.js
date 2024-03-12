@@ -1,16 +1,3 @@
-function createurl() {
-	//opt = document.getElementById("kline_trade_option_id").value
-	pair = document.getElementById("pair_symbol_option_id").value
-	int = document.getElementById("interval_option_id").value
-	amount = document.getElementById("data_amount_option_id").value
-	var url = "http://127.0.0.1:5000/update?kline_trade_option_name=" + "kline"
-		+ "&pair_symbol_option_name=" + pair
-		+ "&interval_option_name=" + int
-		+ "&data_amount_option_name=" + encodeURIComponent(amount);
-
-	return url;
-}
-
 async function setLine(color, counter) {
 
 	const clr = `${color}`

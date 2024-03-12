@@ -345,3 +345,15 @@
 	font-size: 14px;
 	border-radius: 4px;
 }
+
+.rebalancing_index_asset_view_allocation_cancel_button {
+	text-size-adjust: 100%; 
+	background-color: rgb(43, 49, 57);
+	display: block;
+	margin-left: 70vw;
+	margin-top: -4vh;
+	padding: 10px;
+	z-index: 999;
+	position: relative;
+	cursor: pointer;
+}

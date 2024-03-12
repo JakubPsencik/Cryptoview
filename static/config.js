@@ -23,8 +23,42 @@ Slide 2
 	},
 	...
 */
-display_savings_staking_data("http://127.0.0.1:5000/savings")
 
+const autoInvest = new AutoInvest("http://127.0.0.1:5000/autoinvest");
+autoInvest.displayAutoInvestTable();
+
+/* 
+Slide 3
+- získání a zobrazení dat do tabulky Top 10
+- data pochází z tabulek  view_pair_for_trade_ a pro potřeby aplikace byly upraveny do json podoby:
+
+	{
+		"base": "RAD",
+		"compound_interest_total_in_eur": 7.455733,
+		"date_begin": "2023-05-02",
+		"date_end": "2023-05-08",
+		"fixed_deposit_total_in_eur": 1.925318,
+		"pairname": "radbusd",
+		"quote": "BUSD"
+	},
+	{
+		"base": "ORN",
+		"compound_interest_total_in_eur": 2.992203,
+		"date_begin": "2023-05-02",
+		"date_end": "2023-05-08",
+		"fixed_deposit_total_in_eur": 1.316389,
+		"pairname": "ornbusd",
+		"quote": "BUSD"
+	},
+	...
+*/
+
+const simpleEarn = new SimpleEarn("http://127.0.0.1:5000/simpleearn");
+simpleEarn.displaySimpleEarnTable();
+
+/* Slide x - Creating Index Linked Plan
+*/
+displayBinanceIndexAssetData("http://127.0.0.1:5000/binanceIndexAsset");
 
 /* Slide 3 - Rebalancing bot
 */
@@ -52,8 +86,7 @@ $(document).ready(async () => {
 		+ "&interval=" + _interval
 		+ "&start=" + start_date
 		+ "&end=" + end_date;
-
-	//console.log(rebalance_url)
+		
 	setRebalancePoints(rebalance_url);
 });
 
@@ -121,33 +154,6 @@ $(document).ready(async () => {
 	setSpotGridPoints(SpotGrid_url);
 });
 
-/* 
-Slide 6
-- získání a zobrazení dat do tabulky Top 10
-- data pochází z tabulek  view_pair_for_trade_ a pro potřeby aplikace byly upraveny do json podoby:
-
-	{
-		"base": "RAD",
-		"compound_interest_total_in_eur": 7.455733,
-		"date_begin": "2023-05-02",
-		"date_end": "2023-05-08",
-		"fixed_deposit_total_in_eur": 1.925318,
-		"pairname": "radbusd",
-		"quote": "BUSD"
-	},
-	{
-		"base": "ORN",
-		"compound_interest_total_in_eur": 2.992203,
-		"date_begin": "2023-05-02",
-		"date_end": "2023-05-08",
-		"fixed_deposit_total_in_eur": 1.316389,
-		"pairname": "ornbusd",
-		"quote": "BUSD"
-	},
-	...
-*/
-displayTop10("http://127.0.0.1:5000/view");
-
 //setWeekPredictPoints("http://127.0.0.1:5000/weekPredict?&symbol=LTCEUR&interval=1h")
 
 getHistoricalData("http://127.0.0.1:5000/getData?&symbol=BTCEUR")
@@ -168,7 +174,7 @@ const coins = ['BTCEUR', 'ETHEUR', 'BNBEUR', 'XRPEUR', 'SOLEUR', 'ADAEUR', 'TRXE
 	//setEwIndexTableContent(coins[i], `http://127.0.0.1:5000/weekPredict?&symbol=${coins[i]}&interval=1h`)
 //}
 
-displayBinanceIndexAssetData("http://127.0.0.1:5000/binanceIndexAsset");
+
 rb_displayBinanceIndexAssetData("http://127.0.0.1:5000/binanceIndexAsset");
 
 /*const auto_invest_bia = new BinanceIndexAsset("auto_invest", [], "auto_invest_calc_index_wrapper");

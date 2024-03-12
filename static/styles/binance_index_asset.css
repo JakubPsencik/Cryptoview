@@ -105,11 +105,9 @@
 	box-sizing: border-box;
 	margin: 0px;
 	min-width: 0px;
-	grid-template-columns: 1fr 1fr;
 	gap: 12px;
 	margin-top: 12px;
 	width: 100%;
-	display: grid;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -227,7 +225,7 @@
 	user-select: none;
 	cursor: pointer;
 	overflow: hidden;
-	text-overflow: ellipsis;
+	text-overflow: ellipsis;	
 	white-space: nowrap;
 	display: inline-flex;
 	-webkit-box-align: center;
@@ -452,3 +450,15 @@
 		height: 200px;
 	}
 }
+
+@media screen and (max-width: 1560px) {
+
+	.binance_index_asset_div {
+		height: fit-content;
+	}
+	
+	.binance_index_asset_view_allocation_div {
+		flex-direction: column;
+	}
+}
+

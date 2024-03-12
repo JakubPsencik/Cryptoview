@@ -54,6 +54,25 @@ const candlestickSeries2 = price_chart_11_4.addCandlestickSeries({
 
 //Rebalance
 document.getElementById("bn_rebalance").addEventListener("click", function () {
+
+	//tady dostat ty coiny
+	const coinWrapper = document.getElementById("rebalancing_bot_index_wrapper");
+
+	// Get all child nodes
+	var childNodes = coinWrapper.childNodes;
+
+	var coinsWithAllocations = [];
+
+	for (var i = 5; i < childNodes.length; i++) {
+		const indexRow = childNodes[i];
+
+		const coinName = indexRow.childNodes[1].innerHTML;
+		const coinAlloc = indexRow.childNodes[2].value;
+
+		coinsWithAllocations.push([coinName, coinAlloc]);
+	}
+	
+	console.log(coinsWithAllocations);
 	
 	coin1 = document.getElementById("rebalance-coin1").value;
 	alloc1 = document.getElementById("rebalance-coin1-allocation").value;
@@ -66,6 +85,8 @@ document.getElementById("bn_rebalance").addEventListener("click", function () {
 	start_date = document.getElementById("rebalance-start-date").value;
 	end_date = document.getElementById("rebalance-end-date").value;
 
+	// "&coins=" + coinArray
+	// "&allocations=" + allocArray
 
 	var rebalance_url = "http://127.0.0.1:5000/rebalance?"
 		+ "&coin1=" + coin1
@@ -217,7 +238,7 @@ rb_input.addEventListener("input", () => {
 });
 
 async function rbFilterSuggestions(inputValue) {
-	const filteredSuggestions =  binanceIndexAssetCoins.filter((suggestion) => {
+	const filteredSuggestions =  products.filter((suggestion) => {
 	  return suggestion.toLowerCase().startsWith(inputValue.toLowerCase());
 	});
 
@@ -227,7 +248,7 @@ async function rbFilterSuggestions(inputValue) {
 function rbDisplaySuggestions(suggestionsList) {
 	rb_dropdown.innerHTML = "";
 
-	if(suggestionsList.length == binanceIndexAssetCoins.length) { 
+	if(suggestionsList.length == products.length) { 
 		return null;
 	}
 
@@ -272,6 +293,7 @@ function rbDisplaySuggestions(suggestionsList) {
 					inputValue = inputValue.replace(/[^0-9]/g, ""); // Remove non-numeric characters
 					inputValue = Math.min(Math.max(parseInt(inputValue), 0), 100); // Restrict the value between 0 and 100
 					event.target.value = inputValue;
+					allocationInput.setAttribute("value", `${inputValue}`);
 				});
 				newWrapper.appendChild(allocationInput);
 		
@@ -343,6 +365,7 @@ async function rb_createIndexAssetCoinRow(coinName, allocation) {
 		inputValue = inputValue.replace(/[^0-9]/g, ""); // Remove non-numeric characters
 		inputValue = Math.min(Math.max(parseInt(inputValue), 0), 100); // Restrict the value between 0 and 100
 		event.target.value = inputValue;
+		allocationInput.setAttribute("value", `${inputValue}`);
 	});
 	coinDiv.appendChild(allocationInput);
 

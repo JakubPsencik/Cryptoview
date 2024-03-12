@@ -1,236 +1,37 @@
-from flask import Flask, render_template, jsonify, request, redirect, send_from_directory
-import websocket as ws
+from flask import Flask, render_template, jsonify, request
 import config
 from binance.client import Client
-import numpy as np
 import asyncio
 import aiomysql
 import requests
 from datetime import datetime, timedelta
 import math
-import csv
 import os;
 
 app = Flask(__name__)
 
 client = Client(config.API_KEY, config.API_SECRET)
 
-
-@app.route("/", methods=['GET']) #rika flasku, kdy se ma zavolat index() funkce (po zadani ktere url)
+@app.route("/")
 def index():
 	title = "CRYPTOVIEW"
 
 	return render_template("index.html", title=title)
 
-# display data button clicked
-@app.route("/update", methods=['GET'])
-def update():
-	# extract params from url
-	candlesticks = client.get_historical_klines(
-		request.args.get("pair_symbol_option_name"),
-		request.args.get("interval_option_name"),
-		request.args.get("data_amount_option_name"))
-
-	processed_candlesticks = []
-	for data in candlesticks:
-		candlestick = {
-			"time": data[0] / 1000,
-			"open": data[1],
-			"high": data[2],
-			"low": data[3],
-			"close": data[4],
-		}
-
-		processed_candlesticks.append(candlestick)
-
-	return jsonify(processed_candlesticks)
-
-@app.route("/as", methods=['GET'])
-async def show():
+@app.route("/autoinvest", methods=['GET'])
+async def get_auto_invest_data():
 	loop = asyncio.get_event_loop()
 
 	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
 
 	cur = await conn.cursor()
-	await cur.execute("""select pairname, base_currency, quote_currency, course, course_in_eur, compound_interest_total_in_eur, fixed_deposit_total_in_eur, all_no_trades
-						from view_pair_for_trade_all
-						order by fixed_deposit_total_in_eur desc
-						limit 5;""")
-	#print(cur.description)
-	data = await cur.fetchall()
-	await cur.close()
-	conn.close()
-
-	return jsonify(data)
-
-@app.route("/logos", methods=['GET'])
-async def parse():
-	
-	urls = open("urls.txt", "r")
-	data = urls.read()
-	lst = data.split("\n")
-	urls.close()
-
-	return lst
-
-@app.route("/lastPrices", methods=['GET'])
-async def getLastPrices():
-	loop = asyncio.get_event_loop()
-
-	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
-
-	cur = await conn.cursor()
-	await cur.execute("""select pairname 
-							from peak_valley_stats_all
-							where pairname not like '%000%'
-							group by pairname
-							order by SUM(fixed_deposit_total_in_eur) desc
-							limit 20;""")
-	
-	data = await cur.fetchall()
-	data = ["\"{}\"".format(row[0]) for row in data]
-
-	
-	#print(data)
-	#print("##")
-	await cur.execute("""select pairname,type,date_begin,date_end, compound_interest_total_in_eur, fixed_deposit_total_in_eur
-							from peak_valley_stats_all
-							where pairname in ({})
-							and type in ('last_day_01', 'previous_day_01', 'previous_day_02', 'previous_day_03')
-							and (date_begin is not null and fixed_deposit_total_in_eur is not null)""".format(",".join(data)))
-	
-	data1 = await cur.fetchall()
-	#print(data1)
-	await cur.close()
-	conn.close()
-	#print(data)
-	#print(data1)
-	data = list(map(lambda x: x.replace('"', ''), data))
-	processed_data = []
-	processed_data.append(data)
-	for d in data1:
-		pair = {
-			"pairname": d[0],
-			"type": d[1],
-			"date_begin": d[2].strftime('%Y-%m-%d'),
-			"date_end": d[3].strftime('%Y-%m-%d'),
-			"compound_interest_total_in_eur": d[4],
-			"fixed_deposit_total_in_eur": d[5],
-		}
-	
-		processed_data.append(pair)
-
-	#print(processed_data)
-
-	return jsonify(processed_data)
-
-@app.route("/view", methods=['GET'])
-async def getViewData():
-
-	processed_data = []
-
-	loop = asyncio.get_event_loop()
-
-	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
-
-	cur = await conn.cursor()
-
-	##select from view_pair_for_trade_day##
-	await cur.execute("""select v.pairname, v.base_currency, v.quote_currency, v.date_begin, v.date_end, v.compound_interest_total_in_eur, v.fixed_deposit_total_in_eur
-							from view_pair_for_trade_day v
-							order by fixed_deposit_total_in_eur desc
-							limit 20;""")
-	
-	daily = await cur.fetchall()
-	daily_pair_names = ["\"{}\"".format(row[0]) for row in daily]
-	
-	##--------------------------------------------------------------------------
-
-	##select from view_pair_for_trade_week##
-	await cur.execute("""select v.pairname, v.base_currency, v.quote_currency, v.date_begin, v.date_end, v.compound_interest_total_in_eur, v.fixed_deposit_total_in_eur
-							from view_pair_for_trade_week v
-							order by fixed_deposit_total_in_eur desc
-							limit 20;""")
-	
-	weekly = await cur.fetchall()
-	weekly_pair_names = ["\"{}\"".format(row[0]) for row in weekly]
-	
-	##--------------------------------------------------------------------------
-
-	##select from view_pair_for_trade_month
-	await cur.execute("""select v.pairname, v.base_currency, v.quote_currency, v.date_begin, v.date_end, v.compound_interest_total_in_eur, v.fixed_deposit_total_in_eur
-						from view_pair_for_trade_month v
-						order by fixed_deposit_total_in_eur desc
-						limit 20;""")
-	
-	monthly = await cur.fetchall()
-	monthly_pair_names = ["\"{}\"".format(row[0]) for row in monthly]
-	##--------------------------------------------------------------------------
-
-	await cur.close()
-	conn.close()
-
-	processed_data.append("daily")
-	processed_data.append(daily_pair_names)
-	for d in daily:
-		pair = {
-			"pairname": d[0],
-			"base": d[1],
-			"quote": d[2],
-			"date_begin": d[3].strftime('%Y-%m-%d'),
-			"date_end": d[4].strftime('%Y-%m-%d'),
-			"compound_interest_total_in_eur": d[5],
-			"fixed_deposit_total_in_eur": d[6],
-		}
-	
-		processed_data.append(pair)
-
-	processed_data.append("weekly")
-	processed_data.append(weekly_pair_names)
-	for d in weekly:
-		pair = {
-			"pairname": d[0],
-			"base": d[1],
-			"quote": d[2],
-			"date_begin": d[3].strftime('%Y-%m-%d'),
-			"date_end": d[4].strftime('%Y-%m-%d'),
-			"compound_interest_total_in_eur": d[5],
-			"fixed_deposit_total_in_eur": d[6],
-		}
-	
-		processed_data.append(pair)
-
-	processed_data.append("monthly")
-	processed_data.append(monthly_pair_names)	
-	for d in monthly:
-		pair = {
-			"pairname": d[0],
-			"base": d[1],
-			"quote": d[2],
-			"date_begin": d[3].strftime('%Y-%m-%d'),
-			"date_end": d[4].strftime('%Y-%m-%d'),
-			"compound_interest_total_in_eur": d[5],
-			"fixed_deposit_total_in_eur": d[6],
-		}
-
-		processed_data.append(pair)
-
-	return jsonify(processed_data)
-
-@app.route("/savings", methods=['GET'])
-async def getSavingsStakingData():
-	loop = asyncio.get_event_loop()
-
-	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
-
-	cur = await conn.cursor()
-	await cur.execute("""select s.*, ssa.interval_day from (SELECT asset, MAX(profit_total_eur) AS highest_profit_price
+	await cur.execute("""SELECT savings.*, ssa.interval_day FROM (SELECT asset, MAX(profit_total_eur) AS highest_profit_price
 							FROM savings_staking_all
 							GROUP BY asset
 							ORDER BY highest_profit_price DESC
-							limit 20) as s
-							join savings_staking_all ssa on s.asset = ssa.asset and s.highest_profit_price = ssa.profit_total_eur
-							order by highest_profit_price desc;""")
+							LIMIT 10) AS savings
+							JOIN savings_staking_all ssa ON savings.asset = ssa.asset AND savings.highest_profit_price = ssa.profit_total_eur
+							ORDER BY highest_profit_price desc;""")
 	
 	data = await cur.fetchall()
 	await cur.close()
@@ -249,9 +50,92 @@ async def getSavingsStakingData():
 
 	return jsonify(processed_data)
 
-@app.route('/<path:filename>')
-def send_file(filename):
-	return send_from_directory('/static/img', filename)
+@app.route("/simpleearn", methods=['GET'])
+async def get_simple_earn_data():
+
+	processed_data = []
+
+	loop = asyncio.get_event_loop()
+
+	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+
+	cur = await conn.cursor()
+
+	##select from view_pair_for_trade_day##
+	await cur.execute("""SELECT v.pairname, v.base_currency, v.quote_currency, v.compound_interest_total_in_eur, v.fixed_deposit_total_in_eur
+							FROM view_pair_for_trade_day v
+							ORDER BY fixed_deposit_total_in_eur DESC
+							LIMIT 10;""")
+	
+	daily = await cur.fetchall()
+	daily_pair_names = ["\"{}\"".format(row[0]) for row in daily]
+	
+	##--------------------------------------------------------------------------
+
+	##select from view_pair_for_trade_week##
+	await cur.execute("""SELECT v.pairname, v.base_currency, v.quote_currency, v.compound_interest_total_in_eur, v.fixed_deposit_total_in_eur
+							FROM view_pair_for_trade_week v
+							ORDER BY fixed_deposit_total_in_eur DESC
+							LIMIT 10;""")
+	
+	weekly = await cur.fetchall()
+	weekly_pair_names = ["\"{}\"".format(row[0]) for row in weekly]
+	
+	##--------------------------------------------------------------------------
+
+	##select from view_pair_for_trade_month
+	await cur.execute("""SELECT v.pairname, v.base_currency, v.quote_currency, v.compound_interest_total_in_eur, v.fixed_deposit_total_in_eur
+						FROM view_pair_for_trade_month v
+						ORDER BY fixed_deposit_total_in_eur DESC
+						LIMIT 10;""")
+	
+	monthly = await cur.fetchall()
+	monthly_pair_names = ["\"{}\"".format(row[0]) for row in monthly]
+	##--------------------------------------------------------------------------
+
+	await cur.close()
+	conn.close()
+
+	processed_data.append("daily")
+	processed_data.append(daily_pair_names)
+	for d in daily:
+		pair = {
+			"pairname": d[0],
+			"base": d[1],
+			"quote": d[2],
+			"compound_interest_total_in_eur": d[3],
+			"fixed_deposit_total_in_eur": d[4],
+		}
+	
+		processed_data.append(pair)
+
+	processed_data.append("weekly")
+	processed_data.append(weekly_pair_names)
+	for d in weekly:
+		pair = {
+			"pairname": d[0],
+			"base": d[1],
+			"quote": d[2],
+			"compound_interest_total_in_eur": d[3],
+			"fixed_deposit_total_in_eur": d[4],
+		}
+	
+		processed_data.append(pair)
+
+	processed_data.append("monthly")
+	processed_data.append(monthly_pair_names)	
+	for d in monthly:
+		pair = {
+			"pairname": d[0],
+			"base": d[1],
+			"quote": d[2],
+			"compound_interest_total_in_eur": d[3],
+			"fixed_deposit_total_in_eur": d[4],
+		}
+
+		processed_data.append(pair)
+
+	return jsonify(processed_data)
 
 def convert_datetime_to_unix_timestamp(datetime_string):
 	"""Converts a datetime string to a Unix timestamp."""
@@ -663,19 +547,6 @@ def extract_whole_item_with_minimum_price_value(list_of_lists):
 
 def start_spotGrid(historical_data, settings, SpotGridResults):
 
-	'''	
-	settings = [
-		request.args.get("pair"),
-		request.args.get("lower"),
-		request.args.get("upper"),
-		request.args.get("grids"),
-		request.args.get("grid_investment"),
-		request.args.get("interval"),
-		request.args.get("start"),
-		request.args.get("end")
-	]
-	'''
-
 	amtOfBase = 0
 	amtOfQuote = 0
 	price_difference = 0
@@ -703,14 +574,6 @@ def start_spotGrid(historical_data, settings, SpotGridResults):
 	#tohle urcite aritmeticke rozdeleni gridu
 	price_difference = (upper_price - lower_price) / number_of_grids
 
-	#trading fees (c): 0.1%.
-	trading_fees = 0.1
-	#The Maximum Profit/Grid = (1 - c) * d / Grid Lower Limit - 2c
-	maximum_profit_per_grid = (1 - trading_fees) * price_difference / lower_price - 2 * trading_fees
-	#The Minimum Profit/Grid = (Grid Upper Limit*(1 - c)) / (Grid Lower Limit - d) - 1 - c
-	minimum_profit_per_grid = (upper_price * (1 - trading_fees)) / (lower_price - price_difference) - 1 - trading_fees
-	#print(f"max profit: {maximum_profit_per_grid} - min profit: {minimum_profit_per_grid}")
-
 	#za kolik quote meny budu kupovat base menu pri grid triggeru
 	AmtOfQuoteAssetWhenGridTriggered = amount_invested / price_difference
 
@@ -723,7 +586,6 @@ def start_spotGrid(historical_data, settings, SpotGridResults):
 	current_price = float(historical_data[1][4])
 
 	close_to_grid_price_difference = []
-	triggered_grid_price = 0
 
 	SpotGridResults.append([upper_price, lower_price, price_difference, number_of_grids, -1])
 
@@ -1352,3 +1214,28 @@ async def get_binance_cmc_ew_index_coins():
 	await cursor.close()
 
 	return jsonify(data)
+
+@app.route("/products", methods=['GET'])
+async def get_products():
+
+	loop = asyncio.get_event_loop()
+	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+
+	#retrieve data from binance_index table
+	cursor = await conn.cursor()
+	query = """select distinct base_currency from product
+				UNION
+				select distinct quote_currency from product;"""
+	
+	await cursor.execute(query)
+	
+	data = await cursor.fetchall()
+	await cursor.close()
+
+	result = []
+
+	for d in data:
+		d = str(d)[2:-3]
+		result.append(d)
+
+	return jsonify(result)

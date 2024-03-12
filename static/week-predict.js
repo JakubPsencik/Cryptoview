@@ -115,8 +115,6 @@ async function setWeekPredictPoints(url) {
 	} catch (error) {
 		console.log(error);
 	}
-	
-
 }
 
 function InitializeWeekPredictPointRecord(id, _time, _total, amtOfBase, _duration) {
