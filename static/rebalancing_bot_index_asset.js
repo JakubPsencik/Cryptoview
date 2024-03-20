@@ -1,5 +1,5 @@
 async function rb_displayBinanceIndexAssetData(url) {
-	console.log("rb_displayBinanceIndexAssetData");
+	
 	const divsToRender = 1;
 	var divsRenderedCounter = 0;
 	var indexAssetRowDivNumber = 1;
@@ -41,7 +41,7 @@ async function rb_displayBinanceIndexAssetData(url) {
 }
 
 async function rb_createAssetDiv(data, parentDiv) {
-	console.log("rb_createAssetDiv");
+	
 	//main div
 	const div = document.createElement('div');
 	div.classList.add("binance_index_asset_div");

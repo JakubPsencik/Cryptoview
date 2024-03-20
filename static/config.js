@@ -75,7 +75,6 @@ $(document).ready(async () => {
 	start_date = document.getElementById("rebalance-start-date").value;
 	end_date = document.getElementById("rebalance-end-date").value;
 
-
 	var rebalance_url = "http://127.0.0.1:5000/rebalance?"
 		+ "&coin1=" + coin1
 		+ "&alloc1=" + alloc1
@@ -87,7 +86,7 @@ $(document).ready(async () => {
 		+ "&start=" + start_date
 		+ "&end=" + end_date;
 		
-	setRebalancePoints(rebalance_url);
+	//setRebalancePoints(rebalance_url);
 });
 
 /* Slide 4 - Spot DCA bot
@@ -119,8 +118,8 @@ $(document).ready(async () => {
 		+ "&start=" + start_date
 		+ "&end=" + end_date;
 	
-	InitializeSpotDCAHeader();
-	setSpotDCAPoints(DCA_url);
+	//InitializeSpotDCAHeader();
+	//setSpotDCAPoints(DCA_url);
 
 });
 
@@ -151,12 +150,12 @@ $(document).ready(async () => {
 		+ "&start=" + start_date
 		+ "&end=" + end_date;
 
-	setSpotGridPoints(SpotGrid_url);
+	//setSpotGridPoints(SpotGrid_url);
 });
 
 //setWeekPredictPoints("http://127.0.0.1:5000/weekPredict?&symbol=LTCEUR&interval=1h")
 
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=BTCEUR")
+//getHistoricalData("http://127.0.0.1:5000/getData?&symbol=BTCEUR")
 /*getHistoricalData("http://127.0.0.1:5000/getData?&symbol=ETHEUR")
 getHistoricalData("http://127.0.0.1:5000/getData?&symbol=BNBEUR")
 getHistoricalData("http://127.0.0.1:5000/getData?&symbol=XRPEUR")

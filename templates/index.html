@@ -288,8 +288,6 @@
 						<div id="rebalancing_bot_main_content_wrapper">
 							<div id="rebalancing_bot_chart_wrapper">
 								<div id="rebalancing-info-div"></div>
-								<div id="container11_3" class="price-info-chart"></div>
-								<div id="container11_4" class="price-info-chart"></div>
 							</div>
 							<div id="rebalance-widget" class="rebalance-widget">
 
@@ -350,11 +348,47 @@
 									</select>
 
 									<label style=" display: block; margin-bottom: 5px;">Start date</label>
-									<input id="rebalance-start-date" type="datetime-local" value="2023-09-12T08:00" class="rebalance-settings-form-input" >
+									<input id="rebalance-start-date" type="datetime-local" value="2024-03-19T01:00" class="rebalance-settings-form-input" >
 
 									<label style=" display: block; margin-bottom: 5px;">End date</label>
-									<input id="rebalance-end-date" type="datetime-local" value="2023-11-13T08:00" class="rebalance-settings-form-input">
+									<input id="rebalance-end-date" type="datetime-local" value="2024-03-19T06:00" class="rebalance-settings-form-input">
 									
+									<div style="display: flex; flex-direction: column;">
+										<div style="display: inline-flex; justify-content: space-evenly; margin-top: 2vh; margin-bottom: 2vh;">
+											<label id="label-value1">%</label>
+											<input type="radio" id="rebalance-interval-percentage-option-radio-value" name="MyChoice" value="percentage">
+		
+											<select id="rebalance-interval-percentage-option" class="settings">
+												<option value="0.5%">0.5%</option>
+												<option value="1%">1%</option>
+												<option value="2%">2%</option>
+												<option value="5%">5%</option>
+												<option value="10%">10%</option>
+												<option value="20%">20%</option>
+												<option value="30%">30%</option>
+												<option value="50%">50%</option>
+											</select>
+										</div>
+
+										<div style="display: inline-flex; justify-content: space-evenly; margin-top: 2vh; margin-bottom: 2vh;">
+											<label id="label-value2">time</label>
+											<input type="radio" id="rebalance-interval-time-option-radio-value" name="MyChoice" value="time">
+		
+											<select id="rebalance-interval-time-option" class="settings">
+												<option value="30m">30m</option>
+												<option value="1h">1h</option>
+												<option value="4h">4h</option>
+												<option value="8h">8h</option>
+												<option value="12h">12h</option>
+												<option value="1d">1d</option>
+												<option value="3d">3d</option>
+												<option value="7d">7d</option>
+												<option value="14d">28d</option>
+											</select>
+	
+										</div>
+									</div>
+
 									<button id="bn_rebalance" style="margin: 5px; background-color: var(--tw-lightblue); color: #fff; padding: 5px 10px; border: none; cursor: pointer;">Submit</button>
 								</div>
 								

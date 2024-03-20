@@ -15,7 +15,6 @@ const getProducts = async function() {
 	try {
 		const result = await getProducts();
 		products = result;
-		console.log(result);
 	} catch (error) {
 		console.error("Error fetching products:", error);
 	}
