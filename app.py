@@ -170,8 +170,7 @@ def get_binance_kline_data(symbol, interval, start_date, end_date):
 def get_binance_rebalanace_kline_data(symbol, interval, start_date, end_date):
 	base_url = "https://api.binance.com/api/v3/klines"
 
-	#print("get_binance_kline_data: " + symbol + '\n')
-	# Construct the URL
+
 	url = f"{base_url}?symbol={symbol}&interval={interval}&startTime={start_date}&endTime={end_date}&limit={1000}"
 	print(url)
 	# Make the API request
@@ -195,26 +194,29 @@ def Rebalance(coins_amt_of_base, new_coins_prices, timestamps, coin_allocations,
 	for i in range(0, len(new_coins_quote_amount)):
 		quote_total += new_coins_quote_amount[i]
 
+	tmp_ratios = []
 	coin_ratios = []
 
 	for i in range(0, len(new_coins_quote_amount)):
-		coin_ratios.append(new_coins_quote_amount[i] / quote_total)
+		tmp_ratios.append(abs(coin_allocations[i] - (new_coins_quote_amount[i] / quote_total)))
 	
-
+	#print(f"tmp_ratios: {tmp_ratios}")
 	if(option_value == 0):
 
-		for i in range(0, len(coin_ratios)):
+		for i in range(0, len(tmp_ratios)):
 	
 			# if (50% - calculated-ratio) je kladne tak dokupuju -> tzn +
 			# if (50% - calculated-ratio) je zaporne tak prodavam -> tzn -
-			print(f"coin_ratios: {coin_ratios[i]}, rebalanceRatio: {rebalanceRatio}")
-
-			if(coin_ratios[i] > float(rebalanceRatio)):
-				for j in range(0, len(coin_ratios)):
-					coin_ratios[j] = coin_allocations[j] - (new_coins_quote_amount[j] / quote_total)
+			#print(f"coin_ratios: {tmp_ratios[i]}, rebalanceRatio: {rebalanceRatio}")
+			
+			if(tmp_ratios[i] > float(rebalanceRatio)):
+				for j in range(0, len(tmp_ratios)):
+					coin_ratios.append(coin_allocations[j] - (new_coins_quote_amount[j] / quote_total))
+					#print(f"i: {i}, j: {j}, len: {len(coin_ratios)}")
 				
+					
 				trigger_rebalance(coin_ratios, new_coins_quote_amount, quote_total, timestamps, rebalancing_results)
-
+				break
 			else:
 				rebalancing_results.append([timestamps, new_coins_quote_amount, quote_total, 0])
 
@@ -224,16 +226,21 @@ def Rebalance(coins_amt_of_base, new_coins_prices, timestamps, coin_allocations,
 		
 			# if (50% - calculated-ratio) je kladne tak dokupuju -> tzn +
 			# if (50% - calculated-ratio) je zaporne tak prodavam -> tzn -
-			print(f"coin_ratios: {coin_ratios[i]}, rebalanceRatio: {coin_allocations}")
+			#print(f"coin_ratios: {coin_ratios[i]}, rebalanceRatio: {coin_allocations}")
 
 			if(coin_ratios[i] > float(coin_allocations[i])):
 				for j in range(0, len(coin_ratios)):
 					coin_ratios[j] = coin_allocations[j] - (new_coins_quote_amount[j] / quote_total)
 				
 				trigger_rebalance(coin_ratios, new_coins_quote_amount, quote_total, timestamps, rebalancing_results)
+				break
 
 			else:
 				rebalancing_results.append([timestamps, new_coins_quote_amount, quote_total, 0])
+
+	new_coins_quote_amount = []
+	tmp_ratios = []
+	coin_ratios = []
 
 def trigger_rebalance(coin_ratios, new_coins_quote_amount, quote_total, timestamps, rebalancing_results):
 
@@ -245,9 +252,10 @@ def trigger_rebalance(coin_ratios, new_coins_quote_amount, quote_total, timestam
 			pair_amounts.append(new_coins_quote_amount[i] + (quote_total * abs(coin_ratios[i])))
 		else:
 			pair_amounts.append(new_coins_quote_amount[i] - (quote_total * abs(coin_ratios[i])))
-
+	print(pair_amounts)
 	#append record when rebalance triggered
 	rebalancing_results.append([timestamps, pair_amounts, quote_total, 1])
+	pair_amounts = []
 
 def simulate_rebalancing(coins_init_close_prices, coins_data, coins_quote_assests, percentage_ratios, rebalanceRatio, option_value, timestamp_ratio, initial_timestamp):
 
@@ -273,7 +281,7 @@ def simulate_rebalancing(coins_init_close_prices, coins_data, coins_quote_assest
 		#podle casu
 
 		for i in range(0, len(coins_data[0])):
-			print(f"{coins_data[0][i][0]} == {local_init_timestamp}" )
+			#print(f"{coins_data[0][i][0]} == {local_init_timestamp}" )
 			if(coins_data[0][i][0] == local_init_timestamp):
 				local_init_timestamp  += timestamp_ratio
 				#print(f"{coins_data[0][i][0]} == {local_init_timestamp}")

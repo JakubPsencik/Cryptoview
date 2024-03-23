@@ -1,3 +1,28 @@
+var price_chart_14_1 = LightweightCharts.createChart(
+	document.getElementById('container14_1'),
+	{
+		layout: {
+			background: { color: "#131722" },
+			textColor: "#C3BCDB",
+		},
+		grid: {
+			vertLines: { color: "#444" },
+			horzLines: { color: "#444" },
+		},
+		autoSize: true,
+		timeScale: {
+			timeVisible: true,  // Display time on the time scale
+			secondsVisible: false,  // Do not display seconds
+		},
+	}
+);
+
+// Create a candlesticks series
+const price_chart_14_1_candlestickSeries1 = price_chart_14_1.addCandlestickSeries({
+	upColor: "green",
+	downColor: "red",
+});
+
 async function setWeekPredictPoints(url) {
 
 	const markers = [];

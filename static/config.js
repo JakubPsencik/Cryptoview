@@ -64,24 +64,14 @@ displayBinanceIndexAssetData("http://127.0.0.1:5000/binanceIndexAsset");
 */
 $(document).ready(async () => {
 
-	coin1 = "BTC";
-	alloc1 = 50;
-	coin2 = "ETH";
-	alloc2 = 50;
 	investment = document.getElementById("rebalance-investment").value;
-	ratio = document.getElementById("rebalance-ratio").value;
 	selectElement = document.getElementById("rebalance-interval");
 	_interval = selectElement.options[selectElement.selectedIndex].value;
 	start_date = document.getElementById("rebalance-start-date").value;
 	end_date = document.getElementById("rebalance-end-date").value;
 
 	var rebalance_url = "http://127.0.0.1:5000/rebalance?"
-		+ "&coin1=" + coin1
-		+ "&alloc1=" + alloc1
-		+ "&coin2=" + coin2
-		+ "&alloc2=" + alloc2
 		+ "&investment=" + investment
-		+ "&ratio=" + ratio
 		+ "&interval=" + _interval
 		+ "&start=" + start_date
 		+ "&end=" + end_date;

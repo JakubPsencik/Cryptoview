@@ -752,6 +752,28 @@
 	-webkit-box-align: center;
 }
 
+#auto_invest_calc_interval_detail_selector_dateFrom_wrapper {
+	width: 80%;
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	line-height: 20px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin-top: 0.5vh;
+	margin-left: 4vw;
+	margin-right: auto;
+	min-width: 0px;
+	display: flex;
+	gap: 8px;
+	-webkit-box-pack: justify;
+	-webkit-box-align: center;
+}
+
 #auto_invest_calc_interval_selector_button_wrapper {
 	
 	text-size-adjust: 100%;
@@ -906,6 +928,39 @@
 	border-style: solid;
 	border-color: transparent;
 	width: 110px;
+}
+
+#auto_invest_calc_interval_detail_selector_dateFrom_inner_wrapper {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: fit-content;
+	display: inline-flex;
+	position: relative;
+	-webkit-box-align: center;
+	align-items: center;
+	line-height: 1.6;
+	height: 40px;
+	background-color: rgb(43, 49, 57);
+	border-radius: 4px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: transparent;
+	width: 110px;
+}
+
+#auto_invest_calc_interval_detail_selector_DateFrom_input {
+	background-color: rgb(43, 49, 57);
+	color: rgb(234, 236, 239);
+	border: 0;
+	padding-left: 15px;
 }
 
 #auto_invest_calc_interval_detail_selector_hours_input {

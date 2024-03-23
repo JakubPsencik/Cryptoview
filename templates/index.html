@@ -245,6 +245,13 @@
 											</div>
 										</div>
 									</div>
+
+									<div id="auto_invest_calc_interval_detail_selector_dateFrom_wrapper" class="auto_invest_calc_interval_detail_selector_wrapper">
+										<div data-bn-type="text" id="auto_invest_calc_interval_detail_selector_label">Date From</div>
+										<div id="auto_invest_calc_interval_detail_selector_dateFrom_inner_wrapper">
+											<input type="datetime-local" value="2024-03-19T03:00" id="auto_invest_calc_interval_detail_selector_DateFrom_input">
+										</div>
+									</div>
 	
 									<div id="auto_invest_calc_confirm_button1" cursor="pointer" class="auto_invest_calc_confirm_button1">Confirm</div>
 								</div>
@@ -335,12 +342,9 @@
 									<label style=" display: block; margin-bottom: 5px;">Invest Coin</label>
 									<input id="rebalance-investment" type="number" value="1000" class="rebalance-settings-form-input">
 									
-									<label style=" display: block; margin-bottom: 5px;">Coin ratio (%)</label>
-									<input id="rebalance-ratio" type="number" value="1" class="rebalance-settings-form-input">
-									
 									<label style=" display: block; margin-bottom: 5px;">Candle Type</label>
 									<select id="rebalance-interval" class="rebalance-settings-form-input">
-										<option selected="selected">1h</option>
+										<option selected="selected">1m</option>
 										<option value="1m">1m</option>
 										<option value="1h">1h</option>
 										<option value="1d">1d</option>
@@ -351,7 +355,7 @@
 									<input id="rebalance-start-date" type="datetime-local" value="2024-03-19T01:00" class="rebalance-settings-form-input" >
 
 									<label style=" display: block; margin-bottom: 5px;">End date</label>
-									<input id="rebalance-end-date" type="datetime-local" value="2024-03-19T06:00" class="rebalance-settings-form-input">
+									<input id="rebalance-end-date" type="datetime-local" value="2024-03-19T03:00" class="rebalance-settings-form-input">
 									
 									<div style="display: flex; flex-direction: column;">
 										<div style="display: inline-flex; justify-content: space-evenly; margin-top: 2vh; margin-bottom: 2vh;">
@@ -703,7 +707,6 @@
 	<script src="{{url_for('static', filename='binance_index_asset.js')}}"></script>
 	<script src="{{url_for('static', filename='rebalancing_bot_index_asset.js')}}"></script>
 	<script src="{{url_for('static', filename='binance_cmc_ew_index.js')}}"></script>
-	<script src="{{url_for('static', filename='chart.js')}}"></script>
 	<script src="{{url_for('static', filename='config.js')}}"></script>
 
 	

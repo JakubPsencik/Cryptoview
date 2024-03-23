@@ -157,12 +157,6 @@ function displaySuggestions(suggestionsList) {
 		const coinNameDiv = document.createElement("div");
 		coinNameDiv.classList.add("coin_name_div");
 		coinNameDiv.textContent = suggestion;
-		/*
-		coinNameDiv.addEventListener("click", () => {
-		input.value = suggestion;
-		dropdown.innerHTML = "";
-
-		});*/
 
 		coinDiv.addEventListener("click", () => {
 			const index_wrapper = document.getElementById("auto_invest_calc_index_wrapper");
@@ -235,8 +229,33 @@ document.getElementById("auto_invest_calc_confirm_button1").addEventListener("cl
 
 	if(sum != 100) {
 		alert("Allocation sum must be 100!");
-	} else { 
+	} else {
 		alert("Index linked plan created.");
+		var tmp = document.getElementsByClassName("active");
+		var actives = [];
+		console.log(tmp);
+		for (let i = 0; i < tmp.length; i++) 
+			actives.push(tmp[i].innerText);
+		
+			
+	var rebalance_url = "http://127.0.0.1:5000/rebalance?"
+	+ "&coin1=" + coin1
+	+ "&alloc1=" + alloc1
+	+ "&coin2=" + coin2
+	+ "&alloc2=" + alloc2
+	+ "&investment=" + investment
+	+ "&ratio=" + ratio
+	+ "&interval=" + _interval
+	+ "&start=" + start_date
+	+ "&end=" + end_date
+	+ "&coins=" + coins
+	+ "&allocations=" + allocations
+	+ "&intervalOption=" + rebalanceIntervalOptionValue;
+
+	console.log(rebalance_url);
+	
+	setRebalancePoints(rebalance_url);
+
 	}
 	
 });

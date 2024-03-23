@@ -44,7 +44,6 @@ document.getElementById("bn_rebalance").addEventListener("click", function () {
 	}
 	
 	const investment = document.getElementById("rebalance-investment").value;
-	const ratio = document.getElementById("rebalance-ratio").value;
 	const selectElement = document.getElementById("rebalance-interval");
 	const _interval = selectElement.options[selectElement.selectedIndex].value;
 	const start_date = document.getElementById("rebalance-start-date").value;
@@ -60,12 +59,7 @@ document.getElementById("bn_rebalance").addEventListener("click", function () {
 	else if (rebalanceIntervalPercentageOption.checked) { rebalanceIntervalOptionValue = (document.getElementById("rebalance-interval-percentage-option")).value; }
 
 	var rebalance_url = "http://127.0.0.1:5000/rebalance?"
-		+ "&coin1=" + coin1
-		+ "&alloc1=" + alloc1
-		+ "&coin2=" + coin2
-		+ "&alloc2=" + alloc2
 		+ "&investment=" + investment
-		+ "&ratio=" + ratio
 		+ "&interval=" + _interval
 		+ "&start=" + start_date
 		+ "&end=" + end_date
@@ -99,23 +93,18 @@ async function setRebalancePoints(url) {
 			div.classList.add("price-info-chart");
 			chartWrapper.appendChild(div);
 
-			//<div id="container11_3" class="price-info-chart"></div>
 			const chart = LightweightCharts.createChart(div, settings);
 			
 			const candlestickSeries = chart.addCandlestickSeries({upColor: "green", downColor: "red"});
 
 			candlestickSeries.setData(points[i]);
 			candlestickSeriesSet.push(candlestickSeries);
-
-			console.log(points[0][0]);
-			console.log(points[i][points[i].length-1].time);
 			
 			chart.timeScale().setVisibleRange({
 				from: points[i][0].time,
 				to: points[i][points[i].length-1].time,
 			});
 
-			
 		}
 
 		const idx = points.length - 1;
@@ -123,7 +112,9 @@ async function setRebalancePoints(url) {
 		console.log(points)
 		var markers = []
 		var marker = {}
-		for(let i = 0; i < points[idx].length; i+= 50) {
+		const increment = Math.round(points[idx].length / 5);
+		console.log(increment);
+		for(let i = 0; i < points[idx].length; i += 1) {
 			/*
 			if(points[idx][i].Rebalance == 0) {
 				marker = {
@@ -147,9 +138,9 @@ async function setRebalancePoints(url) {
 				};
 			}*/
 
-			console.log(points[idx][i].timestamps[0] / 1000)
-
+			console.log(`${idx}, ${i}`);
 			if(points[idx][i].Rebalance == 1) {
+				console.log('creating marker');
 				marker = {
 					id: String("rebalancePoint" + i),
 					time: points[idx][i].timestamps[0] / 1000,
@@ -159,20 +150,19 @@ async function setRebalancePoints(url) {
 					text: String(Math.round(points[idx][i].QuoteTotal) + '.0 $'),
 					size: 0.5,
 				};
-			}
-			
 
-			markers.push(marker);
+				markers.push(marker);
+			}
 		}
-		//console.log(markers)
+		console.log(markers)
 
 		candlestickSeriesSet.forEach(series => {
 			series.setMarkers(markers);
 		});
-		
+
 		document.getElementById("rebalancing-info-div").innerHTML = 
 		'<span style="color: red;">' 
-		+ String(Math.round(points[idx][points.length-1].QuoteTotal) +'.0 $') 
+		+ String(Math.round(points[idx][points[idx].length-1].QuoteTotal) +'.0 $') 
 		+ '</span>';
 	
 	});

@@ -588,3 +588,19 @@ vektorova grafika
 poznamky k rebalancing botovi:
 - funguje dobre, ale je nastaveny jenom na procentualni zmenu
 - musim pridat funkcionalitu, kdy to ten bot bude kontrolovat v danem datetimu
+
+
+
+
+Text - kapitoly
+---------------------------------------------------------------------
+|	Teoreticka cast:	25 stran (12 - 37)
+|
+|	1 - Uvod 													-> ✓
+|	2 - Kryptoměny a kryptoměnové burzy 						-> ✓
+|	3 - Analýza nástrojů pro vizualizaci a technickou analýzu 	-> ✓
+|	4 - Automatizovaní obchodovací roboti						-> ✓
+|	-----------------------------------------------------------------
+|	Prakticka cast:
+|
+|	5 - Návrh a implementace webové aplikace 					-> 
