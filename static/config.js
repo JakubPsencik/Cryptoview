@@ -140,7 +140,7 @@ $(document).ready(async () => {
 		+ "&start=" + start_date
 		+ "&end=" + end_date;
 
-	//setSpotGridPoints(SpotGrid_url);
+	setSpotGridPoints(SpotGrid_url);
 });
 
 //setWeekPredictPoints("http://127.0.0.1:5000/weekPredict?&symbol=LTCEUR&interval=1h")
@@ -157,11 +157,6 @@ getHistoricalData("http://127.0.0.1:5000/getData?&symbol=DOTEUR")
 getHistoricalData("http://127.0.0.1:5000/getData?&symbol=LTCEUR")
 */
 
-const coins = ['BTCEUR', 'ETHEUR', 'BNBEUR', 'XRPEUR', 'SOLEUR', 'ADAEUR', 'TRXEUR', 'LINKEUR', 'DOTEUR', 'LTCEUR'];
-
-//for(let i = 0; i < coins.length; i++) {
-	//setEwIndexTableContent(coins[i], `http://127.0.0.1:5000/weekPredict?&symbol=${coins[i]}&interval=1h`)
-//}
 
 
 rb_displayBinanceIndexAssetData("http://127.0.0.1:5000/binanceIndexAsset");

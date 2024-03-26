@@ -8,7 +8,7 @@ slide = (direction) => {
 
 	if(direction === 'next') {
 		
-		if(pageNumber === 11) {
+		if(pageNumber === 9) {
 			translate += translateAmount * (pageNumber-1);
 			pageNumber = 1;
 		} else {
@@ -23,7 +23,7 @@ slide = (direction) => {
 		//pageNumber += 1;
 		if(pageNumber === 1) {
 			translate -= translateAmount * (pageNumber-1);
-			pageNumber = 11;
+			pageNumber = 9;
 		} else {
 			//console.log(`translate at 4: ${translate}, translateAmount at 4: ${translateAmount}`)
 			translate += translateAmount;

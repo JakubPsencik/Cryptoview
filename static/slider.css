@@ -23,7 +23,7 @@ transform: scale(1.05);
 
 .pages {
 	display: flex;
-	width: 1100%;
+	width: 900%;
 	height: 100vh;
 	box-sizing: border-box;
 }

@@ -589,8 +589,17 @@ poznamky k rebalancing botovi:
 - funguje dobre, ale je nastaveny jenom na procentualni zmenu
 - musim pridat funkcionalitu, kdy to ten bot bude kontrolovat v danem datetimu
 
+--------------------------------------------------
+konzultace 26.3
+
+porovnani s hodl a dca - kdyz provedu rebalancing
 
 
+pro tu analyzu 
+
+
+reverse engineering grid bota
+--------------------------------------------------
 
 Text - kapitoly
 ---------------------------------------------------------------------

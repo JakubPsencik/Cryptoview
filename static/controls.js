@@ -12,7 +12,7 @@ function moveSlide(e) {
 	pgNum -= 1
 	//console.log(`left arrow pressed, ${pgNum}`)
 	}
-	else if(e.keyCode == '39' && (pgNum == 11)) {
+	else if(e.keyCode == '39' && (pgNum == 9)) {
 		slide('next')
 		pgNum = 0
 		//console.log(`right arrow pressed, ${pgNum}`)

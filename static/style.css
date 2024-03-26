@@ -174,10 +174,8 @@ select option {
 	position: relative;
 	width: 24px;
 	height: 24px;
-	background-color: var(--tw-black);
+	/*background-color: var(--tw-black);*/
 	border-radius: 50%;
-	/*margin-top: 0.5vh;
-	margin-bottom: 0.5vh;*/
 	box-shadow: 0 0 10px rgba(255, 0, 0, 0.1); /* start glow effect */
 	animation: glowRed 2s ease-in-out infinite alternate; /* add animation effect */
 }
