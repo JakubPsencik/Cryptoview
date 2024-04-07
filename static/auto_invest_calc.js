@@ -220,12 +220,40 @@ function displaySuggestions(suggestionsList) {
 	}
 }
 
+const auto_invest_calc_interval_detail_selector_hours_input = document.getElementById("auto_invest_calc_interval_detail_selector_hours_input");
+
+auto_invest_calc_interval_detail_selector_hours_input.addEventListener("change", function() {
+	auto_invest_calc_interval_detail_selector_hours_input.value = this.value;
+});
+
+const auto_invest_calc_interval_detail_selector_DateFrom_input = document.getElementById("auto_invest_calc_interval_detail_selector_DateFrom_input");
+
+auto_invest_calc_interval_detail_selector_DateFrom_input.addEventListener("change", function() {
+	auto_invest_calc_interval_detail_selector_DateFrom_input.value = this.value;
+});
+
+const auto_invest_calc_interval_detail_selector_dayInMonth_input = document.getElementById("auto_invest_calc_interval_detail_selector_dayInMonth_input");
+
+auto_invest_calc_interval_detail_selector_dayInMonth_input.addEventListener("change", function() {
+	auto_invest_calc_interval_detail_selector_dayInMonth_input.value = this.value;
+});
+
+
 document.getElementById("auto_invest_calc_confirm_button1").addEventListener("click", () => { 
+	
+	recurringCycle = [];
+	coinNames = [];
+	allocationValues = [];
 	const allocs = document.getElementsByClassName("auto_invest_calc_allocation_input");
+	const coins = document.getElementsByClassName("coin_name_div");
 	let sum = 0;
 	for (let i = 0; i < allocs.length; i++) { 
 		sum += parseInt(allocs[i].value);
+		allocationValues.push(allocs[i].value);
+		coinNames.push(coins[i].innerText);
 	}
+
+	recurringCycle.push(coinNames, allocationValues);
 
 	if(sum != 100) {
 		alert("Allocation sum must be 100!");
@@ -233,28 +261,63 @@ document.getElementById("auto_invest_calc_confirm_button1").addEventListener("cl
 		alert("Index linked plan created.");
 		var tmp = document.getElementsByClassName("active");
 		var actives = [];
-		console.log(tmp);
 		for (let i = 0; i < tmp.length; i++) 
 			actives.push(tmp[i].innerText);
 		
-			
-	var rebalance_url = "http://127.0.0.1:5000/rebalance?"
-	+ "&coin1=" + coin1
-	+ "&alloc1=" + alloc1
-	+ "&coin2=" + coin2
-	+ "&alloc2=" + alloc2
-	+ "&investment=" + investment
-	+ "&ratio=" + ratio
-	+ "&interval=" + _interval
-	+ "&start=" + start_date
-	+ "&end=" + end_date
-	+ "&coins=" + coins
-	+ "&allocations=" + allocations
-	+ "&intervalOption=" + rebalanceIntervalOptionValue;
+		actives.forEach(active => {
+			if (active.includes('Daily')) {
+				recurringCycle.push('Daily');
+			} else if (active.includes('Weekly')) {
+				recurringCycle.push("Weekly");
+				recurringCycle.push(actives[1]);
+			} else if (active.includes('Monthly')) {
+				recurringCycle.push('Monthly');
+			}
+		});
 
-	console.log(rebalance_url);
-	
-	setRebalancePoints(rebalance_url);
+
+		const investment = document.getElementById("auto_invest_calc_props_input").value;
+		recurringCycle.push(investment);
+
+		const daysInMonth = document.getElementById("auto_invest_calc_interval_detail_selector_dayInMonth_input").value;
+		recurringCycle.push(daysInMonth);
+
+		const hours = document.getElementById("auto_invest_calc_interval_detail_selector_hours_input").value;
+		recurringCycle.push(hours);
+
+		const startDate = document.getElementById("auto_invest_calc_interval_detail_selector_DateFrom_input").value;
+		recurringCycle.push(startDate);
+
+		console.log(recurringCycle);
+
+
+		var rebalance_url = "http://127.0.0.1:5000/rebalance?"
+		+ "&investment=" + investment
+		+ "&interval=" + _interval
+		+ "&start=" + startDate
+		+ "&end=" + new Date().toISOString().slice(0, 16);
+		+ "&coins=" + coinNames
+		+ "&allocations=" + allocationValues
+		+ "&intervalOption=" + "1";
+
+		/* 
+		var rebalance_url = "http://127.0.0.1:5000/rebalance?"
+		+ "&coin1=" + coin1
+		+ "&alloc1=" + alloc1
+		+ "&coin2=" + coin2
+		+ "&alloc2=" + alloc2
+		+ "&investment=" + investment
+		+ "&ratio=" + ratio
+		+ "&interval=" + _interval
+		+ "&start=" + start_date
+		+ "&end=" + end_date
+		+ "&coins=" + coins
+		+ "&allocations=" + allocations
+		+ "&intervalOption=" + rebalanceIntervalOptionValue;*/
+
+		console.log(rebalance_url);
+		
+		//setRebalancePoints(rebalance_url);
 
 	}
 	

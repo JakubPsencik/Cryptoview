@@ -221,6 +221,7 @@ def Rebalance(coins_amt_of_base, new_coins_prices, timestamps, coin_allocations,
 				rebalancing_results.append([timestamps, new_coins_quote_amount, quote_total, 0])
 
 	elif(option_value == 1):
+		coin_ratios = tmp_ratios
 		#podle casu
 		for i in range(0, len(coin_ratios)):
 		
@@ -303,6 +304,8 @@ def simulate_rebalancing(coins_init_close_prices, coins_data, coins_quote_assest
 
 @app.route("/rebalance", methods=['GET'])
 def getRebalancing():
+
+	print(request.args)
 
 	coins = request.args.get("coins").split(",")
 	allocations = request.args.get("allocations").split(",")

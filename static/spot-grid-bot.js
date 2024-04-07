@@ -49,7 +49,7 @@ document.getElementById("bn_SpotGrid").addEventListener("click", function () {
 async function setSpotGridPoints(SpotGrid_url) {
 
 	//create chart
-	var price_chart_13_1 = LightweightCharts.createChart(
+	const price_chart_13_1 = LightweightCharts.createChart(
 		document.getElementById('container13_1'),
 		{
 			layout: {

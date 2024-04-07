@@ -113,9 +113,9 @@ async function setRebalancePoints(url) {
 		var markers = []
 		var marker = {}
 		const increment = Math.round(points[idx].length / 5);
-		console.log(increment);
-		for(let i = 0; i < points[idx].length; i += 1) {
-			/*
+		//console.log(increment);
+		for(let i = 0; i < points[idx].length; i += points.length-1) {
+			
 			if(points[idx][i].Rebalance == 0) {
 				marker = {
 					id: String("rebalancePoint" + i),
@@ -136,9 +136,9 @@ async function setRebalancePoints(url) {
 					text: String(Math.round(points[idx][i].QuoteTotal) + '.0 $'),
 					size: 0.5,
 				};
-			}*/
-
-			console.log(`${idx}, ${i}`);
+			}
+			markers.push(marker);
+			/*console.log(`${idx}, ${i}`);
 			if(points[idx][i].Rebalance == 1) {
 				console.log('creating marker');
 				marker = {
@@ -152,7 +152,7 @@ async function setRebalancePoints(url) {
 				};
 
 				markers.push(marker);
-			}
+			}*/
 		}
 		console.log(markers)
 

@@ -381,14 +381,6 @@ UDELAT GIT REPO
 
 - co je do 10ti procent se toleruje (thesis check)
 
-- zaklad projektu muzu pouzit do diplomky hehe :)
-
-- schazet se prej bude chtet v sirsi skupince
-- budu ho moset nahanet 24/7
-
-SUMMARY
-- do konce cervence teda udelat research
-
 
 
 - literarni zdroje
@@ -589,17 +581,8 @@ poznamky k rebalancing botovi:
 - funguje dobre, ale je nastaveny jenom na procentualni zmenu
 - musim pridat funkcionalitu, kdy to ten bot bude kontrolovat v danem datetimu
 
---------------------------------------------------
-konzultace 26.3
-
-porovnani s hodl a dca - kdyz provedu rebalancing
 
 
-pro tu analyzu 
-
-
-reverse engineering grid bota
---------------------------------------------------
 
 Text - kapitoly
 ---------------------------------------------------------------------
@@ -610,6 +593,6 @@ Text - kapitoly
 |	3 - Analýza nástrojů pro vizualizaci a technickou analýzu 	-> ✓
 |	4 - Automatizovaní obchodovací roboti						-> ✓
 |	-----------------------------------------------------------------
-|	Prakticka cast:
+|	Prakticka cast:		23 stran (38 - 61)
 |
-|	5 - Návrh a implementace webové aplikace 					-> 
+|	5 - Návrh a implementace webové aplikace 					->
