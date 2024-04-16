@@ -79,12 +79,10 @@ async function setRebalancePoints(url) {
 		chartWrapper.removeChild(chartWrapper.lastChild);
 	}
 
-	const candlestickSeriesSet = []
-
 	try {
 		let response = await fetch(url);
 		response.json().then(async (points) => {
-
+		console.log(points);
 		for (let i = 0; i < points.length -1; i++) {
 			
 			var div = document.createElement("div");
@@ -98,71 +96,70 @@ async function setRebalancePoints(url) {
 			const candlestickSeries = chart.addCandlestickSeries({upColor: "green", downColor: "red"});
 
 			candlestickSeries.setData(points[i]);
-			candlestickSeriesSet.push(candlestickSeries);
 			
 			chart.timeScale().setVisibleRange({
 				from: points[i][0].time,
 				to: points[i][points[i].length-1].time,
 			});
 
-		}
-
-		const idx = points.length - 1;
+			const idx = points.length - 1;
 	
-		console.log(points)
-		var markers = []
-		var marker = {}
-		const increment = Math.round(points[idx].length / 5);
-		//console.log(increment);
-		for(let i = 0; i < points[idx].length; i += points.length-1) {
-			
-			if(points[idx][i].Rebalance == 0) {
-				marker = {
-					id: String("rebalancePoint" + i),
-					time: points[idx][i].timestamps[0] / 1000,
-					position: 'belowBar',
-					color: 'yellow',
-					shape: 'circle',
-					text: String(Math.round(points[idx][i].QuoteTotal) + '.0 $'),
-					size: 0.5,
-				};
-			} else {
-				marker = {
-					id: String("rebalancePoint" + i),
-					time: points[idx][i].timestamps[0] / 1000,
-					position: 'aboveBar',
-					color: 'red',
-					shape: 'circle',
-					text: String(Math.round(points[idx][i].QuoteTotal) + '.0 $'),
-					size: 0.5,
-				};
-			}
-			markers.push(marker);
-			/*console.log(`${idx}, ${i}`);
-			if(points[idx][i].Rebalance == 1) {
-				console.log('creating marker');
-				marker = {
-					id: String("rebalancePoint" + i),
-					time: points[idx][i].timestamps[0] / 1000,
-					position: 'aboveBar',
-					color: 'red',
-					shape: 'circle',
-					text: String(Math.round(points[idx][i].QuoteTotal) + '.0 $'),
-					size: 0.5,
-				};
+			var markers = []
+			var marker = {}
+			const increment = Math.round(points[idx].length / 5);
+	
+			//predelat aby pro kazdou series byly spravne markery
+			//console.log(points[idx][0].coinAmounts);
 
+			for(let j = 0; j < points[idx].length; j += points.length-1) {
+				
+				if(points[idx][j].Rebalance == 0) {
+					marker = {
+						id: String("rebalancePoint" + j),
+						time: points[idx][j].timestamps[0] / 1000,
+						position: 'belowBar',
+						color: 'yellow',
+						shape: 'circle',
+						text: String(Math.round(points[idx][j].coinAmounts[i]) + '.0 $'),
+						size: 0.5,
+					};
+				} else {
+					marker = {
+						id: String("rebalancePoint" + i),
+						time: points[idx][j].timestamps[0] / 1000,
+						position: 'aboveBar',
+						color: 'red',
+						shape: 'circle',
+						text: String(Math.round(points[idx][j].coinAmounts[i]) + '.0 $'),
+						size: 0.5,
+					};
+				}
 				markers.push(marker);
-			}*/
-		}
-		console.log(markers)
+				
+				/*console.log(`${idx}, ${i}`);
+				if(points[idx][i].Rebalance == 1) {
+					console.log('creating marker');
+					marker = {
+						id: String("rebalancePoint" + i),
+						time: points[idx][i].timestamps[0] / 1000,
+						position: 'aboveBar',
+						color: 'red',
+						shape: 'circle',
+						text: String(Math.round(points[idx][i].QuoteTotal) + '.0 $'),
+						size: 0.5,
+					};
+	
+					markers.push(marker);
+				}*/
+			}
+			//console.log(markers)
+			candlestickSeries.setMarkers(markers);
 
-		candlestickSeriesSet.forEach(series => {
-			series.setMarkers(markers);
-		});
+		}
 
 		document.getElementById("rebalancing-info-div").innerHTML = 
 		'<span style="color: red;">' 
-		+ String(Math.round(points[idx][points[idx].length-1].QuoteTotal) +'.0 $') 
+		+ String(Math.round(points[points.length - 1][points[points.length - 1].length-1].QuoteTotal) +'.0 $') 
 		+ '</span>';
 	
 	});

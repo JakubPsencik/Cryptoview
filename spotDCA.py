@@ -109,11 +109,11 @@ def start_spotDCA(historical_data):
 			
 			profit = amtOfBase * current_price
 			print(f"({i}.) current price: {current_price}, current profit: {profit}\n")
-			if(profit >= (take_profit * investment + investment)):
-				print(f"Take Profit {100 * take_profit} % reached, selling {amtOfBase} worth of assets now...\naccuired: {profit}\n")
-				SpotDCAResults.append([historical_data[i][0], amtOfBase, profit])
-				SpotDCAResults.append(1)
-				return profit
+			#if(profit >= (take_profit * investment + investment)):
+			#print(f"Take Profit {100 * take_profit} % reached, selling {amtOfBase} worth of assets now...\naccuired: {profit}\n")
+			SpotDCAResults.append([historical_data[i][0], amtOfBase, profit])
+			SpotDCAResults.append(1)
+			return profit
 			
 		
 		SpotDCAResults.append([historical_data[i][0], amtOfBase, profit])

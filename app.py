@@ -200,14 +200,14 @@ def Rebalance(coins_amt_of_base, new_coins_prices, timestamps, coin_allocations,
 	for i in range(0, len(new_coins_quote_amount)):
 		tmp_ratios.append(abs(coin_allocations[i] - (new_coins_quote_amount[i] / quote_total)))
 	
-	#print(f"tmp_ratios: {tmp_ratios}")
+	print(f"tmp_ratios: {tmp_ratios}")
 	if(option_value == 0):
 
 		for i in range(0, len(tmp_ratios)):
 	
 			# if (50% - calculated-ratio) je kladne tak dokupuju -> tzn +
 			# if (50% - calculated-ratio) je zaporne tak prodavam -> tzn -
-			#print(f"coin_ratios: {tmp_ratios[i]}, rebalanceRatio: {rebalanceRatio}")
+			print(f"coin_ratios: {tmp_ratios[i]}, rebalanceRatio: {rebalanceRatio}")
 			
 			if(tmp_ratios[i] > float(rebalanceRatio)):
 				for j in range(0, len(tmp_ratios)):
@@ -227,9 +227,9 @@ def Rebalance(coins_amt_of_base, new_coins_prices, timestamps, coin_allocations,
 		
 			# if (50% - calculated-ratio) je kladne tak dokupuju -> tzn +
 			# if (50% - calculated-ratio) je zaporne tak prodavam -> tzn -
-			#print(f"coin_ratios: {coin_ratios[i]}, rebalanceRatio: {coin_allocations}")
+			print(f"ratio: {coin_ratios[i] + float(coin_allocations[i])}, rebalanceRatio: {coin_allocations}")
 
-			if(coin_ratios[i] > float(coin_allocations[i])):
+			if((coin_ratios[i] + float(coin_allocations[i])) > float(coin_allocations[i])):
 				for j in range(0, len(coin_ratios)):
 					coin_ratios[j] = coin_allocations[j] - (new_coins_quote_amount[j] / quote_total)
 				
@@ -280,7 +280,7 @@ def simulate_rebalancing(coins_init_close_prices, coins_data, coins_quote_assest
 	
 	elif(option_value == 1):
 		#podle casu
-
+		print(coins_data)
 		for i in range(0, len(coins_data[0])):
 			#print(f"{coins_data[0][i][0]} == {local_init_timestamp}" )
 			if(coins_data[0][i][0] == local_init_timestamp):
@@ -303,7 +303,7 @@ def simulate_rebalancing(coins_init_close_prices, coins_data, coins_quote_assest
 	return rebalancing_results
 
 @app.route("/rebalance", methods=['GET'])
-def getRebalancing():
+async def getRebalancing():
 
 	print(request.args)
 
@@ -318,10 +318,53 @@ def getRebalancing():
 	e = convert_datetime_to_unix_timestamp(request.args.get("end"))
 	
 	coins_kline_data = []
-	
-	for i in range(0, len(coins)):
-		coins_kline_data.append(get_binance_rebalanace_kline_data(str(f"{coins[i]}USDT"), interval, s, e))
 
+	if any(item in interval for item in ("d", "M", "w")):
+		loop = asyncio.get_event_loop()
+		conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+		cur = await conn.cursor()
+		param = ''
+		
+		# Input strings
+		start_date_str = request.args.get("start")
+		end_date_str = request.args.get("end")
+
+		# Parse start date string
+		start_date_components = start_date_str.split("T")[0].split("-") + start_date_str.split("T")[1].split(":")
+		start_date = datetime(int(start_date_components[0]), int(start_date_components[1]), int(start_date_components[2]), int(start_date_components[3]), int(start_date_components[4]))
+
+		# Parse end date string
+		end_date_components = end_date_str.split("T")[0].split("-") + end_date_str.split("T")[1].split(":")
+		end_date = datetime(int(end_date_components[0]), int(end_date_components[1]), int(end_date_components[2]), int(end_date_components[3]), int(end_date_components[4]))
+
+		# Initialize an empty list to store formatted dates
+		formatted_dates = []
+
+		# Iterate from start date to end date, adding one day each time
+		current_date = start_date
+		while current_date <= end_date:
+			# Format current date and time and append it to the list
+			formatted_dates.append(current_date.strftime("%Y-%m-%d %H:%M:%S"))
+			current_date += timedelta(days=1)  # Add one day to current date
+
+		for i in range(0, len(formatted_dates)):
+			param += "'{0}',".format(formatted_dates[i])
+		
+		for i in range(0, len(coins)):
+			await cur.execute("""select unixtime,open,high,low,close from binance_pair_{0}usdt.spot_kline where datetime in ({1});""".format(coins[i].lower(), param[:-1]))
+			data = await cur.fetchall()
+
+			coins_kline_data.append(data)
+			print("""data size: {0}""".format(len(data))) 
+	
+		await cur.close()
+		conn.close()
+
+	else:	
+		for i in range(0, len(coins)):
+			coins_kline_data.append(get_binance_rebalanace_kline_data(str(f"{coins[i]}USDT"), interval, s, e))
+
+	#print(coins_kline_data)
 	percentage_ratios = []
 
 	for i in range(0, len(allocations)):
@@ -329,8 +372,12 @@ def getRebalancing():
 
 	coins_amt_of_base = []
 
+	investment = float(request.args.get("investment"))
+	total_investment = investment * len(coins_kline_data[0])
+	print(total_investment)
+
 	for i in range(0, len(coins_kline_data)):
-		coins_amt_of_base.append((percentage_ratios[i] * float(request.args.get("investment"))) / float(coins_kline_data[i][0][4]))
+		coins_amt_of_base.append((percentage_ratios[i] * total_investment) / float(coins_kline_data[i][0][4]))
 
 	coins_quote_assests = []
 
@@ -1299,5 +1346,132 @@ async def get_products():
 	for d in data:
 		d = str(d)[2:-3]
 		result.append(d)
+
+	return jsonify(result)
+
+def simulate_hold(data, total_invested_dca):
+	initial_price = data[0][2]
+	coin_bought = total_invested_dca / initial_price  # Buy the same amount of coins as in DCA
+	final_price = data[-1][2]
+	final_balance = coin_bought * final_price
+	profit = final_balance - total_invested_dca
+	return final_balance, profit
+	
+def simulate_dca(data, initial_balance):
+	total_invested = 0  # Total amount invested
+	coin_balance = 0
+	for item in data:
+		price = item[2]
+		coin_bought = initial_balance / price
+		coin_balance += coin_bought
+		total_invested += initial_balance  # Accumulate the total amount invested
+
+	final_price = data[-1][2]
+	final_balance = coin_balance * final_price
+	
+	profit = final_balance - total_invested  # Profit is final balance minus total invested
+	return total_invested, final_balance, profit
+
+
+@app.route("/getclose", methods=['GET'])
+async def getclose():
+
+	coins = request.args.get("coins")
+	allocations = request.args.get("allocations")
+	investment = request.args.get("investment")
+	start = request.args.get("start")
+	end = request.args.get("end")
+	interval = request.args.get("interval")
+
+	coins = coins.split(",")
+	allocations = allocations.split(",")
+
+	print(coins, allocations, investment, interval, start, end)
+
+	'''
+		(3) ['BTC', 'ETH', 'BNB']
+		(3) ['50', '30', '20']
+		"Weekly"
+		"WED"
+		"1"
+		""
+		"18"
+		"2024-03-19T03:00"
+	'''
+	
+	loop = asyncio.get_event_loop()
+
+	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+
+	cur = await conn.cursor()
+	param = ''
+
+	# Input strings
+	start_date_str = start
+	end_date_str = end
+
+	# Parse start date string
+	start_date_components = start_date_str.split("T")[0].split("-") + start_date_str.split("T")[1].split(":")
+	start_date = datetime(int(start_date_components[0]), int(start_date_components[1]), int(start_date_components[2]), int(start_date_components[3]), int(start_date_components[4]))
+
+	# Parse end date string
+	end_date_components = end_date_str.split("T")[0].split("-") + end_date_str.split("T")[1].split(":")
+	end_date = datetime(int(end_date_components[0]), int(end_date_components[1]), int(end_date_components[2]), int(end_date_components[3]), int(end_date_components[4]))
+
+	# Initialize an empty list to store formatted dates
+	formatted_dates = []
+
+	# Iterate from start date to end date, adding one day each time
+	current_date = start_date
+	while current_date <= end_date:
+		# Format current date and time and append it to the list
+		formatted_dates.append(current_date.strftime("%Y-%m-%d %H:%M:%S"))
+		current_date += timedelta(days=1)  # Add one day to current date
+
+
+	dca_results = []
+	hodl_results = []
+
+	for i in range(0, len(formatted_dates)):
+		param += "'{0}',".format(formatted_dates[i])
+
+	result_data = []
+	for i in range(0, len(coins)):
+		await cur.execute("""select unixtime, datetime, close from binance_pair_{0}usdt.spot_kline where datetime in ({1});""".format(coins[i].lower(), param[:-1]))
+		data = await cur.fetchall()
+		
+		total_invested, final_balance_dca, profit_dca = simulate_dca(data, (float(allocations[i]) / 100) * float(investment))
+		final_balance_hold, profit_hold = simulate_hold(data, total_invested_dca=total_invested)
+		
+		dca_results.append([coins[i], total_invested, final_balance_dca, profit_dca])
+		hodl_results.append([coins[i], total_invested, final_balance_hold, profit_hold])
+
+		result_data.append(data)
+	
+	await cur.close()
+	conn.close()
+
+
+	result = []
+	counter = 0
+
+	for res in result_data:
+		result.append(coins[counter])
+		for d in res:
+			item = {
+				"unixtime": d[0],
+				"datetime": d[1],
+				"close": d[2],
+			}
+
+			result.append(item)
+		counter += 1
+
+	print(len(result))
+
+	result.append("DCA")
+	result.append(dca_results)
+	result.append("HODL")
+	result.append(hodl_results)
 
 	return jsonify(result)

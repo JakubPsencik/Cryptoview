@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs-CZ">
 
 <head>
 	<title>Cryptoview</title>
@@ -249,7 +249,7 @@
 									<div id="auto_invest_calc_interval_detail_selector_dateFrom_wrapper" class="auto_invest_calc_interval_detail_selector_wrapper">
 										<div data-bn-type="text" id="auto_invest_calc_interval_detail_selector_label">Date From</div>
 										<div id="auto_invest_calc_interval_detail_selector_dateFrom_inner_wrapper">
-											<input type="datetime-local" value="2024-03-19T03:00" id="auto_invest_calc_interval_detail_selector_DateFrom_input">
+											<input type="datetime-local" step="1" value="2024-04-08T01:00" id="auto_invest_calc_interval_detail_selector_DateFrom_input">
 										</div>
 									</div>
 	
@@ -267,17 +267,28 @@
 			<div id="page_binance_cmc_ew_index_recommend" class="page b-cmc-idx"> 
 				<div class="modal-body row" style="height: 100vh; padding-bottom: 0; padding-top: 0;">
 					<!--left side-->
-					<div class="col-md-6" style="padding: 0;">
-						<div id="binance_cmc_ew_index_recommend_main_div" style="padding: 0;">
+					<div class="col-md-4" style="padding: 0;">
+						<div id="binance_cmc_ew_index_recommend_main_div_1" class="binance_cmc_ew_index_recommend_main_div" style="padding: 0;">
 							<div id="binance_cmc_ew_index_recommend_wrapper_div" style="padding: 0;">
-								
+								<h2 id="auto_invest_label_small">HODL</h2>
+								<table id="hodl_table" class="custom-table"></table>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6" style="padding: 0;">
-						<div id="binance_cmc_ew_index_recommend_main_div" style="padding: 0;">
+					<div class="col-md-4" style="padding: 0;">
+						<div id="binance_cmc_ew_index_recommend_main_div_2" class="binance_cmc_ew_index_recommend_main_div" style="padding: 0;">
 							<div id="binance_cmc_ew_index_recommend_wrapper_div" style="padding: 0;">
-								
+								<h2 id="auto_invest_label_small">DCA</h2>
+								<table id="dca_table" class="custom-table"></table>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4" style="padding: 0;">
+						<div id="binance_cmc_ew_index_recommend_main_div_3" class="binance_cmc_ew_index_recommend_main_div" style="padding: 0;">
+							<div id="binance_cmc_ew_index_recommend_wrapper_div" style="padding: 0;">
+								<h2 id="auto_invest_label_small">REBALANCING</h2>
+								<table id="rebalance_table" class="custom-table"></table>
 							</div>
 						</div>
 					</div>
@@ -352,10 +363,10 @@
 									</select>
 
 									<label style=" display: block; margin-bottom: 5px;">Start date</label>
-									<input id="rebalance-start-date" type="datetime-local" value="2024-03-19T01:00" class="rebalance-settings-form-input" >
+									<input id="rebalance-start-date" type="datetime-local" step="1" value="2024-04-01T10:00" class="rebalance-settings-form-input" >
 
 									<label style=" display: block; margin-bottom: 5px;">End date</label>
-									<input id="rebalance-end-date" type="datetime-local" value="2024-03-19T03:00" class="rebalance-settings-form-input">
+									<input id="rebalance-end-date" type="datetime-local" step="1" value="2024-04-15T10:00" class="rebalance-settings-form-input">
 									
 									<div style="display: flex; flex-direction: column;">
 										<div style="display: inline-flex; justify-content: space-evenly; margin-top: 2vh; margin-bottom: 2vh;">
@@ -465,10 +476,10 @@
 										</select>
 		
 										<label class="DCA-settings-form-label">Start date</label>
-										<input id="DCA-start-date" type="datetime-local" value="2023-07-13T08:00" class="DCA-settings-form-input" >
+										<input id="DCA-start-date" type="datetime-local" step="1" value="2024-01-01T01:00" class="DCA-settings-form-input" >
 		
 										<label class="DCA-settings-form-label">End date</label>
-										<input id="DCA-end-date" type="datetime-local" value="2023-11-13T08:00" class="DCA-settings-form-input">
+										<input id="DCA-end-date" type="datetime-local" step="1" value="2024-04-01T01:00" class="DCA-settings-form-input">
 									</div>
 									<button id="bn_DCA" style="margin: 5px; background-color: var(--tw-lightblue); color: #fff; padding: 5px 10px; border: none; cursor: pointer;">Submit</button>
 								</div>
@@ -534,10 +545,10 @@
 										</select>
 		
 										<label class="SpotGrid-settings-form-label">Start date</label>
-										<input id="SpotGrid-start-date" type="datetime-local" value="2023-10-13T08:00" class="SpotGrid-settings-form-input" >
+										<input id="SpotGrid-start-date" type="datetime-local" step="1" value="2023-10-13T08:00" class="SpotGrid-settings-form-input" >
 		
 										<label class="SpotGrid-settings-form-label">End date</label>
-										<input id="SpotGrid-end-date" type="datetime-local"  value="2023-11-13T20:00" class="SpotGrid-settings-form-input">
+										<input id="SpotGrid-end-date" type="datetime-local" step="1" value="2023-11-13T20:00" class="SpotGrid-settings-form-input">
 									</div>
 							
 									<button id="bn_SpotGrid" style="margin: 5px; background-color: var(--tw-lightblue); color: #fff; padding: 5px 10px; border: none; cursor: pointer;">Submit</button>
@@ -563,7 +574,7 @@
 	<script src="{{url_for('static', filename='rebalancing-bot.js')}}"></script>
 	<script src="{{url_for('static', filename='spot-dca-bot.js')}}"></script>
 	<script src="{{url_for('static', filename='spot-grid-bot.js')}}"></script>
-	<script src="{{url_for('static', filename='	spot-grid-bot copy.js')}}"></script>
+	<!--<script src="{{url_for('static', filename='	spot-grid-bot copy.js')}}"></script>-->
 	<script src="{{url_for('static', filename='top10.js')}}"></script>
 	<!--<script src="{{url_for('static', filename='week-predict.js')}}"></script>-->
 	<script src="{{url_for('static', filename='get-data.js')}}"></script>
@@ -571,6 +582,7 @@
 	<script src="{{url_for('static', filename='binance_index_asset.js')}}"></script>
 	<script src="{{url_for('static', filename='rebalancing_bot_index_asset.js')}}"></script>
 	<script src="{{url_for('static', filename='binance_cmc_ew_index.js')}}"></script>
+	<script src="{{url_for('static', filename='get-close.js')}}"></script>
 	<script src="{{url_for('static', filename='config.js')}}"></script>
 
 	

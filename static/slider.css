@@ -29,10 +29,15 @@ transform: scale(1.05);
 }
 
 .page {
-width: 100vw;
-height: 100vh;
-transition: all 0.7s;
-color: white;
+	width: 100vw;
+	height: 100vh;
+	transition: all 0.7s;
+	color: white;
+
+	@media screen and (max-width: 768px){
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
 }
 
 .one {

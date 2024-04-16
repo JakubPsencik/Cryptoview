@@ -258,7 +258,7 @@ document.getElementById("auto_invest_calc_confirm_button1").addEventListener("cl
 	if(sum != 100) {
 		alert("Allocation sum must be 100!");
 	} else {
-		alert("Index linked plan created.");
+		alert("Index linked plan created. \n See result on the next slide!");
 		var tmp = document.getElementsByClassName("active");
 		var actives = [];
 		for (let i = 0; i < tmp.length; i++) 
@@ -267,11 +267,14 @@ document.getElementById("auto_invest_calc_confirm_button1").addEventListener("cl
 		actives.forEach(active => {
 			if (active.includes('Daily')) {
 				recurringCycle.push('Daily');
+				_interval = "1d";
 			} else if (active.includes('Weekly')) {
 				recurringCycle.push("Weekly");
 				recurringCycle.push(actives[1]);
+				_interval = "1w";
 			} else if (active.includes('Monthly')) {
 				recurringCycle.push('Monthly');
+				_interval = "1M";
 			}
 		});
 
@@ -290,34 +293,30 @@ document.getElementById("auto_invest_calc_confirm_button1").addEventListener("cl
 
 		console.log(recurringCycle);
 
+		var getclose_url  = "http://127.0.0.1:5000/getclose?"
+		+ "&coins=" + coinNames
+		+ "&allocations=" + allocationValues
+		+ "&investment=" + investment
+		+ "&start=" + startDate
+		+ "&end=" + new Date().toISOString().slice(0, 16);
+		+ "&interval=" + _interval
 
+		//investment=1000& interval=1d& start=2024-04-01T10:00& end=2024-04-15T10:00& coins=BTC,ETH,BNB& allocations=50,30,20 &intervalOption=1d
+		///getclose?&coins=BTC,ETH&allocations=50,50&investment=1&start=2024-04-08T01:00&end=2024-04-15T18:37
 		var rebalance_url = "http://127.0.0.1:5000/rebalance?"
 		+ "&investment=" + investment
 		+ "&interval=" + _interval
 		+ "&start=" + startDate
-		+ "&end=" + new Date().toISOString().slice(0, 16);
+		+ "&end=" + new Date().toISOString().slice(0, 16)
 		+ "&coins=" + coinNames
 		+ "&allocations=" + allocationValues
-		+ "&intervalOption=" + "1";
+		+ "&intervalOption=" + "1d";
 
-		/* 
-		var rebalance_url = "http://127.0.0.1:5000/rebalance?"
-		+ "&coin1=" + coin1
-		+ "&alloc1=" + alloc1
-		+ "&coin2=" + coin2
-		+ "&alloc2=" + alloc2
-		+ "&investment=" + investment
-		+ "&ratio=" + ratio
-		+ "&interval=" + _interval
-		+ "&start=" + start_date
-		+ "&end=" + end_date
-		+ "&coins=" + coins
-		+ "&allocations=" + allocations
-		+ "&intervalOption=" + rebalanceIntervalOptionValue;*/
 
-		console.log(rebalance_url);
+		console.log(getclose_url);
 		
 		//setRebalancePoints(rebalance_url);
+		getClose(getclose_url, rebalance_url);
 
 	}
 	

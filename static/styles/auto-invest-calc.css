@@ -86,6 +86,16 @@
 	border-radius: 2rem;
 	margin: 14.5vh auto auto auto;
 
+	@media screen and (max-width: 768px){
+		width: 80vw;
+		height: 70vh;
+		min-height: fit-content;
+		text-align: center;
+		background-color: var(--bn-black);
+		border-radius: 2rem;
+		margin: auto;
+	}
+
 }
 
 .b-idx-asset {
@@ -1238,7 +1248,7 @@
 }
 
 /*----------------------------------------*/
-
+/*
 @media (max-height: 700px) {
 
 	#auto_invest_calc_div {
@@ -1251,4 +1261,4 @@
 		margin: 7.25vh auto auto auto;
 	
 	}
-}
+}*/

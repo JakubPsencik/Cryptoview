@@ -33,12 +33,12 @@
 	flex-direction: column;
 }
 
-#binance_cmc_ew_index_recommend_main_div {
-	width: 40vw;
+.binance_cmc_ew_index_recommend_main_div {
+	
 	height: 70vh;
 	background-color: var(--bn-black);
 	border-radius: 2rem;
-	margin: 14.5vh auto auto auto;
+	margin: 14.5vh 50px auto 50px;
 	display: flex;
 	flex-direction: column;
 

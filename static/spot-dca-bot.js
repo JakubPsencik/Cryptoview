@@ -189,11 +189,11 @@ async function setSpotDCAPoints(DCA_url) {
 		+ '.0 $ ' 
 		+ '</span>'
 		+ '</span>';
-		
+		console.log(points);
 		// Zoom out the candlestick series to a specific time range.
 		price_chart_12_1.timeScale().setVisibleRange({
-			from: points[1].time / 1000,
-			to: points[points.length-2].time / 1000,
+			from: points[0][0].time / 1000,
+			to: points[0][points[0].length-1].time,
 		});
 	
 	});
