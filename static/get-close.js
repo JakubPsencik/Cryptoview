@@ -96,6 +96,7 @@ async function createGetCloseTable(data, tableName) {
 	}
 
 	tr = document.createElement("tr");
+	tr.style.borderTop = "1px dashed";
 	let fill_td = document.createElement("td");
 	let invested_total_td = document.createElement("td");
 	let balance_total_td = document.createElement("td");
@@ -121,7 +122,16 @@ async function createGetCloseTable(data, tableName) {
 		sum += d[3];
 	});
 
-	profit_total_td.innerHTML = sum.toFixed(2) + " $"
+	if(sum > 0) {
+		profit_total_td.innerHTML =  "+ " + sum.toFixed(2) + " $"
+		profit_total_td.style.color = "limegreen";
+	} else if(sum < 0) {
+		profit_total_td.innerHTML =  sum.toFixed(2) + " $"
+		profit_total_td.style.color = "red";
+	} else {
+		profit_total_td.innerHTML =  sum.toFixed(2) + " $"
+	}
+	
 
 
 	tr.appendChild(fill_td)
