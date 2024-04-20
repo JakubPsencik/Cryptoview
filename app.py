@@ -200,7 +200,7 @@ def Rebalance(coins_amt_of_base, new_coins_prices, timestamps, coin_allocations,
 	for i in range(0, len(new_coins_quote_amount)):
 		tmp_ratios.append(abs(coin_allocations[i] - (new_coins_quote_amount[i] / quote_total)))
 	
-	print(f"tmp_ratios: {tmp_ratios}")
+	#print(f"tmp_ratios: {tmp_ratios}")
 	if(option_value == 0):
 
 		for i in range(0, len(tmp_ratios)):
@@ -227,7 +227,7 @@ def Rebalance(coins_amt_of_base, new_coins_prices, timestamps, coin_allocations,
 		
 			# if (50% - calculated-ratio) je kladne tak dokupuju -> tzn +
 			# if (50% - calculated-ratio) je zaporne tak prodavam -> tzn -
-			print(f"ratio: {coin_ratios[i] + float(coin_allocations[i])}, rebalanceRatio: {coin_allocations}")
+			#print(f"ratio: {coin_ratios[i] + float(coin_allocations[i])}, rebalanceRatio: {coin_allocations}")
 
 			if((coin_ratios[i] + float(coin_allocations[i])) > float(coin_allocations[i])):
 				for j in range(0, len(coin_ratios)):
@@ -253,7 +253,7 @@ def trigger_rebalance(coin_ratios, new_coins_quote_amount, quote_total, timestam
 			pair_amounts.append(new_coins_quote_amount[i] + (quote_total * abs(coin_ratios[i])))
 		else:
 			pair_amounts.append(new_coins_quote_amount[i] - (quote_total * abs(coin_ratios[i])))
-	print(pair_amounts)
+	#print(pair_amounts)
 	#append record when rebalance triggered
 	rebalancing_results.append([timestamps, pair_amounts, quote_total, 1])
 	pair_amounts = []
@@ -264,7 +264,7 @@ def simulate_rebalancing(coins_init_close_prices, coins_data, coins_quote_assest
 	rebalancing_results = []
 	coins_amt_of_base = []
 	local_init_timestamp = initial_timestamp
-
+	
 	if(option_value == 0):
 		for i in range(0, len(coins_data[0])):
 			coins_new_prices = []
@@ -280,13 +280,13 @@ def simulate_rebalancing(coins_init_close_prices, coins_data, coins_quote_assest
 	
 	elif(option_value == 1):
 		#podle casu
-		print(coins_data)
+		#print("coins_data: ", coins_data)
 		for i in range(0, len(coins_data[0])):
 			#print(f"{coins_data[0][i][0]} == {local_init_timestamp}" )
 			if(coins_data[0][i][0] == local_init_timestamp):
 				local_init_timestamp  += timestamp_ratio
 				#print(f"{coins_data[0][i][0]} == {local_init_timestamp}")
-				print('performing rebalance...')
+				#print('performing rebalance...')
 				coins_new_prices = []
 				coins_new_timestamps = []
 				#toto je ke 2. a vyssi iteraci
@@ -305,7 +305,7 @@ def simulate_rebalancing(coins_init_close_prices, coins_data, coins_quote_assest
 @app.route("/rebalance", methods=['GET'])
 async def getRebalancing():
 
-	print(request.args)
+	#print(request.args)
 
 	coins = request.args.get("coins").split(",")
 	allocations = request.args.get("allocations").split(",")
@@ -355,7 +355,7 @@ async def getRebalancing():
 			data = await cur.fetchall()
 
 			coins_kline_data.append(data)
-			print("""data size: {0}""".format(len(data))) 
+			#print("""data size: {0}""".format(len(data))) 
 	
 		await cur.close()
 		conn.close()
@@ -1367,6 +1367,7 @@ def simulate_dca(data, initial_balance):
 		total_invested += initial_balance  # Accumulate the total amount invested
 
 	final_price = data[-1][2]
+	print(data)
 	final_balance = coin_balance * final_price
 	
 	profit = final_balance - total_invested  # Profit is final balance minus total invested

@@ -220,6 +220,7 @@ function displaySuggestions(suggestionsList) {
 	}
 }
 
+
 const auto_invest_calc_interval_detail_selector_hours_input = document.getElementById("auto_invest_calc_interval_detail_selector_hours_input");
 
 auto_invest_calc_interval_detail_selector_hours_input.addEventListener("change", function() {
@@ -227,6 +228,21 @@ auto_invest_calc_interval_detail_selector_hours_input.addEventListener("change",
 });
 
 const auto_invest_calc_interval_detail_selector_DateFrom_input = document.getElementById("auto_invest_calc_interval_detail_selector_DateFrom_input");
+
+const today = new Date();
+const thirtyDaysAgo = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
+const formattedDate = thirtyDaysAgo.toISOString().slice(0, 16);
+auto_invest_calc_interval_detail_selector_DateFrom_input.value = formattedDate;
+
+var cnter = 2;
+document.getElementById("auto_invest_calc_interval_detail_selector_dateFrom_button").addEventListener("click", () => {
+	const today = new Date();
+	const thirtyDaysAgo = new Date(today.getTime() - (cnter * 30) * 24 * 60 * 60 * 1000);
+	const formattedDate = thirtyDaysAgo.toISOString().slice(0, 16);
+	auto_invest_calc_interval_detail_selector_DateFrom_input.value = formattedDate;
+	cnter += 1;
+});
+
 
 auto_invest_calc_interval_detail_selector_DateFrom_input.addEventListener("change", function() {
 	auto_invest_calc_interval_detail_selector_DateFrom_input.value = this.value;
@@ -316,7 +332,7 @@ document.getElementById("auto_invest_calc_confirm_button1").addEventListener("cl
 		console.log(getclose_url);
 		
 		//setRebalancePoints(rebalance_url);
-		getClose(getclose_url, rebalance_url);
+		getClose(getclose_url, rebalance_url, coinNames);
 
 	}
 	

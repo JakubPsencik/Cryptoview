@@ -1,12 +1,10 @@
-async function getClose(url, rebalanceUrl) {
+async function getClose(url, rebalanceUrl, coinNames) {
 	
 	//HODL & DCA
 	try {
 		let response = await fetch(url);
 		response.json().then((r) => {
 			console.log(r);
-			const hodlDiv = document.getElementById('binance_cmc_ew_index_recommend_main_div_1');
-			const dcaDiv = document.getElementById('binance_cmc_ew_index_recommend_main_div_2');
 
 			dcaData = r[r.length - 3];
 			hodlData = r[r.length - 1];
@@ -26,37 +24,21 @@ async function getClose(url, rebalanceUrl) {
 		let response = await fetch(rebalanceUrl);
 		response.json().then(async (points) => {
 		console.log(points);
-		const dcaDiv = document.getElementById('binance_cmc_ew_index_recommend_main_div_3');
-		//createGetCloseTable(rebalanceData, "rebalance_table");
+	
 		
 		let startData = points[points.length - 1][0];
 		let endData = points[points.length - 1][points[points.length - 1].length - 1];
 		
 		data = [];
-
+		
 		for(let i = 0; i < startData.coinAmounts.length; i++) {
 			data.push([
-				"",
-				startData.coinAmounts[i],
-				endData.coinAmounts[i],
-				(endData.coinAmounts[i] - startData.coinAmounts[i]),
+				coinNames[i],
+				parseFloat(startData.coinAmounts[i]).toFixed(2),
+				parseFloat(endData.coinAmounts[i]).toFixed(2),
+				(parseFloat(endData.coinAmounts[i]).toFixed(2) - parseFloat(startData.coinAmounts[i]).toFixed(2)),
 			]);
 		}
-		/*
-		QuoteTotal
-		: 
-		623.9868146423333
-		Rebalance
-		: 
-		0
-		coinAmounts
-		: 
-		(2) [321.0752275413413, 302.91158710099205]
-		timestamps
-		: 
-		(2) [1713056400000, 1713056400000]
-		*/
-		console.log(data);
 
 		createGetCloseTable(data, "rebalance_table");
 	
@@ -68,21 +50,30 @@ async function getClose(url, rebalanceUrl) {
 }
 
 async function createGetCloseTable(data, tableName) {
-
+	console.log(tableName , data);
 	let table = document.getElementById(tableName)
 	table.innerHTML = "";
 
 	let tr = document.createElement("tr");
+	let img_td = document.createElement("td");
 	let name_td = document.createElement("td");
 	let invested_td = document.createElement("td");
 	let balance_td = document.createElement("td");
 	let profit_td = document.createElement("td");
+
+	img_td.classList.add("custom-tr");
+	name_td.classList.add("custom-tr");
+	invested_td.classList.add("custom-tr");
+	balance_td.classList.add("custom-tr");
+	profit_td.classList.add("custom-tr");
+
 
 	name_td.innerHTML = "Coin"
 	invested_td.innerHTML = "Invested"
 	profit_td.innerHTML = "Profit"
 	balance_td.innerHTML = "Balance"
 
+	tr.appendChild(img_td)
 	tr.appendChild(name_td)
 	tr.appendChild(invested_td)
 	tr.appendChild(balance_td)
@@ -92,7 +83,7 @@ async function createGetCloseTable(data, tableName) {
 	table.appendChild(tr)
 
 	for(let i = 0; i < data.length; i++) {
-		this.addGetCloseDcaTableRow(tableName, data[i][0], data[i][1], data[i][2], data[i][3]);
+		this.addGetCloseDcaTableRow(tableName, data[i][0], parseFloat(data[i][1]).toFixed(2), parseFloat(data[i][2]).toFixed(2), parseFloat(data[i][3]).toFixed(2));
 	}
 
 	tr = document.createElement("tr");
@@ -105,39 +96,42 @@ async function createGetCloseTable(data, tableName) {
 	fill_td.innerHTML = "Total: ";
 	sum = 0;
 	data.forEach(d => {
-		sum += d[1];
+		sum += parseFloat(d[1]);
 	});
 
-	invested_total_td.innerHTML = sum.toFixed(2) + " $"
+	invested_total_td.innerHTML = parseFloat(sum).toFixed(2) + " $"
 
 	sum = 0;
 	data.forEach(d => {
-		sum += d[2];
+		sum += parseFloat(d[2]);
 	});
+	const balance_total = sum;
+	balance_total_td.innerHTML = parseFloat(sum).toFixed(2) + " $"
+
+	sum = 0;
+	data.forEach(d => {
+		sum += parseFloat(d[3]);
+	});
+
+	profit_total_percentage = parseFloat((sum / balance_total) * 100).toFixed(2);
 	
-	balance_total_td.innerHTML = sum.toFixed(2) + " $"
-
-	sum = 0;
-	data.forEach(d => {
-		sum += d[3];
-	});
+	console.log(profit_total_percentage);
 
 	if(sum > 0) {
-		profit_total_td.innerHTML =  "+ " + sum.toFixed(2) + " $"
+		profit_total_td.innerHTML =  "+ " + parseFloat(sum).toFixed(2) + " $" + " (" + profit_total_percentage + " %)";
 		profit_total_td.style.color = "limegreen";
 	} else if(sum < 0) {
-		profit_total_td.innerHTML =  sum.toFixed(2) + " $"
+		profit_total_td.innerHTML =  parseFloat(sum).toFixed(2) + " $" + " (" + profit_total_percentage + " %)";
 		profit_total_td.style.color = "red";
 	} else {
-		profit_total_td.innerHTML =  sum.toFixed(2) + " $"
+		profit_total_td.innerHTML =  parseFloat(sum).toFixed(2) + " $" + " (" + profit_total_percentage + " %)";
 	}
-	
 
-
-	tr.appendChild(fill_td)
-	tr.appendChild(invested_total_td)
-	tr.appendChild(balance_total_td)
-	tr.appendChild(profit_total_td)
+	tr.appendChild(document.createElement("td"));
+	tr.appendChild(fill_td);
+	tr.appendChild(invested_total_td);
+	tr.appendChild(balance_total_td);
+	tr.appendChild(profit_total_td);
 
 	table.appendChild(tr);
 }
@@ -147,23 +141,32 @@ async function addGetCloseDcaTableRow(tableName, coinName, invested, balance, pr
 	let table = document.getElementById(tableName)
 
 	let tr = document.createElement("tr");
+	let img_td = document.createElement("td");
 	let name_td = document.createElement("td");
 	let invested_td = document.createElement("td");
 	let balance_td = document.createElement("td");
 	let profit_td = document.createElement("td");
 
 	name_td.innerHTML = coinName
-	name_td.setAttribute("class", "info-label")
+	name_td.setAttribute("class", "custom-tr")
+
+	let img = document.createElement("img");
+	img.setAttribute("src", `static/img/${coinName}.png`);
+	img.setAttribute("loading", 'lazy');
+	img.setAttribute("class", 'pg4_table_img');
+
+	img_td.appendChild(img)
 
 	invested_td.innerHTML = invested + ' $'
-	invested_td.setAttribute("class", "info-label")
+	invested_td.setAttribute("class", "custom-tr")
 	
-	balance_td.innerHTML = `${balance.toFixed(2)} $`
-	balance_td.setAttribute("class", "interval")
+	balance_td.innerHTML = `${balance} $`
+	balance_td.setAttribute("class", "custom-tr")
 
-	profit_td.innerHTML = `${profit.toFixed(2)} $`
-	profit_td.setAttribute("class", "profit")
+	profit_td.innerHTML = `${profit} $`
+	profit_td.setAttribute("class", "custom-tr")
 
+	tr.appendChild(img_td)
 	tr.appendChild(name_td)
 	tr.appendChild(invested_td)
 	tr.appendChild(balance_td)

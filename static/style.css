@@ -633,15 +633,15 @@ border: 1px solid var(--tw-black);
 
 .binance-ew-index-icon {
 	text-size-adjust: 100%;
-    font-weight: 400;
-    line-height: 1.5;
-    font-family: BinancePlex,Arial,sans-serif!important;
-    box-sizing: border-box;
-    margin: 0;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	font-weight: 400;
+	line-height: 1.5;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	box-sizing: border-box;
+	margin: 0;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .custom-label-small {
@@ -651,13 +651,17 @@ border: 1px solid var(--tw-black);
 
 .custom-table {
 	width: 100%;
+	height: fit-content;
+	
 
-	tr {
-		padding-top: 5px;
-		padding-bottom: 5px;
-	}
+	
 
-	tr:last {
+	tr:last-child {
 		border-top: 1px dashed var(--tw-lightgrey);
 	}
+}
+
+.custom-tr {
+	padding-top: 1vh;
+	padding-bottom: 1vh;
 }
