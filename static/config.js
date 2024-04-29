@@ -143,26 +143,7 @@ $(document).ready(async () => {
 	setSpotGridPoints(SpotGrid_url);
 });
 
-//setWeekPredictPoints("http://127.0.0.1:5000/weekPredict?&symbol=LTCEUR&interval=1h")
-
-//getHistoricalData("http://127.0.0.1:5000/getData?&symbol=BTCEUR")
-/*getHistoricalData("http://127.0.0.1:5000/getData?&symbol=ETHEUR")
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=BNBEUR")
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=XRPEUR")
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=SOLEUR")
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=ADAEUR")
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=TRXEUR")
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=LINKEUR")
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=DOTEUR")
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=LTCEUR")
-*/
-
-
-
 rb_displayBinanceIndexAssetData("http://127.0.0.1:5000/binanceIndexAsset");
-
-/*const auto_invest_bia = new BinanceIndexAsset("auto_invest", [], "auto_invest_calc_index_wrapper");
-auto_invest_bia.displayBinanceIndexAssetData("http://127.0.0.1:5000/binanceIndexAsset");*/
 
 displayBinanceCmcEwIndex("http://127.0.0.1:5000/CMC");
 
