@@ -59,21 +59,13 @@
 #saving_staking_table {
 
 	/*width: 40vw;*/
-<<<<<<< HEAD
-	height: 95vh;
-=======
 	height: 70vh;
->>>>>>> main
 	min-height: fit-content;
 	text-align: center;
 	vertical-align: middle;
 	background-color: var(--bn-black);
 	border-radius: 2rem;
-<<<<<<< HEAD
-	margin: 2.0vh auto 0 auto;
-=======
 	margin: 14.5vh auto 0 auto;
->>>>>>> main
 
 	@media screen and (max-width: 768px){
 		width: 80vw;

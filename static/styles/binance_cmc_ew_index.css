@@ -61,11 +61,7 @@
 
 /*----------------------------------------*/
 
-<<<<<<< HEAD
-@media (max-height: 911px) {
-=======
 @media (max-width: 991px) {
->>>>>>> main
 	
 	.binance_cmc_ew_index_img_wrapper {
 		width: 80px;
@@ -118,11 +114,7 @@
 }
 
 
-<<<<<<< HEAD
-@media (max-height: 700px) {
-=======
 @media (max-width: 768px) {
->>>>>>> main
 	.binance_cmc_ew_index_img {
 		position: relative;
 		width: 60px;

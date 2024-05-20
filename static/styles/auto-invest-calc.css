@@ -110,14 +110,11 @@
     background-color: var(--bn-black);
     border-radius: 2rem;
     margin: 14.5vh auto auto auto;
-<<<<<<< HEAD
-=======
 
 	@media (max-width: 768px) {
 		width: 80vw;
 		margin: auto;
 	}
->>>>>>> main
 }
 
 #auto_invest_calc_space_div {
