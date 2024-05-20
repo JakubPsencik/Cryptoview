@@ -58,15 +58,26 @@
 
 #saving_staking_table {
 
-	width: 40vw;
+	/*width: 40vw;*/
 	height: 70vh;
 	min-height: fit-content;
 	text-align: center;
 	vertical-align: middle;
 	background-color: var(--bn-black);
 	border-radius: 2rem;
-	margin: 14.5vh auto auto auto;
+	margin: 14.5vh auto 0 auto;
 
+	@media screen and (max-width: 768px){
+		width: 80vw;
+		height: 70vh;
+		min-height: fit-content;
+		text-align: center;
+		vertical-align: middle;
+		background-color: var(--bn-black);
+		border-radius: 2rem;
+		margin: auto;
+		
+	}
 }
 
 #saving_staking_table td {
@@ -96,7 +107,7 @@
 }
 
 /*----------------------------------------*/
-
+/*
 @media (max-height: 700px) {
 
 	#saving_staking_table {
@@ -109,4 +120,4 @@
 		margin: 7.25vh auto auto auto;
 	
 	}
-}
+}*/

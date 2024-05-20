@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="cs-CZ">
 
 <head>
 	<title>Cryptoview</title>
@@ -14,7 +14,6 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-	<link rel="stylesheet" href="static/style_carousel.css">
 	<link rel="stylesheet" href="static/style.css">
 	<link rel="stylesheet" href="static/slider.css">
 	<link rel="stylesheet" href="static/styles.css">
@@ -23,6 +22,8 @@
 	<link rel="stylesheet" href="static/styles/auto-invest.css"> 
 	<link rel="stylesheet" href="static/styles/saving-staking.css">
 	<link rel="stylesheet" href="static/styles/binance_cmc_ew_index.css">
+	<link rel="stylesheet" href="static/styles/binance_cmc_ew_index_recommend.css">
+	<link rel="stylesheet" href="static/styles/auto-invest-calc.css">
 	<link rel="stylesheet" href="static/styles/rebalancing-bot.css">
 	<link rel="stylesheet" href="static/styles/spot-dca.css">
 	<link rel="stylesheet" href="static/styles/spot-grid.css">
@@ -82,21 +83,220 @@
 					</div>
 					<div class="col-md-7" style="padding: 0;">
 						<div id="binance_cmc_ew_index_main_div" style="padding: 0;">
-							<!--<div id="binance_cmc_ew_index_wrapper_div" style="padding: 0;"></div>-->
+							<div id="binance_cmc_ew_index_wrapper_div" style="padding: 0;">
 								<div id="binance_cmc_ew_index_coin_div_1" class="binance_cmc_ew_index_coin_div"></div>
 								<div id="binance_cmc_ew_index_coin_div_2" class="binance_cmc_ew_index_coin_div"></div>
-							
+							</div>
 						</div>
 					</div>
 				</div>
 			</div> <!--END PAGE BINANCE CMC EQUAL WEIGHTED INDEX-->
 
-			<div id="page_binance_index_asset" class="page b-idx-asset"> 
-			
-				<div id="binance_index_asset_main_div">
-					<h1 class="binance_index_asset_page_label">Choose your portfolito and accumulate crypto now!</h1>
+			<div id="page_auto_invest_calc" class="page auto-invest-calc"> 
+				<div class="modal-body row" style="height: 100vh; padding-bottom: 0; padding-top: 0;">
+					<!--left side-->
+					<div class="col-md-5" style="padding: 0;">
+						<div id="auto_invest_calc_description_wrapper">
+							<h1 id="auto_invest_calc_label_large">Create your own Auto-Invest Plan</h1>
+							<h2 id="auto_invest_calc_label_small">Regularly invest in cryptocurrency with a pre-determined amount and accumulate your crypto holdings</h2>
+						</div>
+					</div>
+					<div class="col-md-7" style="padding: 0;">
+
+						<div id="page_binance_index_asset" class="b-idx-asset"> 
+							<div id="binance_index_asset_main_div">
+								<div style="width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; margin-left: 95%;">
+									<button id="binance_index_asset_cancel_button" class="auto_invest_calc_remove_button">X</button>
+								</div>
+								
+							</div>
+						</div> <!--END PAGE BINANCE INDEX ASSET -->
+						
+						<div id="auto_invest_calc_div">
+							<div id="auto_invest_calc_form_header">
+								<div>
+									Create your plan
+								</div>
+							</div>
+							<div id="auto_invest_calc_space_div"></div>
+							<div id="auto_invest_calc_search_div_wrapper">
+								<div id="auto_invest_calc_buttons_wrapper">
+									<button data-bn-type="button" id="auto_invest_calc_add_coins_bn">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" id="auto_invest_calc_add_coins_bn_plus_icon">
+											<path d="M13.5 3h-3v7.5H3v3h7.5V21h3v-7.5H21v-3h-7.5V3z" fill="currentColor"></path>
+										</svg>
+										Add Coins
+									</button>
+
+									<button data-bn-type="button" id="auto_invest_calc_recom_coins_bn">Recommended For You</button>
+								</div>
+
+								<div id="auto_invest_calc_search_div">
+									<div id="auto_invest_calc_search_bar_wrapper">
+										<img src="/static/img/search-icon.png" class="auto_invest_calc_search_icon">
+										<input id="auto_invest_calc_search_input" type="text" placeholder="Search" class="auto_invest_calc_search_div">
+									</div>
+									
+									<div id="auto_invest_calc_search_input_list"></div>
+								</div>
+								
+								<div id="auto_invest_calc_index_wrapper">
+									<div class="auto_invest_calc_label">Coin Allocation</div>
+									<div id="auto_invest_calc_no_coins_selected">
+										<svg style="width: 6vw; height: auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none" class="css-13hycz7"><path fill-rule="evenodd" clip-rule="evenodd" d="M26 8h38l20 20v60H26V8zm48 29H36v4h38v-4zm0 9H36v4h38v-4zm-38 9h38v4H36v-4zm34 16l-4-4-4 4 4 4 4-4z" fill="url(#not-found-data_svg__paint0)"></path><path opacity="0.15" d="M86 50l3-3 3 3-3 3-3-3zM47 21l3-3 3 3-3 3-3-3zM84 28H64V8l20 20z" fill="#929AA5"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M4.172 73.171l14.5-14.5 5.656 5.658-14.5 14.5-5.656-5.657z" fill="url(#not-found-data_svg__paint1)"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M51 48c0-8.837-7.163-16-16-16s-16 7.163-16 16 7.163 16 16 16 16-7.163 16-16zm4 0c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20z" fill="url(#not-found-data_svg__paint2)"></path><defs><linearGradient id="not-found-data_svg__paint0" x1="55" y1="8" x2="55" y2="88" gradientUnits="userSpaceOnUse"><stop stop-color="#929AA5" stop-opacity="0.1"></stop><stop offset="1" stop-color="#929AA5" stop-opacity="0.25"></stop></linearGradient><linearGradient id="not-found-data_svg__paint1" x1="4.172" y1="68.75" x2="24.328" y2="68.75" gradientUnits="userSpaceOnUse"><stop stop-color="#929AA5"></stop><stop offset="1" stop-color="#76808F"></stop></linearGradient><linearGradient id="not-found-data_svg__paint2" x1="15" y1="48" x2="55" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#929AA5"></stop><stop offset="1" stop-color="#76808F"></stop></linearGradient></defs></svg>
+										<div class="auto_invest_calc_label1">No coin has been selected</div>
+									</div>
+								</div>
+
+								<div id="auto_invest_calc_index_settings_wrapper">
+
+									<div class="auto_invest_calc_props_wrapper">
+										<div data-bn-type="text" class="auto_invest_calc_label">Amount Per Period</div>
+										<div id="auto_invest_calc_amount_input_wrapper">
+											<input data-bn-type="input" id="auto_invest_calc_props_input" class="auto_invest_calc_props_input" value="1">
+											<div id="auto_invest_calc_amount_search_bar_wrapper">
+												<div id="auto_invest_calc_amount_search_input_result" class="auto_invest_calc_search_div">
+													<img id="auto_invest_calc_amount_search_img" src="static/img/USDT.png" loading="lazy" alt="" class="auto_invest_calc_suggestion_image"/>
+													<span id="auto_invest_calc_amount_search_span" class="auto_invest_calc_suggestion_text">USDT</span>
+													<svg id="auto_invest_calc_amount_dropdown" style="width: 1vw; height: auto; margin-left: 1vw" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" class="css-rrv9q1"><path d="M16.5 8.49v2.25L12 15.51l-4.5-4.77V8.49h9z" fill="currentColor"></path></svg>
+												</div>	
+											</div>
+										</div>
+										<div id="auto_invest_calc_amount_search_input_list_wrapper">
+											<div style=" width: 12vw; background-color: var(--bn-black); margin-left: auto; margin-right: auto; margin-top: 1vh;">
+												<img src="/static/img/search-icon.png" class="auto_invest_calc_search_icon">
+												<input id="auto_invest_calc_amount_search_input" type="text" placeholder="Search" class="auto_invest_calc_search_div">
+											</div>
+	
+											<div id="auto_invest_calc_amount_search_input_list"></div>
+										</div>	
+									</div>
+	
+									<div id="recurring_cycle_label_wrapper" style="width: 80%; margin-left: auto; margin-right: auto; padding-left: 0.83vw;">
+										<div data-bn-type="text" class="auto_invest_calc_label">Recurring Cycle</div>
+									</div>
+									
+									<div id="auto_invest_calc_interval_wrapper">
+										
+										<div id="auto_invest_calc_interval_selector_button_wrapper" class="auto_invest_calc_interval_selector_button_wrapper">
+											<div class="auto_invest_calc_interval_selector_button active" style="border: 1px solid var(--bn-yellow);">Daily</div>
+	
+											<div class="auto_invest_calc_interval_selector_button">
+												<div>Weekly</div>
+											</div>
+											
+											<div class="auto_invest_calc_interval_selector_button">
+												<div >Monthly</div>
+											</div>
+											
+											<!--<div class="css-1r5nwuq"><div class="css-179zq33">1 Hour</div></div><div class="css-14xtt6"><div class="css-e1rbpa">4 Hours</div></div><div class="css-14xtt6"><div class="css-e1rbpa">8 Hours</div></div><div class="css-14xtt6"><div class="css-e1rbpa">12 Hours</div></div></div>-->
+										</div>
+									</div>
+	
+									<div id="repeats_on_label_wrapper" style="width: 80%; margin-left: auto; margin-right: auto; padding-left: 0.83vw;">
+										<div data-bn-type="text" class="auto_invest_calc_label">Repeats on</div>
+									</div>
+	
+									<div id="auto_invest_calc_interval_selector_days_button_wrapper" class="auto_invest_calc_interval_selector_days_button_wrapper">
+										<div class="auto_invest_calc_interval_selector_days_button">
+											<div>MON</div>
+										</div>
+	
+										<div class="auto_invest_calc_interval_selector_days_button">
+											<div>TUE</div>
+										</div>
+										
+										<div class="auto_invest_calc_interval_selector_days_button">
+											<div >WED</div>
+										</div>
+	
+										<div class="auto_invest_calc_interval_selector_days_button">
+											<div >THU</div>
+										</div>
+										
+										<div class="auto_invest_calc_interval_selector_days_button">
+											<div >FRI</div>
+										</div>
+	
+										<div class="auto_invest_calc_interval_selector_days_button">
+											<div >SAT</div>
+										</div>
+	
+										<div class="auto_invest_calc_interval_selector_days_button">
+											<div >SUN</div>
+										</div>
+									</div>
+	
+									<div id="auto_invest_calc_interval_detail_selector_daysInMonth_wrapper" class="auto_invest_calc_interval_detail_selector_wrapper">
+										<div data-bn-type="text" id="auto_invest_calc_interval_detail_selector_label">Date of the month</div>
+										<div id="auto_invest_calc_interval_detail_selector_dayInMonth_wrapper">
+											<input data-bn-type="input" placeholder="1-28" type="number" id="auto_invest_calc_interval_detail_selector_dayInMonth_input">
+										</div>
+									</div>
+	
+									<div id="auto_invest_calc_interval_detail_selector_localTime_wrapper" class="auto_invest_calc_interval_detail_selector_wrapper">
+										<div data-bn-type="text" id="auto_invest_calc_interval_detail_selector_label">Local Time</div>
+										<div id="auto_invest_calc_interval_detail_selector_hours_wrapper">
+											<input data-bn-type="input" placeholder="0-23" type="number" value="18" id="auto_invest_calc_interval_detail_selector_hours_input">
+											<div id="auto_invest_calc_interval_detail_selector_hours_input_suffix_wrapper1">
+												<div id="auto_invest_calc_interval_detail_selector_hours_input_suffix_wrapper2">
+													<div data-bn-type="text" id="auto_invest_calc_interval_detail_selector_hours_input_suffix">: 00</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div id="auto_invest_calc_interval_detail_selector_dateFrom_wrapper" class="auto_invest_calc_interval_detail_selector_wrapper">
+										<div data-bn-type="text" id="auto_invest_calc_interval_detail_selector_label">Date From</div>
+										<div id="auto_invest_calc_interval_detail_selector_dateFrom_inner_wrapper">
+											<input type="datetime-local" step="1" value="2024-04-08T01:00" id="auto_invest_calc_interval_detail_selector_DateFrom_input">
+										</div>
+										<button id="auto_invest_calc_interval_detail_selector_dateFrom_button" class="auto_invest_calc_interval_detail_selector_button">Add 30</button>
+									</div>
+	
+									<div id="auto_invest_calc_confirm_button1" cursor="pointer" class="auto_invest_calc_confirm_button1">Confirm</div>
+								</div>
+								
+								
+								<div id="auto_invest_calc_space_div"></div>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div> <!--END PAGE BINANCE INDEX ASSET -->
+			</div> <!-- END PAGE AUTO INVEST CALCULATOR -->
+
+			<div id="page_binance_cmc_ew_index_recommend" class="page b-cmc-idx"> 
+				<div class="modal-body row" style="height: 100vh; padding-bottom: 0; padding-top: 0;">
+					<!--left side-->
+					<div class="col-md-4" style="padding: 0;">
+						<div id="binance_cmc_ew_index_recommend_main_div_1" class="binance_cmc_ew_index_recommend_main_div" style="padding: 0;">
+							<div id="binance_cmc_ew_index_recommend_wrapper_div">
+								<h2 id="auto_invest_label_small" class="custom-label-small">HODL</h2>
+								<table id="hodl_table" class="custom-table"></table>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4" style="padding: 0;">
+						<div id="binance_cmc_ew_index_recommend_main_div_3" class="binance_cmc_ew_index_recommend_main_div" style="padding: 0;">
+							<div id="binance_cmc_ew_index_recommend_wrapper_div">
+								<h2 id="auto_invest_label_small" class="custom-label-small">REBALANCING</h2>
+								<table id="rebalance_table" class="custom-table"></table>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4" style="padding: 0;">
+						<div id="binance_cmc_ew_index_recommend_main_div_2" class="binance_cmc_ew_index_recommend_main_div" style="padding: 0;">
+							<div id="binance_cmc_ew_index_recommend_wrapper_div">
+								<h2 id="auto_invest_label_small" class="custom-label-small">DCA</h2>
+								<table id="dca_table" class="custom-table"></table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div> <!--END PAGE BINANCE CMC EQUAL WEIGHTED INDEX-->
 
 			<div id="page_rebalancing_bot" class="page rebalancing-bot"> 
 				<div class="modal-body row" style="height: 100vh; padding-top: 0; padding-bottom: 0;">
@@ -108,32 +308,57 @@
 
 						<div id="rebalancing_bot_main_content_wrapper">
 							<div id="rebalancing_bot_chart_wrapper">
-								<div id="container11_3" class="price-info-chart"></div>
-								<div id="container11_4" class="price-info-chart"></div>
+								<div id="rebalancing-info-div"></div>
 							</div>
-							<div class="rebalance-widget">
-								<div>
-									<div style="display: flex; flex-direction: row;">
-										<label style=" display: block; margin: 5px;">1</label>
-										<input id="rebalance-coin1" type="text" value="BTC" class="rebalance-settings-form-input">
-										<input id="rebalance-coin1-allocation" type="number" value=50 class="rebalance-settings-form-input">
-									</div>
+							<div id="rebalance-widget" class="rebalance-widget">
 
-									<div style="display: flex; flex-direction: row;">
-										<label style=" display: block; margin: 5px;">2</label>
-										<input id="rebalance-coin2" type="text" value="BNB" class="rebalance-settings-form-input">
-										<input id="rebalance-coin2-allocation" type="number" value=50 class="rebalance-settings-form-input">
+								<div id="rebalance_page_binance_index_asset"> 
+									<div id="rebalance_binance_index_asset_main_div">
+										<div style="width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; margin-left: 95%;">
+											<button id="rebalance_binance_index_asset_cancel_button" class="auto_invest_calc_remove_button">X</button>
+										</div>
+										
 									</div>
+								</div> <!--END PAGE BINANCE INDEX ASSET -->
+								
+								<div id="rebalancing_bot_buttons_wrapper">
+									<button data-bn-type="button" id="rebalancing_bot_add_coins_bn">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" id="rebalancing_bot_add_coins_bn_plus_icon">
+											<path d="M13.5 3h-3v7.5H3v3h7.5V21h3v-7.5H21v-3h-7.5V3z" fill="currentColor"></path>
+										</svg>
+										Add Coins
+									</button>
 
+									<button data-bn-type="button" id="rebalancing_bot_recom_coins_bn">Recommended For You</button>
+								</div>
+
+								<!--z cmc-->
+
+								<div id="rebalancing_bot_search_div">
+									<div id="rebalancing_bot_search_bar_wrapper">
+										<img src="/static/img/search-icon.png" class="rebalancing_bot_search_icon">
+										<input id="rebalancing_bot_search_input" type="text" placeholder="Search" class="rebalancing_bot_search_div">
+									</div>
+									
+									<div id="rebalancing_bot_search_input_list"></div>
+								</div>
+								
+								<div id="rebalancing_bot_index_wrapper">
+									<div class="rebalancing_bot_label">Coin Allocation</div>
+									<div id="rebalancing_bot_no_coins_selected">
+										<svg style="width: 6vw; height: auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none" class="css-13hycz7"><path fill-rule="evenodd" clip-rule="evenodd" d="M26 8h38l20 20v60H26V8zm48 29H36v4h38v-4zm0 9H36v4h38v-4zm-38 9h38v4H36v-4zm34 16l-4-4-4 4 4 4 4-4z" fill="url(#not-found-data_svg__paint0)"></path><path opacity="0.15" d="M86 50l3-3 3 3-3 3-3-3zM47 21l3-3 3 3-3 3-3-3zM84 28H64V8l20 20z" fill="#929AA5"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M4.172 73.171l14.5-14.5 5.656 5.658-14.5 14.5-5.656-5.657z" fill="url(#not-found-data_svg__paint1)"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M51 48c0-8.837-7.163-16-16-16s-16 7.163-16 16 7.163 16 16 16 16-7.163 16-16zm4 0c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20z" fill="url(#not-found-data_svg__paint2)"></path><defs><linearGradient id="not-found-data_svg__paint0" x1="55" y1="8" x2="55" y2="88" gradientUnits="userSpaceOnUse"><stop stop-color="#929AA5" stop-opacity="0.1"></stop><stop offset="1" stop-color="#929AA5" stop-opacity="0.25"></stop></linearGradient><linearGradient id="not-found-data_svg__paint1" x1="4.172" y1="68.75" x2="24.328" y2="68.75" gradientUnits="userSpaceOnUse"><stop stop-color="#929AA5"></stop><stop offset="1" stop-color="#76808F"></stop></linearGradient><linearGradient id="not-found-data_svg__paint2" x1="15" y1="48" x2="55" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#929AA5"></stop><stop offset="1" stop-color="#76808F"></stop></linearGradient></defs></svg>
+										<div class="rebalancing_bot_label1">No coin has been selected</div>
+									</div>
+								</div>
+
+								<!--z cmc-->
+								<div id="rebalance_settings_div">
 									<label style=" display: block; margin-bottom: 5px;">Invest Coin</label>
 									<input id="rebalance-investment" type="number" value="1000" class="rebalance-settings-form-input">
 									
-									<label style=" display: block; margin-bottom: 5px;">Coin ratio (%)</label>
-									<input id="rebalance-ratio" type="number" value="1" class="rebalance-settings-form-input">
-									
 									<label style=" display: block; margin-bottom: 5px;">Candle Type</label>
 									<select id="rebalance-interval" class="rebalance-settings-form-input">
-										<option selected="selected">1h</option>
+										<option selected="selected">1m</option>
 										<option value="1m">1m</option>
 										<option value="1h">1h</option>
 										<option value="1d">1d</option>
@@ -141,13 +366,36 @@
 									</select>
 
 									<label style=" display: block; margin-bottom: 5px;">Start date</label>
-									<input id="rebalance-start-date" type="datetime-local" value="2023-09-12T08:00" class="rebalance-settings-form-input" >
+									<input id="rebalance-start-date" type="datetime-local" step="1" value="2024-04-01T10:00" class="rebalance-settings-form-input" >
 
 									<label style=" display: block; margin-bottom: 5px;">End date</label>
-									<input id="rebalance-end-date" type="datetime-local" value="2023-11-13T08:00" class="rebalance-settings-form-input">
+									<input id="rebalance-end-date" type="datetime-local" step="1" value="2024-04-15T10:00" class="rebalance-settings-form-input">
 									
+									<div style="display: flex; flex-direction: column;">
+
+										<div style="display: inline-flex; justify-content: space-evenly; margin-top: 2vh; margin-bottom: 2vh;">
+											<label id="label-value2">time</label>
+											<input type="radio" id="rebalance-interval-time-option-radio-value" name="MyChoice" value="time">
+		
+											<select id="rebalance-interval-time-option" class="settings">
+												<option value="30m">30m</option>
+												<option value="1h">1h</option>
+												<option value="4h">4h</option>
+												<option value="8h">8h</option>
+												<option value="12h">12h</option>
+												<option value="1d">1d</option>
+												<option value="3d">3d</option>
+												<option value="7d">7d</option>
+												<option value="14d">28d</option>
+											</select>
+	
+										</div>
+									</div>
+
 									<button id="bn_rebalance" style="margin: 5px; background-color: var(--tw-lightblue); color: #fff; padding: 5px 10px; border: none; cursor: pointer;">Submit</button>
 								</div>
+								
+								
 							</div>
 						</div>
 						
@@ -174,7 +422,7 @@
 							</div>
 
 							<div id="spot_dca_chart_wrapper">
-								<div id="container12_1"  class="price-info-chart"></div>
+								<div id="container12_1"  class="price-info-chart_dca"></div>
 							</div>
 
 							<div class="DCA-widget">
@@ -216,10 +464,10 @@
 										</select>
 		
 										<label class="DCA-settings-form-label">Start date</label>
-										<input id="DCA-start-date" type="datetime-local" value="2023-07-13T08:00" class="DCA-settings-form-input" >
+										<input id="DCA-start-date" type="datetime-local" step="1" value="2024-01-01T01:00" class="DCA-settings-form-input" >
 		
 										<label class="DCA-settings-form-label">End date</label>
-										<input id="DCA-end-date" type="datetime-local" value="2023-11-13T08:00" class="DCA-settings-form-input">
+										<input id="DCA-end-date" type="datetime-local" step="1" value="2024-04-01T01:00" class="DCA-settings-form-input">
 									</div>
 									<button id="bn_DCA" style="margin: 5px; background-color: var(--tw-lightblue); color: #fff; padding: 5px 10px; border: none; cursor: pointer;">Submit</button>
 								</div>
@@ -285,10 +533,10 @@
 										</select>
 		
 										<label class="SpotGrid-settings-form-label">Start date</label>
-										<input id="SpotGrid-start-date" type="datetime-local" value="2023-10-13T08:00" class="SpotGrid-settings-form-input" >
+										<input id="SpotGrid-start-date" type="datetime-local" step="1" value="2023-10-13T08:00" class="SpotGrid-settings-form-input" >
 		
 										<label class="SpotGrid-settings-form-label">End date</label>
-										<input id="SpotGrid-end-date" type="datetime-local"  value="2023-11-13T20:00" class="SpotGrid-settings-form-input">
+										<input id="SpotGrid-end-date" type="datetime-local" step="1" value="2023-11-13T20:00" class="SpotGrid-settings-form-input">
 									</div>
 							
 									<button id="bn_SpotGrid" style="margin: 5px; background-color: var(--tw-lightblue); color: #fff; padding: 5px 10px; border: none; cursor: pointer;">Submit</button>
@@ -299,164 +547,32 @@
 					
 				</div> 
 			</div> <!--END PAGE 12-->
-			<div id="pg13" class="page ten">
-				<div class="modal-body row" style="height: 100vh; padding-top: 0; padding-bottom: 0;">
-					<div id="WeekPredict-left-side" class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0;">
-						<!--left side-->
-						<div id="WeekPredict-left-1" idstyle="border: 2px solid var(--tw-grey); padding: 0; width: 100%; height: 100%;">
-							<div id="WeekPredict-header">
-									
-								<span class="span">Date</span>
-								<span class="span">Duration</span>
-								<span class="span">Invested</span>
-								<span class="span">Balance</span>
-								
-							</div>
-							<div id="WeekPredict-points-div">
-							</div>
-						</div>
-						
-
-					</div>
-					<div class="col-md-8" style="display: flex; flex-direction: column; border: 2px solid var(--tw-grey); padding: 0;">
-					
-						<div style="border: 2px solid var(--tw-grey); padding: 0;">
-							<h1 id="week-predict-info-div" class="auto_invest_headliner mb-4"></h1>
-						</div>
-
-						<div id="week-predict-div" style="display: flex; flex-direction: row; flex: 1;">
-							<div id="container14_1" style="width: 100%; height: 99.9%;"></div>
-						</div>
-					</div>
-					<div id="WeekPredict-right-side" class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0; width: 100%; height: 100%;">
-						<!--<div id="WeekPredict-left" class="col-md-2" style="border: 2px solid var(--tw-grey); padding: 0; z-index: 1; width: 100%;">-->
-													<!--left side-->
-						<div style="border: 2px solid var(--tw-grey); padding: 0; width: 100%; height: 100%;">
-							<h1 id="" class="auto_invest_headliner mb-4" > 
-								Week Predictions  <br>
-							</h1>
-						</div>
-						<!--</div>-->
-					</div>
-				</div> 
-			</div> <!--END PAGE 13-->
-			<div id="pg3" class="page three"> 
-				<div id="binance-div-test" style= "width: 100vw; height: 100vh; padding-bottom: 0; padding-top: 0; padding-right: 5px; padding-left: 5px;">
-					
-					<div style="width: 100%; background-color: var(--bn-black);">
-						<div id="binance-ew-index-current-set">
-						
-							<div class="binance-ew-index-icon">
-								<img src="/static/img/BTC.png" width="50" height="50">
-								<span style="font-size: larger; font-weight: bold; align-items: center; margin-top: 10px;">BTC</span>
-								<span style="font-size: small; justify-content: center;">Bitcoin</span>
-							</div>
-	
-							<div class="binance-ew-index-icon">
-								<img src="/static/img/ETH.png" width="50" height="50">
-								<span style="font-size: larger; font-weight: bold; align-items: center; margin-top: 10px;">ETH</span>
-								<span style="font-size: small; justify-content: center;">Ethereum</span>
-							</div>
-	
-							<div class="binance-ew-index-icon">
-								<img src="/static/img/BNB.png" width="50" height="50">
-								<span style="font-size: larger; font-weight: bold; align-items: center; margin-top: 10px;">BNB</span>
-								<span style="font-size: small; justify-content: center;">BNB</span>
-							</div>
-	
-							<div class="binance-ew-index-icon">
-								<img src="/static/img/XRP.png" width="50" height="50">
-								<span style="font-size: larger; font-weight: bold; align-items: center; margin-top: 10px;">XRP</span>
-								<span style="font-size: small; justify-content: center;">XRP</span>
-							</div>
-	
-							<div class="binance-ew-index-icon">
-								<img src="/static/img/SOL.png" width="50" height="50">
-								<span style="font-size: larger; font-weight: bold; align-items: center; margin-top: 10px;">SOL</span>
-								<span style="font-size: small; justify-content: center;">Solana</span>
-							</div>
-	
-							<div class="binance-ew-index-icon">
-								<img src="/static/img/ADA.png" width="50" height="50">
-								<span style="font-size: larger; font-weight: bold; align-items: center; margin-top: 10px;">ADA</span>
-								<span style="font-size: small; justify-content: center;">Cardano</span>
-							</div>
-	
-							<div class="binance-ew-index-icon">
-								<img src="/static/img/TRX.png" width="50" height="50">
-								<span style="font-size: larger; font-weight: bold; align-items: center; margin-top: 10px;">TRX</span>
-								<span style="font-size: small; justify-content: center;">TRON</span>
-							</div>
-	
-							<div class="binance-ew-index-icon">
-								<img src="/static/img/LINK.png" width="50" height="50">
-								<span style="font-size: larger; font-weight: bold; align-items: center; margin-top: 10px;">LINK</span>
-								<span style="font-size: small; justify-content: center;">Chainlink</span>
-							</div>
-	
-							<div class="binance-ew-index-icon">
-								<img src="/static/img/DOT.png" width="50" height="50">
-								<span style="font-size: larger; font-weight: bold; align-items: center; margin-top: 10px;">DOT</span>
-								<span style="font-size: small; justify-content: center;">Polkadot</span>
-							</div>
-	
-							<div class="binance-ew-index-icon">
-								<img src="/static/img/LTC.png" width="50" height="50">
-								<span style="font-size: larger; font-weight: bold; align-items: center; margin-top: 10px;">LTC</span>
-								<span style="font-size: small; justify-content: center;">Litecoin</span>
-							</div>
-	
-						</div>
-					</div>
-
-					<div class="binance-ew-index-outer-wrapper">
-						<div id="binance-ew-index-chart-wrapper" class="binance-ew-index-wrapper">
-							<div id="binance-container1" class="binance-ew-index-chart"></div>
-							<div id="binance-container2" class="binance-ew-index-chart"></div>
-							<div id="binance-container3" class="binance-ew-index-chart"></div>
-							<div id="binance-container4" class="binance-ew-index-chart"></div>
-							<div id="binance-container5" class="binance-ew-index-chart"></div>
-						</div>
-						<div id="binance-ew-index-chart-wrapper" class="binance-ew-index-wrapper">
-							<div id="binance-container6" class="binance-ew-index-chart"></div>
-							<div id="binance-container7" class="binance-ew-index-chart"></div>
-							<div id="binance-container8" class="binance-ew-index-chart"></div>
-							<div id="binance-container9" class="binance-ew-index-chart"></div>
-							<div id="binance-container10" class="binance-ew-index-chart"></div>
-						</div>
-					</div>
-					<!--tady potrebuju tabulku kde budou ty data-->
-					<div id="binance-ew-index-table">
-						<h1 id="binance-ew-index-title" class="mb-4" > 
-							Binance CMC Top 10 Equal-Weighted Index
-						</h1>
-						<div id="binance-ew-index-table-content">
-							<!--<img src="/static/img/ew-index-test-data.png" style="width: 1520px; height: 270px;">-->
-						</div>
-					</div>
-				</div>
-			</div> <!--END PAGE 3-->
 		</div>
 	</div>
 
 	<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+	<script src="{{url_for('static', filename='startup.js')}}"></script>
 	<script src="{{url_for('static', filename='controls.js')}}"></script>
 	<script src="{{url_for('static', filename='slider.js')}}"></script>
 	<script src="{{url_for('static', filename='realtimeWidget.js')}}"></script>
 	<script src="{{url_for('static', filename='auto-invest.js')}}"></script>
+	<script src="{{url_for('static', filename='auto_invest_calc.js')}}"></script>
+	<script src="{{url_for('static', filename='auto_invest_calc_amount.js')}}"></script>
 	<script src="{{url_for('static', filename='rebalancing-bot.js')}}"></script>
 	<script src="{{url_for('static', filename='spot-dca-bot.js')}}"></script>
 	<script src="{{url_for('static', filename='spot-grid-bot.js')}}"></script>
+	<!--<script src="{{url_for('static', filename='	spot-grid-bot copy.js')}}"></script>-->
 	<script src="{{url_for('static', filename='top10.js')}}"></script>
-	<script src="{{url_for('static', filename='week-predict.js')}}"></script>
+	<!--<script src="{{url_for('static', filename='week-predict.js')}}"></script>-->
 	<script src="{{url_for('static', filename='get-data.js')}}"></script>
 	<script src="{{url_for('static', filename='ew-index.js')}}"></script>
 	<script src="{{url_for('static', filename='binance_index_asset.js')}}"></script>
+	<script src="{{url_for('static', filename='rebalancing_bot_index_asset.js')}}"></script>
 	<script src="{{url_for('static', filename='binance_cmc_ew_index.js')}}"></script>
-	<script src="{{url_for('static', filename='chart.js')}}"></script>
+	<script src="{{url_for('static', filename='get-close.js')}}"></script>
 	<script src="{{url_for('static', filename='config.js')}}"></script>
+
+	
 </body>
 </html>

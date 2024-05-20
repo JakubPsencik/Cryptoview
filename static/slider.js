@@ -6,9 +6,9 @@ let pageNumber = 1;
 slide = (direction) => {
 	//console.log('before: ', pageNumber);
 
-	if(direction === "next") {
+	if(direction === 'next') {
 		
-		if(pageNumber === 10) {
+		if(pageNumber === 9) {
 			translate += translateAmount * (pageNumber-1);
 			pageNumber = 1;
 		} else {
@@ -17,12 +17,13 @@ slide = (direction) => {
 		}
 		
 	} 
+	
 	//previous
-	else {
+	else if(direction === 'prev') {
 		//pageNumber += 1;
 		if(pageNumber === 1) {
 			translate -= translateAmount * (pageNumber-1);
-			pageNumber = 10;
+			pageNumber = 9;
 		} else {
 			//console.log(`translate at 4: ${translate}, translateAmount at 4: ${translateAmount}`)
 			translate += translateAmount;
@@ -34,7 +35,6 @@ slide = (direction) => {
 	
 	pages.forEach(
 		pages => (pages.style.transform = `translateX(${translate}%)`)
-
 	)
 	
 	//console.log('after: ', pageNumber);

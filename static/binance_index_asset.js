@@ -1,6 +1,6 @@
 async function displayBinanceIndexAssetData(url) {
 
-	const divsToRender = 4;
+	const divsToRender = 1;
 	var divsRenderedCounter = 0;
 	var indexAssetRowDivNumber = 1;
 
@@ -17,7 +17,7 @@ async function displayBinanceIndexAssetData(url) {
 			div.classList.add("binance_index_asset_row_div");
 			document.getElementById("binance_index_asset_main_div").appendChild(div);
 			indexAssetRowDivNumber += 1;
-			for (let i = 0; i < data.length-1; i++) {
+			for (let i = 0; i < data.length; i++) {
 
 				createAssetDiv(data[i], div);
 				divsRenderedCounter += 1;
@@ -49,12 +49,42 @@ async function createAssetDiv(data, parentDiv) {
 	const nameDiv = document.createElement('div');
 	nameDiv.innerHTML = data.name
 	nameDiv.classList.add("binance_index_asset_name_div");
+
+	nameDiv.addEventListener("click", () => {
+	
+		const index_wrapper = document.getElementById("auto_invest_calc_index_wrapper");
+		if(index_wrapper.children.length > 2) {
+			while (index_wrapper.children.length > 2) {
+				index_wrapper.removeChild(index_wrapper.lastChild);
+			}
+			
+		}
+
+		if(data.coins.length < 11) {
+			for(let i = 0; i < data.coins.length; i++) {
+				createIndexAssetCoinRow(data.coins[i].coin, parseFloat(data.coins[i].allocation)*100);
+			}
+			const page_binance_index_asset = document.getElementById("page_binance_index_asset");
+			page_binance_index_asset.style.display = "none";
+
+			const auto_invest_calc_div = document.getElementById("auto_invest_calc_div");
+			auto_invest_calc_div.style.display = "block";
+
+			const index_settings_wrapper = document.getElementById("auto_invest_calc_index_settings_wrapper");
+			index_settings_wrapper.style.display = "flex";
+			
+		} else {
+			alert("Index too large, please select another index.");
+		}
+		
+	});
+
 	//coin allocated in index
 	const coinsDiv = document.createElement('div');
 	coinsDiv.classList.add("binance_index_asset_coins_div");
 
 	var counter = data.coins.length;
-	var moreDiv = undefined;
+	var moreDiv;
 	if(data.coins.length > 5) {
 		counter = 5;
 		moreDiv = document.createElement('div');
@@ -163,8 +193,8 @@ async function createAssetDiv(data, parentDiv) {
 		allocationDetailsDiv.appendChild(cancelButton);
 
 		// Append the div to the document or a specific element
-		document.getElementById("page_binance_index_asset").appendChild(overlay);
-		document.getElementById("page_binance_index_asset").appendChild(allocationDetailsDiv);
+		document.getElementById("page_auto_invest_calc").appendChild(overlay);
+		document.getElementById("page_auto_invest_calc").appendChild(allocationDetailsDiv);
 	};
 
 	viewAllocationsDiv.appendChild(allocationButton);
@@ -206,8 +236,8 @@ async function createAssetDiv(data, parentDiv) {
 		indexDetailsDiv.appendChild(cancelButton);
 
 		// Append the div to the document or a specific element
-		document.getElementById("page_binance_index_asset").appendChild(overlay);
-		document.getElementById("page_binance_index_asset").appendChild(indexDetailsDiv);
+		document.getElementById("page_auto_invest_calc").appendChild(overlay);
+		document.getElementById("page_auto_invest_calc").appendChild(indexDetailsDiv);
 	};
 
 	viewAllocationsDiv.appendChild(detailButton);
@@ -231,15 +261,15 @@ async function createAssetDiv(data, parentDiv) {
 		const chartdivWrapper = document.createElement('div');
 		chartdivWrapper.classList.add("binance_index_asset_getPriceTrendDataWrapper");
 
-		data.coins.forEach(coin => {
+		data.coins.forEach(async coin => {
 			try {
-				getPriceTrendData(chartdivWrapper, coin, `http://127.0.0.1:5000/getData?&symbol=${coin.coin}EUR`, true)
+				let result = await getPriceTrendData(chartdivWrapper, coin, `http://127.0.0.1:5000/getData?&symbol=${coin.coin}EUR`, true);
+				if(result == -1) {
+					await getPriceTrendData(chartdivWrapper, coin, `http://127.0.0.1:5000/getData?&symbol=${coin.coin}USDT`, false);
+				}
 			} catch (error) {
 				console.log(error);
-			} finally {
-				getPriceTrendData(chartdivWrapper, coin, `http://127.0.0.1:5000/getData?&symbol=${coin.coin}USDT`, false)
 			}
-			
 		});
 
 		indexDetailsDiv.appendChild(chartdivWrapper);
@@ -264,8 +294,8 @@ async function createAssetDiv(data, parentDiv) {
 		indexDetailsDiv.appendChild(cancelButton);
 
 		// Append the div to the document or a specific element
-		document.getElementById("page_binance_index_asset").appendChild(overlay);
-		document.getElementById("page_binance_index_asset").appendChild(indexDetailsDiv);
+		document.getElementById("page_auto_invest_calc").appendChild(overlay);
+		document.getElementById("page_auto_invest_calc").appendChild(indexDetailsDiv);
 	};
 
 	viewAllocationsDiv.appendChild(priceTrendChartButton);
@@ -281,6 +311,9 @@ async function getPriceTrendData(div, coin, url, coinIsTradedAgainstEuro) {
  
 	try {
 		let response = await fetch(url);
+		if(response.status == 500) {
+			return -1;
+		}
 		response.json().then(async (points) => {
 
 			const chartDiv = document.createElement('div');
@@ -294,26 +327,31 @@ async function getPriceTrendData(div, coin, url, coinIsTradedAgainstEuro) {
 
 			const labelDiv = document.createElement('div');
 			labelDiv.append(img);
-			const quoteCurrency = coinIsTradedAgainstEuro == true ? "EUR" : "USDT";
+			const quoteCurrency = coinIsTradedAgainstEuro ? "EUR" : "USDT";
 			labelDiv.innerHTML += `<span style="margin-left: 10px"></span><strong>${coin.coin} (${quoteCurrency})</strong>`;
 			div.appendChild(labelDiv);
 
 			chartData = points.slice(0, (points.length-2));
-			/**/
+			
 			var chart = LightweightCharts.createChart(chartDiv);
 			chart.applyOptions(_options);
 			const lineSeries = chart.addLineSeries({});
 			lineSeries.applyOptions({
 				type: "line",
 				color: "red", // Set the line color to red
-				lineWidth: 2, // Set the line width to 2 pixels
+				lineWidth: 2,
+				autoSize: true,
+				timeScale: {
+					timeVisible: true,  // Display time on the time scale
+					secondsVisible: false,  // Do not display seconds
+				}, // Set the line width to 2 pixels
 			});
 			lineSeries.setData(chartData);
-
+			
 			// Zoom out the candlestick series to a specific time range.
 			chart.timeScale().setVisibleRange({
-				from: points[0].time,
-				to: points[points.length-1].time,
+				from: chartData[0].time,
+				to: chartData[chartData.length-1].time,
 			});
 			
 			//setEwIndexTableContent(`${coin}EUR`, points);
@@ -323,6 +361,7 @@ async function getPriceTrendData(div, coin, url, coinIsTradedAgainstEuro) {
 		
 	} catch (error) {
 		console.log(error);
+		return null;
 	}
 }
 
@@ -410,6 +449,7 @@ async function fillInfoDivWithCoinStatistics_Minute(div, coin) {
 					//img.classList.add("binance_index_asset_coin_img");
 
 					const labelDiv = document.createElement('div');
+					labelDiv.classList.add("img-wrapper");
 					labelDiv.append(img);
 					div.appendChild(labelDiv);
 					labelRendered = true;
@@ -453,6 +493,7 @@ async function fillInfoDivWithCoinStatistics_Hour(div, coin) {
 					//img.classList.add("binance_index_asset_coin_img");
 
 					const labelDiv = document.createElement('div');
+					labelDiv.classList.add("img-wrapper");
 					labelDiv.append(img);
 					div.appendChild(labelDiv);
 					labelRendered = true;
@@ -496,6 +537,7 @@ async function fillInfoDivWithCoinStatistics_Week(div, coin) {
 					//img.classList.add("binance_index_asset_coin_img");
 
 					const labelDiv = document.createElement('div');
+					labelDiv.classList.add("img-wrapper");
 					labelDiv.append(img);
 					div.appendChild(labelDiv);
 					labelRendered = true;
@@ -539,6 +581,7 @@ async function fillInfoDivWithCoinStatistics_Month(div, coin) {
 					//img.classList.add("binance_index_asset_coin_img");
 
 					const labelDiv = document.createElement('div');
+					labelDiv.classList.add("img-wrapper");
 					labelDiv.append(img);
 					div.appendChild(labelDiv);
 					labelRendered = true;

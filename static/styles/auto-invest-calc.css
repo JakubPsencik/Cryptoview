@@ -1,0 +1,1269 @@
+#auto_invest_calc_label_large {
+	font-size: 48px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: #fff;
+	line-height: 1;
+	text-align: left;
+	padding-left: 100px;
+}
+
+#auto_invest_calc_label_small {
+	font-size: 20px;
+	letter-spacing: 4px;
+	font-family: Poppins, Arial, sans-serif;
+	text-transform: uppercase;
+	color: #fff;
+	display: block;
+	position: relative;
+	text-align: left;
+	padding-left: 100px;
+	font-weight: initial;
+	flex-direction: row;
+}
+
+#auto_invest_calc_description_wrapper {
+	width: 50vw;
+	height: 100vh;
+	margin: auto;
+	text-align: center;
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+}
+
+#auto_invest_calc_form_header {
+	text-size-adjust: 100%;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	outline: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	display: flex;
+	border-bottom: 0px solid rgb(71, 77, 87);
+	padding: 56px 20px 20px;
+	color: rgb(234, 236, 239);
+	font-size: 20px;
+	line-height: 24px;
+	font-weight: 500;
+	z-index: 2;
+	position: sticky;
+	top: 0px;
+	background-color: var(--tw-black);
+	border-bottom-width: 1px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+
+#auto_invest_calc_table .info-label {
+	text-align: center;
+	color: #fff;
+	font-size: 25px;
+	font-weight: 500;
+	text-transform: uppercase;
+}
+
+.auto_invest_calc_headliner {
+	position: relative;
+	width: 100%;
+	color: #fff;
+	text-align: center;
+	background-color: var(--tw-black);
+	font-weight: 600;
+	font-size: 3em;
+}
+
+#auto_invest_calc_div {
+	display: block;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	width: 40vw;
+	height: 70vh;
+	min-height: fit-content;
+	text-align: center;
+	background-color: var(--bn-black);
+	border-radius: 2rem;
+	margin: 14.5vh auto auto auto;
+
+	@media screen and (max-width: 768px){
+		width: 80vw;
+		height: 70vh;
+		min-height: fit-content;
+		text-align: center;
+		background-color: var(--bn-black);
+		border-radius: 2rem;
+		margin: auto;
+	}
+
+}
+
+.b-idx-asset {
+	display: none;
+	overflow-x: hidden;
+    overflow-y: scroll;
+    width: 40vw;
+    height: 70vh;
+    min-height: fit-content;
+    text-align: center;
+    vertical-align: middle;
+    background-color: var(--bn-black);
+    border-radius: 2rem;
+    margin: 14.5vh auto auto auto;
+
+	@media (max-width: 768px) {
+		width: 80vw;
+		margin: auto;
+	}
+}
+
+#auto_invest_calc_space_div {
+	width: 100%;
+	height: 5vh;
+	margin: 0;
+	padding: 0;
+	border-radius: 2rem;
+}
+
+#auto_invest_calc_add_coins_bn {
+	text-size-adjust: 100%;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	text-transform: none;
+	margin: 0px;
+	appearance: none;
+	user-select: none;
+	cursor: pointer;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: inline-flex;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+	box-sizing: border-box;
+	font-family: inherit;
+	font-weight: 600;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	padding: 8px 16px;
+	min-width: 60px;
+	word-break: keep-all;
+	border-radius: 4px;
+	min-height: 24px;
+	border: none;
+	background-image: none;
+	color: var(--bn-yellow);
+	background-color: var(--tw-black);
+	font-size: 12px;
+	line-height: 18px;
+	margin-right: 0.5vw;
+
+}
+
+#auto_invest_calc_add_coins_bn_plus_icon {
+	text-size-adjust: 100%;
+    text-transform: none;
+    user-select: none;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: inherit;
+    font-weight: 600;
+    text-align: center;
+    word-break: keep-all;
+    line-height: 18px;
+    outline: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    box-sizing: border-box;
+    margin: 0px 8px 0px 0px;
+    min-width: 0px;
+    color: var(--bn-yellow);
+    font-size: 16px;
+    fill: var(--bn-yellow);
+    width: 1em;
+    height: 1em;
+    display: block;
+}
+
+#auto_invest_calc_recom_coins_bn {
+	text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    text-transform: none;
+    margin: 0px;
+    appearance: none;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    padding: 8px 16px;
+    min-width: 60px;
+    word-break: keep-all;
+    border-radius: 4px;
+    border: none;
+    background-image: none;
+    min-height: 28px;
+    color: var(--bn-yellow);
+    background-color: var(--tw-black);
+    font-size: 12px;
+    line-height: 18px;
+}
+
+#auto_invest_calc_buttons_wrapper {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	display: inline-flex;
+	justify-content: flex-start;
+	padding: 5px;
+}
+
+
+#auto_invest_calc_search_div_wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 80%;
+	height: fit-content;
+	background-color: var(--bn-black);
+	color: white;
+	border-radius: 2rem;
+	font-weight: bold;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#auto_invest_calc_index_settings_wrapper {
+	display: none;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 100%;
+	height: fit-content;
+	background-color: var(--bn-black);
+	color: white;
+	border-radius: 2rem;
+	font-weight: bold;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#auto_invest_calc_search_bar_wrapper {
+	display: none;
+	align-items: flex-start;
+	width: 80%;
+	height: fit-content;
+	background-color: var(--bn-black);
+	color: white;
+	border-radius: 2rem;
+	font-weight: bold;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#auto_invest_calc_search_div {
+	display: none;
+	color: white;
+	font-weight: 500;
+	box-sizing: border-box;
+	margin-top: 0.26rem;
+	min-width: 0px;
+	outline: none;
+	border: none;
+	opacity: 1;
+	padding: 5px !important;
+	margin-left: 3.2vw;
+	background-color: var(--tw-black);
+	width: 50%;
+	max-height: 30vh;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+.auto_invest_calc_search_div {
+	display: none;
+	width: 75%;
+	background-color: var(--tw-black);
+	color: white;
+	font-weight: 500;
+	box-sizing: border-box;
+	margin-top: 0.26rem;
+	min-width: 0px;
+	outline: none;
+	border: none;
+	opacity: 1;
+	padding: 0px !important;
+}
+
+#auto_invest_calc_search_input {
+	display: flex;
+	border-radius: 2rem;
+	background-color: var(--bn-black);
+}
+
+#auto_invest_calc_search_input_list {
+	display: none;
+	height: fit-content;
+	overflow-y: scroll;
+	align-items: center;
+	width: 80%;
+	color: white;
+	font-weight: bold;
+	margin-left: auto;
+	margin-right: auto;
+	max-height: 30vh;
+	overflow-x: hidden;
+	padding-bottom: 4vh;
+	margin-top: 0.5vh;
+}
+
+#auto_invest_calc_amount_input_wrapper {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	line-height: 20px;
+	outline: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+
+	margin-left: -0.65vw;
+	min-width: 0px;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+}
+
+#auto_invest_calc_amount_input_coin_div {
+	text-size-adjust: 100%;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	font-family: inherit;
+	line-height: 1.15;
+	overflow: visible;
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	outline: none;
+	border: none;
+	opacity: 1;
+	visibility: hidden;
+	cursor: pointer;
+	background-color: transparent;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	border-radius: 4px;
+	padding-left: 12px;
+	padding-right: 12px;
+}
+
+#auto_invest_calc_amount_input_wrapper1 { 
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	display: inline-flex;
+	position: relative;
+	-webkit-box-align: center;
+	align-items: center;
+	line-height: 1.6;
+	background-color: rgb(43, 49, 57);
+	border-radius: 4px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: transparent;
+	height: 40px;
+	width: 100%;
+	cursor: pointer;
+}
+
+.suggestion_wrapper {
+
+	width: fit-content;
+	height: fit-content;
+	background-color: var(--tw-grey);
+	display: inline-flex;
+	align-items: center;
+	border-radius: 2px;
+	padding: 5px;
+	margin: 0.5vw;
+	cursor: pointer;	
+}
+
+.selected_coin_wrapper {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	font-size: 12px;
+	color: rgb(132, 142, 156);
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	min-width: 0px;
+	position: relative;
+	line-height: 1.6;
+	background-color: rgb(43, 49, 57);
+	border-radius: 4px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: transparent;
+	height: 40px;
+	width: 96%;
+	-webkit-box-align: center;
+	align-items: center;
+	margin: 10px;
+}
+
+.coin_name_div {
+	text-size-adjust: 100%;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px 0px 0px 8px;
+	min-width: 0px;
+	display: flex;
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 500;
+}
+
+.auto_invest_calc_allocation_input {
+	text-size-adjust: 100%;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	font-family: inherit;
+	line-height: 1.15;
+	overflow: visible;
+	box-sizing: border-box;
+	margin-left: 15px;
+	min-width: 0;
+	width: 100%;
+	height: 100%;
+	outline: none;
+	border: none;
+	background-color: inherit;
+	opacity: 1;
+	text-align: center;
+	padding: 0px !important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	border-radius: 4px;
+}
+
+.auto_invest_calc_percent {
+	text-size-adjust: 100%;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(132, 142, 156);
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px 12px 0px 0px;
+	min-width: 0px;
+	display: flex;
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 500;
+}
+
+.auto_invest_calc_confirm_button1 {
+	width: 20%;
+	margin-left: auto;
+	margin-right: auto;
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	font-size: 14px;
+	line-height: 20px;
+	outline: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	min-width: 0px;
+	display: flex;
+	color: var(--bn-yellow);
+	cursor: pointer;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	align-items: center;
+	padding: 8px 12px;
+}
+
+#auto_invest_calc_index_wrapper {
+	overflow-x: hidden;
+	overflow-y: scroll;
+	align-items: center;
+	width: 80%;
+	background-color: var(--tw-black);
+	color: white;
+	font-weight: bold;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2vh;
+	padding: 1rem;
+}
+
+.auto_invest_calc_props_wrapper {
+	overflow-x: hidden;
+	overflow-y: scroll;
+	align-items: center;
+	width: 80%;
+	background-color: var(--bn-black);
+	color: white;
+	font-weight: bold;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2vh;
+	padding: 1rem;
+}
+
+.auto_invest_calc_props_input {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	font-size: 16px;
+	color: rgb(132, 142, 156);
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	min-width: 0px;
+	position: relative;
+	line-height: 1.6;
+	background-color: rgb(43, 49, 57);
+	border-radius: 4px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: transparent;
+	height: 40px;
+	width: 96%;
+	-webkit-box-align: center;
+	align-items: center;
+	margin: 10px;
+}
+
+.auto_invest_calc_label {
+	text-size-adjust: 100%;
+	font-weight: 500;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	font-size: 14px;
+	line-height: 22px;
+	color: rgb(234, 236, 239);
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	/*margin: 1vh 0px 1vh 0px;*/
+	min-width: 0px;
+	display: flex;
+
+}
+
+.auto_invest_calc_label1 {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	font-size: 14px;
+	line-height: 20px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	min-width: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	color: rgb(132, 142, 156);
+}
+
+.auto_invest_calc_suggestion_image {
+	position: relative;
+	width: 24px;
+	height: 24px;
+	background-color: var(--tw-black);
+	border-radius: 50%;
+	margin-right: 5px;
+	
+}
+
+.auto_invest_calc_remove_button {
+	border-radius: 50%;
+	background-color: var(--bn-black);
+	color: #FFF;
+	text-align: center;
+}
+
+.auto_invest_calc_search_icon {
+	width: 24px;
+	height: 24px;
+	margin: 5px;
+}
+
+.auto_invest_calc_table_img {
+	position: relative;
+	width: 24px;
+	height: 24px;
+	background-color: var(--tw-black);
+	border-radius: 50%;
+	margin-left: 5px;
+}
+
+/*AMOUNT SEARCH BAR*/
+#auto_invest_calc_amount_search_input {
+	height: 40px;
+	max-height: 60vh;
+	overflow-y: scroll;
+	align-items: center;
+	width: 80%;
+	background-color: var(--bn-black);
+	color: white;
+	display: inline-flex;
+	font-weight: bold;
+}
+
+#auto_invest_calc_amount_search_input_result {
+	height: 40px;
+	max-height: 60vh;
+	overflow-y: scroll;
+	align-items: center;
+	width: 80%;
+	background-color: var(--bn-black);
+	color: white;
+	border-radius: 2rem;
+	display: inline-flex;
+	width: fit-content;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#auto_invest_calc_amount_search_bar_wrapper {
+	
+}
+
+#auto_invest_calc_amount_search_input_list_wrapper {
+	display: none;
+	height: fit-content;
+	max-height: 60vh;
+	overflow-y: scroll;
+	align-items: center;
+	background-color: var(--tw-black);
+	color: white;
+	border-radius: 4px;
+	font-weight: 500;
+	margin-left: auto;
+	width: 15vw;
+}
+
+#auto_invest_calc_amount_search_input_list {
+	height: fit-content;
+	max-height: 60vh;
+	overflow-y: scroll;
+	align-items: center;
+	width: 80%;
+	background-color: var(--bn-black);
+	color: white;
+	font-weight: bold;
+	margin-left: auto;
+	margin-right: auto;
+	display: grid;
+	margin-bottom: 1vh;
+}
+
+.amount_suggestion_wrapper {
+
+	height: fit-content;
+	display: inline-flex;
+	align-items: center;
+	border-radius: 2px;
+	padding: 5px;
+	margin: 0.5vw;
+	cursor: pointer;	
+}
+
+#auto_invest_calc_interval_wrapper {
+	width: 80%;
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	line-height: 20px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin-left: auto;
+	margin-right: auto;
+	min-width: 0px;
+	gap: 8px;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	align-items: center;
+}
+
+.auto_invest_calc_interval_wrapper {
+	width: 80%;
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	line-height: 20px;
+	outline: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin-left: 1.45vw;
+	min-width: 0px;
+	gap: 8px;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	-webkit-box-align: center;
+}
+
+#auto_invest_calc_interval_detail_selector_localTime_wrapper {
+	width: 80%;
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	line-height: 20px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin-top: 0.5vh;
+	margin-left: 4vw;
+	margin-right: auto;
+	min-width: 0px;
+	display: flex;
+	gap: 8px;
+	-webkit-box-pack: justify;
+	-webkit-box-align: center;
+}
+
+#auto_invest_calc_interval_detail_selector_dateFrom_wrapper {
+	width: 80%;
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	line-height: 20px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin-top: 0.5vh;
+	margin-left: 4vw;
+	margin-right: auto;
+	min-width: 0px;
+	display: flex;
+	gap: 8px;
+	-webkit-box-pack: justify;
+	-webkit-box-align: center;
+}
+
+#auto_invest_calc_interval_selector_button_wrapper {
+	
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	line-height: 20px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin-top: 0.5vh;
+	margin-left: 0.83vw;
+	margin-right: auto;
+	min-width: 0px;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 8px;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	align-items: center;
+}
+
+.auto_invest_calc_interval_selector_button_wrapper {
+	width: 80%;
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	line-height: 20px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin-top: 0.5vh;
+	margin-left: auto;
+	margin-right: auto;
+	min-width: 0px;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 8px;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	align-items: center;
+}
+
+.auto_invest_calc_interval_selector_button {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	outline: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	display: flex;
+	width: 100%;
+	height: 32px;
+	border-radius: 4px;
+	padding: 6px;
+	border: 1px solid rgb(71, 77, 87);
+	cursor: pointer;
+	text-align: center;
+	white-space: nowrap;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+	padding-left: 12px;
+	padding-right: 12px;
+	font-size: 14px;
+	line-height: 12px;
+}
+
+#auto_invest_calc_interval_detail_selector_wrapper {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	line-height: 20px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 8px 0px 0px;
+	min-width: 0px;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+}
+
+.auto_invest_calc_interval_detail_selector_wrapper {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	line-height: 20px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 8px 0px 0px;
+	min-width: 0px;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+}
+
+#auto_invest_calc_interval_detail_selector_label {
+	text-size-adjust: 100%;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px 12px 0px 0px;
+	min-width: 0px;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+#auto_invest_calc_interval_detail_selector_hours_wrapper {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	display: inline-flex;
+	position: relative;
+	-webkit-box-align: center;
+	align-items: center;
+	line-height: 1.6;
+	height: 40px;
+	background-color: rgb(43, 49, 57);
+	border-radius: 4px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: transparent;
+	width: 110px;
+}
+
+#auto_invest_calc_interval_detail_selector_dateFrom_inner_wrapper {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: fit-content;
+	display: inline-flex;
+	position: relative;
+	-webkit-box-align: center;
+	align-items: center;
+	line-height: 1.6;
+	height: 40px;
+	background-color: rgb(43, 49, 57);
+	border-radius: 4px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: transparent;
+	width: 110px;
+}
+
+#auto_invest_calc_interval_detail_selector_DateFrom_input {
+	background-color: rgb(43, 49, 57);
+	color: rgb(234, 236, 239);
+	border: 0;
+	padding-left: 15px;
+}
+
+#auto_invest_calc_interval_detail_selector_hours_input {
+	text-size-adjust: 100%;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	font-family: inherit;
+	line-height: 1.15;
+	overflow: visible;
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	outline: none;
+	border: none;
+	background-color: inherit;
+	opacity: 1;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	border-radius: 4px;
+	padding-left: 12px;
+	padding-right: 12px;
+}
+
+#auto_invest_calc_interval_detail_selector_hours_input_suffix_wrapper1 {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	line-height: 1.6;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0;
+	min-width: 0;
+	flex-shrink: 0;
+	margin-left: 4px;
+	margin-right: 4px;
+	font-size: 14px;
+}
+
+#auto_invest_calc_interval_detail_selector_hours_input_suffix_wrapper2 {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	line-height: 1.6;
+	font-size: 14px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px 8px 0px 0px;
+	min-width: 0px;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+}
+
+#auto_invest_calc_interval_detail_selector_hours_input_suffix {
+	text-size-adjust: 100%;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+#auto_invest_calc_interval_selector_days_button_wrapper {
+	
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	line-height: 20px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin-top: 0.5vh;
+	margin-left: 4vw;
+	margin-right: auto;
+	min-width: 0px;
+	display: none;
+	gap: 8px;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	align-items: center;
+}
+
+.auto_invest_calc_interval_selector_days_button_wrapper {
+	width: 80%;
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	line-height: 20px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin-top: 0.5vh;
+	margin-left: auto;
+	margin-right: auto;
+	min-width: 0px;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 8px;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	align-items: center;
+}
+
+.auto_invest_calc_interval_selector_days_button {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	outline: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	display: flex;
+	width: 100%;
+	height: 32px;
+	border-radius: 4px;
+	padding: 6px;
+	border: 1px solid rgb(71, 77, 87);
+	cursor: pointer;
+	text-align: center;
+	white-space: nowrap;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+	padding-left: 12px;
+	padding-right: 12px;
+	font-size: 14px;
+	line-height: 12px;
+}
+
+#auto_invest_calc_interval_detail_selector_daysInMonth_wrapper {
+	width: 80%;
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	line-height: 20px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin-top: 0.5vh;
+	margin-left: 4vw;
+	margin-right: auto;
+	min-width: 0px;
+	display: none;
+	gap: 8px;
+	-webkit-box-pack: justify;
+	-webkit-box-align: center;
+}
+
+#auto_invest_calc_interval_detail_selector_dayInMonth_wrapper {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	display: inline-flex;
+	position: relative;
+	-webkit-box-align: center;
+	align-items: center;
+	line-height: 1.6;
+	height: 40px;
+	background-color: rgb(43, 49, 57);
+	border-radius: 4px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: transparent;
+	width: 110px;
+}
+
+#auto_invest_calc_interval_detail_selector_dayInMonth_input {
+	text-size-adjust: 100%;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	font-family: inherit;
+	line-height: 1.15;
+	overflow: visible;
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	outline: none;
+	border: none;
+	background-color: inherit;
+	opacity: 1;
+	color: rgb(234, 236, 239);
+	font-size: 14px;
+	border-radius: 4px;
+	padding-left: 12px;
+	padding-right: 12px;
+}
+
+#auto_invest_calc_interval_detail_selector_dayInMonth_input_suffix_wrapper1 {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	line-height: 1.6;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0;
+	min-width: 0;
+	flex-shrink: 0;
+	margin-left: 4px;
+	margin-right: 4px;
+	font-size: 14px;
+}
+
+#auto_invest_calc_interval_detail_selector_dayInMonth_input_suffix_wrapper2 {
+	text-size-adjust: 100%;
+	font-weight: 400;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	line-height: 1.6;
+	font-size: 14px;
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px 8px 0px 0px;
+	min-width: 0px;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+}
+
+#auto_invest_calc_interval_detail_selector_dayInMonth_input_suffix {
+	text-size-adjust: 100%;
+	font-family: BinancePlex,Arial,sans-serif!important;
+	color: rgb(234, 236, 239);
+	outline: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0px;
+	min-width: 0px;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+/*----------------------------------------*/
+/*
+@media (max-height: 700px) {
+
+	#auto_invest_calc_div {
+		
+		width: 40vw;
+		height: 85vh;
+		text-align: center;
+		background-color: var(--bn-black);
+		border-radius: 2rem;
+		margin: 7.25vh auto auto auto;
+	
+	}
+}*/

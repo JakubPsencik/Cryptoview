@@ -1,5 +1,39 @@
+var price_chart_14_1 = LightweightCharts.createChart(
+	document.getElementById('container14_1'),
+	{
+		layout: {
+			background: { color: "#0B0E11" },
+			textColor: "#C3BCDB",
+		},
+		grid: {
+			vertLines: { color: "#444" },
+			horzLines: { color: "#444" },
+		},
+		autoSize: true,
+		timeScale: {
+			timeVisible: true,  // Display time on the time scale
+			secondsVisible: false,  // Do not display seconds
+		},
+	}
+);
+
+// Create a candlesticks series
+const price_chart_14_1_candlestickSeries1 = price_chart_14_1.addCandlestickSeries({
+	upColor: "green",
+	downColor: "red",
+});
+
 async function setWeekPredictPoints(url) {
 
+	data = [
+		{ time: "2023-03-24", open: 100, high: 110, low: 90, close: 105 },
+		{ time: "2023-03-25", open: 105, high: 115, low: 95, close: 110 },
+		{ time: "2023-03-26", open: 110, high: 120, low: 100, close: 103 },
+		{ time: "2023-03-27", open: 115, high: 125, low: 105, close: 120 },
+	  ];
+
+	price_chart_14_1_candlestickSeries1.setData(data);
+	/*
 	const markers = [];
 	const investment = 1000;
 	let total = 0;
@@ -76,7 +110,7 @@ async function setWeekPredictPoints(url) {
 			//}
 			
 		}
-		*/
+		tady/
 		//buy point
 		markers.push({
 			id: String("week-predict-min"),
@@ -84,7 +118,7 @@ async function setWeekPredictPoints(url) {
 			position: 'aboveBar',
 			color: 'green',
 			shape: 'circle',
-			text: ''/*String(parseFloat(points[0].close).toFixed(2) + ' €')*/,
+			text: ''/*String(parseFloat(points[0].close).toFixed(2) + ' €')tady/,
 			size: 2.0,
 		});
 
@@ -95,7 +129,7 @@ async function setWeekPredictPoints(url) {
 			position: 'aboveBar',
 			color: 'red',
 			shape: 'circle',
-			text: ''/*String(parseFloat(points[1].close).toFixed(2) + ' €')*/,
+			text: ''/*String(parseFloat(points[1].close).toFixed(2) + ' €')tady/,
 			size: 2.0,
 		});
 		
@@ -114,9 +148,7 @@ async function setWeekPredictPoints(url) {
 		
 	} catch (error) {
 		console.log(error);
-	}
-	
-
+	}*/
 }
 
 function InitializeWeekPredictPointRecord(id, _time, _total, amtOfBase, _duration) {

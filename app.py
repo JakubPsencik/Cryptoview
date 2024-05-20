@@ -1,242 +1,37 @@
-from flask import Flask, render_template, jsonify, request, redirect, send_from_directory
-import websocket as ws
+from flask import Flask, render_template, jsonify, request
 import config
 from binance.client import Client
-import numpy as np
 import asyncio
 import aiomysql
 import requests
 from datetime import datetime, timedelta
 import math
-import csv
+import os;
 
 app = Flask(__name__)
 
 client = Client(config.API_KEY, config.API_SECRET)
 
-# load page
-
-
-@app.route("/", methods=['GET'])
+@app.route("/")
 def index():
 	title = "CRYPTOVIEW"
 
-	exchange_info = client.get_exchange_info()
-	currency_symbols = exchange_info['symbols']
+	return render_template("index.html", title=title)
 
-	return render_template("index.html", title=title, symbols=currency_symbols)
-
-# display data button clicked
-
-
-@app.route("/update", methods=['GET'])
-def update():
-	# extract params from url
-	candlesticks = client.get_historical_klines(
-		request.args.get("pair_symbol_option_name"),
-		request.args.get("interval_option_name"),
-		request.args.get("data_amount_option_name"))
-
-	processed_candlesticks = []
-	for data in candlesticks:
-		candlestick = {
-			"time": data[0] / 1000,
-			"open": data[1],
-			"high": data[2],
-			"low": data[3],
-			"close": data[4],
-		}
-
-		processed_candlesticks.append(candlestick)
-
-	return jsonify(processed_candlesticks)
-
-@app.route("/as", methods=['GET'])
-async def show():
+@app.route("/autoinvest", methods=['GET'])
+async def get_auto_invest_data():
 	loop = asyncio.get_event_loop()
 
 	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
 
 	cur = await conn.cursor()
-	await cur.execute("""select pairname, base_currency, quote_currency, course, course_in_eur, compound_interest_total_in_eur, fixed_deposit_total_in_eur, all_no_trades
-						from view_pair_for_trade_all
-						order by fixed_deposit_total_in_eur desc
-						limit 5;""")
-	#print(cur.description)
-	data = await cur.fetchall()
-	await cur.close()
-	conn.close()
-
-	return jsonify(data)
-
-@app.route("/logos", methods=['GET'])
-async def parse():
-	
-	urls = open("urls.txt", "r")
-	data = urls.read()
-	lst = data.split("\n")
-	urls.close()
-
-	return lst
-
-@app.route("/lastPrices", methods=['GET'])
-async def getLastPrices():
-	loop = asyncio.get_event_loop()
-
-	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
-
-	cur = await conn.cursor()
-	await cur.execute("""select pairname 
-							from peak_valley_stats_all
-							where pairname not like '%000%'
-							group by pairname
-							order by SUM(fixed_deposit_total_in_eur) desc
-							limit 20;""")
-	
-	data = await cur.fetchall()
-	data = ["\"{}\"".format(row[0]) for row in data]
-
-	
-	#print(data)
-	#print("##")
-	await cur.execute("""select pairname,type,date_begin,date_end, compound_interest_total_in_eur, fixed_deposit_total_in_eur
-							from peak_valley_stats_all
-							where pairname in ({})
-							and type in ('last_day_01', 'previous_day_01', 'previous_day_02', 'previous_day_03')
-							and (date_begin is not null and fixed_deposit_total_in_eur is not null)""".format(",".join(data)))
-	
-	data1 = await cur.fetchall()
-	#print(data1)
-	await cur.close()
-	conn.close()
-	#print(data)
-	#print(data1)
-	data = list(map(lambda x: x.replace('"', ''), data))
-	processed_data = []
-	processed_data.append(data)
-	for d in data1:
-		pair = {
-			"pairname": d[0],
-			"type": d[1],
-			"date_begin": d[2].strftime('%Y-%m-%d'),
-			"date_end": d[3].strftime('%Y-%m-%d'),
-			"compound_interest_total_in_eur": d[4],
-			"fixed_deposit_total_in_eur": d[5],
-		}
-	
-		processed_data.append(pair)
-
-	#print(processed_data)
-
-	return jsonify(processed_data)
-
-@app.route("/view", methods=['GET'])
-async def getViewData():
-
-	processed_data = []
-
-	loop = asyncio.get_event_loop()
-
-	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
-
-	cur = await conn.cursor()
-
-	##select from view_pair_for_trade_day##
-	await cur.execute("""select v.pairname, v.base_currency, v.quote_currency, v.date_begin, v.date_end, v.compound_interest_total_in_eur, v.fixed_deposit_total_in_eur
-							from view_pair_for_trade_day v
-							order by fixed_deposit_total_in_eur desc
-							limit 20;""")
-	
-	daily = await cur.fetchall()
-	daily_pair_names = ["\"{}\"".format(row[0]) for row in daily]
-	
-	##--------------------------------------------------------------------------
-
-	##select from view_pair_for_trade_week##
-	await cur.execute("""select v.pairname, v.base_currency, v.quote_currency, v.date_begin, v.date_end, v.compound_interest_total_in_eur, v.fixed_deposit_total_in_eur
-							from view_pair_for_trade_week v
-							order by fixed_deposit_total_in_eur desc
-							limit 20;""")
-	
-	weekly = await cur.fetchall()
-	weekly_pair_names = ["\"{}\"".format(row[0]) for row in weekly]
-	
-	##--------------------------------------------------------------------------
-
-	##select from view_pair_for_trade_month
-	await cur.execute("""select v.pairname, v.base_currency, v.quote_currency, v.date_begin, v.date_end, v.compound_interest_total_in_eur, v.fixed_deposit_total_in_eur
-						from view_pair_for_trade_month v
-						order by fixed_deposit_total_in_eur desc
-						limit 20;""")
-	
-	monthly = await cur.fetchall()
-	monthly_pair_names = ["\"{}\"".format(row[0]) for row in monthly]
-	##--------------------------------------------------------------------------
-
-	await cur.close()
-	conn.close()
-
-	processed_data.append("daily")
-	processed_data.append(daily_pair_names)
-	for d in daily:
-		pair = {
-			"pairname": d[0],
-			"base": d[1],
-			"quote": d[2],
-			"date_begin": d[3].strftime('%Y-%m-%d'),
-			"date_end": d[4].strftime('%Y-%m-%d'),
-			"compound_interest_total_in_eur": d[5],
-			"fixed_deposit_total_in_eur": d[6],
-		}
-	
-		processed_data.append(pair)
-
-	processed_data.append("weekly")
-	processed_data.append(weekly_pair_names)
-	for d in weekly:
-		pair = {
-			"pairname": d[0],
-			"base": d[1],
-			"quote": d[2],
-			"date_begin": d[3].strftime('%Y-%m-%d'),
-			"date_end": d[4].strftime('%Y-%m-%d'),
-			"compound_interest_total_in_eur": d[5],
-			"fixed_deposit_total_in_eur": d[6],
-		}
-	
-		processed_data.append(pair)
-
-	processed_data.append("monthly")
-	processed_data.append(monthly_pair_names)	
-	for d in monthly:
-		pair = {
-			"pairname": d[0],
-			"base": d[1],
-			"quote": d[2],
-			"date_begin": d[3].strftime('%Y-%m-%d'),
-			"date_end": d[4].strftime('%Y-%m-%d'),
-			"compound_interest_total_in_eur": d[5],
-			"fixed_deposit_total_in_eur": d[6],
-		}
-
-		processed_data.append(pair)
-
-	return jsonify(processed_data)
-
-@app.route("/savings", methods=['GET'])
-async def getSavingsStakingData():
-	loop = asyncio.get_event_loop()
-
-	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
-
-	cur = await conn.cursor()
-	await cur.execute("""select s.*, ssa.interval_day from (SELECT asset, MAX(profit_total_eur) AS highest_profit_price
+	await cur.execute("""SELECT savings.*, ssa.interval_day FROM (SELECT asset, MAX(profit_total_eur) AS highest_profit_price
 							FROM savings_staking_all
 							GROUP BY asset
 							ORDER BY highest_profit_price DESC
-							limit 20) as s
-							join savings_staking_all ssa on s.asset = ssa.asset and s.highest_profit_price = ssa.profit_total_eur
-							order by highest_profit_price desc;""")
+							LIMIT 10) AS savings
+							JOIN savings_staking_all ssa ON savings.asset = ssa.asset AND savings.highest_profit_price = ssa.profit_total_eur
+							ORDER BY highest_profit_price desc;""")
 	
 	data = await cur.fetchall()
 	await cur.close()
@@ -255,9 +50,92 @@ async def getSavingsStakingData():
 
 	return jsonify(processed_data)
 
-@app.route('/<path:filename>')
-def send_file(filename):
-	return send_from_directory('/static/img', filename)
+@app.route("/simpleearn", methods=['GET'])
+async def get_simple_earn_data():
+
+	processed_data = []
+
+	loop = asyncio.get_event_loop()
+
+	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+
+	cur = await conn.cursor()
+
+	##select from view_pair_for_trade_day##
+	await cur.execute("""SELECT v.pairname, v.base_currency, v.quote_currency, v.compound_interest_total_in_eur, v.fixed_deposit_total_in_eur
+							FROM view_pair_for_trade_day v
+							ORDER BY fixed_deposit_total_in_eur DESC
+							LIMIT 10;""")
+	
+	daily = await cur.fetchall()
+	daily_pair_names = ["\"{}\"".format(row[0]) for row in daily]
+	
+	##--------------------------------------------------------------------------
+
+	##select from view_pair_for_trade_week##
+	await cur.execute("""SELECT v.pairname, v.base_currency, v.quote_currency, v.compound_interest_total_in_eur, v.fixed_deposit_total_in_eur
+							FROM view_pair_for_trade_week v
+							ORDER BY fixed_deposit_total_in_eur DESC
+							LIMIT 10;""")
+	
+	weekly = await cur.fetchall()
+	weekly_pair_names = ["\"{}\"".format(row[0]) for row in weekly]
+	
+	##--------------------------------------------------------------------------
+
+	##select from view_pair_for_trade_month
+	await cur.execute("""SELECT v.pairname, v.base_currency, v.quote_currency, v.compound_interest_total_in_eur, v.fixed_deposit_total_in_eur
+						FROM view_pair_for_trade_month v
+						ORDER BY fixed_deposit_total_in_eur DESC
+						LIMIT 10;""")
+	
+	monthly = await cur.fetchall()
+	monthly_pair_names = ["\"{}\"".format(row[0]) for row in monthly]
+	##--------------------------------------------------------------------------
+
+	await cur.close()
+	conn.close()
+
+	processed_data.append("daily")
+	processed_data.append(daily_pair_names)
+	for d in daily:
+		pair = {
+			"pairname": d[0],
+			"base": d[1],
+			"quote": d[2],
+			"compound_interest_total_in_eur": d[3],
+			"fixed_deposit_total_in_eur": d[4],
+		}
+	
+		processed_data.append(pair)
+
+	processed_data.append("weekly")
+	processed_data.append(weekly_pair_names)
+	for d in weekly:
+		pair = {
+			"pairname": d[0],
+			"base": d[1],
+			"quote": d[2],
+			"compound_interest_total_in_eur": d[3],
+			"fixed_deposit_total_in_eur": d[4],
+		}
+	
+		processed_data.append(pair)
+
+	processed_data.append("monthly")
+	processed_data.append(monthly_pair_names)	
+	for d in monthly:
+		pair = {
+			"pairname": d[0],
+			"base": d[1],
+			"quote": d[2],
+			"compound_interest_total_in_eur": d[3],
+			"fixed_deposit_total_in_eur": d[4],
+		}
+
+		processed_data.append(pair)
+
+	return jsonify(processed_data)
 
 def convert_datetime_to_unix_timestamp(datetime_string):
 	"""Converts a datetime string to a Unix timestamp."""
@@ -283,6 +161,8 @@ def get_binance_kline_data(symbol, interval, start_date, end_date):
 	
 	if response.status_code == 200:
 		return response.json()
+	elif response.status_code == 400 or response.status_code == 500:
+		return -1
 	else:
 		print(f"Failed to retrieve data. Status code: {response.status_code}")
 		return None
@@ -290,10 +170,9 @@ def get_binance_kline_data(symbol, interval, start_date, end_date):
 def get_binance_rebalanace_kline_data(symbol, interval, start_date, end_date):
 	base_url = "https://api.binance.com/api/v3/klines"
 
-	#print("get_binance_kline_data: " + symbol + '\n')
-	# Construct the URL
-	url = f"{base_url}?symbol={symbol}&interval={interval}&startTime={start_date}&endTime={end_date}&limit={1000}"
 
+	url = f"{base_url}?symbol={symbol}&interval={interval}&startTime={start_date}&endTime={end_date}&limit={1000}"
+	print(url)
 	# Make the API request
 	response = requests.get(url)
 	
@@ -303,210 +182,291 @@ def get_binance_rebalanace_kline_data(symbol, interval, start_date, end_date):
 		print(f"Failed to retrieve data. Status code: {response.status_code}")
 		return None
 
-def Rebalance(AmountOfBaseCurrency1, AmountOfBaseCurrency2, newPair1Price, newPair2Price, time1, time2, alloc1,alloc2, rebalanceRatio, rebalancingResults):
+def Rebalance(coins_amt_of_base, new_coins_prices, timestamps, coin_allocations, rebalanceRatio, option_value, rebalancing_results):
+
+	new_coins_quote_amount = []
+
+	for i in range(0, len(coins_amt_of_base)):
+		new_coins_quote_amount.append(coins_amt_of_base[i] * float(new_coins_prices[i]))
+
+	quote_total = 0
+
+	for i in range(0, len(new_coins_quote_amount)):
+		quote_total += new_coins_quote_amount[i]
+
+	tmp_ratios = []
+	coin_ratios = []
+
+	for i in range(0, len(new_coins_quote_amount)):
+		tmp_ratios.append(abs(coin_allocations[i] - (new_coins_quote_amount[i] / quote_total)))
 	
-	newPair1QuoteAmount = AmountOfBaseCurrency1 * newPair1Price
-	newPair2QuoteAmount = AmountOfBaseCurrency2 * newPair2Price
+	#print(f"tmp_ratios: {tmp_ratios}")
+	if(option_value == 0):
 
-	QuoteTotal = newPair1QuoteAmount + newPair2QuoteAmount
-	#print(alloc1)
-	#print(alloc2)
-	pair1Ratio = abs(alloc1 - (newPair1QuoteAmount / QuoteTotal))
-	pair2Ratio = abs(alloc2 - (newPair2QuoteAmount / QuoteTotal))
+		for i in range(0, len(tmp_ratios)):
 	
-	# if (50% - calculated-ration) je kladne tak dokupuju -> tzn +
-	# if (50% - calculated-ration) je zaporne tak prodavam -> tzn -
-	
-	if((pair1Ratio > rebalanceRatio) or (pair2Ratio > rebalanceRatio)):
-		#print("rebalance triggered")
-		#print(f"newPair1QuoteAmount / QuoteTotal: {newPair1QuoteAmount / QuoteTotal}, newPair2QuoteAmount / QuoteTotal: {newPair2QuoteAmount / QuoteTotal}\n")
-		#print(f"ratio1: {0.5 - (newPair1QuoteAmount / QuoteTotal)}, ratio2: {0.5 - (newPair2QuoteAmount / QuoteTotal)}\n")
-		ratio1 = 0.5 - (newPair1QuoteAmount / QuoteTotal)
-		ratio2 = 0.5 - (newPair2QuoteAmount / QuoteTotal)
+			# if (50% - calculated-ratio) je kladne tak dokupuju -> tzn +
+			# if (50% - calculated-ratio) je zaporne tak prodavam -> tzn -
+			print(f"coin_ratios: {tmp_ratios[i]}, rebalanceRatio: {rebalanceRatio}")
+			
+			if(tmp_ratios[i] > float(rebalanceRatio)):
+				for j in range(0, len(tmp_ratios)):
+					coin_ratios.append(coin_allocations[j] - (new_coins_quote_amount[j] / quote_total))
+					#print(f"i: {i}, j: {j}, len: {len(coin_ratios)}")
+				
+					
+				trigger_rebalance(coin_ratios, new_coins_quote_amount, quote_total, timestamps, rebalancing_results)
+				break
+			else:
+				rebalancing_results.append([timestamps, new_coins_quote_amount, quote_total, 0])
 
+	elif(option_value == 1):
+		coin_ratios = tmp_ratios
+		#podle casu
+		for i in range(0, len(coin_ratios)):
+		
+			# if (50% - calculated-ratio) je kladne tak dokupuju -> tzn +
+			# if (50% - calculated-ratio) je zaporne tak prodavam -> tzn -
+			#print(f"ratio: {coin_ratios[i] + float(coin_allocations[i])}, rebalanceRatio: {coin_allocations}")
 
-		TriggerRebalance(ratio1, ratio2, newPair1QuoteAmount, newPair2QuoteAmount, QuoteTotal, time1, time2, rebalancingResults)
-	else:
-		rebalancingResults.append([time1, time2, newPair1QuoteAmount,newPair2QuoteAmount,QuoteTotal, 0])
+			if((coin_ratios[i] + float(coin_allocations[i])) > float(coin_allocations[i])):
+				for j in range(0, len(coin_ratios)):
+					coin_ratios[j] = coin_allocations[j] - (new_coins_quote_amount[j] / quote_total)
+				
+				trigger_rebalance(coin_ratios, new_coins_quote_amount, quote_total, timestamps, rebalancing_results)
+				break
 
-def TriggerRebalance(pair1Ratio, pair2Ratio, newPair1QuoteAmount, newPair2QuoteAmount, QuoteTotal, time1, time2, rebalancingResults):
+			else:
+				rebalancing_results.append([timestamps, new_coins_quote_amount, quote_total, 0])
 
-	#print(f"def TriggerRebalance\n-----------------------\npair1Ratio: {abs(pair1Ratio)}, pair2Ratio: {abs(pair2Ratio)}")
-	pair1amt = 0
-	pair2amt = 0
+	new_coins_quote_amount = []
+	tmp_ratios = []
+	coin_ratios = []
 
-	if(pair1Ratio > 0):
-		#buy
-		pair1amt = newPair1QuoteAmount + (QuoteTotal * abs(pair1Ratio))
-	else:
-		pair1amt = newPair1QuoteAmount - (QuoteTotal * abs(pair1Ratio))
+def trigger_rebalance(coin_ratios, new_coins_quote_amount, quote_total, timestamps, rebalancing_results):
 
-	if(pair2Ratio > 0):
-	#buy
-		pair2amt = newPair2QuoteAmount + (QuoteTotal * abs(pair2Ratio))
-	else:
-		pair2amt = newPair2QuoteAmount - (QuoteTotal * abs(pair2Ratio))
-	
+	pair_amounts = []
 
-	#print(f"pair1 amount: ' {pair1amt}\n")
-	#print(f"pair2 amount: ' {pair2amt}\n")
-
-	#print(f"total: ' {QuoteTotal}\n")
-
+	for i in range(0, len(coin_ratios)):
+		if(coin_ratios[i] > 0):
+			#buy
+			pair_amounts.append(new_coins_quote_amount[i] + (quote_total * abs(coin_ratios[i])))
+		else:
+			pair_amounts.append(new_coins_quote_amount[i] - (quote_total * abs(coin_ratios[i])))
+	#print(pair_amounts)
 	#append record when rebalance triggered
-	rebalancingResults.append([time1, time2, pair1amt,pair2amt,QuoteTotal, 1])
+	rebalancing_results.append([timestamps, pair_amounts, quote_total, 1])
+	pair_amounts = []
 
-	return
+def simulate_rebalancing(coins_init_close_prices, coins_data, coins_quote_assests, percentage_ratios, rebalanceRatio, option_value, timestamp_ratio, initial_timestamp):
 
-def SimulateRebalancing(pair1Data,   pair2Data, pair1QuoteAssest, pair2QuoteAssest, ratio1, ratio2, rebalanceRatio):
-	
 	#global values
-	rebalancingResults = []
+	rebalancing_results = []
+	coins_amt_of_base = []
+	local_init_timestamp = initial_timestamp
+	
+	if(option_value == 0):
+		for i in range(0, len(coins_data[0])):
+			coins_new_prices = []
+			coins_new_timestamps = []
+			#toto je ke 2. a vyssi iteraci
+			for j in range(0, len(coins_init_close_prices)):
+				coins_amt_of_base.append((coins_quote_assests[j]) / coins_init_close_prices[j])
+				coins_new_prices.append(float(coins_data[j][i][4]))
+				coins_new_timestamps.append(coins_data[j][i][0])
+			
+			Rebalance(coins_amt_of_base, coins_new_prices,coins_new_timestamps, percentage_ratios, rebalanceRatio, option_value, rebalancing_results)
+			coins_amt_of_base = []
+	
+	elif(option_value == 1):
+		#podle casu
+		#print("coins_data: ", coins_data)
+		for i in range(0, len(coins_data[0])):
+			#print(f"{coins_data[0][i][0]} == {local_init_timestamp}" )
+			if(coins_data[0][i][0] == local_init_timestamp):
+				local_init_timestamp  += timestamp_ratio
+				#print(f"{coins_data[0][i][0]} == {local_init_timestamp}")
+				#print('performing rebalance...')
+				coins_new_prices = []
+				coins_new_timestamps = []
+				#toto je ke 2. a vyssi iteraci
+				for j in range(0, len(coins_init_close_prices)):
+					coins_amt_of_base.append((coins_quote_assests[j]) / coins_init_close_prices[j])
+					coins_new_prices.append(float(coins_data[j][i][4]))
+					coins_new_timestamps.append(coins_data[j][i][0])
+				
+				Rebalance(coins_amt_of_base, coins_new_prices,coins_new_timestamps, percentage_ratios, rebalanceRatio, option_value, rebalancing_results)
+				coins_amt_of_base = []
+			else:
+				continue
 
-	for i in range(1, len(pair1Data)):
-
-		#print(f"Cycle Number: {i}\n")
-
-		#print(f"newMultiplier1: ' {pair1Data[i][4]}\n")
-		#print(f"newMultiplier2: ' {pair2Data[i][4]}\n")
-
-		#toto je ke 2. a vyssi iteraci
-		amtOfBase1 = (pair1QuoteAssest) / float(pair1Data[0][4])
-		amtOfBase2 = (pair2QuoteAssest) / float(pair2Data[0][4])
-
-		Rebalance(amtOfBase1,amtOfBase2,float(pair1Data[i][4]), float(pair2Data[i][4]), pair1Data[i][0],pair2Data[i][0], ratio1, ratio2, rebalanceRatio, rebalancingResults)
-
-	return rebalancingResults
+	return rebalancing_results
 
 @app.route("/rebalance", methods=['GET'])
-def getRebalancing():
+async def getRebalancing():
 
-	if(request.args.get("coin1") == None):
-		return ""
+	#print(request.args)
 
-	#inputs from the form
-	settings = [
-		request.args.get("coin1"),
-		request.args.get("alloc1"),
-		request.args.get("coin2"),
-		request.args.get("alloc2"),
-		request.args.get("investment"),
-		request.args.get("ratio"),
-		request.args.get("interval"),
-		request.args.get("start"),
-		request.args.get("end")
-	]
+	coins = request.args.get("coins").split(",")
+	allocations = request.args.get("allocations").split(",")
 
-	#print(settings)
-
-	rebalancingResults = []
-	symbols = [str(f"{settings[0]}USDT"), str(f"{settings[2]}USDT")]
-	interval = settings[6]
-
-	s = convert_datetime_to_unix_timestamp(settings[7])
-	e = convert_datetime_to_unix_timestamp(settings[8])
-	#print(f"{s}, || {e}")
-
-	# Retrieve Kline data
-	BTCUSDT_kline_data = get_binance_rebalanace_kline_data(symbols[0], interval, s, e)
-	BNBUSDT_kline_data = get_binance_rebalanace_kline_data(symbols[1], interval, s, e)
-
-	#print(BTCUSDT_kline_data)
-	#print(len(BNBUSDT_kline_data))
-
-	ratio1 = int(settings[1]) / 100
-	ratio2 = int(settings[3]) / 100
-
-	#print(f"{ratio1}, {ratio2}")
-
-	amtOfBase1 = (ratio1 * int(settings[4])) / float(BTCUSDT_kline_data[0][4])
-	amtOfBase2 = (ratio2 * int(settings[4])) / float(BNBUSDT_kline_data[0][4])
-
-	pair1QuoteAssest = ratio1 * int(settings[4])
-	pair2QuoteAssest =  ratio2 * int(settings[4])
-
-	rebalanceRatio = float(settings[5]) / 100
-	#(rebalanceRatio)
-	#1. iterace
+	rebalancing_results = []
 	
-	Rebalance(amtOfBase1,amtOfBase2, float(BTCUSDT_kline_data[0][4]), float(BNBUSDT_kline_data[0][4]),  BTCUSDT_kline_data[0][0], BNBUSDT_kline_data[0][0], ratio1, ratio2, rebalanceRatio, rebalancingResults)
+	interval = request.args.get("interval")
+	
+	s = convert_datetime_to_unix_timestamp(request.args.get("start"))
+	e = convert_datetime_to_unix_timestamp(request.args.get("end"))
+	
+	coins_kline_data = []
 
-	rebalancingResults = SimulateRebalancing(BTCUSDT_kline_data,   BNBUSDT_kline_data, pair1QuoteAssest, pair2QuoteAssest,  ratio1, ratio2, rebalanceRatio)
+	if any(item in interval for item in ("d", "M", "w")):
+		loop = asyncio.get_event_loop()
+		conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+		cur = await conn.cursor()
+		param = ''
+		
+		# Input strings
+		start_date_str = request.args.get("start")
+		end_date_str = request.args.get("end")
+
+		# Parse start date string
+		start_date_components = start_date_str.split("T")[0].split("-") + start_date_str.split("T")[1].split(":")
+		start_date = datetime(int(start_date_components[0]), int(start_date_components[1]), int(start_date_components[2]), int(start_date_components[3]), int(start_date_components[4]))
+
+		# Parse end date string
+		end_date_components = end_date_str.split("T")[0].split("-") + end_date_str.split("T")[1].split(":")
+		end_date = datetime(int(end_date_components[0]), int(end_date_components[1]), int(end_date_components[2]), int(end_date_components[3]), int(end_date_components[4]))
+
+		# Initialize an empty list to store formatted dates
+		formatted_dates = []
+
+		# Iterate from start date to end date, adding one day each time
+		current_date = start_date
+		while current_date <= end_date:
+			# Format current date and time and append it to the list
+			formatted_dates.append(current_date.strftime("%Y-%m-%d %H:%M:%S"))
+			current_date += timedelta(days=1)  # Add one day to current date
+
+		for i in range(0, len(formatted_dates)):
+			param += "'{0}',".format(formatted_dates[i])
+		
+		for i in range(0, len(coins)):
+			await cur.execute("""select unixtime,open,high,low,close from binance_pair_{0}usdt.spot_kline where datetime in ({1});""".format(coins[i].lower(), param[:-1]))
+			data = await cur.fetchall()
+
+			coins_kline_data.append(data)
+			#print("""data size: {0}""".format(len(data))) 
+	
+		await cur.close()
+		conn.close()
+
+	else:	
+		for i in range(0, len(coins)):
+			coins_kline_data.append(get_binance_rebalanace_kline_data(str(f"{coins[i]}USDT"), interval, s, e))
+
+	#print(coins_kline_data)
+	percentage_ratios = []
+
+	for i in range(0, len(allocations)):
+		percentage_ratios.append(float(int(allocations[i])) / 100)
+
+	coins_amt_of_base = []
+
+	investment = float(request.args.get("investment"))
+	total_investment = investment * len(coins_kline_data[0])
+	print(total_investment)
+
+	for i in range(0, len(coins_kline_data)):
+		coins_amt_of_base.append((percentage_ratios[i] * total_investment) / float(coins_kline_data[i][0][4]))
+
+	coins_quote_assests = []
+
+	for i in range(0, len(coins_kline_data)):
+		coins_quote_assests.append(coins_amt_of_base[i] * (float(coins_kline_data[i][0][4])))
+
+	rebalance_ratio = 0
+	
+	coins_init_close_prices = []
+
+	for i in range(0, len(coins_kline_data)):
+		coins_init_close_prices.append(float(coins_kline_data[i][0][4]))
+
+	coins_init_timestamps = []
+
+	for i in range(0, len(coins_kline_data)):
+		coins_init_timestamps.append(coins_kline_data[i][0][0])
+
+	interval_option = request.args.get("intervalOption")
+	option_value = 0
+	time_ratio = 0
+
+	if "%" in interval_option:
+		option_value = 0
+		rebalance_ratio = float(interval_option[:-1]) / 100
+	else:
+		option_value = 1
+		sec = convert_interval_to_miliseconds(interval_option)
+		time_ratio = sec
+
+	#1. iterace	
+	Rebalance(coins_amt_of_base, coins_init_close_prices, coins_init_timestamps, percentage_ratios, rebalance_ratio, option_value, rebalancing_results)
+
+	rebalancing_results = simulate_rebalancing(coins_init_close_prices, coins_kline_data, coins_quote_assests, percentage_ratios, rebalance_ratio, option_value, time_ratio, coins_init_timestamps[0])
+
+	#rebalancing_results.append([timestamps, new_coins_quote_amount, quote_total, 0])
 
 	processed_data = []
 	data0 = []
-	for res in rebalancingResults:
+	for res in rebalancing_results:
 		item = {
-			"time1": res[0],
-			"time2": res[1],
-			"pair1amt": res[2],
-			"pair2amt": res[3],
-			"QuoteTotal": res[4],
-			"Rebalance": res[5]
+			"timestamps": res[0],
+			"coinAmounts": res[1],
+			"QuoteTotal": res[2],
+			"Rebalance": res[3]
 		}
 
 		data0.append(item)
 
+	for i in range(0, len(coins_kline_data)):
+		data = []
+		for j in coins_kline_data[i]:
+			try:
+				item = {
+					"time": j[0] / 1000,
+					"open": j[1],
+					"high": j[2],
+					"low":  j[3],
+					"close": j[4],
+				}
+
+			except:
+				pass
+
+			data.append(item)
+
+		processed_data.append(data)
 	
-	data1 = []
-	for i in BTCUSDT_kline_data:
-		try:
-			item = {
-				"time": i[0] / 1000,
-				"open": i[1],
-				"high": i[2],
-				"low":  i[3],
-				"close": i[4],
-			}
-
-		except:
-			pass
-
-		data1.append(item)
-
-	
-	data2 = []
-	for i in BNBUSDT_kline_data:
-		try:
-			item = {
-				"time": i[0] / 1000,
-				"open": i[1],
-				"high": i[2],
-				"low":  i[3],
-				"close": i[4],
-			}
-
-		except:
-			pass
-
-		data2.append(item)
-
-	
-
-	processed_data.append(data1)
-	processed_data.append(data2)
 	processed_data.append(data0)
 
 	#print(processed_data)
 	return jsonify(processed_data)
+
+def convert_interval_to_miliseconds(interval):
+	mapping = {
+		"30m": 30 * 60 * 1000,
+		"1h": 60 * 60 * 1000,
+		"4h": 4 * 60 * 60 * 1000,
+		"8h": 8 * 60 * 60 * 1000,
+		"12h": 12 * 60 * 60 * 1000,
+		"1d": 24 * 60 * 60 * 1000,
+		"3d": 3 * 24 * 60 * 60 * 1000,
+		"7d": 7 * 24 * 60 * 60 * 1000,
+		"14d": 14 * 24 * 60 * 60 * 1000
+	}
+	return mapping.get(interval, 0)
 	
 def start_spotDCA(historical_data, settings, SpotDCAResults):
 	#start Spot DCA by buying 1,000 USDT worth of BTC.
-
-	'''
-	#inputs from the form
-	settings = [
-		request.args.get("pair"),
-		request.args.get("price_deviation"),
-		request.args.get("take_profit"),
-		request.args.get("base_order"),
-		request.args.get("order_size"),
-		request.args.get("number_of_orders"),
-		request.args.get("interval"),
-		request.args.get("start"),
-		request.args.get("end")
-	]
-	'''
 
 	price_deviation = float(settings[1]) / 100 #%
 	take_profit =float(settings[2]) / 100 #% 
@@ -696,19 +656,6 @@ def extract_whole_item_with_minimum_price_value(list_of_lists):
 
 def start_spotGrid(historical_data, settings, SpotGridResults):
 
-	'''	
-	settings = [
-		request.args.get("pair"),
-		request.args.get("lower"),
-		request.args.get("upper"),
-		request.args.get("grids"),
-		request.args.get("grid_investment"),
-		request.args.get("interval"),
-		request.args.get("start"),
-		request.args.get("end")
-	]
-	'''
-
 	amtOfBase = 0
 	amtOfQuote = 0
 	price_difference = 0
@@ -736,14 +683,6 @@ def start_spotGrid(historical_data, settings, SpotGridResults):
 	#tohle urcite aritmeticke rozdeleni gridu
 	price_difference = (upper_price - lower_price) / number_of_grids
 
-	#trading fees (c): 0.1%.
-	trading_fees = 0.1
-	#The Maximum Profit/Grid = (1 - c) * d / Grid Lower Limit - 2c
-	maximum_profit_per_grid = (1 - trading_fees) * price_difference / lower_price - 2 * trading_fees
-	#The Minimum Profit/Grid = (Grid Upper Limit*(1 - c)) / (Grid Lower Limit - d) - 1 - c
-	minimum_profit_per_grid = (upper_price * (1 - trading_fees)) / (lower_price - price_difference) - 1 - trading_fees
-	#print(f"max profit: {maximum_profit_per_grid} - min profit: {minimum_profit_per_grid}")
-
 	#za kolik quote meny budu kupovat base menu pri grid triggeru
 	AmtOfQuoteAssetWhenGridTriggered = amount_invested / price_difference
 
@@ -756,7 +695,6 @@ def start_spotGrid(historical_data, settings, SpotGridResults):
 	current_price = float(historical_data[1][4])
 
 	close_to_grid_price_difference = []
-	triggered_grid_price = 0
 
 	SpotGridResults.append([upper_price, lower_price, price_difference, number_of_grids, -1])
 
@@ -1068,6 +1006,10 @@ def getData():
 	for i in range(3, -1, -1):
 		start_date, end_date = calculate_start_end_dates(i)
 		historical_data = get_binance_kline_data( symbol,interval, start_date, end_date)
+		
+		if(historical_data == -1):
+			return -1
+		
 		for i in historical_data:
 			item = {
 				"time": i[0] / 1000,
@@ -1158,6 +1100,36 @@ def findNameIdx(label, binanceIndexData, binanceIndexAssetData):
 			for idx, idx_data in enumerate(binanceIndexData):
 				if idx_data[0] == label:
 					return idx
+
+@app.route("/binanceIndexAssetCoins", methods=['GET'])
+async def get_binance_index_asset__coins():
+
+	loop = asyncio.get_event_loop()
+
+	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+
+	crs = await conn.cursor()
+	await crs.execute("""select distinct asset_label from binance_index_asset;""")
+	
+	data = await crs.fetchall()
+	await crs.close()
+
+	result = []
+
+	for record in data:
+		item = {"coin": record[0]}
+		result.append(item)
+
+	# Save coins into a .js file
+	with open(os.path.join(os.path.dirname(__file__), "coins.js"), "w") as file:
+		file.write("const coins = [")
+		for i, record in enumerate(data):
+			file.write(f'"{record[0]}"')
+			if i != len(data) - 1:
+				file.write(", ")
+		file.write("]")
+
+	return jsonify(result)
 
 @app.route("/binanceIndexRecommend", methods=['GET'])
 async def get_binance_index_recom_all_data():
@@ -1351,3 +1323,156 @@ async def get_binance_cmc_ew_index_coins():
 	await cursor.close()
 
 	return jsonify(data)
+
+@app.route("/products", methods=['GET'])
+async def get_products():
+
+	loop = asyncio.get_event_loop()
+	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+
+	#retrieve data from binance_index table
+	cursor = await conn.cursor()
+	query = """select distinct base_currency from product
+				UNION
+				select distinct quote_currency from product;"""
+	
+	await cursor.execute(query)
+	
+	data = await cursor.fetchall()
+	await cursor.close()
+
+	result = []
+
+	for d in data:
+		d = str(d)[2:-3]
+		result.append(d)
+
+	return jsonify(result)
+
+def simulate_hold(data, total_invested_dca):
+	initial_price = data[0][2]
+	coin_bought = total_invested_dca / initial_price  # Buy the same amount of coins as in DCA
+	final_price = data[-1][2]
+	final_balance = coin_bought * final_price
+	profit = final_balance - total_invested_dca
+	return final_balance, profit
+	
+def simulate_dca(data, initial_balance):
+	total_invested = 0  # Total amount invested
+	coin_balance = 0
+	for item in data:
+		price = item[2]
+		coin_bought = initial_balance / price
+		coin_balance += coin_bought
+		total_invested += initial_balance  # Accumulate the total amount invested
+
+	final_price = data[-1][2]
+	print(data)
+	final_balance = coin_balance * final_price
+	
+	profit = final_balance - total_invested  # Profit is final balance minus total invested
+	return total_invested, final_balance, profit
+
+
+@app.route("/getclose", methods=['GET'])
+async def getclose():
+
+	coins = request.args.get("coins")
+	allocations = request.args.get("allocations")
+	investment = request.args.get("investment")
+	start = request.args.get("start")
+	end = request.args.get("end")
+	interval = request.args.get("interval")
+
+	coins = coins.split(",")
+	allocations = allocations.split(",")
+
+	print(coins, allocations, investment, interval, start, end)
+
+	'''
+		(3) ['BTC', 'ETH', 'BNB']
+		(3) ['50', '30', '20']
+		"Weekly"
+		"WED"
+		"1"
+		""
+		"18"
+		"2024-03-19T03:00"
+	'''
+	
+	loop = asyncio.get_event_loop()
+
+	conn = await aiomysql.connect(host=config.HOST, port=config.PORT,user=config.USER, password=config.PASSWORD, db=config.DB, loop=loop)
+
+	cur = await conn.cursor()
+	param = ''
+
+	# Input strings
+	start_date_str = start
+	end_date_str = end
+
+	# Parse start date string
+	start_date_components = start_date_str.split("T")[0].split("-") + start_date_str.split("T")[1].split(":")
+	start_date = datetime(int(start_date_components[0]), int(start_date_components[1]), int(start_date_components[2]), int(start_date_components[3]), int(start_date_components[4]))
+
+	# Parse end date string
+	end_date_components = end_date_str.split("T")[0].split("-") + end_date_str.split("T")[1].split(":")
+	end_date = datetime(int(end_date_components[0]), int(end_date_components[1]), int(end_date_components[2]), int(end_date_components[3]), int(end_date_components[4]))
+
+	# Initialize an empty list to store formatted dates
+	formatted_dates = []
+
+	# Iterate from start date to end date, adding one day each time
+	current_date = start_date
+	while current_date <= end_date:
+		# Format current date and time and append it to the list
+		formatted_dates.append(current_date.strftime("%Y-%m-%d %H:%M:%S"))
+		current_date += timedelta(days=1)  # Add one day to current date
+
+
+	dca_results = []
+	hodl_results = []
+
+	for i in range(0, len(formatted_dates)):
+		param += "'{0}',".format(formatted_dates[i])
+
+	result_data = []
+	for i in range(0, len(coins)):
+		await cur.execute("""select unixtime, datetime, close from binance_pair_{0}usdt.spot_kline where datetime in ({1});""".format(coins[i].lower(), param[:-1]))
+		data = await cur.fetchall()
+		
+		total_invested, final_balance_dca, profit_dca = simulate_dca(data, (float(allocations[i]) / 100) * float(investment))
+		final_balance_hold, profit_hold = simulate_hold(data, total_invested_dca=total_invested)
+		
+		dca_results.append([coins[i], total_invested, final_balance_dca, profit_dca])
+		hodl_results.append([coins[i], total_invested, final_balance_hold, profit_hold])
+
+		result_data.append(data)
+	
+	await cur.close()
+	conn.close()
+
+
+	result = []
+	counter = 0
+
+	for res in result_data:
+		result.append(coins[counter])
+		for d in res:
+			item = {
+				"unixtime": d[0],
+				"datetime": d[1],
+				"close": d[2],
+			}
+
+			result.append(item)
+		counter += 1
+
+	print(len(result))
+
+	result.append("DCA")
+	result.append(dca_results)
+	result.append("HODL")
+	result.append(hodl_results)
+
+	return jsonify(result)

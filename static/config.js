@@ -23,37 +23,61 @@ Slide 2
 	},
 	...
 */
-display_savings_staking_data("http://127.0.0.1:5000/savings")
 
+const autoInvest = new AutoInvest("http://127.0.0.1:5000/autoinvest");
+autoInvest.displayAutoInvestTable();
+
+/* 
+Slide 3
+- získání a zobrazení dat do tabulky Top 10
+- data pochází z tabulek  view_pair_for_trade_ a pro potřeby aplikace byly upraveny do json podoby:
+
+	{
+		"base": "RAD",
+		"compound_interest_total_in_eur": 7.455733,
+		"date_begin": "2023-05-02",
+		"date_end": "2023-05-08",
+		"fixed_deposit_total_in_eur": 1.925318,
+		"pairname": "radbusd",
+		"quote": "BUSD"
+	},
+	{
+		"base": "ORN",
+		"compound_interest_total_in_eur": 2.992203,
+		"date_begin": "2023-05-02",
+		"date_end": "2023-05-08",
+		"fixed_deposit_total_in_eur": 1.316389,
+		"pairname": "ornbusd",
+		"quote": "BUSD"
+	},
+	...
+*/
+
+const simpleEarn = new SimpleEarn("http://127.0.0.1:5000/simpleearn");
+simpleEarn.displaySimpleEarnTable();
+
+/* Slide x - Creating Index Linked Plan
+*/
+displayBinanceIndexAssetData("http://127.0.0.1:5000/binanceIndexAsset");
 
 /* Slide 3 - Rebalancing bot
 */
 $(document).ready(async () => {
 
-	coin1 = document.getElementById("rebalance-coin1").value;
-	alloc1 = document.getElementById("rebalance-coin1-allocation").value;
-	coin2 = document.getElementById("rebalance-coin2").value;
-	alloc2 = document.getElementById("rebalance-coin2-allocation").value;
 	investment = document.getElementById("rebalance-investment").value;
-	ratio = document.getElementById("rebalance-ratio").value;
 	selectElement = document.getElementById("rebalance-interval");
 	_interval = selectElement.options[selectElement.selectedIndex].value;
 	start_date = document.getElementById("rebalance-start-date").value;
 	end_date = document.getElementById("rebalance-end-date").value;
 
-
 	var rebalance_url = "http://127.0.0.1:5000/rebalance?"
-		+ "&coin1=" + coin1
-		+ "&alloc1=" + alloc1
-		+ "&coin2=" + coin2
-		+ "&alloc2=" + alloc2
 		+ "&investment=" + investment
-		+ "&ratio=" + ratio
 		+ "&interval=" + _interval
 		+ "&start=" + start_date
 		+ "&end=" + end_date;
 
-	//console.log(rebalance_url)
+		//http://127.0.0.1:5000/rebalance?&investment=1000&interval=1d&start=2024-04-01T10:00&end=2024-04-15T10:00&coins=BTC,ETH&allocations=50,50&intervalOption=1d
+		
 	setRebalancePoints(rebalance_url);
 });
 
@@ -121,54 +145,10 @@ $(document).ready(async () => {
 	setSpotGridPoints(SpotGrid_url);
 });
 
-/* 
-Slide 6
-- získání a zobrazení dat do tabulky Top 10
-- data pochází z tabulek  view_pair_for_trade_ a pro potřeby aplikace byly upraveny do json podoby:
-
-	{
-		"base": "RAD",
-		"compound_interest_total_in_eur": 7.455733,
-		"date_begin": "2023-05-02",
-		"date_end": "2023-05-08",
-		"fixed_deposit_total_in_eur": 1.925318,
-		"pairname": "radbusd",
-		"quote": "BUSD"
-	},
-	{
-		"base": "ORN",
-		"compound_interest_total_in_eur": 2.992203,
-		"date_begin": "2023-05-02",
-		"date_end": "2023-05-08",
-		"fixed_deposit_total_in_eur": 1.316389,
-		"pairname": "ornbusd",
-		"quote": "BUSD"
-	},
-	...
-*/
-displayTop10("http://127.0.0.1:5000/view");
-
-//setWeekPredictPoints("http://127.0.0.1:5000/weekPredict?&symbol=LTCEUR&interval=1h")
-
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=BTCEUR")
-/*getHistoricalData("http://127.0.0.1:5000/getData?&symbol=ETHEUR")
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=BNBEUR")
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=XRPEUR")
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=SOLEUR")
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=ADAEUR")
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=TRXEUR")
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=LINKEUR")
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=DOTEUR")
-getHistoricalData("http://127.0.0.1:5000/getData?&symbol=LTCEUR")
-*/
-
-const coins = ['BTCEUR', 'ETHEUR', 'BNBEUR', 'XRPEUR', 'SOLEUR', 'ADAEUR', 'TRXEUR', 'LINKEUR', 'DOTEUR', 'LTCEUR'];
-
-//for(let i = 0; i < coins.length; i++) {
-	//setEwIndexTableContent(coins[i], `http://127.0.0.1:5000/weekPredict?&symbol=${coins[i]}&interval=1h`)
-//}
-
-displayBinanceIndexAssetData("http://127.0.0.1:5000/binanceIndexAsset");
+rb_displayBinanceIndexAssetData("http://127.0.0.1:5000/binanceIndexAsset");
 
 displayBinanceCmcEwIndex("http://127.0.0.1:5000/CMC");
 
+$(document).ready(async () => {
+	await fetch("http://127.0.0.1:5000/binanceIndexAssetCoins");
+});
