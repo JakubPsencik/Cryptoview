@@ -655,13 +655,31 @@ border: 1px solid var(--tw-black);
 	
 
 	
+<<<<<<< HEAD
 
 	tr:last-child {
 		border-top: 1px dashed var(--tw-lightgrey);
 	}
+=======
+	/*
+	tr:last-child {
+		border-top: 1px dashed var(--tw-lightgrey);
+	}*/
+>>>>>>> main
 }
 
 .custom-tr {
 	padding-top: 1vh;
 	padding-bottom: 1vh;
+<<<<<<< HEAD
+=======
+}
+
+.rebalancing_bot_remove_button {
+	background-color: var(--tw-grey);
+	color: white;
+	border-radius: 100%;
+	border: none;
+	margin-left: 10px;
+>>>>>>> main
 }

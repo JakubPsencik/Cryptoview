@@ -82,12 +82,19 @@ async function createGetCloseTable(data, tableName) {
 	
 	table.appendChild(tr)
 
+<<<<<<< HEAD
 	for(let i = 0; i < data.length; i++) {
 		this.addGetCloseDcaTableRow(tableName, data[i][0], parseFloat(data[i][1]).toFixed(2), parseFloat(data[i][2]).toFixed(2), parseFloat(data[i][3]).toFixed(2));
 	}
 
 	tr = document.createElement("tr");
 	tr.style.borderTop = "1px dashed";
+=======
+	tr = document.createElement("tr");
+	tr.style.borderTop = "1px dashed";
+	tr.style.marginTop = "1rem";
+	tr.classList.add("custom-tr");
+>>>>>>> main
 	let fill_td = document.createElement("td");
 	let invested_total_td = document.createElement("td");
 	let balance_total_td = document.createElement("td");
@@ -134,6 +141,13 @@ async function createGetCloseTable(data, tableName) {
 	tr.appendChild(profit_total_td);
 
 	table.appendChild(tr);
+<<<<<<< HEAD
+=======
+
+	for(let i = 0; i < data.length; i++) {
+		this.addGetCloseDcaTableRow(tableName, data[i][0], parseFloat(data[i][1]).toFixed(2), parseFloat(data[i][2]).toFixed(2), parseFloat(data[i][3]).toFixed(2));
+	}
+>>>>>>> main
 }
 
 async function addGetCloseDcaTableRow(tableName, coinName, invested, balance, profit) {

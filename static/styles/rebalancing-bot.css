@@ -306,7 +306,10 @@
 
 #rebalance_binance_index_asset_main_div {
 
+<<<<<<< HEAD
 	border: 1px solid red;
+=======
+>>>>>>> main
 	display: none;
 	overflow-x: hidden;
 	overflow-y: scroll;

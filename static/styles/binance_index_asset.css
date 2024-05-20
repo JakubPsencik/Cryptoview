@@ -281,6 +281,13 @@
 	z-index: 999; /* Ensure it's above other elements */
 	overflow-x: hidden;
 	overflow-y: scroll;
+<<<<<<< HEAD
+=======
+
+	@media (max-width: 768px) {
+		width: 80vw;
+	}
+>>>>>>> main
 }
 
 .overlay {
@@ -369,11 +376,18 @@
 	z-index: 999; /* Ensure it's above other elements */
 }
 
+.img-wrapper {
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	display: flex;
+	justify-content: center;
+}
+
 .binance_index_asset_index_detailsInfoDiv {
 	width: 100%;
 	height: 100%;
 	margin: auto;
-	border: 1px solid red;
+	border: 1px solid #eee;
 	padding: 5px;
 	overflow-y: scroll;
 	overflow-x: hidden;
@@ -388,11 +402,12 @@
 }
 
 .binance_index_asset_index_recom_all_recomendDataDiv {
-	border: 1px solid green;
+	border-bottom: 1px dashed #eee;
 	width: inherit;
 	height: fit-content;
 	align-items: center;
 	text-align: center;
+	padding-bottom: 1rem;
 }
 
 .binance_index_asset_index_recom_all_recomendCoinDataDiv {

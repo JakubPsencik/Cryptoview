@@ -193,8 +193,8 @@ async function createAssetDiv(data, parentDiv) {
 		allocationDetailsDiv.appendChild(cancelButton);
 
 		// Append the div to the document or a specific element
-		document.getElementById("page_binance_index_asset").appendChild(overlay);
-		document.getElementById("page_binance_index_asset").appendChild(allocationDetailsDiv);
+		document.getElementById("page_auto_invest_calc").appendChild(overlay);
+		document.getElementById("page_auto_invest_calc").appendChild(allocationDetailsDiv);
 	};
 
 	viewAllocationsDiv.appendChild(allocationButton);
@@ -236,8 +236,8 @@ async function createAssetDiv(data, parentDiv) {
 		indexDetailsDiv.appendChild(cancelButton);
 
 		// Append the div to the document or a specific element
-		document.getElementById("page_binance_index_asset").appendChild(overlay);
-		document.getElementById("page_binance_index_asset").appendChild(indexDetailsDiv);
+		document.getElementById("page_auto_invest_calc").appendChild(overlay);
+		document.getElementById("page_auto_invest_calc").appendChild(indexDetailsDiv);
 	};
 
 	viewAllocationsDiv.appendChild(detailButton);
@@ -294,8 +294,8 @@ async function createAssetDiv(data, parentDiv) {
 		indexDetailsDiv.appendChild(cancelButton);
 
 		// Append the div to the document or a specific element
-		document.getElementById("page_binance_index_asset").appendChild(overlay);
-		document.getElementById("page_binance_index_asset").appendChild(indexDetailsDiv);
+		document.getElementById("page_auto_invest_calc").appendChild(overlay);
+		document.getElementById("page_auto_invest_calc").appendChild(indexDetailsDiv);
 	};
 
 	viewAllocationsDiv.appendChild(priceTrendChartButton);
@@ -449,6 +449,7 @@ async function fillInfoDivWithCoinStatistics_Minute(div, coin) {
 					//img.classList.add("binance_index_asset_coin_img");
 
 					const labelDiv = document.createElement('div');
+					labelDiv.classList.add("img-wrapper");
 					labelDiv.append(img);
 					div.appendChild(labelDiv);
 					labelRendered = true;
@@ -492,6 +493,7 @@ async function fillInfoDivWithCoinStatistics_Hour(div, coin) {
 					//img.classList.add("binance_index_asset_coin_img");
 
 					const labelDiv = document.createElement('div');
+					labelDiv.classList.add("img-wrapper");
 					labelDiv.append(img);
 					div.appendChild(labelDiv);
 					labelRendered = true;
@@ -535,6 +537,7 @@ async function fillInfoDivWithCoinStatistics_Week(div, coin) {
 					//img.classList.add("binance_index_asset_coin_img");
 
 					const labelDiv = document.createElement('div');
+					labelDiv.classList.add("img-wrapper");
 					labelDiv.append(img);
 					div.appendChild(labelDiv);
 					labelRendered = true;
@@ -578,6 +581,7 @@ async function fillInfoDivWithCoinStatistics_Month(div, coin) {
 					//img.classList.add("binance_index_asset_coin_img");
 
 					const labelDiv = document.createElement('div');
+					labelDiv.classList.add("img-wrapper");
 					labelDiv.append(img);
 					div.appendChild(labelDiv);
 					labelRendered = true;

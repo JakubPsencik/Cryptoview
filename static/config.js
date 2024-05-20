@@ -75,8 +75,15 @@ $(document).ready(async () => {
 		+ "&interval=" + _interval
 		+ "&start=" + start_date
 		+ "&end=" + end_date;
+<<<<<<< HEAD
 		
 	//setRebalancePoints(rebalance_url);
+=======
+
+		//http://127.0.0.1:5000/rebalance?&investment=1000&interval=1d&start=2024-04-01T10:00&end=2024-04-15T10:00&coins=BTC,ETH&allocations=50,50&intervalOption=1d
+		
+	setRebalancePoints(rebalance_url);
+>>>>>>> main
 });
 
 /* Slide 4 - Spot DCA bot

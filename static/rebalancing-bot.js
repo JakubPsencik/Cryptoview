@@ -66,8 +66,11 @@ document.getElementById("bn_rebalance").addEventListener("click", function () {
 		+ "&coins=" + coins
 		+ "&allocations=" + allocations
 		+ "&intervalOption=" + rebalanceIntervalOptionValue;
+<<<<<<< HEAD
 
 	console.log(rebalance_url);
+=======
+>>>>>>> main
 	
 	setRebalancePoints(rebalance_url);
 });
@@ -82,7 +85,10 @@ async function setRebalancePoints(url) {
 	try {
 		let response = await fetch(url);
 		response.json().then(async (points) => {
+<<<<<<< HEAD
 		console.log(points);
+=======
+>>>>>>> main
 		for (let i = 0; i < points.length -1; i++) {
 			
 			var div = document.createElement("div");
