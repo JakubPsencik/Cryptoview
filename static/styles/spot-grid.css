@@ -140,6 +140,7 @@ border: 1px solid var(--tw-black);
 }	
 
 #SpotGrid-widget {
+	min-width: 250px;
 	height: 70vh;
 	width: 20vw;
 	vertical-align: middle;

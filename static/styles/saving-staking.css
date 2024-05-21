@@ -107,17 +107,29 @@
 }
 
 /*----------------------------------------*/
-/*
-@media (max-height: 700px) {
 
-	#saving_staking_table {
+@media (max-width: 1200px) {
+
+	table#saving_staking_table {
 
 		width: 50vw;
-		height: 40vh;
+		height: 70vh;
 		text-align: center;
 		background-color: var(--bn-black);
 		border-radius: 2rem;
-		margin: 7.25vh auto auto auto;
+		margin: .5vh auto auto auto;
+
+		td.info-label {
+			font-size: 16px !important;
+		}
+	
+		td.profit {
+			font-size: 16px !important;
+		}
 	
 	}
-}*/
+
+
+
+
+}

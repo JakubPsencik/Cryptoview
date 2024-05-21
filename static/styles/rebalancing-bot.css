@@ -60,6 +60,7 @@
 }
 
 .rebalance-widget {
+	min-width: 250px;
 	height: 70vh;
 	min-height: fit-content;
 	text-align: center;

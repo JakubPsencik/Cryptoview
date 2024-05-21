@@ -673,3 +673,9 @@ border: 1px solid var(--tw-black);
 	border: none;
 	margin-left: 10px;
 }
+
+@media (max-width: 1500px) {
+	.custom-tr {
+		font-size: small;
+	}
+}
