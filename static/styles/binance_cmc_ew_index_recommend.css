@@ -65,6 +65,13 @@
 
 	.binance_cmc_ew_index_recommend_main_div {
 		height: fit-content;
+		/*height: 70vh;
+		margin: 14.5vh 0.5rem auto 0.5rem;*/
+	}
+
+	#binance_cmc_ew_index_recommend_wrapper_div {
+		height: 70vh !important;
+		
 	}
 	
 	.binance_cmc_ew_index_recommend_img_wrapper {
