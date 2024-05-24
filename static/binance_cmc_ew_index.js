@@ -33,14 +33,14 @@ async function displayBinanceCmcEwIndex(url) {
 				wrapper.classList.add("binance_cmc_ew_index_img_wrapper");
 
 				let img = document.createElement("img");
-				img.setAttribute("src", `static/img/${r[i]}.png`);
+				img.setAttribute("src", `static/img/${(r[i] == 'LTC' ? 'AVAX' : r[i])}.png`);
 				img.setAttribute("loading", 'lazy');
 				img.setAttribute("class", 'binance_cmc_ew_index_img');
 
 				let coinName = document.createElement("span");
-				coinName.innerHTML = r[i];
+				console.log(r[i]);
+				r[i] == 'LTC' ? coinName.innerHTML = "AVAX" :  coinName.innerHTML = r[i];
 				coinName.classList.add("binance_cmc_ew_index_img_name");
-
 				wrapper.append(img);
 				wrapper.append(coinName);
 

@@ -679,3 +679,13 @@ border: 1px solid var(--tw-black);
 		font-size: small;
 	}
 }
+
+.auto_invest_calc_interval_detail_selector_button {
+	background-color: var(--bn-black);
+	border: 1px solid var(--tw-grey);
+    color: #fff;
+    width: 5rem;
+    border-radius: 5px;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}

@@ -35,7 +35,7 @@
 
 .binance_cmc_ew_index_recommend_main_div {
 	
-	height: 70vh;
+	/*height: 70vh;*/
 	background-color: var(--bn-black);
 	border-radius: 2rem;
 	margin: 14.5vh 3rem auto 3rem;
